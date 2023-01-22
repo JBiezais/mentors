@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('study_programs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('faculty_id');
+            $table->string('title');
+            $table->string('code');
+            $table->string('lriCode');
+            $table->string('level');
             $table->timestamps();
         });
     }

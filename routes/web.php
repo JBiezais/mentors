@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\ProfileController;
@@ -20,32 +21,25 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+Route::get('/', [Controller::class, 'index'])->name('home');
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/mentor', [MentorController::class, 'index'])->name('mentor');
-Route::get('/student', [StudentsController::class, 'index'])->name('student');
+Route::resource('mentor', MentorController::class)->only('store', 'create');
+Route::resource('student', StudentsController::class)->only('store', 'create');
 
 
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return redirect('/');
+    })->name('dashboard');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('mentor', MentorController::class)->except('create', 'edit', 'index');
-    Route::resource('student', StudentsController::class)->except('create', 'edit', 'index');
-    Route::resource('faculty', FacultyController::class)->except('create', 'edit');
-    Route::resource('programs', StudyProgramController::class)->except('create', 'edit');
+    Route::resource('mentor', MentorController::class)->except('store', 'create');
+    Route::resource('student', StudentsController::class)->except('store', 'create', 'edit');
+    Route::resource('faculty', FacultyController::class)->except('create', 'edit', 'index');
+    Route::resource('programs', StudyProgramController::class)->except('create');
 });
 
 require __DIR__.'/auth.php';

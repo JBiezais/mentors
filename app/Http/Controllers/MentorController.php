@@ -6,7 +6,9 @@ use App\Http\Requests\MentorRequest;
 use App\Models\Faculty;
 use App\Models\Mentor;
 use App\Models\StudyProgram;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -14,10 +16,14 @@ class MentorController extends Controller
 {
     public function index():Response
     {
-        $programs = StudyProgram::query()->select('id', 'code')->get();
+        $programs = StudyProgram::query()->select('id', 'title', 'code')->get();
+        $faculties = Faculty::all();
+        $mentors = Mentor::all();
 
         return Inertia::render('Admin/Mentor',[
-            'programs' => $programs
+            'programs' => $programs,
+            'mentors' => $mentors,
+            'faculties' => $faculties
         ]);
     }
     public function create():Response
@@ -27,17 +33,32 @@ class MentorController extends Controller
             'faculties' => $faculties
         ]);
     }
-    public function store(MentorRequest $request){
-        dd($request);
+    public function store(MentorRequest $request): RedirectResponse
+    {
+        $data = $request->validated();
+
+        Mentor::create($data);
+
+        return Redirect::route('home');
     }
     public function edit(Mentor $mentor):Response
     {
-        return Inertia::render('Admin/EditMentor', $mentor);
+        $faculties = Faculty::all();
+        $programs = StudyProgram::query()->select('id', 'title', 'code')->get();
+        $data = Mentor::query()->whereId($mentor->id)->with('students')->first();
+
+        return Inertia::render('Admin/EditMentor', [
+            'mentor' => $data,
+            'faculties' => $faculties,
+            'programs' => $programs,
+        ]);
     }
     public function update(){
 
     }
-    public function destroy(){
+    public function destroy(Mentor $mentor){
+        Mentor::find($mentor->id)->delete();
 
+        return Redirect::route('mentor.index');
     }
 }

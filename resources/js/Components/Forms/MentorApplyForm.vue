@@ -103,6 +103,7 @@
 <script>
 import {Inertia} from "@inertiajs/inertia";
 import InputError from "@/Components/InputError.vue";
+import { useForm } from '@inertiajs/vue3'
 
 export default {
     name: "MentorApplyForm",
@@ -113,7 +114,7 @@ export default {
     data(){
         return{
             programs: {},
-            form: {
+            form: useForm({
                 name: '',
                 lastName: '',
                 phone: '',
@@ -128,12 +129,12 @@ export default {
                 ru: 0,
                 en: 0,
                 privacy: 0
-            },
+            }),
         }
     },
     methods:{
         submit(){
-            Inertia.post(route('mentor.store'), this.form, {
+            this.form.post(route('mentor.store'), {
                 preserveState: 'errors'
             })
         }

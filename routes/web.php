@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('mentor', MentorController::class)->except('store', 'create');
-    Route::resource('student', StudentsController::class)->except('store', 'create', 'edit');
+    Route::resource('student', StudentsController::class)->except('store', 'create',);
     Route::resource('faculty', FacultyController::class)->except('create', 'edit', 'index');
     Route::resource('programs', StudyProgramController::class)->except('create');
 });

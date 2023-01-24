@@ -43,15 +43,15 @@
             <div class="grid grid-cols-3 mt-3">
                 <label class="flex flex-col mx-auto">
                     Latviešu
-                    <input class="border-gray-800 bg-gray-100 rounded-lg text-gray-800 mx-auto" type="radio" v-model="form.language" value="0">
+                    <input class="border-gray-800 bg-gray-100 rounded-lg text-gray-800 mx-auto" type="radio" v-model="form.lang" value="0">
                 </label>
                 <label class="flex flex-col mx-auto">
                     Krievu
-                    <input class="border-gray-800 bg-gray-100 rounded-lg text-gray-800 mx-auto" type="radio" v-model="form.language" value="1">
+                    <input class="border-gray-800 bg-gray-100 rounded-lg text-gray-800 mx-auto" type="radio" v-model="form.lang" value="1">
                 </label>
                 <label class="flex flex-col mx-auto">
                     Angļu
-                    <input class="border-gray-800 bg-gray-100 rounded-lg text-gray-800 mx-auto" type="radio" v-model="form.language" value="2">
+                    <input class="border-gray-800 bg-gray-100 rounded-lg text-gray-800 mx-auto" type="radio" v-model="form.lang" value="2">
                 </label>
             </div>
         </div>
@@ -111,7 +111,7 @@ export default {
                 faculty_id: 'default',
                 program_id: 'default',
                 comment: '',
-                language: null,
+                lang: null,
                 mentor: '',
                 privacy: 0
             }

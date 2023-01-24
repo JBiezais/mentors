@@ -49,8 +49,23 @@ class StudentsController extends Controller
             'faculties' => $faculties
         ]);
     }
-    public function update(){
+    public function update(Student $student, Request $request){
 
+        $data = $request->validate([
+            'id' => 'required',
+            'faculty_id' => 'required|integer',
+            'program_id' => 'required|integer',
+            'name' => 'required|string',
+            'lastName' => 'required|string',
+            'phone' => 'required',
+            'email' => 'required|email',
+            'comment' => 'nullable',
+            'lang' => 'nullable|integer',
+        ]);
+
+        Student::find($data['id'])->update($data);
+
+        return Redirect::route('student.edit', $data['id']);
     }
     public function destroy(Student $student){
 

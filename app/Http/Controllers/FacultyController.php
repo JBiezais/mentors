@@ -24,7 +24,15 @@ class FacultyController extends Controller
 
         return Redirect::to(route('programs.index'));
     }
-    public function update(){
+    public function update(Faculty $faculty, Request $request){
+        $data = $request->validate([
+            'id' => 'required',
+            'title' => 'required'
+        ]);
+
+        $faculty->update($data);
+
+        return Redirect::route('programs.index');
 
     }
     public function destroy($faculty):RedirectResponse

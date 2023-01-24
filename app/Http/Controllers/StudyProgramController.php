@@ -37,8 +37,21 @@ class StudyProgramController extends Controller
     public function edit(){
 
     }
-    public function update(){
+    public function update(StudyProgram $studyProgram, Request $request): RedirectResponse
+    {
 
+        $data = $request->validate([
+            'id' => 'required',
+            'faculty_id' => 'required',
+            'title' => 'required',
+            'code' => 'required',
+            'lriCode' => 'required',
+            'level' => 'required',
+        ]);
+
+        StudyProgram::find($data['id'])->update($data);
+
+        return Redirect::route('programs.index');
     }
     public function destroy($program):RedirectResponse
     {

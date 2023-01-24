@@ -16,9 +16,16 @@
             </div>
             <div class="space-y-5" v-for="faculty in data">
                 <div class="flex space-x-5">
-                    <h1 class="text-2xl font-semibold text-gray-800 my-auto">{{faculty.title}}</h1>
-                    <h1 class="cursor-pointer bg-gray-700 hover:bg-gray-900 text-gray-100 rounded-lg py-2 px-3">Labot</h1>
-                    <h1 @click="deleteFaculty(faculty.id)" class="cursor-pointer bg-red-600 rounded-lg py-2 px-3 hover:bg-red-800 text-gray-100">Dzēst</h1>
+                    <h1 v-if="updateForm.id !== faculty.id" class="text-2xl font-semibold text-gray-800 my-auto">{{faculty.title}}</h1>
+                    <form class="space-x-5" v-if="updateForm.id === faculty.id" @submit.prevent="updateFaculty()">
+                        <input class="rounded-xl border-2 border-gray-800 text-xl font-semibold text-gray-800" type="text" v-model="updateForm.title">
+                        <button class="cursor-pointer bg-gray-700 hover:bg-gray-900 text-gray-100 rounded-lg py-2 px-3">Update</button>
+                    </form>
+                    <div class="flex space-x-5 h-full py-1.5">
+                        <h1 v-if="updateForm.id !== faculty.id" @click="updateForm = faculty" class="cursor-pointer bg-gray-700 hover:bg-gray-900 text-gray-100 rounded-lg py-2 px-3">Labot</h1>
+                        <h1 v-if="updateForm.id === faculty.id" @click="updateForm = {id: null, title: ''}" class="cursor-pointer bg-gray-700 hover:bg-gray-900 text-gray-100 rounded-lg py-2 px-3">Aizvērt</h1>
+                        <h1 @click="deleteFaculty(faculty.id)" class="cursor-pointer bg-red-600 rounded-lg py-2 px-3 hover:bg-red-800 text-gray-100">Dzēst</h1>
+                    </div>
                 </div>
                 <table class="min-w-full text-center">
                     <thead class="border-b bg-gray-800">
@@ -54,7 +61,7 @@
                             Smth Else
                         </td>
                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap space-x-3 flex">
-                            <h1 class="cursor-pointer bg-gray-700 hover:bg-gray-900 text-gray-100 rounded-lg py-2 px-3">Labot</h1>
+                            <h1 @click="activeProgram = program" class="cursor-pointer bg-gray-700 hover:bg-gray-900 text-gray-100 rounded-lg py-2 px-3">Labot</h1>
                             <h1 @click="deleteProgram(program.id)" class="cursor-pointer bg-red-600 rounded-lg py-2 px-3 hover:bg-red-800 text-gray-100">Dzēst</h1>
                         </td>
                     </tr>
@@ -63,7 +70,7 @@
                             <h1>Add new program</h1>
                         </td>
                         <td colspan="5" v-if="programForm.faculty_id === faculty.id" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            <form class="relative space-y-3" @submit.prevent="submitProgram()">
+                            <form class="relative space-y-3" @submit.prevent="submitProgram(activeProgram.id)">
                                 <div class="w-full">
                                     <input type="text" v-model="programForm.title" placeholder="Nosaukums" class="rounded-lg w-full">
                                 </div>
@@ -72,7 +79,11 @@
                                     <input class="rounded-lg w-full mx-auto" type="text" v-model="programForm.level" placeholder="Studiju līmenis">
                                     <input class="rounded-lg w-full" type="text" v-model="programForm.code" placeholder="Kods">
                                 </div>
-                                <button type="submit" class="text-white bg-gray-700 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Pievienot</button>
+                                <div class="flex w-fit mx-auto space-x-4">
+                                    <button v-if="!programForm.id" type="submit" class="text-white bg-gray-700 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Pievienot</button>
+                                    <button v-if="programForm.id" type="submit" class="text-white bg-gray-700 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Update</button>
+                                    <h1 @click="activeProgram = {title: '', code: '', lriCode: '', level: '', faculty_id: ''}" type="submit" class="cursor-pointer text-gray-900 bg-gray-100 hover:bg-gray-200 border-gray-900 border focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Aizvērt</h1>
+                                </div>
                             </form>
                         </td>
                     </tr>
@@ -97,6 +108,7 @@ export default {
     },
     data(){
         return{
+            activeProgram:{},
             addFaculty: 0,
             createProgram: 0,
             programForm:{
@@ -108,17 +120,33 @@ export default {
             },
             facultyForm:{
               title: ''
+            },
+            updateForm:{
+              id: null,
+              title: '',
             }
         }
     },
     methods: {
-        submitProgram(){
-            Inertia.post(route('programs.store'), this.programForm, {
-                preserveState: false
-            })
+        submitProgram(id){
+            if(!this.programForm.id){
+                Inertia.post(route('programs.store'), this.programForm, {
+                    preserveState: false
+                })
+            }else{
+                Inertia.put(route('programs.update', id), this.programForm, {
+                    preserveState: false
+                })
+            }
+
         },
         submitFaculty(){
             Inertia.post(route('faculty.store'), this.facultyForm, {
+                preserveState: false
+            })
+        },
+        updateFaculty(){
+            Inertia.put(route('faculty.update', this.updateForm.id), this.updateForm, {
                 preserveState: false
             })
         },
@@ -133,5 +161,10 @@ export default {
             })
         }
     },
+    watch:{
+        'activeProgram': function(){
+            this.programForm = this.activeProgram
+        }
+    }
 }
 </script>

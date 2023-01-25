@@ -24,9 +24,9 @@ class DatabaseSeeder extends Seeder
              'password' => bcrypt('password')
          ]);
 
-         Faculty::factory(5)->create();
-         StudyProgram::factory(25)->create();
-         Mentor::factory(60)->create();
-         Student::factory(100)->create();
+//         Faculty::factory(5)->create();
+//         StudyProgram::factory(25)->create();
+//         Mentor::factory(60)->create();
+//         Student::factory(100)->create();
     }
 }

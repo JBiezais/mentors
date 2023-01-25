@@ -20,12 +20,38 @@ class MentorController extends Controller
     {
         $programs = StudyProgram::query()->select('id', 'title', 'code')->get();
         $faculties = Faculty::all();
-        $mentors = Mentor::all();
+        $mentors = Mentor::query();
+
+        if(request('keyword') !== null){
+            $values = explode(' ', trim(request('keyword')));
+            $mentors = $mentors->where(function($query) use ($values) {
+                $query->orWhereIn('name', $values);
+                $query->orWhereIn('lastName', $values);
+            });
+        }
+
+        if(request('type') !== null){
+            switch (request('type')){
+                case 'requested':
+                    $mentors = $mentors->where('status', 0);
+                    break;
+                case 'confirmed':
+                    $mentors = $mentors->where('status', 1);
+                    break;
+            }
+        }
+
+        if(request('program') !== null){
+            $mentors = $mentors->where('program_id', request('program'));
+        }
 
         return Inertia::render('Admin/Mentor',[
             'programs' => $programs,
-            'mentors' => $mentors,
-            'faculties' => $faculties
+            'mentors' => $mentors->get(),
+            'faculties' => $faculties,
+            'keyword' => request('keyword'),
+            'type' => request('type'),
+            'program' => request('program')
         ]);
     }
     public function create():Response
@@ -88,5 +114,8 @@ class MentorController extends Controller
         Student::query()->where('mentor_id', $mentor->id)->update(['mentor_id' => null]);
 
         return Redirect::route('mentor.edit', $mentor->id);
+    }
+    public function confirmMentor(Mentor $mentor){
+        $mentor->update(['status' => 1]);
     }
 }

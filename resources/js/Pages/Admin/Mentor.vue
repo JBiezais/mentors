@@ -3,7 +3,7 @@
         <Header v-if="$page.props.auth.user !== null"></Header>
         <div class="flex-grow lg:max-w-7xl mx-auto py-5">
             <div class="p-8 bg-gray-50 w-full space-y-5">
-                <FilterBar @filter="getFilteredProps()" :programs="programs">
+                <FilterBar :keyword="keyword" :type="type" :program="program" @filter="getFilteredProps($event)" :programs="programs">
                     <template v-slot:first>Apstiprinātie</template>
                     <template v-slot:second>Pieteikumi</template>
                 </FilterBar>
@@ -55,13 +55,15 @@ export default {
     props:{
         programs: Object,
         mentors: Object,
-        faculties: Object
+        faculties: Object,
+        keyword: String,
+        type: String,
+        program: String
     },
 
     methods:{
-        getFilteredProps(type){
-            this.filterForm.type = type
-            Inertia.get(route('mentor.index'), this.filterForm, {
+        getFilteredProps($event){
+            Inertia.get(route('mentor.index'), $event, {
                 preserveState: false
             })
         },

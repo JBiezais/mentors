@@ -18,11 +18,37 @@ class StudentsController extends Controller
     public function index(): Response
     {
         $programs = StudyProgram::query()->get();
-        $students = Student::query()->with('mentor')->get();
+        $students = Student::query()->with('mentor');
+
+        if(request('keyword') !== null){
+            $values = explode(' ', trim(request('keyword')));
+            $students = $students->where(function($query) use ($values) {
+                $query->orWhereIn('name', $values);
+                $query->orWhereIn('lastName', $values);
+            });
+        }
+
+        if(request('type') !== null){
+            switch (request('type')){
+                case 'requested':
+                    $students = $students->whereNull('mentor_id');
+                    break;
+                case 'confirmed':
+                    $students = $students->whereNotNull('mentor_id');
+                    break;
+            }
+        }
+
+        if(request('program') !== null){
+            $students = $students->where('program_id', request('program'));
+        }
 
         return Inertia::render('Admin/Mentee', [
             'programs' => $programs,
-            'students' => $students
+            'students' => $students->get(),
+            'keyword' => request('keyword'),
+            'type' => request('type'),
+            'program' => request('program')
         ]);
     }
     public function create(): Response

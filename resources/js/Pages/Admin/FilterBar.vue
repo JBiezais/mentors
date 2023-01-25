@@ -1,20 +1,20 @@
 <template>
     <div class="flex flex-wrap">
         <div class="flex bg-gray-400 rounded-lg text-gray-100" >
-          <div class="flex border-r border-gray-100 px-5 py-3 cursor-pointer rounded-l-lg" :class="filterForm.type === 'all'? 'bg-gray-700': 'bg-gray-400'" @click="getFilteredProps('all')">
+          <div class="flex border-r border-gray-100 px-5 py-3 cursor-pointer rounded-l-lg" :class="filterForm.type === 'all'? 'bg-gray-700': 'bg-gray-400'" @click="this.filterForm.type = 'all'; getFilteredProps()">
             <h1 class="my-auto">Visi</h1>
           </div>
-          <div class="flex border-r border-gray-100 px-5 py-3 cursor-pointer" :class="filterForm.type === 'confirmed'? 'bg-gray-700': 'bg-gray-400'" @click="getFilteredProps('confirmed')">
+          <div class="flex border-r border-gray-100 px-5 py-3 cursor-pointer" :class="filterForm.type === 'confirmed'? 'bg-gray-700': 'bg-gray-400'" @click="this.filterForm.type = 'confirmed'; getFilteredProps()">
             <h1 class="my-auto"><slot name="first"></slot></h1>
           </div>
-          <div class="flex px-5 py-3 cursor-pointer rounded-r-lg" :class="filterForm.type === 'requested'? 'bg-gray-700': 'bg-gray-400'" @click="getFilteredProps('requested')">
+          <div class="flex px-5 py-3 cursor-pointer rounded-r-lg" :class="filterForm.type === 'requested'? 'bg-gray-700': 'bg-gray-400'" @click="this.filterForm.type = 'requested'; getFilteredProps()">
             <h1 class="my-auto"><slot name="second"></slot></h1>
           </div>
         </div>
         <div class="flex bg-gray-700 px-5 py-3 rounded-lg text-gray-100 cursor-pointer extraMail">
           <h1 class="my-auto">Sūtīt ziņu</h1>
         </div>
-        <form class="w-96 extraSearch">
+        <div class="w-96 extraSearch">
           <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
           <div class="relative">
             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -27,20 +27,20 @@
             <input type="search" id="default-search" v-model="filterForm.keyword"
                    class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-200 focus:ring-blue-500 focus:border-blue-500"
                    placeholder="Search Name, Last Name">
-            <button type="submit"
+            <button @click="getFilteredProps()"
                     class="text-white absolute right-2.5 bottom-2.5 bg-gray-700 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">
               Search
             </button>
           </div>
-        </form>
+        </div>
     </div>
     <div class="flex space-x-3">
         <h1 class="text-gray-800 my-auto">Fakultātes: </h1>
         <div class="flex flex-wrap">
-            <div class="bg-gray-200 py-3 px-5 rounded-xl overflow-hidden w-fit ml-3 cursor-pointer">
+            <div class="py-3 px-5 rounded-xl overflow-hidden w-fit ml-3 cursor-pointer" :class="filterForm.program === null? 'bg-gray-400': 'bg-gray-200 '" @click="filterForm.program = null; getFilteredProps()">
                 <h1>Visas</h1>
             </div>
-            <div class="py-3 px-5 rounded-xl overflow-hidden w-fit ml-3 cursor-pointer bg-gray-200 border border-gray-300" v-for="program in programs">
+            <div class="py-3 px-5 rounded-xl overflow-hidden w-fit ml-3 cursor-pointer bg-gray-200 border border-gray-300" :class="filterForm.program === program.id.toString()? 'bg-gray-400': 'bg-gray-200 '" @click="this.filterForm.program = program.id; getFilteredProps()" v-for="program in programs">
                 <h1>{{program.code}}</h1>
             </div>
         </div>
@@ -50,19 +50,22 @@
 export default {
     name: 'FilterBar',
     props:{
-      programs: Object
+        programs: Object,
+        keyword: String,
+        type: String,
+        program: String
     },
     data(){
         return{
             filterForm:{
-                keyword: '',
-                type: 'all'
+                keyword: this.keyword || '',
+                type: this.type || 'all',
+                program: this.program || null
             }
         }
     },
     methods:{
-        getFilteredProps(type = 'all'){
-            this.filterForm.type = type
+        getFilteredProps(){
             this.$emit('filter', this.filterForm)
         }
     }

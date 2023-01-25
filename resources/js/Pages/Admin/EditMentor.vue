@@ -69,6 +69,7 @@
                 <div class="">
                     <div class="bg-gray-200 shadow-xl rounded-xl p-5 space-y-5 flex flex-col w-full">
                         <h1 @click="edit = 1" class="cursor-pointer bg-gray-700 hover:bg-gray-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Labot</h1>
+                        <h1 @click="confirmMentor(mentor.id)" class="cursor-pointer bg-emerald-700 hover:bg-emerald-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Apstiprināt</h1>
                         <h1 class="cursor-pointer bg-sky-700 hover:bg-sky-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Sūtīt ziņu</h1>
                         <Link :href="'/'" class="cursor-pointer bg-cyan-700 hover:bg-cyan-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Nosūtīt mentorējamo datus</Link>
                         <h1 @click="removeMentees(mentor.id)" class="cursor-pointer bg-gray-100 hover:bg-red-800 text-red-700 hover:text-gray-50 border border-red-700 rounded-lg py-2 px-3 w-full text-center">Atsaukt mentorējamos</h1>
@@ -183,6 +184,11 @@ export default {
         removeMentees(id){
             Inertia.post(route('remove.mentees', id), {}, {
                 preserveState:false
+            })
+        },
+        confirmMentor(id){
+            Inertia.post(route('confirm.mentor', id), {}, {
+                preserveState: false
             })
         }
     },

@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard');
 
     Route::post('/mentees/remove/{mentor}', [MentorController::class, 'removeMentees'])->name('remove.mentees');
+    Route::post('/mentor/confirm/{mentor}', [MentorController::class, 'confirmMentor'])->name('confirm.mentor');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

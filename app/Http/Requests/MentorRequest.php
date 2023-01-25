@@ -38,6 +38,7 @@ class MentorRequest extends FormRequest
             'ru' => 'nullable|boolean',
             'en' => 'nullable|boolean',
             'privacy' => 'required|boolean',
+            'img' => 'required|mimes:jpg,jpeg,png'
         ];
     }
 }

@@ -24,7 +24,8 @@ class Mentor extends Model
         'lv',
         'ru',
         'en',
-        'privacy'
+        'privacy',
+        'img'
     ];
 
     public function students():HasMany

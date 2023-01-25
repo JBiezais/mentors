@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\UploadFileAction;
 use App\Http\Requests\MentorRequest;
 use App\Models\Faculty;
 use App\Models\Mentor;
@@ -33,9 +34,13 @@ class MentorController extends Controller
             'faculties' => $faculties
         ]);
     }
-    public function store(MentorRequest $request): RedirectResponse
+    public function store(MentorRequest $request, UploadFileAction $uploadFileAction): RedirectResponse
     {
         $data = $request->validated();
+
+        if($request->hasFile('img')){
+            $data['img'] = $uploadFileAction->upload($request->file('img'));
+        }
 
         Mentor::create($data);
 

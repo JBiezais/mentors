@@ -19,7 +19,7 @@ class StudentFactory extends Factory
         return [
             'faculty_id' => 1,
             'program_id' => 1,
-            'mentor_id' => fake()->randomNumber(1),
+            'mentor_id' => fake()->randomNumber(2),
             'name' => fake()->firstName(),
             'lastName' => fake()->lastName(),
             'phone' => fake()->phoneNumber,

@@ -17,7 +17,20 @@ class MentorFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'faculty_id' => fake()->randomElement([1,2,3]),
+            'program_id' => fake()->numberBetween(1,25),
+            'name' => fake()->firstName(),
+            'lastName' => fake()->lastName(),
+            'phone' => fake()->phoneNumber,
+            'email' => fake()->email,
+            'about' => fake()->paragraph,
+            'why' => fake()->paragraph,
+            'mentees' => fake()->numberBetween(1,5),
+            'year' => fake()->numberBetween(1,5),
+            'lv' => fake()->boolean,
+            'ru' => fake()->boolean,
+            'en' => fake()->boolean,
+            'privacy' => 1
         ];
     }
 }

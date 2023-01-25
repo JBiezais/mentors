@@ -5,7 +5,7 @@
             <div class="grid grid-cols-4 gap-10">
                 <div>
                     <div class="w-fit h-fit bg-gray-100 rounded-full border-gray-400 shadow-xl p-3 flex mx-auto">
-                        <img class="rounded-full w-48 h-48" src="https://mentors.rsu.lv/storage/photos/resized/2022/c6294244a80a85ad60de3c2dd6757ed78b95d95e.jpg" alt="student">
+                        <img class="rounded-full w-48 h-48" :src="'/'+mentor.img" alt="student">
                     </div>
                 </div>
                 <form class="col-span-2 grid grid-cols-4 gap-3" @submit.prevent="submitForm(mentor.id)">

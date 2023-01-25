@@ -17,7 +17,7 @@ class FacultyFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => fake()->sentence(2)
         ];
     }
 }

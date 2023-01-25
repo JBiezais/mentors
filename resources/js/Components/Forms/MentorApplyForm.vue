@@ -133,6 +133,15 @@
             </div>
         </div>
         <div>
+            <h1>Pievienot Attēlu</h1>
+            <label class="block border-emerald-900 border-2 rounded-xl p-1 space-y-2">
+                <img :src="formPhotoPreview" class="border w-2/3 border-none rounded-xl" alt="photo" v-if="formPhotoPreview">
+                <span class="sr-only">Choose File</span>
+                <input type="file" ref="formPhotoUploadField" @change="updatePhotoPreview" class="block w-full rounded-lg text-sm text-emerald-900 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-emerald-500 file:text-emerald-900 hover:file:text-emerald-500 hover:file:bg-emerald-900"/>
+            </label>
+            <InputError class="mt-2" :message="$page.props.errors.img" />
+        </div>
+        <div>
             <label class="flex space-x-2 font-semibold">
                 <input class="rounded-xl my-auto" type="checkbox" v-model="form.privacy">
                 <p>Piekrītu savu datu apstrādāšanai saskaņā ar datu izmantošanas politiku</p>
@@ -157,6 +166,7 @@ export default {
     data(){
         return{
             programs: {},
+            formPhotoPreview: null,
             form: useForm({
                 name: '',
                 lastName: '',
@@ -171,7 +181,8 @@ export default {
                 lv: 0,
                 ru: 0,
                 en: 0,
-                privacy: 0
+                privacy: 0,
+                img: null
             }),
         }
     },
@@ -180,7 +191,17 @@ export default {
             this.form.post(route('mentor.store'), {
                 preserveState: 'errors'
             })
-        }
+        },
+        updatePhotoPreview(){
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                this.formPhotoPreview = e.target.result;
+            };
+
+            this.form.img = this.$refs.formPhotoUploadField.files[0];
+            reader.readAsDataURL(this.$refs.formPhotoUploadField.files[0]);
+        },
     },
     watch:{
         'form.faculty_id': function(){

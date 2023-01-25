@@ -12,7 +12,7 @@
                 <div class="border border-gray-300 flex w-full p-5 rounded-xl" v-for="mentor in mentors">
                     <div class="w-1/4">
                         <div class="w-fit h-fit bg-gray-100 rounded-full border-gray-400 shadow-xl p-3 flex">
-                            <img class="rounded-full w-48 h-48" src="https://mentors.rsu.lv/storage/photos/resized/2022/c6294244a80a85ad60de3c2dd6757ed78b95d95e.jpg" alt="student">
+                            <img class="rounded-full w-48 h-48" :src="mentor.img" :alt="mentor.name">
                         </div>
                     </div>
                     <div class="grid grid-cols-4 gap-x-5 gap-y-2 w-3/4 text-gray-800">

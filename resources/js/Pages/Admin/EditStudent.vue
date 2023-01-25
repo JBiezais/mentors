@@ -12,7 +12,7 @@
                     <input v-if="edit" class="col-span-3 border-gray-800 bg-gray-100 rounded-lg text-gray-800" type="text" v-model="form.email">
                     <p v-if="!edit" class="col-span-3">{{student.email}}</p>
                     <h1 class="col-span-1 font-semibold text-lg">Komentārs</h1>
-                    <input v-if="edit" class="col-span-3 border-gray-800 bg-gray-100 rounded-lg text-gray-800" type="text" v-model="form.comment">
+                    <textarea v-if="edit" class="col-span-3 border-gray-800 bg-gray-100 rounded-lg text-gray-800" type="text" v-model="form.comment"></textarea>
                     <p v-if="!edit" class="col-span-3">{{student.comment}}</p>
                     <h1 class="col-span-1 font-semibold text-lg">Fakultāte</h1>
                     <select v-if="edit" class="col-span-3 border-gray-800 bg-gray-100 rounded-lg text-gray-800" v-model="form.faculty_id">
@@ -42,6 +42,12 @@
                         </label>
                     </div>
                     <p v-if="!edit" class="col-span-3"><span v-if="student.lang === 0">Latviešu</span><span v-if="student.lang === 1">Krievu</span><span v-if="student.lang === 2">Angļu</span></p>
+                    <h1 class="col-span-1 font-semibold text-lg">Mentors {{edit ? '('+chooseMentor.length+')' : ''}}</h1>
+                    <select v-if="edit" class="col-span-3 border-gray-800 bg-gray-100 rounded-lg text-gray-800 w-full" v-model="form.mentor_id">
+                        <option disabled value="default">Izvēlieties Studiju Programu</option>
+                        <option :value="mentor.id" v-for="mentor in chooseMentor">{{mentor.name}} {{mentor.lastName}}</option>
+                    </select>
+                    <Link v-if="!edit" :href="route('mentor.edit', student.mentor.id)" class="col-span-3">{{student.mentor.name}} {{student.mentor.lastName}}</Link>
                     <h1 class="col-span-1 font-semibold text-lg">Pieteicās</h1>
                     <p class="col-span-3">{{new Date(student.created_at).toLocaleDateString()}} {{new Date(student.created_at).toLocaleTimeString()}}</p>
                     <div v-if="edit" class="col-span-4 relative">
@@ -50,10 +56,9 @@
                 </form>
                 <div class="">
                     <div class="bg-gray-200 shadow-xl rounded-xl p-5 space-y-5 flex flex-col w-full">
-                        <h1 @click="edit = 1" class="cursor-pointer bg-gray-700 hover:bg-gray-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Labot</h1>
+                        <h1 @click="edit = 1; getMentors" class="cursor-pointer bg-gray-700 hover:bg-gray-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Labot</h1>
                         <h1 class="cursor-pointer bg-sky-700 hover:bg-sky-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Sūtīt ziņu</h1>
-                        <Link :href="'/'" class="cursor-pointer bg-cyan-700 hover:bg-cyan-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Nosūtīt mentorējamo datus</Link>
-                        <Link :href="'/'" class="cursor-pointer bg-gray-100 hover:bg-red-800 text-red-700 hover:text-gray-50 border border-red-700 rounded-lg py-2 px-3 w-full text-center">Atsaukt mentorējamos</Link>
+                        <Link :href="'/'" class="cursor-pointer bg-cyan-700 hover:bg-cyan-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Nosūtīt mentora datus</Link>
                         <h1 @click="deleteStudent(student.id)" class="cursor-pointer bg-red-500 hover:bg-red-700 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Dzēst</h1>
                     </div>
                 </div>
@@ -77,10 +82,12 @@ export default {
     },
     props:{
         student: Object,
-        faculties: Object
+        faculties: Object,
+        mentors: Object
     },
     data(){
         return{
+            chooseMentor:{},
             programs:{},
             edit: 0,
             faculty: null,
@@ -92,6 +99,7 @@ export default {
                 email: this.student.email,
                 faculty_id: this.student.faculty_id,
                 program_id: this.student.program_id,
+                mentor_id: this.student.mentor_id,
                 comment: this.student.comment,
                 lang: this.student.lang,
             }
@@ -117,15 +125,46 @@ export default {
             Inertia.put(route('student.update', id), this.form, {
                 preserveState: false,
             })
+        },
+        getMentors(){
+            this.chooseMentor = this.mentors.filter(mentor => {
+                if(mentor.program_id === this.form.program_id){
+                    switch (this.form.lang.toString()){
+                        case '0':
+                            console.log(mentor)
+                            if(mentor.lv){
+                                return mentor
+                            }
+                            break
+                        case '1':
+                            if(mentor.ru){
+                                return mentor
+                            }
+                            break
+                        case '2':
+                            if(mentor.en){
+                                return mentor
+                            }
+                            break
+                    }
+                }
+            })
         }
     },
     watch:{
         'form.faculty_id': function(){
             this.setPrograms()
+        },
+        'form.program_id': function (){
+            this.getMentors()
+        },
+        'form.lang':function(){
+            this.getMentors()
         }
     },
     mounted(){
         this.setPrograms()
+        this.getMentors()
     }
 }
 </script>

@@ -46,9 +46,12 @@ class StudentsController extends Controller
     public function edit(Student $student){
 
         $faculties = Faculty::with('programs')->get();
+        $mentors = Mentor::all();
+        $student = Student::query()->whereId($student->id)->with('mentor')->first();
 
         return Inertia::render('Admin/EditStudent', [
             'student' => $student,
+            'mentors' => $mentors,
             'faculties' => $faculties
         ]);
     }
@@ -58,6 +61,7 @@ class StudentsController extends Controller
             'id' => 'required',
             'faculty_id' => 'required|integer',
             'program_id' => 'required|integer',
+            'mentor_id' => 'integer',
             'name' => 'required|string',
             'lastName' => 'required|string',
             'phone' => 'required',

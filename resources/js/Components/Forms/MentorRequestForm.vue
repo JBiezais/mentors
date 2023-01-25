@@ -148,7 +148,6 @@ export default {
             if(this.form.mentor === id){
                 this.form.mentor_id = null
             }else{
-
                 this.form.mentor_id = id
             }
         },

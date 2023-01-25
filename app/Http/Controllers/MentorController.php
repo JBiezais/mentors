@@ -6,6 +6,7 @@ use App\Actions\UploadFileAction;
 use App\Http\Requests\MentorRequest;
 use App\Models\Faculty;
 use App\Models\Mentor;
+use App\Models\Student;
 use App\Models\StudyProgram;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -75,9 +76,17 @@ class MentorController extends Controller
 
         Mentor::find($data['id'])->update($data);
     }
-    public function destroy(Mentor $mentor){
+    public function destroy(Mentor $mentor): RedirectResponse
+    {
+        Student::query()->where('mentor_id', $mentor->id)->update(['mentor_id' => null]);
         Mentor::find($mentor->id)->delete();
 
         return Redirect::route('mentor.index');
+    }
+    public function removeMentees(Mentor $mentor): RedirectResponse
+    {
+        Student::query()->where('mentor_id', $mentor->id)->update(['mentor_id' => null]);
+
+        return Redirect::route('mentor.edit', $mentor->id);
     }
 }

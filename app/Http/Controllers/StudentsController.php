@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StudentRequest;
 use App\Models\Faculty;
+use App\Models\Mentor;
 use App\Models\Student;
 use App\Models\StudyProgram;
 use Illuminate\Http\RedirectResponse;
@@ -27,9 +28,11 @@ class StudentsController extends Controller
     public function create(): Response
     {
         $faculties = Faculty::query()->with('programs')->get();
+        $mentors = Mentor::all();
 
         return Inertia::render('Public/Student', [
-            'faculties' => $faculties
+            'faculties' => $faculties,
+            'mentors' => $mentors
         ]);
     }
     public function store(StudentRequest $request):RedirectResponse

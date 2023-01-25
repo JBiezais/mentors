@@ -1,14 +1,14 @@
 <template>
     <div class="min-h-screen flex flex-col bg-gray-50">
         <Header v-if="$page.props.auth.user !== null"></Header>
-        <div class="flex-grow lg:max-w-7xl mx-auto">
+        <div class="flex-grow lg:max-w-7xl mx-auto py-5">
             <div class="p-8 bg-gray-50 w-full space-y-5">
                 <FilterBar @filter="getFilteredProps()" :programs="programs">
                     <template v-slot:first>Apstiprinātie</template>
                     <template v-slot:second>Pieteikumi</template>
                 </FilterBar>
             </div>
-            <div>
+            <div class="space-y-5">
                 <div class="border border-gray-300 flex w-full p-5 rounded-xl" v-for="mentor in mentors">
                     <div class="w-1/4">
                         <div class="w-fit h-fit bg-gray-100 rounded-full border-gray-400 shadow-xl p-3 flex">

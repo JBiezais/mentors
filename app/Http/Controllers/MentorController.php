@@ -43,7 +43,7 @@ class MentorController extends Controller
     }
     public function edit(Mentor $mentor):Response
     {
-        $faculties = Faculty::all();
+        $faculties = Faculty::query()->with('programs')->get();
         $programs = StudyProgram::query()->select('id', 'title', 'code')->get();
         $data = Mentor::query()->whereId($mentor->id)->with('students')->first();
 
@@ -53,8 +53,22 @@ class MentorController extends Controller
             'programs' => $programs,
         ]);
     }
-    public function update(){
+    public function update(Request $request, Mentor $mentor){
+        $data = $request->validate([
+            'id' => 'required',
+            'faculty_id' => 'required|integer',
+            'program_id' => 'required|integer',
+            'phone' => 'required',
+            'email' => 'required|email',
+            'year' => 'required|integer',
+            'about' => 'required',
+            'why' => 'required',
+            'lv' => 'nullable|boolean',
+            'ru' => 'nullable|boolean',
+            'en' => 'nullable|boolean',
+        ]);
 
+        Mentor::find($data['id'])->update($data);
     }
     public function destroy(Mentor $mentor){
         Mentor::find($mentor->id)->delete();

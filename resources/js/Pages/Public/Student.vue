@@ -1,13 +1,13 @@
 <template>
     <div class="min-h-screen flex flex-col">
         <Header v-if="$page.props.auth.user !== null"></Header>
-        <div class="w-full bg-gray-800 p-8 flex-grow">
+        <div class="w-full bg-gray-900 p-8 flex-grow">
             <div class="rounded-xl bg-gray-100 p-5 space-y-5 text-gray-800 md:max-w-3xl mx-auto">
                 <h1 class="text-2xl font-semibold">Gribu sev mentoru!</h1>
                 <p class="text-gray-500">Mentors, students-veckursnieks, palīdzēs Tev iesākt studiju gaitas un adaptēties studiju vidē.</p>
                 <p>Atstāj informāciju par sevi, lai Tavs mentors varētu sazināties ar Tevi.</p>
 
-                <MentorRequestForm :faculties="faculties"></MentorRequestForm>
+                <MentorRequestForm :faculties="faculties" :mentors="mentors"></MentorRequestForm>
             </div>
         </div>
         <Footer></Footer>
@@ -25,6 +25,7 @@ export default {
     components: {Header, MentorRequestForm, Footer},
     props:{
         faculties: Object,
+        mentors: Object,
     }
 }
 </script>

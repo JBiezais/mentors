@@ -58,27 +58,27 @@
         <div class="text-center md:text-left text-xl font-semibold">
             Izvēlies mentoru:
             <div class="md:grid md:grid-cols-2 md:gap-5 mt-5">
-                <div class="border border-gray-800 rounded-xl p-2 space-y-3">
+                <div class="rounded-xl p-2 space-y-3" :class="form.mentor === mentor.id ? 'border-2 border-emerald-800 shadow-xl': 'border border-gray-800'" @click="addMentor(mentor.id)" v-for="mentor in displayMentors">
                     <img class="rounded-lg m-auto w-full h-auto" src="https://mentors.rsu.lv/storage/photos/resized/2022/65d0896bc734c3952e2840f5c6bd703c8ff2b0ce.jpg" alt="student">
                     <div class="text-center text-lg">
-                        <h1>Georgs Alberts Pimanovs</h1>
-                        <p class="text-gray-500 italic text-sm">3. gads</p>
+                        <h1>{{mentor.name}} {{mentor.lastName}}</h1>
+                        <p class="text-gray-500 italic text-sm">{{mentor.year}}. gads</p>
                     </div>
                     <div class="text-center font-semibold text-base md:text-left">
                         Par sevi:
                         <p class="font-medium">
-                            Esmu ļoti atvērts un komunikabls students ar kripatiņu entuziasma un radošas domāšanas. Liels kardio un spoguļkameru fanātiķis, tāpēc, tici man, tikai par anatomiskajām struktūrām un histoloģijas protokoliem runāt nespēsim. Aktīvi iesaistos arī universitātes sabiedriskajā dzīvē un problēmu risināšanā kā gada vecākais, tāpēc varēšu izpalīdzēt arī arkārtas situācijās. Ja mīļi palūgsi, droši varēsi uzdot kādu āķīgu jautājumu vakara vēlajās stundās. Teiksim tā - būšu lielais brālis brīžos, kad viss iet greizi!
+                            {{mentor.about}}
                         </p>
                     </div>
                     <div class="text-center font-semibold text-base md:text-left">
                         Kāpēc pieteicos mentorēt:
                         <p class="font-medium">
-                            Pirmkursnieks noteikti justos daudz pašpārliecinātāks, ja tam būtu kāds stūrakmens, sākot savu akadēmisko “karjeru”, un manuprāt esmu pietiekami labs kandidāts, lai, nevelkot laiku, spētu prasmīgi iemācīt kādam "pirmajam" būt par studentu!
+                           {{mentor.why}}
                         </p>
                     </div>
                     <div class="flex text-center font-semibold text-base">
                         Valodas:
-                        <h1 class="ml-2 space-x-3 font-medium"><span>Latviešu</span><span>Krievu</span><span>Angļu</span></h1>
+                        <h1 class="ml-2 space-x-3 font-medium"><span v-if="mentor.lv">Latviešu</span><span v-if="mentor.ru">Krievu</span><span v-if="mentor.en">Angļu</span></h1>
                     </div>
                 </div>
             </div>
@@ -95,15 +95,18 @@
 
 <script>
 import {Inertia} from "@inertiajs/inertia";
+import { useForm } from '@inertiajs/vue3'
 export default {
     name: "MentorRequestForm",
     props:{
         faculties: Object,
+        mentors: Object
     },
     data(){
         return{
             programs:{},
-            form:{
+            displayMentors:{},
+            form: useForm({
                 name: '',
                 lastName: '',
                 phone: '',
@@ -114,19 +117,56 @@ export default {
                 lang: null,
                 mentor: '',
                 privacy: 0
-            }
+            })
         }
     },
     methods:{
         submit(){
-            Inertia.post(route('student.store'), this.form,{
+            this.form.post(route('student.store'), {
                 preserveState: 'errors'
+            })
+        },
+        addMentor(id){
+            if(this.form.mentor === id){
+                this.form.mentor = null
+            }else{
+
+                this.form.mentor = id
+            }
+        },
+        filterMentors(){
+            this.displayMentors = this.mentors.filter(mentor => {
+                if(mentor.program_id === this.form.program_id){
+                    switch (this.form.lang){
+                        case '0':
+                            if(mentor.lv){
+                                return mentor
+                            }
+                            break
+                        case '1':
+                            if(mentor.ru){
+                                return mentor
+                            }
+                            break
+                        case '2':
+                            if(mentor.en){
+                                return mentor
+                            }
+                            break
+                    }
+                }
             })
         }
     },
     watch:{
         'form.faculty_id': function(){
             this.programs = this.faculties.find(faculty => faculty.id === this.form.faculty_id)
+        },
+        'form.program_id': function(){
+            this.filterMentors()
+        },
+        'form.lang': function (){
+            this.filterMentors()
         }
     }
 }

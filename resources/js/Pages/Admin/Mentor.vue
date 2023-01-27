@@ -16,7 +16,10 @@
                         </div>
                     </div>
                     <div class="grid grid-cols-4 gap-x-5 gap-y-2 w-3/4 text-gray-800">
-                        <Link :href="route('mentor.edit', mentor.id)" class="col-span-4 font-semibold text-xl text-blue-700">{{mentor.name}} {{mentor.lastName}}</Link>
+                        <div class="flex space-x-5 col-span-4">
+                            <Link :href="route('mentor.edit', mentor.id)" class="font-semibold text-xl text-blue-700">{{mentor.name}} {{mentor.lastName}}</Link>
+                            <h1 class="my-auto font-semibold">{{mentor.students.length}}/{{mentor.mentees}}</h1>
+                        </div>
                         <h1 class="col-span-1 font-semibold text-lg">Pamatinformācija</h1>
                         <p class="col-span-3">{{mentor.year}}. gads; {{mentor.email}} ; {{mentor.phone}}</p>
                         <h1 class="col-span-1 font-semibold text-lg">Par sevi</h1>

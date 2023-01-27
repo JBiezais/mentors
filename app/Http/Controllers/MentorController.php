@@ -20,7 +20,7 @@ class MentorController extends Controller
     {
         $programs = StudyProgram::query()->select('id', 'title', 'code')->get();
         $faculties = Faculty::all();
-        $mentors = Mentor::query();
+        $mentors = Mentor::query()->with('students');
 
         if(request('keyword') !== null){
             $values = explode(' ', trim(request('keyword')));

@@ -114,9 +114,9 @@ class MentorController extends Controller
 
         return Redirect::route('mentor.index');
     }
-    public function removeMentees(Mentor $mentor): RedirectResponse
+    public function removeMentees(Mentor $mentor, Request $request): RedirectResponse
     {
-        Student::query()->where('mentor_id', $mentor->id)->update(['mentor_id' => null]);
+        Student::query()->where('mentor_id', $mentor->id)->whereIn('id', $request->ids)->update(['mentor_id' => null]);
 
         return Redirect::route('mentor.edit', $mentor->id);
     }

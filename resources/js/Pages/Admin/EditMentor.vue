@@ -71,7 +71,7 @@
                         <h1 @click="confirmMentor(mentor.id)" v-if="!mentor.status" class="cursor-pointer bg-emerald-700 hover:bg-emerald-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Apstiprināt</h1>
                         <h1 class="cursor-pointer bg-sky-700 hover:bg-sky-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Sūtīt ziņu</h1>
                         <Link :href="'/'" class="cursor-pointer bg-cyan-700 hover:bg-cyan-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Nosūtīt mentorējamo datus</Link>
-                        <h1 @click="removeMentees(mentor.id)" class="cursor-pointer bg-gray-100 hover:bg-red-800 text-red-700 hover:text-gray-50 border border-red-700 rounded-lg py-2 px-3 w-full text-center">Atsaukt mentorējamos</h1>
+                        <h1 @click="removeMentees(mentor.id)" v-if="mentees.length" class="cursor-pointer bg-gray-100 hover:bg-red-800 text-red-700 hover:text-gray-50 border border-red-700 rounded-lg py-2 px-3 w-full text-center">Atsaukt mentorējamos</h1>
                         <h1 @click="deleteMentor(mentor.id)" class="cursor-pointer bg-red-500 hover:bg-red-700 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Dzēst</h1>
                     </div>
                 </div>
@@ -81,6 +81,7 @@
                 <table class="min-w-full text-center">
                     <thead class="border-b bg-gray-800">
                     <tr>
+                        <th scope="col" class="text-sm font-medium text-white px-6 py-4"></th>
                         <th scope="col" class="text-sm font-medium text-white px-6 py-4">
                             Vārds, Uzvārds
                         </th>
@@ -99,6 +100,9 @@
                     </thead>
                     <tbody>
                     <tr class="bg-white border-b" v-for="student in mentor.students">
+                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <input type="checkbox" class="border-gray-800 bg-gray-100 rounded-lg text-gray-800 mx-auto" @click="selectMentee(student.id)">
+                        </td>
                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                             {{student.name}}, {{student.lastName}}
                         </td>
@@ -156,7 +160,8 @@ export default {
                 lv: this.mentor.lv,
                 ru: this.mentor.ru,
                 en: this.mentor.en
-            }
+            },
+            mentees:[]
         }
     },
     methods:{
@@ -181,7 +186,7 @@ export default {
             })
         },
         removeMentees(id){
-            Inertia.post(route('remove.mentees', id), {}, {
+            Inertia.post(route('remove.mentees', id), {ids: this.mentees}, {
                 preserveState:false
             })
         },
@@ -189,6 +194,14 @@ export default {
             Inertia.post(route('confirm.mentor', id), {}, {
                 preserveState: false
             })
+        },
+        selectMentee(id){
+            const index = this.mentees.indexOf(id);
+            if (index !== -1) {
+                this.mentees.splice(index, 1);
+            } else {
+                this.mentees.push(id);
+            }
         }
     },
     watch:{

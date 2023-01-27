@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\ProfileController;
@@ -43,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('student', StudentsController::class)->except('store', 'create', 'show');
     Route::resource('faculty', FacultyController::class)->except('create', 'edit', 'index', 'show');
     Route::resource('programs', StudyProgramController::class)->except('create', 'show');
+    Route::resource('event', EventController::class)->except('create', 'show');
 });
 
 require __DIR__.'/auth.php';

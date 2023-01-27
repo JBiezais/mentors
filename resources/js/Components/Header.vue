@@ -27,6 +27,9 @@
                         <NavLink :href="route('programs.index')" :active="route().current('programs.index')">
                             Study programs
                         </NavLink>
+                        <NavLink :href="route('event.index')" :active="route().current('event.index')">
+                            Events
+                        </NavLink>
                     </div>
                 </div>
 
@@ -117,7 +120,10 @@
                     Mentees
                 </ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('programs.index')" :active="route().current('programs.index')">
-                    Programs
+                    Study programs
+                </ResponsiveNavLink>
+                <ResponsiveNavLink :href="route('event.index')" :active="route().current('event.index')">
+                    Events
                 </ResponsiveNavLink>
             </div>
 

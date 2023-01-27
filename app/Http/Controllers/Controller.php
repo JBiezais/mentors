@@ -7,12 +7,13 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function index(): \Inertia\Response
+    public function index():Response
     {
         return Inertia::render('Public/Home');
     }

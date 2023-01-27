@@ -12,7 +12,6 @@
                     <Link :href="route('mentor.edit', mentor.id)" class="col-span-4 font-semibold text-xl text-blue-700">{{mentor.name}} {{mentor.lastName}}</Link>
                     <h1 class="col-span-1 font-semibold text-lg">Gads</h1>
                     <select v-if="edit" class="col-span-3 border-gray-800 bg-gray-100 rounded-lg text-gray-800" v-model="form.year">
-                        <option value="1">1. gads</option>
                         <option value="2">2. gads</option>
                         <option value="3">3. gads</option>
                         <option value="4">4. gads</option>

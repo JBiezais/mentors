@@ -72,7 +72,6 @@
                         Studiju gads
                     </label>
                     <select class="border-0 rounded-lg bg-gray-100 w-full" v-model="form.year">
-                        <option value="1">1. gads</option>
                         <option value="2">2. gads</option>
                         <option value="3">3. gads</option>
                         <option value="4">4. gads</option>

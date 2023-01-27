@@ -45,15 +45,15 @@
                     <p v-if="!edit" class="col-span-3">{{findProgram(mentor.program_id)}}</p>
                     <h1 class="col-span-1 font-semibold text-lg">Valodas</h1>
                     <div v-if="edit" class="col-span-3 grid grid-cols-3 mt-3">
-                        <label class="flex flex-col mx-auto">
+                        <label class="flex flex-col mx-auto" @click="form.lv? form.lv = 0: form.lv = 1">
                             Latviešu
                             <input class="border-gray-800 bg-gray-100 rounded-lg text-gray-800 mx-auto" type="radio" value="1" v-model="form.lv">
                         </label>
-                        <label class="flex flex-col mx-auto">
+                        <label class="flex flex-col mx-auto" @click="form.ru? form.ru = 0: form.ru = 1">
                             Krievu
                             <input class="border-gray-800 bg-gray-100 rounded-lg text-gray-800 mx-auto" type="radio" value="1" v-model="form.ru">
                         </label>
-                        <label class="flex flex-col mx-auto">
+                        <label class="flex flex-col mx-auto" @click="form.en? form.en = 0: form.en = 1">
                             Angļu
                             <input class="border-gray-800 bg-gray-100 rounded-lg text-gray-800 mx-auto" type="radio" value="1" v-model="form.en">
                         </label>

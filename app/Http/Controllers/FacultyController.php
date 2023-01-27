@@ -17,7 +17,8 @@ class FacultyController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $data = $request->validate([
-            'title' => 'required'
+            'title' => 'required',
+            'code' => 'required'
         ]);
 
         Faculty::create($data);

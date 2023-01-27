@@ -18,6 +18,7 @@ class StudentsController extends Controller
     public function index(): Response
     {
         $programs = StudyProgram::query()->get();
+        $faculties = Faculty::query()->with('programs')->get();
         $students = Student::query()->with('mentor');
 
         if(request('keyword') !== null){
@@ -39,16 +40,22 @@ class StudentsController extends Controller
             }
         }
 
+        if(request('faculty') !== null){
+            $students = $students->where('faculty_id', request('faculty'));
+        }
+
         if(request('program') !== null){
             $students = $students->where('program_id', request('program'));
         }
 
         return Inertia::render('Admin/Mentee', [
             'programs' => $programs,
+            'faculties' => $faculties,
             'students' => $students->get(),
             'keyword' => request('keyword'),
             'type' => request('type'),
-            'program' => request('program')
+            'program' => request('program'),
+            'faculty' => request('faculty'),
         ]);
     }
     public function create(): Response

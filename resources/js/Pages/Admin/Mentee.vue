@@ -3,7 +3,7 @@
         <Header v-if="$page.props.auth.user !== null"></Header>
         <div class="flex-grow lg:max-w-7xl mx-auto">
             <div class="p-8 bg-gray-50 w-full space-y-5">
-                <FilterBar :keyword="keyword" :type="type" :program="program" @filter="getFilteredProps($event)" :programs="programs">
+                <FilterBar :keyword="keyword" :type="type" :program="program" :faculty="faculty" @filter="getFilteredProps($event)" :faculties="faculties">
                     <template v-slot:first>Ar mentoru</template>
                     <template v-slot:second>Bez mentora</template>
                 </FilterBar>
@@ -74,10 +74,12 @@ export default {
     components: {Footer, Header, FilterBar, Link},
     props:{
         programs: Object,
+        faculties: Object,
         students: Object,
         keyword: String,
         type: String,
-        program: String
+        program: String,
+        faculty: String,
     },
     methods:{
         getFilteredProps($event){

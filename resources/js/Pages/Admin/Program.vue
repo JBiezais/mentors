@@ -5,9 +5,15 @@
             <div>
                 <div v-if="!addFaculty" type="submit" class="w-fit text-white bg-gray-700 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2" @click="addFaculty = 1">Pievienot fakultāti</div>
                 <form class="flex space-x-5" v-if="addFaculty" @submit.prevent="submitFaculty()">
-                    <div class="space-y-3" :class="data.length ? 'w-1/2':'min-w-96'">
-                        <h1>Fakultātes nosaukums</h1>
-                        <input type="text" v-model="facultyForm.title" class="rounded-lg w-full">
+                    <div class=" flex space-x-5" :class="data.length ? 'w-1/2':'min-w-96'">
+                        <div class="space-y-3">
+                            <h1>Fakultātes nosaukums</h1>
+                            <input type="text" v-model="facultyForm.title" class="rounded-lg w-full">
+                        </div>
+                        <div class="space-y-3">
+                            <h1>Fakultātes kods</h1>
+                            <input type="text" v-model="facultyForm.code" class="rounded-lg w-full">
+                        </div>
                     </div>
                     <div class="mt-auto mb-1">
                         <button type="submit" class="text-white bg-gray-700 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Pievienot</button>
@@ -119,11 +125,12 @@ export default {
                 faculty_id: ''
             },
             facultyForm:{
-              title: ''
+                title: '',
+                code: ''
             },
             updateForm:{
-              id: null,
-              title: '',
+                id: null,
+                title: '',
             }
         }
     },

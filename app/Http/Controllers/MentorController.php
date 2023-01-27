@@ -19,7 +19,7 @@ class MentorController extends Controller
     public function index():Response
     {
         $programs = StudyProgram::query()->select('id', 'title', 'code')->get();
-        $faculties = Faculty::all();
+        $faculties = Faculty::query()->with('programs')->get();
         $mentors = Mentor::query()->with('students');
 
         if(request('keyword') !== null){
@@ -41,6 +41,10 @@ class MentorController extends Controller
             }
         }
 
+        if(request('faculty') !== null){
+            $mentors = $mentors->where('faculty_id', request('faculty'));
+        }
+
         if(request('program') !== null){
             $mentors = $mentors->where('program_id', request('program'));
         }
@@ -51,7 +55,8 @@ class MentorController extends Controller
             'faculties' => $faculties,
             'keyword' => request('keyword'),
             'type' => request('type'),
-            'program' => request('program')
+            'program' => request('program'),
+            'faculty' => request('faculty')
         ]);
     }
     public function create():Response

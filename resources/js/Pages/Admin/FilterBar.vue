@@ -37,10 +37,21 @@
     <div class="flex space-x-3">
         <h1 class="text-gray-800 my-auto">Fakultātes: </h1>
         <div class="flex flex-wrap">
+            <div class="py-3 px-5 rounded-xl overflow-hidden w-fit ml-3 cursor-pointer" :class="filterForm.faculty === null? 'bg-gray-400': 'bg-gray-200 '" @click="filterForm.faculty = null; getFilteredProps()">
+                <h1>Visas</h1>
+            </div>
+            <div class="py-3 px-5 rounded-xl overflow-hidden w-fit ml-3 cursor-pointer bg-gray-200 border border-gray-300" :class="filterForm.faculty === faculty.id.toString()? 'bg-gray-400': 'bg-gray-200 '" @click="this.filterForm.faculty = faculty.id; getFilteredProps()" v-for="faculty in faculties">
+                <h1>{{faculty.code}}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="flex space-x-3" v-if="filterForm.faculty">
+        <h1 class="text-gray-800 my-auto">Studiju programmas: </h1>
+        <div class="flex flex-wrap">
             <div class="py-3 px-5 rounded-xl overflow-hidden w-fit ml-3 cursor-pointer" :class="filterForm.program === null? 'bg-gray-400': 'bg-gray-200 '" @click="filterForm.program = null; getFilteredProps()">
                 <h1>Visas</h1>
             </div>
-            <div class="py-3 px-5 rounded-xl overflow-hidden w-fit ml-3 cursor-pointer bg-gray-200 border border-gray-300" :class="filterForm.program === program.id.toString()? 'bg-gray-400': 'bg-gray-200 '" @click="this.filterForm.program = program.id; getFilteredProps()" v-for="program in programs">
+            <div class="py-3 px-5 rounded-xl overflow-hidden w-fit ml-3 cursor-pointer bg-gray-200 border border-gray-300" :class="filterForm.program === program.id.toString()? 'bg-gray-400': 'bg-gray-200 '" @click="this.filterForm.program = program.id; getFilteredProps()" v-for="program in programs.programs">
                 <h1>{{program.code}}</h1>
             </div>
         </div>
@@ -50,17 +61,20 @@
 export default {
     name: 'FilterBar',
     props:{
-        programs: Object,
+        faculties: Object,
         keyword: String,
         type: String,
-        program: String
+        program: String,
+        faculty: String,
     },
     data(){
         return{
+            programs:{},
             filterForm:{
                 keyword: this.keyword || '',
                 type: this.type || 'all',
-                program: this.program || null
+                program: this.program || null,
+                faculty: this.faculty || null,
             }
         }
     },
@@ -68,6 +82,9 @@ export default {
         getFilteredProps(){
             this.$emit('filter', this.filterForm)
         }
+    },
+    mounted(){
+        this.programs = this.faculties.find(faculty => faculty.id.toString() === this.filterForm.faculty)
     }
 }
 </script>

@@ -6,6 +6,7 @@ use App\Models\Faculty;
 use App\Models\StudyProgram;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -14,7 +15,13 @@ class StudyProgramController extends Controller
 {
     public function index(): Response
     {
-        $data = Faculty::query()->with('programs')->get();
+//        $data = StudyProgram::with('spotsTotal')->get();
+//        dd($data);
+        $data = Faculty::query()->with(['programs' => function($query) {
+            $query->withCount('students');
+            $query->withCount('mentors');
+            $query->with('spotsTotal');
+        }])->get();
 
         return Inertia::render('Admin/Program', [
             'data' => $data

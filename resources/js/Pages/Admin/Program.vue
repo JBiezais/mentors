@@ -40,13 +40,16 @@
                             Nosaukums
                         </th>
                         <th scope="col" class="text-sm font-medium text-white px-6 py-4">
+                            Mentoru skaits
+                        </th>
+                        <th scope="col" class="text-sm font-medium text-white px-6 py-4">
                             Mentorējamo skaits
                         </th>
                         <th scope="col" class="text-sm font-medium text-white px-6 py-4">
                             Mentorējamo vietas
                         </th>
                         <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                            Another one
+                            Pāri palikušie
                         </th>
                         <th scope="col" class="text-sm font-medium text-white px-6 py-4">
                         </th>
@@ -58,13 +61,16 @@
                             {{program.title}} ({{program.level}})
                         </td>
                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            12
+                            {{program.mentors_count}}
                         </td>
                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            0
+                            {{program.students_count}}
                         </td>
                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            Smth Else
+                            {{typeof program.spots_total[0] !== 'undefined' ? program.spots_total[0].total_spots: '0'}}
+                        </td>
+                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap" :class="checkValue(program.students_count, program.spots_total)">
+                            {{typeof program.spots_total[0] !== 'undefined' ? program.students_count - program.spots_total[0].total_spots : program.students_count}}
                         </td>
                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap space-x-3 flex">
                             <h1 @click="activeProgram = program" class="cursor-pointer bg-gray-700 hover:bg-gray-900 text-gray-100 rounded-lg py-2 px-3">Labot</h1>
@@ -72,10 +78,10 @@
                         </td>
                     </tr>
                     <tr class="bg-white border-b">
-                        <td v-if="programForm.faculty_id !== faculty.id" colspan="5" class="cursor-pointer text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap" @click="programForm.faculty_id = faculty.id">
+                        <td v-if="programForm.faculty_id !== faculty.id" colspan="6" class="cursor-pointer text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap" @click="programForm.faculty_id = faculty.id">
                             <h1>Add new program</h1>
                         </td>
-                        <td colspan="5" v-if="programForm.faculty_id === faculty.id" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        <td colspan="6" v-if="programForm.faculty_id === faculty.id" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                             <form class="relative space-y-3" @submit.prevent="submitProgram(activeProgram.id)">
                                 <div class="w-full">
                                     <input type="text" v-model="programForm.title" placeholder="Nosaukums" class="rounded-lg w-full">
@@ -166,6 +172,14 @@ export default {
             Inertia.delete(route('programs.destroy', id),{
                 preserveState: false,
             })
+        },
+        checkValue(students, spots){
+            if(spots[0]){
+                if(spots[0].total_spots < students){
+                    return 'bg-red-300'
+                }
+            }
+            return ''
         }
     },
     watch:{

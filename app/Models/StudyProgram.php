@@ -20,6 +20,18 @@ class StudyProgram extends Model
 
     public function mentors():HasMany
     {
-        return $this->hasMany(Mentor::class);
+        return $this->hasMany(Mentor::class, 'program_id');
+    }
+
+    public function students(): HasMany
+    {
+        return $this->hasMany(Student::class, 'program_id');
+    }
+
+    public function spotsTotal()
+    {
+        return $this->hasMany(Mentor::class, 'program_id')
+            ->selectRaw('program_id, SUM(mentees) as total_spots')
+            ->groupBy('program_id');
     }
 }

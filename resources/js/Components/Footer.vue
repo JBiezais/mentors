@@ -6,7 +6,7 @@
         </div>
         <div class="text-right ml-auto text-gray-200 flex flex-col my-auto space-y-3">
             <a>Kontakti</a>
-            <a>Datu izmantošana</a>
+            <a href="/files/RSU%20SP_Privātuma%20politika.pdf" target="_blank">Datu izmantošana</a>
             <Link :href="route('login')" v-if="$page.props.auth.user === null">Autorizēties</Link>
         </div>
     </div>

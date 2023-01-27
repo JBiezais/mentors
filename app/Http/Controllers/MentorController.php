@@ -116,6 +116,6 @@ class MentorController extends Controller
         return Redirect::route('mentor.edit', $mentor->id);
     }
     public function confirmMentor(Mentor $mentor){
-        $mentor->update(['status' => 1]);
+        Mentor::query()->whereId($mentor->id)->update(['status' => 1]);
     }
 }

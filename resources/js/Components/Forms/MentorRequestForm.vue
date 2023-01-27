@@ -45,7 +45,7 @@
             <textarea class="border-gray-800 bg-gray-100 rounded-lg text-gray-800" v-model="form.comment"></textarea>
             <InputError class="mt-2" :message="$page.props.errors.comment" />
         </label>
-        <div class="flex flex-col text-center">
+        <div class="flex flex-col">
             Kurā valodā vēlies runāt ar mentoru?
             <div class="grid grid-cols-3 mt-3">
                 <label class="flex flex-col mx-auto">
@@ -105,7 +105,7 @@
             </label>
             <InputError class="mt-2" :message="$page.props.errors.privacy" />
         </div>
-        <button class="w-full text-center text-gray-100 bg-green-600 hover:bg-green-700 rounded-lg py-3 text-xl font-semibold">Nosūtīt pieteikumu</button>
+        <button class="w-full text-center text-gray-100 bg-emerald-800 hover:bg-emerald-900 rounded-lg py-3 text-xl font-semibold">Nosūtīt pieteikumu</button>
     </form>
 </template>
 

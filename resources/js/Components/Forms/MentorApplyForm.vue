@@ -1,117 +1,82 @@
 <template>
-    <form class="space-y-8 text-gray-800" @submit.prevent="submit()">
+    <form class="space-y-5 text-gray-800" @submit.prevent="submit()">
         <div class="space-y-5 md:space-y-0 md:flex md:space-x-3">
-            <div class="w-1/2">
-                <div class="border border-gray-800 rounded-lg relative w-full">
-                    <label class="absolute -top-3 left-5 bg-gray-100 px-4 text-emerald-800 font-semibold">
-                        Vārds
-                    </label>
-                    <input class="border-0 rounded-lg bg-gray-100 w-full" type="text" v-model="form.name">
-                </div>
+            <label class="flex flex-col md:w-1/2">
+                Vārds
+                <input class="border-gray-800 bg-gray-100 rounded-lg text-gray-800" type="text" v-model="form.name">
                 <InputError class="mt-2" :message="$page.props.errors.name" />
-            </div>
-            <div class="w-1/2">
-                <div class="border border-gray-800 rounded-lg relative w-full">
-                    <label class="absolute -top-3 left-5 bg-gray-100 px-4 text-emerald-800 font-semibold">
-                        Uzvārds
-                    </label>
-                    <input class="border-0 rounded-lg bg-gray-100 w-full" type="text" v-model="form.lastName">
-                </div>
+            </label>
+            <label class="flex flex-col md:w-1/2">
+                Uzvārds
+                <input class="border-gray-800 bg-gray-100 rounded-lg text-gray-800" type="text" v-model="form.lastName">
                 <InputError class="mt-2" :message="$page.props.errors.lastName" />
-            </div>
+            </label>
         </div>
         <div class="space-y-3 md:space-y-0 md:flex md:space-x-3">
-            <div class="w-1/2">
-                <div class="border border-gray-800 rounded-lg relative w-full">
-                    <label class="absolute -top-3 left-5 bg-gray-100 px-4 text-emerald-800 font-semibold">
-                        Telefona nummurs
-                    </label>
-                    <input class="border-0 rounded-lg bg-gray-100 w-full" type="text" v-model="form.phone">
-                </div>
+            <label class="flex flex-col md:w-1/2">
+                Telefona nummurs
+                <input class="border-gray-800 bg-gray-100 rounded-lg text-gray-800" type="text" v-model="form.phone">
                 <InputError class="mt-2" :message="$page.props.errors.phone" />
-            </div>
-            <div class="w-1/2">
-                <div class="border border-gray-800 rounded-lg relative w-full">
-                    <label class="absolute -top-3 left-5 bg-gray-100 px-4 text-emerald-800 font-semibold">
-                        E-pasts
-                    </label>
-                    <input class="border-0 rounded-lg bg-gray-100 w-full" type="text" v-model="form.email">
-                </div>
+            </label>
+            <label class="flex flex-col md:w-1/2">
+                E-pasts
+                <input class="border-gray-800 bg-gray-100 rounded-lg text-gray-800" type="text" v-model="form.email">
                 <InputError class="mt-2" :message="$page.props.errors.email" />
-            </div>
+            </label>
         </div>
         <div>
-            <div class="border border-gray-800 rounded-lg relative w-full">
-                <label class="absolute -top-3 left-5 bg-gray-100 px-4 text-emerald-800 font-semibold">
-                    Fakultāte
-                </label>
-                <select class="border-0 rounded-lg bg-gray-100 w-full text-sm" v-model="form.faculty_id">
+            <label class="flex flex-col">
+                Fakultāte
+                <select class="border-gray-800 bg-gray-100 rounded-lg text-gray-800" v-model="form.faculty_id">
                     <option disabled value="default">Izvēlieties Fakultāti</option>
                     <option :value="faculty.id" v-for="faculty in faculties">{{faculty.title}}</option>
                 </select>
-            </div>
-            <InputError class="mt-2" :message="$page.props.errors.faculty_id" />
+                <InputError class="mt-2" :message="$page.props.errors.faculty_id" />
+            </label>
         </div>
 
         <div>
-            <div class="border border-gray-800 rounded-lg relative w-full">
-                <label class="absolute -top-3 left-5 bg-gray-100 px-4 text-emerald-800 font-semibold">
-                    Studiju Programma
-                </label>
-                <select class="border-0 rounded-lg bg-gray-100 w-full text-sm" v-model="form.program_id">
-                    <option disabled value="default">Izvēlieties Studiju Programu</option>
+            <label class="flex flex-col">
+                Studiju Programma
+                <select class="border-gray-800 bg-gray-100 rounded-lg text-gray-800" v-model="form.program_id">
+                    <option disabled value="default">Izvēlieties Fakultāti</option>
                     <option :value="program.id" v-for="program in programs.programs">{{program.title}}</option>
                 </select>
-            </div>
-            <InputError class="mt-2" :message="$page.props.errors.program_id" />
+                <InputError class="mt-2" :message="$page.props.errors.program_id" />
+            </label>
         </div>
         <div class="space-y-3 md:space-y-0 md:flex md:space-x-3">
-            <div class="w-1/2">
-                <div class="border border-gray-800 rounded-lg relative w-full">
-                    <label class="absolute -top-3 left-5 bg-gray-100 px-4 text-emerald-800 font-semibold">
-                        Studiju gads
-                    </label>
-                    <select class="border-0 rounded-lg bg-gray-100 w-full" v-model="form.year">
-                        <option value="2">2. gads</option>
-                        <option value="3">3. gads</option>
-                        <option value="4">4. gads</option>
-                        <option value="5">5. gads</option>
-                        <option value="6">6. gads</option>
-                    </select>
-                </div>
+            <label class="flex flex-col md:w-1/2">
+                Studiju gads
+                <select class="border-gray-800 bg-gray-100 rounded-lg text-gray-800" v-model="form.year">
+                    <option value="2">2. gads</option>
+                    <option value="3">3. gads</option>
+                    <option value="4">4. gads</option>
+                    <option value="5">5. gads</option>
+                    <option value="6">6. gads</option>
+                </select>
                 <InputError class="mt-2" :message="$page.props.errors.year" />
-            </div>
-            <div class="w-1/2">
-                <div class="border border-gray-800 rounded-lg relative w-full">
-                    <label class="absolute -top-3 left-5 bg-gray-100 px-4 text-emerald-800 font-semibold">
-                        Mentorējamo skaits
-                    </label>
-                    <input class="border-0 rounded-lg bg-gray-100 w-full" type="number" min="1" max="5" v-model="form.mentees">
-                </div>
+            </label>
+            <label class="flex flex-col md:w-1/2">
+                Mentorējamo skaits
+                <input class="border-gray-800 bg-gray-100 rounded-lg text-gray-800" type="number" min="1" max="5" v-model="form.mentees">
                 <InputError class="mt-2" :message="$page.props.errors.mentees" />
-            </div>
+            </label>
         </div>
-        <div>
-            <div class="border border-gray-800 rounded-lg relative w-full">
-                <label class="absolute -top-3 left-5 bg-gray-100 px-4 text-emerald-800 font-semibold">
-                    Par Tevi
-                </label>
-                <textarea class="border-0 rounded-lg bg-gray-100 w-full mb-0 pb-0" type="text" v-model="form.about"></textarea>
-            </div>
+
+        <label class="flex flex-col">
+            Par Tevi
+            <textarea class="border-gray-800 bg-gray-100 rounded-lg text-gray-800" v-model="form.about"></textarea>
             <InputError class="mt-2" :message="$page.props.errors.about" />
-        </div>
+        </label>
 
-        <div>
-            <div class="border border-gray-800 rounded-lg relative w-ful">
-                <label class="absolute -top-3 left-5 bg-gray-100 px-4 text-emerald-800 font-semibold">
-                    Kāpēc gribi būt mentors?
-                </label>
-                <textarea class="border-0 rounded-lg bg-gray-100 w-full" type="text" v-model="form.why"></textarea>
-            </div>
+        <label class="flex flex-col">
+            Kāpēc gribi būt mentors?
+            <textarea class="border-gray-800 bg-gray-100 rounded-lg text-gray-800" v-model="form.why"></textarea>
             <InputError class="mt-2" :message="$page.props.errors.why" />
-        </div>
+        </label>
 
-        <div class="flex flex-col text-center font-semibold">
+        <div class="flex flex-col font-semibold">
             Brīvi runā
             <div class="grid grid-cols-3 mt-3">
                 <label class="flex flex-col mx-auto font-semibold">
@@ -133,7 +98,7 @@
         </div>
         <div>
             <h1>Pievienot Attēlu</h1>
-            <label class="block border-emerald-900 border-2 rounded-xl p-1 space-y-2">
+            <label class="block border-emerald-900 border rounded-xl p-1 space-y-2">
                 <img :src="formPhotoPreview" class="border w-2/3 border-none rounded-xl" alt="photo" v-if="formPhotoPreview">
                 <span class="sr-only">Choose File</span>
                 <input type="file" ref="formPhotoUploadField" @change="updatePhotoPreview" class="block w-full rounded-lg text-sm text-emerald-900 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-emerald-500 file:text-emerald-900 hover:file:text-emerald-500 hover:file:bg-emerald-900"/>

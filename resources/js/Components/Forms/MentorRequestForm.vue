@@ -95,6 +95,7 @@
                         <h1 class="ml-2 space-x-3 font-medium"><span v-if="mentor.lv">Latviešu</span><span v-if="mentor.ru">Krievu</span><span v-if="mentor.en">Angļu</span></h1>
                     </div>
                 </div>
+
             </div>
             <InputError class="mt-2" :message="$page.props.errors.mentor" />
         </div>
@@ -158,17 +159,23 @@ export default {
                     switch (this.form.lang){
                         case '0':
                             if(mentor.lv){
-                                return mentor
+                                if(mentor.mentees > mentor.students_count){
+                                    return mentor
+                                }
                             }
                             break
                         case '1':
                             if(mentor.ru){
-                                return mentor
+                                if(mentor.mentees > mentor.students_count){
+                                    return mentor
+                                }
                             }
                             break
                         case '2':
                             if(mentor.en){
-                                return mentor
+                                if(mentor.mentees > mentor.students_count){
+                                    return mentor
+                                }
                             }
                             break
                     }

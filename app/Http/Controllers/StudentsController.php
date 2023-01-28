@@ -61,7 +61,7 @@ class StudentsController extends Controller
     public function create(): Response
     {
         $faculties = Faculty::query()->with('programs')->get();
-        $mentors = Mentor::all();
+        $mentors = Mentor::query()->withCount('students')->get();
 
         return Inertia::render('Public/Student', [
             'faculties' => $faculties,
@@ -79,7 +79,7 @@ class StudentsController extends Controller
     public function edit(Student $student){
 
         $faculties = Faculty::with('programs')->get();
-        $mentors = Mentor::all();
+        $mentors = Mentor::query()->withCount('students')->get();
         $student = Student::query()->whereId($student->id)->with('mentor')->first();
 
         return Inertia::render('Admin/EditStudent', [

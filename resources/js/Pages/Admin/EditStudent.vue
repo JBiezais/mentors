@@ -25,7 +25,7 @@
                         <option disabled value="default">Izvēlieties Studiju Programu</option>
                         <option :value="program.id" v-for="program in programs.programs">{{program.title}}</option>
                     </select>
-                    <p v-if="!edit" class="col-span-3">{{findProgram(student.program_id)}}</p>
+                    <p v-if="!edit" class="col-span-3">{{findProgram(student.program_id).title}}</p>
                     <h1 class="col-span-1 font-semibold text-lg">Valodas prefrence</h1>
                     <div v-if="edit" class="col-span-3 grid grid-cols-3 mt-3">
                         <label class="flex flex-col mx-auto">
@@ -47,7 +47,9 @@
                         <option disabled value="default">Izvēlieties Studiju Programu</option>
                         <option :value="mentor.id" v-for="mentor in chooseMentor">{{mentor.name}} {{mentor.lastName}}</option>
                     </select>
-                    <Link v-if="!edit" :href="route('mentor.edit', student.mentor.id)" class="col-span-3">{{student.mentor.name}} {{student.mentor.lastName}}</Link>
+                    <div v-if="!edit && student.mentor" class="col-span-3">
+                        <Link  :href="route('mentor.edit', student.mentor.id)" >{{student.mentor.name}} {{student.mentor.lastName}}</Link>
+                    </div>
                     <h1 class="col-span-1 font-semibold text-lg">Pieteicās</h1>
                     <p class="col-span-3">{{new Date(student.created_at).toLocaleDateString()}} {{new Date(student.created_at).toLocaleTimeString()}}</p>
                     <div v-if="edit" class="col-span-4 relative">
@@ -111,7 +113,7 @@ export default {
             return this.faculty.title
         },
         findProgram(id){
-            return this.faculty.programs.find(program => program.id === id).title
+            return this.faculty.programs.find(program => program.id === id) || {title: ''}
         },
         deleteStudent(id){
             Inertia.delete(route('student.destroy', id), {
@@ -128,24 +130,34 @@ export default {
         },
         getMentors(){
             this.chooseMentor = this.mentors.filter(mentor => {
-                if(mentor.faculty_id === this.form.faculty_id){
-                    switch (this.form.lang.toString()){
-                        case '0':
-                            if(mentor.lv){
-                                return mentor
-                            }
-                            break
-                        case '1':
-                            if(mentor.ru){
-                                return mentor
-                            }
-                            break
-                        case '2':
-                            if(mentor.en){
-                                return mentor
-                            }
-                            break
+                if(mentor.id !== this.form.mentor_id){
+                    if(mentor.faculty_id === this.form.faculty_id){
+                        switch (this.form.lang.toString()){
+                            case '0':
+                                if(mentor.lv){
+                                    if(mentor.mentees > mentor.students_count){
+                                        return mentor
+                                    }
+                                }
+                                break
+                            case '1':
+                                if(mentor.ru){
+                                    if(mentor.mentees > mentor.students_count){
+                                        return mentor
+                                    }
+                                }
+                                break
+                            case '2':
+                                if(mentor.en){
+                                    if(mentor.mentees > mentor.students_count){
+                                        return mentor
+                                    }
+                                }
+                                break
+                        }
                     }
+                }else{
+                    return mentor
                 }
             })
         }

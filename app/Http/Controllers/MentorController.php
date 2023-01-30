@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Actions\UploadFileAction;
 use App\Http\Requests\MentorRequest;
+use App\Mail\VerificationMail;
 use App\Models\Faculty;
 use App\Models\Mentor;
 use App\Models\Student;
 use App\Models\StudyProgram;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -74,7 +76,17 @@ class MentorController extends Controller
             $data['img'] = $uploadFileAction->upload($request->file('img'));
         }
 
+        $data['key'] = bcrypt($data['email']);
+
+        $emailData = [
+            'name' => $data['name'],
+            'lastName' => $data['lastName'],
+            'key' => $data['key']
+        ];
+
         Mentor::create($data);
+
+        Mail::to($data['email'])->send(new VerificationMail($emailData));
 
         return Redirect::route('home');
     }

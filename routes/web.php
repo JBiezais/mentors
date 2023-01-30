@@ -3,6 +3,7 @@
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FacultyController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentsController;
@@ -26,6 +27,7 @@ Route::get('/', [Controller::class, 'index'])->name('home');
 
 Route::resource('mentor', MentorController::class)->only('store', 'create');
 Route::resource('student', StudentsController::class)->only('store', 'create');
+Route::get('/mail/{key}', [MailController::class, 'verify']);
 
 
 Route::middleware('auth')->group(function () {

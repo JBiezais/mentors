@@ -2,29 +2,102 @@
     <div class="min-h-screen flex flex-col bg-gray-50">
         <Header v-if="$page.props.auth.user !== null"></Header>
         <div class="flex-grow">
-            <div class="w-full bg-gray-900 p-8">
-                <div class="lg:max-w-4xl mx-auto">
-                    <div class="rounded-xl bg-white p-5 space-y-5">
-                        <h1 class="text-xl font-semibold text-gray-800">Sveiks, RSU pirmkursniek!</h1>
-                        <p class="text-gray-800">Vai arī tev ir radušies jautājumi par studiju procesu, ikdienas gaitām un ārpusstudiju dzīvi Rīgas Stradiņa universitātē? Tad piesakies Mentoram un jau pa visam drīz iegūsi ne tikai atbildes, bet arī paziņu no vecākiem studiju gadiem!</p>
-                        <hr class="bg-gray-800">
-                        <p class="text-gray-800">Mentors palīdzēs Tev iejusties universitātē, spert pirmos soļus studijās un kāpt vēl augstāk pa karjeras kāpnēm, dodot tik ļoti nepieciešamos padomus. Atbildes uz neatbildētiem jautājumiem, virziens, vietas un lietas, kā arī labs padoms un dzīves triki - to visu varēsi iegūt no mentora. Sākt visu no nulles ir vienkāršāk, ja kāds sniedz palīdzīgu roku! Tādēļ izvēlies savu mentoru un jau drīz tiekamies universitātes gaiteņos!</p>
-                        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-5 md:justify-center">
-                            <Link :href="route('student.create')" class="py-5 px-8 bg-red-600 hover:bg-red-700 text-gray-200 hover:text-white shadow-xl flex rounded-xl mx-auto md:mx-0 cursor-pointer">
-                                <h1 class="text-xl font-semibold my-auto">Pieteikties mentoram</h1>
+            <div class="w-full bg-yellow-500 p-8">
+                <div class="lg:max-w-5xl mx-auto flex flex-col md:flex-row space-y-5 md:space-x-5 md:space-y-0">
+                    <div class="rounded-xl bg-white p-5 md:w-1/3">
+                        <div class="flex flex-col space-y-4  md:justify-center">
+                            <Link :href="route('student.create')" class="py-5 px-8 bg-lime-700 hover:bg-lime-800 text-gray-200 hover:text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer w-full">
+                                <h1 class="text-xl text-center font-semibold my-auto">Pieteikties mentoram</h1>
                             </Link>
-                            <Link :href="route('mentor.create')" class="py-5 px-4 bg-gray-600 hover:bg-gray-800 text-gray-200 hover:text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer">
-                                <h1>Gribu būt mentors</h1>
+                            <Link :href="route('mentor.create')" class="py-5 px-4 bg-gray-550 hover:bg-gray-500 text-gray-50 hover:text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer w-full">
+                                <h1 class="text-xl text-center my-auto" >Gribu būt mentors</h1>
                             </Link>
+                            <div class="py-5 px-8 bg-gray-450 text-center hover:bg-gray-500 text-gray-50 hover:text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer text-xl font-semibold my-auto w-full">
+                                <a class="text-center">Ārzemju mentors</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3 rounded-xl bg-white p-5">
+                        <div class="space-y-4 md:justify-center">
+                            <h1 class="text-2xl text-lime-700 font-bold">Tuvākie pasākumi</h1>
+                            <div class="space-y-4 overflow-y-auto h-48 pb-4">
+                                <div class="flex space-x-5 border border-gray-300 rounded-xl shadow-lg p-1">
+                                    <div class="py-3 px-5 bg-gray-200 rounded-xl">
+                                        <h1 class="text-xs text-center uppercase">dec</h1>
+                                        <h1 class="text-xl text-center font-black -my-1">8</h1>
+                                    </div>
+                                    <div class="w-2/3 flex">
+                                        <h1 class="my-auto">Event title description</h1>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-5 border border-gray-300 rounded-xl shadow-lg p-1">
+                                    <div class="py-3 px-5 bg-gray-200 rounded-xl">
+                                        <h1 class="text-xs text-center uppercase">dec</h1>
+                                        <h1 class="text-xl text-center font-black -my-1">8</h1>
+                                    </div>
+                                    <div class="w-2/3 flex">
+                                        <h1 class="my-auto">Event title description</h1>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-5 border border-gray-300 rounded-xl shadow-lg p-1">
+                                    <div class="py-3 px-5 bg-gray-200 rounded-xl">
+                                        <h1 class="text-xs text-center uppercase">dec</h1>
+                                        <h1 class="text-xl text-center font-black -my-1">8</h1>
+                                    </div>
+                                    <div class="w-2/3 flex">
+                                        <h1 class="my-auto">Event title description</h1>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-5 border border-gray-300 rounded-xl shadow-lg p-1">
+                                    <div class="py-3 px-5 bg-gray-200 rounded-xl">
+                                        <h1 class="text-xs text-center uppercase">dec</h1>
+                                        <h1 class="text-xl text-center font-black -my-1">8</h1>
+                                    </div>
+                                    <div class="w-2/3 flex">
+                                        <h1 class="my-auto">Event title description</h1>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
             <div class="p-8 bg-gray-50">
-                <div class="lg:max-w-4xl space-y-5 mx-auto">
+                <div class="lg:max-w-5xl space-y-5 mx-auto">
+                    <div class="flex flex-col space-y-5">
+                        <div class="md:w-3/4 bg-gray-100 shadow-xl rounded-xl flex">
+                            <div class="w-3 rounded-l-xl bg-yellow-500 h-auto"></div>
+                            <div class="p-5">
+                                <h1 class="text-2xl">Mentors</h1>
+                                <p class="text-xl italic ">Mentors ir kā sienas, kas balsta jumtu.</p>
+                            </div>
+                        </div>
+                        <div class="md:flex">
+                            <div class="md:flex-grow"></div>
+                            <div class="md:w-3/4 bg-gray-100 shadow-xl flex rounded-xl">
+                                <div class="p-5 w-fit flex-grow">
+                                    <h1 class="text-2xl">Mentors</h1>
+                                    <p class="text-xl italic ">Dažreiz viss, kas vajadzīgs, lai spertu pirmos soļus, ir nedaudz atbalsta.</p>
+                                </div>
+                                <div class="w-3 rounded-r-xl bg-yellow-500 h-auto"></div>
+                            </div>
+                        </div>
+                        <div class="md:w-3/4 bg-gray-100 shadow-xl flex rounded-xl">
+                            <div class="w-3 rounded-l-xl bg-yellow-500 h-auto"></div>
+                            <div class="p-5 w-fit">
+                                <h1 class="text-2xl">Mentors</h1>
+                                <p class="text-xl italic ">Viss nezināmais var šķists biedējošs. Cik labi, ja kāds palīdz to padarīt par zināmu.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-8 bg-gray-50">
+                <div class="lg:max-w-5xl space-y-5 mx-auto">
                     <div class="w-full space-y-3 md:flex md:space-y-0 md:space-x-5">
                         <div class="md:my-auto">
-                            <div class="w-fit h-fit bg-gray-100 rounded-full border-gray-400 shadow-xl p-3 flex mx-auto">
+                            <div class="w-fit h-fit bg-yellow-500 rounded-full border-gray-400 shadow-xl p-3 flex mx-auto">
                                 <img class="rounded-full m-auto" src="https://mentors.rsu.lv/images/dins-mironovs.jpg" alt="student">
                             </div>
                         </div>
@@ -36,7 +109,7 @@
                     <hr class="bg-gray-800">
                     <div class="w-full space-y-3 md:flex md:flex-row-reverse md:space-y-0 md:space-x-5">
                         <div class="md:my-auto">
-                            <div class="w-fit h-fit bg-gray-100 rounded-full border-gray-400 shadow-xl p-3 flex mx-auto">
+                            <div class="w-fit h-fit bg-yellow-500 rounded-full border-gray-400 shadow-xl p-3 flex mx-auto">
                                 <img class="rounded-full m-auto" src="https://mentors.rsu.lv/images/arta-hermane.jpg" alt="student">
                             </div>
                         </div>

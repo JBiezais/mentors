@@ -4,8 +4,8 @@
         <div class="flex-grow">
             <div class="w-full bg-yellow-500 p-8">
                 <div class="lg:max-w-5xl mx-auto flex flex-col md:flex-row space-y-5 md:space-x-5 md:space-y-0">
-                    <div class="rounded-xl bg-white p-5" :class="events? 'md:w-1/3': 'w-full'">
-                        <div class="flex md:justify-center" :class="events? 'flex-col space-y-4': 'space-x-4'">
+                    <div class="rounded-xl bg-white p-5" :class="events.length? 'md:w-1/3': 'w-full'">
+                        <div class="flex md:justify-center" :class="events.length? 'flex-col space-y-4': 'space-x-4'">
                             <Link :href="route('student.create')" class="py-5 px-8 bg-lime-700 hover:bg-lime-800 text-gray-200 hover:text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer w-full">
                                 <h1 class="text-xl text-center font-semibold my-auto">Pieteikties mentoram</h1>
                             </Link>
@@ -17,7 +17,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="md:w-2/3 rounded-xl bg-white p-5" v-if="events">
+                    <div class="md:w-2/3 rounded-xl bg-white p-5" v-if="events.length">
                         <div class="space-y-4 md:justify-center">
                             <h1 class="text-2xl text-lime-700 font-bold">Tuvākie pasākumi</h1>
                             <div class="space-y-4 overflow-y-auto h-48 pb-4">

@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full bg-gray-550 p-8 md:flex space-y-5 md:space-y-0">
+    <div class="w-full bg-stone-900 p-8 md:flex space-y-5 md:space-y-0">
         <div class="w-full md:w-1/3 lg:w-1/4 space-y-5 my-auto">
             <h1 class="text-gray-200 text-lg font-semibold">Koordinē</h1>
             <div>

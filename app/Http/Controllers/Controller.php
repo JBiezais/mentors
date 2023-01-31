@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -15,6 +17,9 @@ class Controller extends BaseController
 
     public function index():Response
     {
-        return Inertia::render('Public/Home');
+        $events = Event::query()->where('date', '>' ,Carbon::now()->subDay())->orderBy('date')->get();
+        return Inertia::render('Public/Home', [
+            'events' => $events
+        ]);
     }
 }

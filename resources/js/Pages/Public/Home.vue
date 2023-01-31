@@ -4,8 +4,8 @@
         <div class="flex-grow">
             <div class="w-full bg-yellow-500 p-8">
                 <div class="lg:max-w-5xl mx-auto flex flex-col md:flex-row space-y-5 md:space-x-5 md:space-y-0">
-                    <div class="rounded-xl bg-white p-5 md:w-1/3">
-                        <div class="flex flex-col space-y-4  md:justify-center">
+                    <div class="rounded-xl bg-white p-5" :class="events? 'md:w-1/3': 'w-full'">
+                        <div class="flex md:justify-center" :class="events? 'flex-col space-y-4': 'space-x-4'">
                             <Link :href="route('student.create')" class="py-5 px-8 bg-lime-700 hover:bg-lime-800 text-gray-200 hover:text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer w-full">
                                 <h1 class="text-xl text-center font-semibold my-auto">Pieteikties mentoram</h1>
                             </Link>
@@ -17,44 +17,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="md:w-2/3 rounded-xl bg-white p-5">
+                    <div class="md:w-2/3 rounded-xl bg-white p-5" v-if="events">
                         <div class="space-y-4 md:justify-center">
                             <h1 class="text-2xl text-lime-700 font-bold">Tuvākie pasākumi</h1>
                             <div class="space-y-4 overflow-y-auto h-48 pb-4">
-                                <div class="flex space-x-5 border border-gray-300 rounded-xl shadow-lg p-1">
+                                <div v-for="event in events" class="flex space-x-5 border border-gray-300 rounded-xl shadow-lg p-1">
                                     <div class="py-3 px-5 bg-gray-200 rounded-xl">
-                                        <h1 class="text-xs text-center uppercase">dec</h1>
-                                        <h1 class="text-xl text-center font-black -my-1">8</h1>
+                                        <h1 class="text-xs text-center uppercase">{{new Date(event.date).toLocaleDateString("lv-LV", { month: "short" })}}</h1>
+                                        <h1 class="text-xl text-center font-black -my-1">{{new Date(event.date).getDate()}}</h1>
                                     </div>
                                     <div class="w-2/3 flex">
-                                        <h1 class="my-auto">Event title description</h1>
-                                    </div>
-                                </div>
-                                <div class="flex space-x-5 border border-gray-300 rounded-xl shadow-lg p-1">
-                                    <div class="py-3 px-5 bg-gray-200 rounded-xl">
-                                        <h1 class="text-xs text-center uppercase">dec</h1>
-                                        <h1 class="text-xl text-center font-black -my-1">8</h1>
-                                    </div>
-                                    <div class="w-2/3 flex">
-                                        <h1 class="my-auto">Event title description</h1>
-                                    </div>
-                                </div>
-                                <div class="flex space-x-5 border border-gray-300 rounded-xl shadow-lg p-1">
-                                    <div class="py-3 px-5 bg-gray-200 rounded-xl">
-                                        <h1 class="text-xs text-center uppercase">dec</h1>
-                                        <h1 class="text-xl text-center font-black -my-1">8</h1>
-                                    </div>
-                                    <div class="w-2/3 flex">
-                                        <h1 class="my-auto">Event title description</h1>
-                                    </div>
-                                </div>
-                                <div class="flex space-x-5 border border-gray-300 rounded-xl shadow-lg p-1">
-                                    <div class="py-3 px-5 bg-gray-200 rounded-xl">
-                                        <h1 class="text-xs text-center uppercase">dec</h1>
-                                        <h1 class="text-xl text-center font-black -my-1">8</h1>
-                                    </div>
-                                    <div class="w-2/3 flex">
-                                        <h1 class="my-auto">Event title description</h1>
+                                        <h1 class="my-auto">{{event.title}}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -66,28 +39,62 @@
             <div class="p-8 bg-gray-50">
                 <div class="lg:max-w-5xl space-y-5 mx-auto">
                     <div class="flex flex-col space-y-5">
-                        <div class="md:w-3/4 bg-gray-100 shadow-xl rounded-xl flex">
-                            <div class="w-3 rounded-l-xl bg-yellow-500 h-auto"></div>
-                            <div class="p-5">
-                                <h1 class="text-2xl">Mentors</h1>
-                                <p class="text-xl italic ">Mentors ir kā sienas, kas balsta jumtu.</p>
-                            </div>
-                        </div>
-                        <div class="md:flex">
-                            <div class="md:flex-grow"></div>
-                            <div class="md:w-3/4 bg-gray-100 shadow-xl flex rounded-xl">
-                                <div class="p-5 w-fit flex-grow">
-                                    <h1 class="text-2xl">Mentors</h1>
-                                    <p class="text-xl italic ">Dažreiz viss, kas vajadzīgs, lai spertu pirmos soļus, ir nedaudz atbalsta.</p>
+                        <div class="relative">
+                            <div class="card">
+                                <div class="md:w-3/4 bg-gray-100 shadow-xl rounded-xl flex front">
+                                    <div class="w-3 rounded-l-xl bg-yellow-500 h-auto"></div>
+                                    <div class="p-5">
+                                        <h1 class="text-2xl">Mentors</h1>
+                                        <p class="text-xl italic ">Mentors ir kā sienas, kas balsta jumtu.</p>
+                                    </div>
                                 </div>
-                                <div class="w-3 rounded-r-xl bg-yellow-500 h-auto"></div>
+                                <div class="md:w-3/4 bg-gray-100 shadow-xl rounded-xl flex back">
+                                    <div class="p-5 w-fit">
+                                        <h1 class="text-2xl">Mentors</h1>
+                                        <p class="text-xl italic ">Mentors ir kā sienas, kas balsta jumtu.</p>
+                                    </div>
+                                    <div class="flex-grow"></div>
+                                    <div class="w-3 rounded-r-xl bg-lime-700 h-auto"></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="md:w-3/4 bg-gray-100 shadow-xl flex rounded-xl">
-                            <div class="w-3 rounded-l-xl bg-yellow-500 h-auto"></div>
-                            <div class="p-5 w-fit">
-                                <h1 class="text-2xl">Mentors</h1>
-                                <p class="text-xl italic ">Viss nezināmais var šķists biedējošs. Cik labi, ja kāds palīdz to padarīt par zināmu.</p>
+                        <div class="relative flex">
+                            <div class="flex-grow"></div>
+                            <div class="card">
+                                <div class="md:w-3/4 bg-gray-100 shadow-xl rounded-xl flex front">
+                                    <div class="p-5 w-fit">
+                                        <h1 class="text-2xl">Mentors</h1>
+                                        <p class="text-xl italic ">Mentors ir kā sienas, kas balsta jumtu.</p>
+                                    </div>
+                                    <div class="flex-grow"></div>
+                                    <div class="w-3 rounded-r-xl bg-yellow-500 h-auto"></div>
+                                </div>
+                                <div class="md:w-3/4 bg-gray-100 shadow-xl rounded-xl flex back">
+                                    <div class="w-3 rounded-l-xl bg-lime-700 h-auto"></div>
+                                    <div class="p-5">
+                                        <h1 class="text-2xl">Mentors</h1>
+                                        <p class="text-xl italic ">Dažreiz viss, kas vajadzīgs, lai spertu pirmos soļus, ir nedaudz atbalsta.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <div class="card">
+                                <div class="md:w-3/4 bg-gray-100 shadow-xl rounded-xl flex front">
+                                    <div class="w-3 rounded-l-xl bg-yellow-500 h-auto"></div>
+                                    <div class="p-5">
+                                        <h1 class="text-2xl">Mentors</h1>
+                                        <p class="text-xl italic ">Viss nezināmais var šķists biedējošs. Cik labi, ja kāds palīdz to padarīt par zināmu.</p>
+                                    </div>
+                                </div>
+                                <div class="md:w-3/4 bg-gray-100 shadow-xl rounded-xl flex back">
+                                    <div class="p-5 w-fit">
+                                        <h1 class="text-2xl">Mentors</h1>
+                                        <p class="text-xl italic ">Mentors ir kā sienas, kas balsta jumtu.</p>
+                                    </div>
+                                    <div class="flex-grow"></div>
+                                    <div class="w-3 rounded-r-xl bg-lime-700 h-auto"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -135,12 +142,59 @@ import Header from "@/Components/Header.vue";
 export default {
     name: "Home",
     components: {Header, Link, Footer},
-    methods:{
-
-    }
+    props:{
+      events: Object,
+    },
+    data() {
+        return {
+            flipped: false,
+        };
+    },
+    methods: {
+        flip() {
+            this.flipped = !this.flipped;
+        },
+    },
 }
 </script>
 
 <style scoped>
+    .card {
+        width: 75%;
+        height: 150px;
+        position: relative;
+        perspective: 1000px;
+    }
 
+    .front,
+    .back {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        backface-visibility: hidden;
+        transition: transform 0.8s ease-in-out;
+    }
+
+    .front {
+        transform: rotateY(0deg);
+    }
+
+    .back {
+        transform: rotateY(180deg);
+    }
+
+    .card:hover .front {
+        transform: rotateY(-180deg);
+    }
+
+    .card:hover .back {
+        transform: rotateY(0deg);
+    }
+
+    @media (max-width: 600px) {
+        .card{
+            width: 100%;
+            height: 250px;
+        }
+    }
 </style>

@@ -37,10 +37,10 @@
     <div class="flex space-x-3">
         <h1 class="text-gray-800 my-auto">Fakultātes: </h1>
         <div class="flex flex-wrap">
-            <div class="py-3 px-5 rounded-xl overflow-hidden w-fit ml-3 cursor-pointer" :class="filterForm.faculty === null? 'bg-gray-400': 'bg-gray-200 '" @click="filterForm.faculty = null; getFilteredProps()">
+            <div class="py-3 px-5 rounded-xl overflow-hidden w-fit ml-3 cursor-pointer" :class="filterForm.faculty === null? 'bg-gray-400': 'bg-gray-200 '" @click="filterForm.faculty = null; filterForm.program = null; getFilteredProps()">
                 <h1>Visas</h1>
             </div>
-            <div class="py-3 px-5 rounded-xl overflow-hidden w-fit ml-3 cursor-pointer bg-gray-200 border border-gray-300" :class="filterForm.faculty === faculty.id.toString()? 'bg-gray-400': 'bg-gray-200 '" @click="this.filterForm.faculty = faculty.id; getFilteredProps()" v-for="faculty in faculties">
+            <div class="py-3 px-5 rounded-xl overflow-hidden w-fit ml-3 cursor-pointer bg-gray-200 border border-gray-300" :class="filterForm.faculty === faculty.id.toString()? 'bg-gray-400': 'bg-gray-200 '" @click="this.filterForm.faculty = faculty.id; filterForm.program = null; getFilteredProps()" v-for="faculty in faculties">
                 <h1>{{faculty.code}}</h1>
             </div>
         </div>

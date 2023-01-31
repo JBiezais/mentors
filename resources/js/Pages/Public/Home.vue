@@ -1,39 +1,67 @@
 <template>
-    <div class="min-h-screen flex flex-col bg-gray-50">
+    <div class="min-h-screen flex flex-col bg-gray-100">
         <Header v-if="$page.props.auth.user !== null"></Header>
+        <div class="h-20 w-full sticky top-0 z-10 bg-gray-100">
+            <div class="lg:max-w-5xl m-auto flex">
+                <ApplicationLogo
+                    class="block h-16 w-auto my-auto fill-current text-gray-800"
+                />
+                <div class="m-auto">
+                    <h1 class="text-2xl font-semibold uppercase">mentoru programma {{new Date().getFullYear()}}</h1>
+                    <h1></h1>
+                </div>
+            </div>
+        </div>
+
         <div class="flex-grow">
-            <div class="w-full bg-yellow-500 p-8">
+
+            <div class="w-full background py-5">
+<!--                <ApplicationLogo class="w-1/3 h-fit my-auto -left-60 absolute -top-24"></ApplicationLogo>-->
                 <div class="lg:max-w-5xl mx-auto flex flex-col md:flex-row space-y-5 md:space-x-5 md:space-y-0">
-                    <div class="rounded-xl bg-white p-5" :class="events.length? 'md:w-1/3': 'w-full'">
-                        <div class="flex md:justify-center" :class="events.length? 'flex-col space-y-4': 'space-x-4'">
-                            <Link :href="route('student.create')" class="py-5 px-8 bg-lime-700 hover:bg-lime-800 text-gray-200 hover:text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer w-full">
-                                <h1 class="text-xl text-center font-semibold my-auto">Pieteikties mentoram</h1>
-                            </Link>
-                            <Link :href="route('mentor.create')" class="py-5 px-4 bg-gray-550 hover:bg-gray-500 text-gray-50 hover:text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer w-full">
-                                <h1 class="text-xl text-center my-auto" >Gribu būt mentors</h1>
-                            </Link>
-                            <div class="py-5 px-8 bg-gray-450 text-center hover:bg-gray-500 text-gray-50 hover:text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer text-xl font-semibold my-auto w-full">
-                                <a class="text-center">Ārzemju mentors</a>
+                    <div class="flex flex flex-col md:flex-row space-y-5 md:space-x-5 md:space-y-0 w-full">
+                        <div class="rounded-xl bg-gray-50 p-5 h-fit my-auto" :class="events.length? 'md:w-1/2': 'w-full'">
+                            <div class="flex md:justify-center" :class="events.length? 'flex-col space-y-8': 'space-x-4'">
+                                <Link :href="route('student.create')" class="py-5 uppercase px-8 border-4 border-lime-700 hover:bg-lime-700 text-lime-700 hover:text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer w-full">
+                                    <h1 class="text-xl text-center font-bold my-auto">Pieteikties mentoram</h1>
+                                </Link>
+                                <Link :href="route('mentor.create')" class="py-5 px-4 uppercase border-4 border-lime-700 hover:bg-lime-700 text-lime-700 hover:text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer w-full">
+                                    <h1 class="text-xl text-center my-auto font-bold" >Gribu būt mentors</h1>
+                                </Link>
+                                <div class="py-5 px-8 uppercase border-4 border-lime-700 text-center hover:bg-lime-700 text-lime-700 hover:text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer text-xl font-bold my-auto w-full">
+                                    <a class="text-center">Ārzemju mentors</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="md:w-2/3 rounded-xl bg-white p-5" v-if="events.length">
-                        <div class="space-y-4 md:justify-center">
-                            <h1 class="text-2xl text-lime-700 font-bold">Tuvākie pasākumi</h1>
-                            <div class="space-y-4 overflow-y-auto h-48 pb-4">
-                                <div v-for="event in events" class="flex space-x-5 border border-gray-300 rounded-xl shadow-lg p-1">
-                                    <div class="py-3 px-5 bg-gray-200 rounded-xl">
-                                        <h1 class="text-xs text-center uppercase">{{new Date(event.date).toLocaleDateString("lv-LV", { month: "short" })}}</h1>
-                                        <h1 class="text-xl text-center font-black -my-1">{{new Date(event.date).getDate()}}</h1>
-                                    </div>
-                                    <div class="w-2/3 flex">
-                                        <h1 class="my-auto">{{event.title}}</h1>
+                        <div class="md:w-1/2 rounded-xl bg-gray-50 p-5 h-fit" v-if="events.length">
+                            <div class="space-y-4 md:justify-center">
+                                <h1 class="text-2xl text-lime-700 font-bold">Gaidāmie notikumi</h1>
+                                <div class="space-y-4 overflow-y-auto h-96 pb-4">
+                                    <div v-for="event in events" class="flex space-x-5 border border-gray-300 rounded-xl shadow-lg p-1">
+                                        <div class="py-3 px-4 rounded-xl">
+                                            <h1 class="text-3xl text-center font-black -my-1">{{new Date(event.date).getDate()}}</h1>
+                                            <h1 class="text-xs text-center uppercase">{{new Date(event.date).toLocaleDateString("lv-LV", { month: "short" })}}</h1>
+                                        </div>
+                                        <div class="w-2/3 flex flex-col my-auto">
+                                            <h1>{{event.title}}</h1>
+                                            <div class="flex space-x-4">
+                                                <div class="flex space-x-2">
+                                                    <img src="/img/clock.svg" alt="location" class="h-4 w-auto my-auto">
+                                                    <h1 class="my-auto">{{new Date(event.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}}</h1>
+                                                </div>
+                                                <div class="flex space-x-2">
+                                                    <img src="/img/location.svg" alt="location" class="h-4 w-auto my-auto">
+                                                    <h1 class="my-auto">{{event.location}}</h1>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
+
                 </div>
             </div>
             <div class="p-8 bg-gray-50">
@@ -137,11 +165,12 @@
 import Footer from "@/Components/Footer.vue";
 import { Link } from '@inertiajs/vue3';
 import Header from "@/Components/Header.vue";
+import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 
 
 export default {
     name: "Home",
-    components: {Header, Link, Footer},
+    components: {ApplicationLogo, Header, Link, Footer},
     props:{
       events: Object,
     },
@@ -189,6 +218,11 @@ export default {
 
     .card:hover .back {
         transform: rotateY(0deg);
+    }
+
+    .background{
+        background-color: #4d7c0f;
+        background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='%236ca81c' fill-opacity='0.23'%3E%3Cpath d='M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
 
     @media (max-width: 600px) {

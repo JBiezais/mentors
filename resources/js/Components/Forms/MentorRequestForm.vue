@@ -106,7 +106,7 @@
             </label>
             <InputError class="mt-2" :message="$page.props.errors.privacy" />
         </div>
-        <button class="w-full text-center text-gray-100 bg-emerald-800 hover:bg-emerald-900 rounded-lg py-3 text-xl font-semibold">Nosūtīt pieteikumu</button>
+        <button class="w-full text-center text-gray-100 bg-lime-700 hover:bg-emerald-900 rounded-lg py-3 text-xl font-semibold">Nosūtīt pieteikumu</button>
     </form>
 </template>
 

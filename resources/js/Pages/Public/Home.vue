@@ -42,7 +42,7 @@
                                             <h1 class="text-xs text-center uppercase">{{new Date(event.date).toLocaleDateString("lv-LV", { month: "short" })}}</h1>
                                         </div>
                                         <div class="w-2/3 flex flex-col my-auto">
-                                            <h1>{{event.title}}</h1>
+                                            <h1 class="font-bold">{{event.title}}</h1>
                                             <div class="flex space-x-4">
                                                 <div class="flex space-x-2">
                                                     <img src="/img/clock.svg" alt="location" class="h-4 w-auto my-auto">

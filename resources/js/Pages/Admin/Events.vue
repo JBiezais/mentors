@@ -48,7 +48,11 @@
                                     <input type="text" class="border-gray-800 bg-gray-100 rounded-lg text-gray-800" v-model="form.title">
                                     <input type="datetime-local" class="border-gray-800 bg-gray-100 rounded-lg text-gray-800" v-model="form.date">
                                     <input type="text" class="border-gray-800 bg-gray-100 rounded-lg text-gray-800" v-model="form.location">
-                                    <!--                    <input type="text" class="border-gray-800 bg-gray-100 rounded-lg text-gray-800" v-model="form.description">-->
+                                    <h1>Mentoru apmācības</h1>
+                                    <h1>Mentorējamo pieteikšanās</h1>
+                                    <div></div>
+                                    <input type="radio" value="1" class="border-gray-800 bg-gray-100 rounded-lg text-gray-800 mx-auto" @click="form.mentors_training? form.mentors_training = 0: form.mentors_training = 1" v-model="form.mentors_training">
+                                    <input type="radio" value="1" class="border-gray-800 bg-gray-100 rounded-lg text-gray-800 mx-auto" @click="form.mentees_applying? form.mentees_applying = 0: form.mentees_applying = 1" v-model="form.mentees_applying">
                                 </div>
                                 <div class="flex w-fit mx-auto space-x-4">
                                     <button v-if="!form.id" type="submit" class="text-white bg-gray-700 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Pievienot</button>
@@ -92,6 +96,8 @@ export default {
                 date: null,
                 location: '',
                 description: '',
+                mentors_training: 0,
+                mentees_applying: 0
             }
         }
     },

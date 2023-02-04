@@ -41,7 +41,7 @@
 </head>
 <body class="background">
     <div class="message-box">
-        <p>Sveiks Lietotāj,</p>
+        <p>Sveiks {{$data['name']. ' '. $data['lastName']}},</p>
         <p>
             Paldies, ka izvēlējies pieteikties Mentoram! Ceram, ka no Mentora iegūtās zināšanas un stāsti par viņa pieredzi Tev noderēs uzsākot studijas RSU!<br/>
             <br/>
@@ -49,9 +49,9 @@
             <br/>
             Ja tomēr vēlies sazināties pirmais, šeit būs Tava Mentora kontaktinformācija:<br/>
         </p>
-        <p>Vārds Uzvārds: <strong></strong></p>
-        <p>Telefona nummurs: <strong></strong></p>
-        <p>E-pasts: <strong></strong></p>
+        <p>Vārds Uzvārds: <strong>{{$data['mentor']['name']. ' '. $data['mentor']['lastName']}}</strong></p>
+        <p>Telefona nummurs: <strong>{{$data['mentor']['phone']}}</strong></p>
+        <p>E-pasts: <strong>{{$data['mentor']['email']}}</strong></p>
         <p>Jautājumu vai neskaidrību gadījumā sazinies ar Mentoru programmas koordinatori <strong>Alisi Agnesi Rozentāli</strong> <a href="mailto:aliseagnese.rozentale@rsu.lv">aliseagnese.rozentale@rsu.lv</a> .</p>
         <p>
             Lai viss izdodas!<br/>

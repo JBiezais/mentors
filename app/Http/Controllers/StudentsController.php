@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StudentRequest;
 use App\Models\Faculty;
+use App\Models\Mail;
 use App\Models\Mentor;
 use App\Models\Student;
 use App\Models\StudyProgram;
@@ -72,7 +73,14 @@ class StudentsController extends Controller
     {
         $data = $request->validated();
 
-        Student::create($data);
+        $student = Student::create($data);
+
+        Mail::create([
+            'mentor_ids' => null,
+            'student_ids' => json_encode(array($student->id)),
+            'content' => null,
+            'type' => 'mentorData'
+        ]);
 
         return Redirect::route('home');
     }

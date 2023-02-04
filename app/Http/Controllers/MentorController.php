@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Actions\UploadFileAction;
 use App\Http\Requests\MentorRequest;
-use App\Mail\VerificationMail;
 use App\Models\Faculty;
+use App\Models\Mail;
 use App\Models\Mentor;
 use App\Models\Student;
 use App\Models\StudyProgram;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -76,17 +76,16 @@ class MentorController extends Controller
             $data['img'] = $uploadFileAction->upload($request->file('img'));
         }
 
-        $data['key'] = bcrypt($data['email']);
+        $data['key'] = Str::random(20);
 
-        $emailData = [
-            'name' => $data['name'],
-            'lastName' => $data['lastName'],
-            'key' => $data['key']
-        ];
+        $mentor = Mentor::create($data);
 
-        Mentor::create($data);
-
-        Mail::to($data['email'])->send(new VerificationMail($emailData));
+        Mail::create([
+            'mentor_ids' => json_encode(array($mentor->id)),
+            'student_ids' => null,
+            'content' => null,
+            'type' => 'verification'
+        ]);
 
         return Redirect::route('home');
     }
@@ -134,5 +133,12 @@ class MentorController extends Controller
     }
     public function confirmMentor(Mentor $mentor){
         Mentor::query()->whereId($mentor->id)->update(['status' => 1]);
+
+        Mail::create([
+            'mentor_ids' => json_encode(array($mentor->id)),
+            'student_ids' => null,
+            'content' => null,
+            'type' => 'verificationPassed'
+        ]);
     }
 }

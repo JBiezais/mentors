@@ -1,22 +1,20 @@
 <template>
     <div class="min-h-screen flex flex-col bg-gray-100">
         <Header v-if="$page.props.auth.user !== null"></Header>
-        <div class="h-20 w-full sticky top-0 z-10 bg-gray-100">
+        <div v-if="$page.props.auth.user === null" class="w-full sticky top-0 z-10 bg-gray-100">
             <div class="lg:max-w-5xl m-auto flex">
                 <ApplicationLogo
                     class="block h-16 w-auto my-auto fill-current text-gray-800"
                 />
                 <div class="m-auto">
-                    <h1 class="text-2xl font-semibold uppercase">mentoru programma {{new Date().getFullYear()}}</h1>
+                    <h1 class="text-xl md:text-2xl font-semibold uppercase">mentoru programma {{new Date().getFullYear()}}</h1>
                     <h1></h1>
                 </div>
             </div>
         </div>
 
         <div class="flex-grow">
-
-            <div class="w-full background py-8">
-<!--                <ApplicationLogo class="w-1/3 h-fit my-auto -left-60 absolute -top-24"></ApplicationLogo>-->
+            <div class="w-full background py-8 px-3">
                 <div class="lg:max-w-5xl mx-auto flex flex-col md:flex-row space-y-5 md:space-x-8 md:space-y-0">
                     <div class="flex flex flex-col md:flex-row space-y-5 md:space-x-8 md:space-y-0 w-full">
                         <div class="rounded-xl bg-gray-50 p-5 h-fit my-auto" :class="events.length? 'md:w-1/2': 'w-full'">
@@ -53,8 +51,6 @@
                                                     <h1 class="my-auto">{{event.location}}</h1>
                                                 </div>
                                             </div>
-
-
                                         </div>
                                     </div>
                                 </div>

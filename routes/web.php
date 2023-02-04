@@ -37,6 +37,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/mentees/remove/{mentor}', [MentorController::class, 'removeMentees'])->name('remove.mentees');
     Route::post('/mentor/confirm/{mentor}', [MentorController::class, 'confirmMentor'])->name('confirm.mentor');
+    Route::post('/mentor/sendMenteesData/{mentor}', [MentorController::class, 'sendMenteeData'])->name('sendMenteesData');
+
+    Route::post('/student/sendMentorData/{student}', [StudentsController::class, 'sendMentorData'])->name('sendMentorData');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

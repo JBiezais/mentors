@@ -70,7 +70,7 @@
                         <h1 @click="edit = 1" class="cursor-pointer bg-gray-700 hover:bg-gray-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Labot</h1>
                         <h1 @click="confirmMentor(mentor.id)" v-if="!mentor.status" class="cursor-pointer bg-emerald-700 hover:bg-emerald-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Apstiprināt</h1>
                         <h1 class="cursor-pointer bg-sky-700 hover:bg-sky-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Sūtīt ziņu</h1>
-                        <Link :href="'/'" class="cursor-pointer bg-cyan-700 hover:bg-cyan-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Nosūtīt mentorējamo datus</Link>
+                        <h1 @click="sendMenteeData(mentor.id)" class="cursor-pointer bg-cyan-700 hover:bg-cyan-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Nosūtīt mentorējamo datus</h1>
                         <h1 @click="removeMentees(mentor.id)" v-if="mentees.length" class="cursor-pointer bg-gray-100 hover:bg-red-800 text-red-700 hover:text-gray-50 border border-red-700 rounded-lg py-2 px-3 w-full text-center">Atsaukt mentorējamos</h1>
                         <h1 @click="deleteMentor(mentor.id)" class="cursor-pointer bg-red-500 hover:bg-red-700 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Dzēst</h1>
                     </div>
@@ -202,6 +202,11 @@ export default {
             } else {
                 this.mentees.push(id);
             }
+        },
+        sendMenteeData(id){
+            Inertia.post(route('sendMenteesData', id), {}, {
+                preserveState: false
+            })
         }
     },
     watch:{

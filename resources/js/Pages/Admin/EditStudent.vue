@@ -60,7 +60,7 @@
                     <div class="bg-gray-200 shadow-xl rounded-xl p-5 space-y-5 flex flex-col w-full">
                         <h1 @click="edit = 1; getMentors" class="cursor-pointer bg-gray-700 hover:bg-gray-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Labot</h1>
                         <h1 class="cursor-pointer bg-sky-700 hover:bg-sky-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Sūtīt ziņu</h1>
-                        <Link :href="'/'" class="cursor-pointer bg-cyan-700 hover:bg-cyan-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Nosūtīt mentora datus</Link>
+                        <h1 @click="sendMentorData(student.id)" class="cursor-pointer bg-cyan-700 hover:bg-cyan-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Nosūtīt mentora datus</h1>
                         <h1 @click="deleteStudent(student.id)" class="cursor-pointer bg-red-500 hover:bg-red-700 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Dzēst</h1>
                     </div>
                 </div>
@@ -126,6 +126,11 @@ export default {
         submitForm(id){
             Inertia.put(route('student.update', id), this.form, {
                 preserveState: false,
+            })
+        },
+        sendMentorData(id){
+            Inertia.post(route('sendMentorData', id), {}, {
+                preserveState: false
             })
         },
         getMentors(){

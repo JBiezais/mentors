@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\UploadFileAction;
 use App\Http\Requests\MentorRequest;
+use App\Models\Event;
 use App\Models\Faculty;
 use App\Models\Mail;
 use App\Models\Mentor;
@@ -140,5 +141,17 @@ class MentorController extends Controller
             'content' => null,
             'type' => 'verificationPassed'
         ]);
+    }
+
+    public function sendMenteeData(Mentor $mentor): RedirectResponse
+    {
+        Mail::create([
+            'mentor_ids' => json_encode(array($mentor->id)),
+            'student_ids' => null,
+            'content' => null,
+            'type' => 'menteeData'
+        ]);
+
+        return Redirect::route('home');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StudentRequest;
+use App\Models\Event;
 use App\Models\Faculty;
 use App\Models\Mail;
 use App\Models\Mentor;
@@ -120,5 +121,14 @@ class StudentsController extends Controller
         $student->delete();
 
         return Redirect::route('student.index');
+    }
+
+    public function sendMentorData(Student $student){
+        Mail::create([
+            'mentor_ids' => null,
+            'student_ids' => json_encode(array($student->id)),
+            'content' => null,
+            'type' => 'mentorData'
+        ]);
     }
 }

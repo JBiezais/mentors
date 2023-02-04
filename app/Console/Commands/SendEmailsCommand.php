@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\CustomMail;
+use App\Mail\MenteeDataMail;
 use App\Mail\MenteeHasNoMentor;
 use App\Mail\MenteesBeginToApplyMail;
 use App\Mail\MentorDataMail;
@@ -96,6 +98,35 @@ class SendEmailsCommand extends Command
                             $this->verificationPassed($mentors);
                         }
                         break;
+                    case 'menteeData':
+                        if($mail->mentor_ids){
+                            $mentors = Mentor::query()
+                                ->with('students')
+                                ->select('id', 'name', 'lastName', 'email', 'key')
+                                ->whereIn('id', json_decode($mail->mentor_ids))
+                                ->get();
+                            $this->menteeData($mentors);
+                        }
+                        break;
+                    case 'custom':
+                        $receivers = null;
+
+                        if($mail->mentor_ids){
+                            $receivers = Mentor::query()
+                                ->select('id', 'name', 'lastName', 'email', 'key')
+                                ->whereIn('id', json_decode($mail->mentor_ids))
+                                ->get();
+                        }
+                        if($mail->student_ids){
+                            $receivers = Student::query()
+                                ->select('id', 'mentor_id', 'name', 'lastName', 'email')
+                                ->whereIn('id', json_decode($mail->student_ids))
+                                ->get();
+                        }
+                        if($receivers){
+                            $this->custom($receivers, $mail->content);
+                        }
+                        break;
                 }
 
                 $mail->update([
@@ -161,6 +192,22 @@ class SendEmailsCommand extends Command
         }
     }
 
+    private function menteeData($mentors){
+        foreach ($mentors as $mentor){
+            if($mentor->students){
+                $emailData = [
+                    'name' => $mentor->name,
+                    'lastName' => $mentor->lastName,
+                    'students' => $mentor->students
+                ];
+                SendMail::to($mentor['email'])->send(new MenteeDataMail($emailData));
+                $this->info('Mentees Data mail has been sent to '. $mentor['email']);
+            }else{
+                $this->info('Mentor has no mentees');
+            }
+        }
+    }
+
     private function verificationPassed($mentors){
         $events = Event::query()->where(function($q){
             $q->orWhere('mentors_training', 1);
@@ -198,6 +245,18 @@ class SendEmailsCommand extends Command
             ];
             SendMail::to($mentor['email'])->send(new MenteesBeginToApplyMail($emailData));
             $this->info('Mentees Begin To Apply mail has been sent to '. $mentor['email']);
+        }
+    }
+
+    private function custom($receivers, $data){
+        foreach ($receivers as $receiver){
+            $emailData = [
+                'name' => $receiver->name,
+                'lastName' => $receiver->lastName,
+                'content' => $data
+            ];
+            SendMail::to($receiver['email'])->send(new CustomMail($emailData));
+            $this->info('Mentees Begin To Apply mail has been sent to '. $receiver['email']);
         }
     }
 }

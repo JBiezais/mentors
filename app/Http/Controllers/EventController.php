@@ -26,7 +26,8 @@ class EventController extends Controller
             'location' => 'string',
             'date' => 'required|date',
             'mentors_training' => 'nullable|boolean',
-            'mentees_applying' => 'nullable|boolean'
+            'mentees_applying' => 'nullable|boolean',
+            'link' => 'nullable'
         ]);
 
         $data = Event::create($data);
@@ -51,7 +52,8 @@ class EventController extends Controller
             'location' => 'string',
             'date' => 'required|date',
             'mentors_training' => 'nullable|boolean',
-            'mentees_applying' => 'nullable|boolean'
+            'mentees_applying' => 'nullable|boolean',
+            'link' => 'nullable'
         ]);
 
         $event->update($data);

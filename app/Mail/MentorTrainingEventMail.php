@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class VerificationMail extends Mailable
+class MentorTrainingEventMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -20,8 +20,7 @@ class VerificationMail extends Mailable
 
     public function build()
     {
-        return $this->view('emails.verification', ['data' => $this->data])
+        return $this->view('emails.mentorTrainingEvent', ['data' => $this->data])
             ->subject('Verification email');
     }
-
 }

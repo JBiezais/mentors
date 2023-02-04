@@ -2,13 +2,17 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\MenteeHasNoMentor;
+use App\Mail\MenteesBeginToApplyMail;
 use App\Mail\MentorDataMail;
+use App\Mail\MentorTrainingEventMail;
 use App\Mail\VerificationMail;
 use App\Mail\VerificationPassedMail;
 use App\Models\Event;
 use App\Models\Mail;
 use App\Models\Mentor;
 use App\Models\Student;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail as SendMail;
 
@@ -35,6 +39,31 @@ class SendEmailsCommand extends Command
      */
     public function handle()
     {
+        $events = Event::query()
+            ->where(function($q){
+                $q->orWhere('date', '>', Carbon::now()->subDay());
+                $q->orWhere('date', '<', Carbon::now()->subDay());
+            })
+            ->where('sent', 0)
+            ->where(function($q){
+                $q->orWhere('mentors_training', 1);
+                $q->orWhere('mentees_applying', 1);
+            })
+            ->get();
+        if(!empty($events)){
+            $mentors = Mentor::query()->where('status', 1)->get();
+            foreach ($events as $event){
+                if($event['mentors_training']){
+                    $this->mentorTraining($mentors, $event);
+                    $event->update(['sent' => 1]);
+                }
+                if($event['mentees_applying']){
+                    $this->menteesBeginToApply($mentors, $event);
+                    $event->update(['sent' => 1]);
+                }
+            }
+        }
+
         $mails = Mail::query()->where('sent', 0)->get();
         if(!empty($mails)){
             foreach ($mails as $mail){
@@ -55,16 +84,18 @@ class SendEmailsCommand extends Command
                                         ->select('id', 'mentor_id', 'name', 'lastName', 'email')
                                         ->whereIn('id', json_decode($mail->student_ids))
                                         ->get();
+                            $this->mentorData($students);
                         }
-                        $this->mentorData($students);
                         break;
                     case 'verificationPassed':
-
-                        $mentors = Mentor::query()
-                                    ->select('id', 'name', 'lastName', 'email')
-                                    ->whereIn('id', json_decode($mail->mentor_ids))
-                                    ->get();
-                        $this->verificationPassed($mentors);
+                        if($mail->mentor_ids){
+                            $mentors = Mentor::query()
+                                ->select('id', 'name', 'lastName', 'email')
+                                ->whereIn('id', json_decode($mail->mentor_ids))
+                                ->get();
+                            $this->verificationPassed($mentors);
+                        }
+                        break;
                 }
 
                 $mail->update([
@@ -117,6 +148,15 @@ class SendEmailsCommand extends Command
                 }
             }else{
                 $this->info('Student has no mentor');
+
+                $emailData = [
+                    'name' => $student->name,
+                    'lastName' => $student->lastName,
+                ];
+                if($student['email']){
+                    SendMail::to($student['email'])->send(new MenteeHasNoMentor($emailData));
+                    $this->info('Student sent confirmation mail');
+                }
             }
         }
     }
@@ -134,6 +174,30 @@ class SendEmailsCommand extends Command
             ];
             SendMail::to($mentor['email'])->send(new VerificationPassedMail($emailData));
             $this->info('Verification Passed mail has been sent to '. $mentor['email']);
+        }
+    }
+
+    private function mentorTraining($mentors, $event){
+        foreach ($mentors as $mentor){
+            $emailData = [
+                'name' => $mentor->name,
+                'lastName' => $mentor->lastName,
+                'event' => $event
+            ];
+            SendMail::to($mentor['email'])->send(new MentorTrainingEventMail($emailData));
+            $this->info('Mentor Training mail has been sent to '. $mentor['email']);
+        }
+    }
+
+    private function menteesBeginToApply($mentors, $event){
+        foreach ($mentors as $mentor){
+            $emailData = [
+                'name' => $mentor->name,
+                'lastName' => $mentor->lastName,
+                'event' => $event
+            ];
+            SendMail::to($mentor['email'])->send(new MenteesBeginToApplyMail($emailData));
+            $this->info('Mentees Begin To Apply mail has been sent to '. $mentor['email']);
         }
     }
 }

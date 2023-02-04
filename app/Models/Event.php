@@ -15,6 +15,8 @@ class Event extends Model
         'location',
         'date',
         'mentors_training',
-        'mentees_applying'
+        'mentees_applying',
+        'link',
+        'sent'
     ];
 }

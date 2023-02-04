@@ -21,6 +21,6 @@ class MenteesBeginToApplyMail extends Mailable
     public function build()
     {
         return $this->view('emails.menteesBeginToApply', ['data' => $this->data])
-            ->subject('Verification email');
+            ->subject('Mentees Begin To Apply email');
     }
 }

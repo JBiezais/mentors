@@ -21,6 +21,6 @@ class MentorTrainingEventMail extends Mailable
     public function build()
     {
         return $this->view('emails.mentorTrainingEvent', ['data' => $this->data])
-            ->subject('Verification email');
+            ->subject('Mentor Training event email');
     }
 }

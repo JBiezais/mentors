@@ -126,6 +126,7 @@
         </div>
         <Footer></Footer>
     </div>
+    <CustomMail @filter="getFilteredProps($event)"></CustomMail>
 </template>
 
 <script>
@@ -135,10 +136,11 @@ import Footer from "@/Components/Footer.vue";
 import {useForm} from "@inertiajs/vue3";
 import {Link} from '@inertiajs/vue3';
 import {Inertia} from "@inertiajs/inertia";
+import CustomMail from "@/Components/CustomMail.vue";
 
 export default {
     name: "EditMentor",
-    components: {Footer, Header, Link},
+    components: {CustomMail, Footer, Header, Link},
     props:{
         mentor: Object,
         programs: Object,
@@ -207,7 +209,12 @@ export default {
             Inertia.post(route('sendMenteesData', id), {}, {
                 preserveState: false
             })
-        }
+        },
+        getFilteredProps($event){
+            Inertia.get(route(''), $event, {
+                preserveState: false
+            })
+        },
     },
     watch:{
         'form.faculty_id': function(){

@@ -14,7 +14,7 @@
         </div>
 
         <div class="flex-grow">
-            <div class="w-full background py-8 px-3">
+            <div class="w-full py-8 px-3" style="background-image: url('/img/bg.png'); background-size: cover; background-repeat: no-repeat">
                 <div class="lg:max-w-5xl mx-auto flex flex-col md:flex-row space-y-5 md:space-x-8 md:space-y-0">
                     <div class="flex flex flex-col md:flex-row space-y-5 md:space-x-8 md:space-y-0 w-full">
                         <div class="rounded-xl bg-gray-50 p-5 h-fit my-auto" :class="events.length? 'md:w-1/2': 'w-full'">
@@ -63,18 +63,18 @@
                 <div class="lg:max-w-5xl space-y-5 mx-auto">
                     <div class="flex flex-col space-y-5">
                         <div class="relative">
-                            <div class="card">
+                            <div class="card extra-height">
                                 <div class="md:w-3/4 bg-gray-100 shadow-xl rounded-xl flex front">
                                     <div class="w-3 rounded-l-xl bg-yellow-500 h-auto"></div>
-                                    <div class="p-5">
-                                        <h1 class="text-2xl">Mentors</h1>
-                                        <p class="text-xl italic ">Mentors ir kā sienas, kas balsta jumtu.</p>
+                                    <div class="p-5 w-fit flex">
+                                        <h1 class="text-2xl my-auto text-gray-700">Uzzini vairāk par <span class="text-lime-700 font-semibold">Mentoru Programmu</span><br/>
+                                            Mentoru programma ir vieta, kur iegūt noderīgas zināšanas!
+                                        </h1>
                                     </div>
                                 </div>
                                 <div class="md:w-3/4 bg-gray-100 shadow-xl rounded-xl flex back">
                                     <div class="p-5 w-fit">
-                                        <h1 class="text-2xl">Mentors</h1>
-                                        <p class="text-xl italic ">Mentors ir kā sienas, kas balsta jumtu.</p>
+                                        <p class="text-xl italic ">RSU Mentoru programma latviešu studējošajiem tiek realizēta katru gadu no septembra līdz februārim, tā ir balstīta uz brīvprātības principa. Tās mērķis ir veicināt jauno studējošo inegrāciju studiju vidē un sabiedriskajā dzīvē. Mentoru programmā jaunie studējošie jeb mentorējamie iegūst zināšanas no vecāko studiju gadu studējošajiem jeb mentoriem.</p>
                                     </div>
                                     <div class="flex-grow"></div>
                                     <div class="w-3 rounded-r-xl bg-lime-700 h-auto"></div>
@@ -83,37 +83,37 @@
                         </div>
                         <div class="relative flex">
                             <div class="flex-grow"></div>
-                            <div class="card">
+                            <div class="card extra-height">
                                 <div class="md:w-3/4 bg-gray-100 shadow-xl rounded-xl flex front">
-                                    <div class="p-5 w-fit">
-                                        <h1 class="text-2xl">Mentors</h1>
-                                        <p class="text-xl italic ">Mentors ir kā sienas, kas balsta jumtu.</p>
+                                    <div class="p-5 w-fit flex">
+                                        <h1 class="text-2xl my-auto text-gray-700">Uzzini, kas ir <span class="text-lime-700 font-semibold">MENTORS</span><br/>
+                                            Par mentoru var kļūt jau otrajā mācību semestrī.
+                                        </h1>
                                     </div>
                                     <div class="flex-grow"></div>
                                     <div class="w-3 rounded-r-xl bg-yellow-500 h-auto"></div>
                                 </div>
                                 <div class="md:w-3/4 bg-gray-100 shadow-xl rounded-xl flex back">
                                     <div class="w-3 rounded-l-xl bg-lime-700 h-auto"></div>
-                                    <div class="p-5">
-                                        <h1 class="text-2xl">Mentors</h1>
-                                        <p class="text-xl italic ">Dažreiz viss, kas vajadzīgs, lai spertu pirmos soļus, ir nedaudz atbalsta.</p>
+                                    <div class="p-5 w-fit">
+                                        <p class="text-xl italic ">Mentors ir studējošais, kurš uzsācis studijas vismaz 3. semestrī un ir gatavs dalīties savās zināšanās un praktiskajā pieredzē ar jauno studējošo. Mentors var gan sniegt padomus, gan atbildēt uz mentorējamajam interesējošiem jautājumiem. Mentors tiek piešķirts uz pirmo mācību semestri un vienam mentoram var būt līdz 5 mentorējamajiem.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="relative">
-                            <div class="card">
+                            <div class="card default-height">
                                 <div class="md:w-3/4 bg-gray-100 shadow-xl rounded-xl flex front">
                                     <div class="w-3 rounded-l-xl bg-yellow-500 h-auto"></div>
-                                    <div class="p-5">
-                                        <h1 class="text-2xl">Mentors</h1>
-                                        <p class="text-xl italic ">Viss nezināmais var šķists biedējošs. Cik labi, ja kāds palīdz to padarīt par zināmu.</p>
+                                    <div class="p-5 w-fit flex">
+                                        <h1 class="text-2xl my-auto text-gray-700">Uzzini, kas ir <span class="text-lime-700 font-semibold">MENTORĒJAMAIS</span><br/>
+                                            Par mentorējamo var kļūt jebkurš pirmā kursa studējošais.
+                                        </h1>
                                     </div>
                                 </div>
                                 <div class="md:w-3/4 bg-gray-100 shadow-xl rounded-xl flex back">
                                     <div class="p-5 w-fit">
-                                        <h1 class="text-2xl">Mentors</h1>
-                                        <p class="text-xl italic ">Mentors ir kā sienas, kas balsta jumtu.</p>
+                                        <p class="text-xl italic ">Mentorējamais ir pirmā studiju gada studējošais, kurš vēlas iegūt zināšanas par studiju procesa norisi, par sabiedriskās dzīves iespējām universitātē, vēlas iegūt jaunus kontaktus un iegūt pieredzi.</p>
                                     </div>
                                     <div class="flex-grow"></div>
                                     <div class="w-3 rounded-r-xl bg-lime-700 h-auto"></div>
@@ -185,11 +185,15 @@ export default {
 <style scoped>
     .card {
         width: 75%;
-        height: 150px;
         position: relative;
         perspective: 1000px;
     }
-
+    .default-height{
+        height: 150px;
+    }
+    .extra-height{
+        height: 200px;
+    }
     .front,
     .back {
         width: 100%;
@@ -223,7 +227,12 @@ export default {
     @media (max-width: 600px) {
         .card{
             width: 100%;
+        }
+        .default-height{
             height: 250px;
+        }
+        .extra-height{
+            height: 425px;
         }
     }
 </style>

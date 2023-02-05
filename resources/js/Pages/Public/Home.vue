@@ -18,7 +18,7 @@
                 <div class="lg:max-w-5xl mx-auto flex flex-col md:flex-row space-y-5 md:space-x-8 md:space-y-0">
                     <div class="flex flex flex-col md:flex-row space-y-5 md:space-x-8 md:space-y-0 w-full">
                         <div class="rounded-xl bg-gray-50 p-5 h-fit my-auto" :class="events.length? 'md:w-1/2': 'w-full'">
-                            <div class="flex md:justify-center" :class="events.length? 'flex-col space-y-8': 'space-x-4'">
+                            <div class="flex flex-col space-y-8 md:justify-center" :class="events.length? '': 'md:flex-row md:space-x-4'">
                                 <Link :href="route('student.create')" class="py-5 uppercase px-8 border-4 border-lime-700 hover:bg-lime-700 text-lime-700 hover:text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer w-full">
                                     <h1 class="text-xl text-center font-bold my-auto">Pieteikties mentoram</h1>
                                 </Link>

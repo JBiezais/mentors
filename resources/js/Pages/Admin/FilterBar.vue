@@ -11,7 +11,7 @@
             <h1 class="my-auto"><slot name="second"></slot></h1>
           </div>
         </div>
-        <div class="flex bg-gray-700 px-5 py-3 rounded-lg text-gray-100 cursor-pointer extraMail">
+        <div @click="open" class="flex bg-gray-700 px-5 py-3 rounded-lg text-gray-100 cursor-pointer extraMail">
           <h1 class="my-auto">Sūtīt ziņu</h1>
         </div>
         <div class="w-96 extraSearch">
@@ -66,6 +66,7 @@ export default {
         type: String,
         program: String,
         faculty: String,
+        custom: Boolean,
     },
     data(){
         return{
@@ -81,6 +82,9 @@ export default {
     methods:{
         getFilteredProps(){
             this.$emit('filter', this.filterForm)
+        },
+        open(){
+            this.$emit('open');
         }
     },
     mounted(){

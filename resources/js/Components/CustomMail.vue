@@ -1,6 +1,6 @@
 <template>
     <div class="fixed z-10 top-0 h-screen">
-        <div class="w-screen h-screen flex bg-gray-900 opacity-60 relative">
+        <div @click="close()" class="w-screen h-screen flex bg-gray-900 opacity-60 relative">
         </div>
         <div class="absolute inset-x-10 md:inset-x-1/5 xl:inset-1/4 h-4/6 md:h-3/5 md:w-1/2 xl:h-1/2 rounded-xl bg-gray-200 py-10 flex overflow-scroll">
             <div class="mx-auto space-y-5">
@@ -22,8 +22,9 @@
                        bullist numlist outdent indent | removeformat | help'
                 }"
                 ></editor>
-                <div class="ml-auto w-fit">
-                    <PrimaryButton>Nosūtīt</PrimaryButton>
+                <div class="ml-auto w-fit space-x-3">
+                    <SecondaryButton @click="close">Aizvērt</SecondaryButton>
+                    <PrimaryButton @click="sendMessageData">Nosūtīt</PrimaryButton>
                 </div>
             </div>
         </div>
@@ -33,9 +34,10 @@
 <script>
 import Editor from '@tinymce/tinymce-vue'
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
 export default {
     name: "CustomMail",
-    components:{PrimaryButton, Editor},
+    components:{SecondaryButton, PrimaryButton, Editor},
     data(){
         return {
             form:{
@@ -45,7 +47,10 @@ export default {
     },
     methods:{
         sendMessageData(){
-            this.$emit
+            this.$emit('custom', this.form.content)
+        },
+        close(){
+            this.$emit('close')
         }
     }
 }

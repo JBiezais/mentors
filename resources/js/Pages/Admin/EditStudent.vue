@@ -59,7 +59,7 @@
                 <div class="">
                     <div class="bg-gray-200 shadow-xl rounded-xl p-5 space-y-5 flex flex-col w-full">
                         <h1 @click="edit = 1; getMentors" class="cursor-pointer bg-gray-700 hover:bg-gray-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Labot</h1>
-                        <h1 class="cursor-pointer bg-sky-700 hover:bg-sky-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Sūtīt ziņu</h1>
+                        <h1 @click="close = 1" class="cursor-pointer bg-sky-700 hover:bg-sky-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Sūtīt ziņu</h1>
                         <h1 @click="sendMentorData(student.id)" class="cursor-pointer bg-cyan-700 hover:bg-cyan-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Nosūtīt mentora datus</h1>
                         <h1 @click="deleteStudent(student.id)" class="cursor-pointer bg-red-500 hover:bg-red-700 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Dzēst</h1>
                     </div>
@@ -68,6 +68,7 @@
         </div>
         <Footer></Footer>
     </div>
+    <CustomMail @custom="getFilteredProps($event)" @close="close = 0" v-if="close"></CustomMail>
 </template>
 
 <script>
@@ -75,9 +76,11 @@ import {Link} from '@inertiajs/vue3';
 import Header from "@/Components/Header.vue";
 import Footer from "@/Components/Footer.vue";
 import {Inertia} from "@inertiajs/inertia";
+import CustomMail from "@/Components/CustomMail.vue";
 export default {
     name: "EditStudent",
     components:{
+        CustomMail,
         Footer,
         Header,
         Link
@@ -89,6 +92,7 @@ export default {
     },
     data(){
         return{
+            close: 0,
             chooseMentor:{},
             programs:{},
             edit: 0,
@@ -165,7 +169,19 @@ export default {
                     return mentor
                 }
             })
-        }
+        },
+        getFilteredProps($event){
+            let emailForm = {
+                content: $event,
+                receivers: {
+                    type: 'students',
+                    id: [this.student.id]
+                }
+            }
+            Inertia.post(route('sendCustom'), emailForm, {
+                preserveState: false
+            })
+        },
     },
     watch:{
         'form.faculty_id': function(){

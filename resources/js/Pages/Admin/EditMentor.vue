@@ -69,7 +69,7 @@
                     <div class="bg-gray-200 shadow-xl rounded-xl p-5 space-y-5 flex flex-col w-full">
                         <h1 @click="edit = 1" class="cursor-pointer bg-gray-700 hover:bg-gray-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Labot</h1>
                         <h1 @click="confirmMentor(mentor.id)" v-if="!mentor.status" class="cursor-pointer bg-emerald-700 hover:bg-emerald-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Apstiprināt</h1>
-                        <h1 class="cursor-pointer bg-sky-700 hover:bg-sky-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Sūtīt ziņu</h1>
+                        <h1 @click="close = 1" class="cursor-pointer bg-sky-700 hover:bg-sky-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Sūtīt ziņu</h1>
                         <h1 @click="sendMenteeData(mentor.id)" class="cursor-pointer bg-cyan-700 hover:bg-cyan-900 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Nosūtīt mentorējamo datus</h1>
                         <h1 @click="removeMentees(mentor.id)" v-if="mentees.length" class="cursor-pointer bg-gray-100 hover:bg-red-800 text-red-700 hover:text-gray-50 border border-red-700 rounded-lg py-2 px-3 w-full text-center">Atsaukt mentorējamos</h1>
                         <h1 @click="deleteMentor(mentor.id)" class="cursor-pointer bg-red-500 hover:bg-red-700 text-gray-100 rounded-lg py-2 px-3 w-full text-center">Dzēst</h1>
@@ -126,7 +126,7 @@
         </div>
         <Footer></Footer>
     </div>
-    <CustomMail @filter="getFilteredProps($event)"></CustomMail>
+    <CustomMail @custom="getFilteredProps($event)" @close="close = 0" v-if="close"></CustomMail>
 </template>
 
 <script>
@@ -148,6 +148,7 @@ export default {
     },
     data(){
         return{
+            close: 0,
             dropDownPrograms:{},
             edit: 0,
             form:{
@@ -211,7 +212,14 @@ export default {
             })
         },
         getFilteredProps($event){
-            Inertia.get(route(''), $event, {
+            let emailForm = {
+                content: $event,
+                receivers: {
+                    type: 'mentors',
+                    id: [this.mentor.id]
+                }
+            }
+            Inertia.post(route('sendCustom'), emailForm, {
                 preserveState: false
             })
         },

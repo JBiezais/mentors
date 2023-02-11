@@ -3,7 +3,7 @@
         <Header v-if="$page.props.auth.user !== null"></Header>
         <div class="flex-grow lg:max-w-7xl mx-auto py-5">
             <div class="p-8 bg-gray-50 w-full space-y-5">
-                <FilterBar :keyword="keyword" :type="type" :program="program" :faculty="faculty" @filter="getFilteredProps($event)" :faculties="faculties">
+                <FilterBar :keyword="keyword" :type="type" :program="program" :faculty="faculty" :custom="close" @filter="getFilteredProps($event)" @open="close = 1" :faculties="faculties">
                     <template v-slot:first>Apstiprinātie</template>
                     <template v-slot:second>Pieteikumi</template>
                 </FilterBar>
@@ -38,6 +38,7 @@
         </div>
         <Footer></Footer>
     </div>
+    <CustomMail @custom="createCustomMail($event)" @close="close = 0" v-if="close"></CustomMail>
 </template>
 <style>
     @media (max-width: 486px){
@@ -51,10 +52,11 @@ import Header from "@/Components/Header.vue";
 import {Inertia} from "@inertiajs/inertia";
 import {Link} from '@inertiajs/vue3';
 import FilterBar from "@/Pages/Admin/FilterBar.vue";
+import CustomMail from "@/Components/CustomMail.vue";
 
 export default {
     name: "Mentor",
-    components: {FilterBar, Header, Footer, Link},
+    components: {CustomMail, FilterBar, Header, Footer, Link},
     props:{
         programs: Object,
         mentors: Object,
@@ -63,6 +65,12 @@ export default {
         type: String,
         program: String,
         faculty: String
+    },
+
+    data(){
+        return{
+            close: 0,
+        }
     },
 
     methods:{
@@ -76,7 +84,19 @@ export default {
         },
         findProgram(id){
             return this.programs.find(program => program.id === id).title
-        }
+        },
+        createCustomMail($event){
+            let emailForm = {
+                content: $event,
+                receivers: {
+                    type: 'mentors',
+                    id: this.mentors.map(mentor => mentor.id)
+                }
+            }
+            Inertia.post(route('sendCustom'), emailForm, {
+                preserveState: false
+            })
+        },
     }
 }
 </script>

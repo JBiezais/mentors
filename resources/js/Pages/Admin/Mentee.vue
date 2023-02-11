@@ -3,7 +3,7 @@
         <Header v-if="$page.props.auth.user !== null"></Header>
         <div class="flex-grow lg:max-w-7xl mx-auto">
             <div class="p-8 bg-gray-50 w-full space-y-5">
-                <FilterBar :keyword="keyword" :type="type" :program="program" :faculty="faculty" @filter="getFilteredProps($event)" :faculties="faculties">
+                <FilterBar :keyword="keyword" :type="type" :program="program" :faculty="faculty" :custom="close" @filter="getFilteredProps($event)" @open="close = 1" :faculties="faculties">
                     <template v-slot:first>Ar mentoru</template>
                     <template v-slot:second>Bez mentora</template>
                 </FilterBar>
@@ -60,6 +60,7 @@
         </div>
         <Footer></Footer>
     </div>
+    <CustomMail @custom="createCustomMail($event)" @close="close = 0" v-if="close"></CustomMail>
 </template>
 
 <script>
@@ -68,10 +69,11 @@ import Header from "@/Components/Header.vue";
 import Footer from "@/Components/Footer.vue";
 import {Inertia} from "@inertiajs/inertia";
 import {Link} from '@inertiajs/vue3';
+import CustomMail from "@/Components/CustomMail.vue";
 
 export default {
     name: "Mentee",
-    components: {Footer, Header, FilterBar, Link},
+    components: {CustomMail, Footer, Header, FilterBar, Link},
     props:{
         programs: Object,
         faculties: Object,
@@ -80,6 +82,11 @@ export default {
         type: String,
         program: String,
         faculty: String,
+    },
+    data(){
+        return{
+            close: 0,
+        }
     },
     methods:{
         getFilteredProps($event){
@@ -94,7 +101,19 @@ export default {
           Inertia.delete(route('student.destroy', id), {
               preserveState: false
           })
-        }
+        },
+        createCustomMail($event){
+            let emailForm = {
+                content: $event,
+                receivers: {
+                    type: 'students',
+                    id: this.students.map(student => student.id)
+                }
+            }
+            Inertia.post(route('sendCustom'), emailForm, {
+                preserveState: false
+            })
+        },
     }
 }
 </script>

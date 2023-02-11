@@ -98,21 +98,21 @@
         </div>
         <div>
             <h1>Pievienot Attēlu</h1>
-            <label class="block border-emerald-900 border rounded-xl p-1 space-y-2">
+            <label class="block border-blue-850 border rounded-xl p-1 space-y-2">
                 <img :src="formPhotoPreview" class="border w-2/3 border-none rounded-xl" alt="photo" v-if="formPhotoPreview">
                 <span class="sr-only">Choose File</span>
-                <input type="file" ref="formPhotoUploadField" @change="updatePhotoPreview" class="block w-full rounded-lg text-sm text-emerald-900 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-emerald-500 file:text-emerald-900 hover:file:text-emerald-500 hover:file:bg-emerald-900"/>
+                <input type="file" ref="formPhotoUploadField" @change="updatePhotoPreview" class="block w-full rounded-lg text-sm text-blue-850 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-850 file:text-white hover:file:text-white hover:file:bg-blue-950 file:cursor-pointer"/>
             </label>
             <InputError class="mt-2" :message="$page.props.errors.img" />
         </div>
         <div>
             <label class="flex space-x-2 font-semibold">
                 <input class="rounded-xl my-auto" type="checkbox" v-model="form.privacy">
-                <p>Piekrītu savu datu apstrādāšanai saskaņā ar datu izmantošanas politiku un esmu iepazinies ar <a class="underline" href="">nolikumu</a></p>
+                <p>Piekrītu savu datu apstrādāšanai saskaņā ar datu izmantošanas politiku un esmu iepazinies ar <a class="underline" href="#">nolikumu</a></p>
             </label>
             <InputError class="mt-2" :message="$page.props.errors.privacy" />
         </div>
-        <button class="w-full text-center text-gray-100 bg-emerald-800 hover:bg-emerald-900 rounded-lg py-3 text-xl font-semibold">Nosūtīt pieteikumu</button>
+        <button class="w-full text-center text-gray-100 bg-blue-850 hover:bg-blue-950 rounded-lg py-3 text-xl font-semibold">Nosūtīt pieteikumu</button>
     </form>
 </template>
 

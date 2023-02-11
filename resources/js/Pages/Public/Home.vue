@@ -21,7 +21,7 @@
                 <div class="lg:max-w-5xl mx-auto flex flex-col md:flex-row space-y-5 md:space-x-8 md:space-y-0">
                     <div class="flex flex flex-col md:flex-row space-y-5 md:space-x-8 md:space-y-0 w-full">
                         <div class="rounded-xl bg-gray-50 p-5 h-fit my-auto" :class="events.length? 'md:w-1/2': 'w-full'">
-                            <div class="flex flex-col space-y-8 md:justify-center" :class="events.length? 'space-y-8': 'md:flex-row md:space-x-4 space-y-0'">
+                            <div class="flex flex-col space-y-8 md:justify-center" :class="events.length? 'space-y-8': 'md:flex-row md:space-x-4 md:space-y-0'">
                                 <Link :href="route('student.create')" class="py-5 uppercase px-8 bg-blue-750 text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer w-full">
                                     <h1 class="text-xl text-center font-bold my-auto">Pieteikties mentoram</h1>
                                 </Link>
@@ -62,101 +62,100 @@
                     </div>
                 </div>
             </div>
-<!--            <div class="p-8 bg-gradient-to-b from-blue-950 to-blue-850">-->
             <div class="lg:max-w-5xl bg-gray-50 p-5 space-y-9 mb-5 mx-3 md:mx-auto rounded-xl">
-            <div class="p-8">
-                <div class="lg:max-w-5xl space-y-5 mx-auto">
-                    <div class="flex flex-col space-y-5">
-                        <div class="relative">
-                            <div class="card extra-height">
-                                <div class="md:w-3/4 bg-gray-200 shadow-xl rounded-xl flex front">
-                                    <div class="w-3 rounded-l-xl bg-yellow-950 h-auto"></div>
-                                    <div class="p-5 w-fit flex">
-                                        <h1 class="text-2xl my-auto text-gray-700">Uzzini vairāk par <span class="text-lime-700 font-semibold">Mentoru Programmu</span><br/>
-                                            Mentoru programma ir vieta, kur iegūt noderīgas zināšanas!
-                                        </h1>
+                <div class="p-8">
+                    <div class="lg:max-w-5xl space-y-5 mx-auto">
+                        <div class="flex flex-col space-y-5">
+                            <div class="relative">
+                                <div class="card extra-height">
+                                    <div class="md:w-3/4 bg-gray-200 shadow-xl rounded-xl flex front">
+                                        <div class="w-3 rounded-l-xl bg-yellow-950 h-auto"></div>
+                                        <div class="p-5 w-fit flex">
+                                            <h1 class="text-2xl my-auto text-gray-700">Uzzini vairāk par <span class="text-blue-850 font-semibold">Mentoru Programmu!</span><br/>
+                                                Mentoru programma ir vieta, kur pieredzējuši studējošie savas zināšanas un pieredzi nodod pirmā studiju gada studējošajiem.
+                                            </h1>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="md:w-3/4 bg-gray-200 shadow-xl rounded-xl flex back">
-                                    <div class="p-5 w-fit">
-                                        <p class="text-xl italic ">RSU Mentoru programma latviešu studējošajiem tiek realizēta katru gadu no septembra līdz februārim, tā ir balstīta uz brīvprātības principa. Tās mērķis ir veicināt jauno studējošo inegrāciju studiju vidē un sabiedriskajā dzīvē. Mentoru programmā jaunie studējošie jeb mentorējamie iegūst zināšanas no vecāko studiju gadu studējošajiem jeb mentoriem.</p>
-                                    </div>
-                                    <div class="flex-grow"></div>
-                                    <div class="w-3 rounded-r-xl bg-blue-950 h-auto"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="relative flex">
-                            <div class="flex-grow"></div>
-                            <div class="card extra-height">
-                                <div class="md:w-3/4 bg-gray-200 shadow-xl rounded-xl flex front">
-                                    <div class="p-5 w-fit flex">
-                                        <h1 class="text-2xl my-auto text-gray-700">Uzzini, kas ir <span class="text-lime-700 font-semibold">MENTORS</span><br/>
-                                            Par mentoru var kļūt jau otrajā mācību semestrī.
-                                        </h1>
-                                    </div>
-                                    <div class="flex-grow"></div>
-                                    <div class="w-3 rounded-r-xl bg-yellow-950 h-auto"></div>
-                                </div>
-                                <div class="md:w-3/4 bg-gray-200 shadow-xl rounded-xl flex back">
-                                    <div class="w-3 rounded-l-xl bg-blue-950 h-auto"></div>
-                                    <div class="p-5 w-fit">
-                                        <p class="text-xl italic ">Mentors ir studējošais, kurš uzsācis studijas vismaz 3. semestrī un ir gatavs dalīties savās zināšanās un praktiskajā pieredzē ar jauno studējošo. Mentors var gan sniegt padomus, gan atbildēt uz mentorējamajam interesējošiem jautājumiem. Mentors tiek piešķirts uz pirmo mācību semestri un vienam mentoram var būt līdz 5 mentorējamajiem.</p>
+                                    <div class="md:w-3/4 bg-gray-200 shadow-xl rounded-xl flex back">
+                                        <div class="p-5 w-fit">
+                                            <p class="text-xl italic ">RSU Mentoru programma latviešu studējošajiem tiek realizēta katru gadu no septembra līdz februārim, tā ir balstīta uz brīvprātības principa. Tās mērķis ir veicināt jauno studējošo integrāciju studiju vidē un sabiedriskajā dzīvē. Mentoru programmā jaunie studējošie jeb mentorējamie iegūst zināšanas no vecāko studiju gadu studējošajiem jeb mentoriem. </p>
+                                        </div>
+                                        <div class="flex-grow"></div>
+                                        <div class="w-3 rounded-r-xl bg-blue-950 h-auto"></div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="relative">
-                            <div class="card default-height">
-                                <div class="md:w-3/4 bg-gray-200 shadow-xl rounded-xl flex front">
-                                    <div class="w-3 rounded-l-xl bg-yellow-950 h-auto"></div>
-                                    <div class="p-5 w-fit flex">
-                                        <h1 class="text-2xl my-auto text-gray-700">Uzzini, kas ir <span class="text-lime-700 font-semibold">MENTORĒJAMAIS</span><br/>
-                                            Par mentorējamo var kļūt jebkurš pirmā kursa studējošais.
-                                        </h1>
+                            <div class="relative flex">
+                                <div class="flex-grow"></div>
+                                <div class="card extra-height">
+                                    <div class="md:w-3/4 bg-gray-200 shadow-xl rounded-xl flex front">
+                                        <div class="p-5 w-fit flex">
+                                            <h1 class="text-2xl my-auto text-gray-700">Uzzini, kas ir <span class="text-blue-850 font-semibold">MENTORS</span><br/>
+                                                Mentors ir padomdevējs un palīgs pirmā studiju gada studējošajam.
+                                            </h1>
+                                        </div>
+                                        <div class="flex-grow"></div>
+                                        <div class="w-3 rounded-r-xl bg-yellow-950 h-auto"></div>
+                                    </div>
+                                    <div class="md:w-3/4 bg-gray-200 shadow-xl rounded-xl flex back">
+                                        <div class="w-3 rounded-l-xl bg-blue-950 h-auto"></div>
+                                        <div class="p-5 w-fit">
+                                            <p class="text-xl italic ">Mentors ir studējošais, kurš uzsācis studijas otrajā studiju gadā un ir gatavs dalīties savās zināšanās un praktiskajā pieredzē ar jauno studējošo. Mentors var gan sniegt padomus, gan atbildēt uz mentorējamajam interesējošiem jautājumiem. Mentors tiek piešķirts uz pirmo mācību semestri un vienam mentoram var būt līdz 5 mentorējamajiem. </p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="md:w-3/4 bg-gray-200 shadow-xl rounded-xl flex back">
-                                    <div class="p-5 w-fit">
-                                        <p class="text-xl italic ">Mentorējamais ir pirmā studiju gada studējošais, kurš vēlas iegūt zināšanas par studiju procesa norisi, par sabiedriskās dzīves iespējām universitātē, vēlas iegūt jaunus kontaktus un iegūt pieredzi.</p>
+                            </div>
+                            <div class="relative">
+                                <div class="card default-height">
+                                    <div class="md:w-3/4 bg-gray-200 shadow-xl rounded-xl flex front">
+                                        <div class="w-3 rounded-l-xl bg-yellow-950 h-auto"></div>
+                                        <div class="p-5 w-fit flex">
+                                            <h1 class="text-2xl my-auto text-gray-700">Uzzini, kas ir <span class="text-blue-850 font-semibold">MENTORĒJAMAIS</span><br/>
+                                                Par mentorējamo var kļūt jebkurš pirmā studiju gada studējošais.
+                                            </h1>
+                                        </div>
                                     </div>
-                                    <div class="flex-grow"></div>
-                                    <div class="w-3 rounded-r-xl bg-blue-950 h-auto"></div>
+                                    <div class="md:w-3/4 bg-gray-200 shadow-xl rounded-xl flex back">
+                                        <div class="p-5 w-fit">
+                                            <p class="text-xl italic ">Mentorējamais ir pirmā studiju gada studējošais, kurš vēlas iegūt zināšanas par studiju procesa norisi, par sabiedriskās dzīves iespējām universitātē, vēlas iegūt jaunus kontaktus un pieredzi.
+                                            </p>
+                                        </div>
+                                        <div class="flex-grow"></div>
+                                        <div class="w-3 rounded-r-xl bg-blue-950 h-auto"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-<!--            <div class="p-8 bg-gradient-to-b from-blue-850 to-blue-750">-->
-            <div class="p-8">
-                <div class="lg:max-w-5xl space-y-5 mx-auto">
-                    <div class="w-full space-y-3 md:flex md:space-y-0 md:space-x-5">
-                        <div class="md:my-auto">
-                            <div class="w-fit h-fit bg-yellow-950 rounded-full border-gray-400 shadow-xl p-3 flex mx-auto">
-                                <img class="rounded-full m-auto" src="https://mentors.rsu.lv/images/dins-mironovs.jpg" alt="student">
+                <div class="p-8">
+                    <div class="lg:max-w-5xl space-y-5 mx-auto">
+                        <div class="w-full space-y-3 md:flex md:space-y-0 md:space-x-5">
+                            <div class="md:my-auto">
+                                <div class="w-fit h-fit bg-yellow-950 rounded-full border-gray-400 shadow-xl p-3 flex mx-auto">
+                                    <img class="rounded-full m-auto" src="https://mentors.rsu.lv/images/dins-mironovs.jpg" alt="student">
+                                </div>
+                            </div>
+                            <div class="md:w-2/3 md:flex md:flex-col md:justify-center md:space-y-3">
+                                <p class="text-gray-800 text-center md:text-right">Mentoru programmā piedalījos, jo gribēju pamēģināt, kā ir būt mentoram. Pašam pirmajā studiju gadā bija neoficiāls mentors caur draugu draugiem, tādēļ arī nolēmu pieteikties, jo visiem šādas iespējas dabūt neoficiālus mentorus nav. Tomēr pirmā studiju gada studējošajiem ir vērtīgi iesaistīties programmā, jo tā var daudz vieglāk un ātrāk iekļauties universitātes vidē, noskaidrot sev interesējošos jautājumus par studiju procesu, akadēmiskajām lietām, pašpārvaldi, tādēļ ļoti silti iesaku pieteikties mentoru programmai.</p>
+                                <p class="text-gray-400 text-sm md:text-right">- Dins Mironovs, Medicīnas fakultāte, 3.studiju gads, RSU SP Akadēmiskā virziena vadītāja vietnieks</p>
                             </div>
                         </div>
-                        <div class="md:w-2/3 md:flex md:flex-col md:justify-center md:space-y-3">
-                            <p class="text-gray-800 text-center md:text-right">Mentoru programmā piedalījos, jo gribēju pamēģināt, kā ir būt mentoram. Pašam pirmajā studiju gadā bija neoficiāls mentors caur draugu draugiem, tādēļ arī nolēmu pieteikties, jo visiem šādas iespējas dabūt neoficiālus mentorus nav. Tomēr pirmā studiju gada studējošajiem ir vērtīgi iesaistīties programmā, jo tā var daudz vieglāk un ātrāk iekļauties universitātes vidē, noskaidrot sev interesējošos jautājumus par studiju procesu, akadēmiskajām lietām, pašpārvaldi, tādēļ ļoti silti iesaku pieteikties mentoru programmai.</p>
-                            <p class="text-gray-400 text-sm md:text-right">- Dins Mironovs, Medicīnas fakultāte, 3.studiju gads, RSU SP Akadēmiskā virziena vadītāja vietnieks</p>
-                        </div>
-                    </div>
-                    <hr class="bg-gray-800">
-                    <div class="w-full space-y-3 md:flex md:flex-row-reverse md:space-y-0 md:space-x-5">
-                        <div class="md:my-auto">
-                            <div class="w-fit h-fit bg-yellow-950 rounded-full border-gray-400 shadow-xl p-3 flex mx-auto">
-                                <img class="rounded-full m-auto" src="https://mentors.rsu.lv/images/arta-hermane.jpg" alt="student">
+                        <hr class="bg-gray-800">
+                        <div class="w-full space-y-3 md:flex md:flex-row-reverse md:space-y-0 md:space-x-5">
+                            <div class="md:my-auto">
+                                <div class="w-fit h-fit bg-yellow-950 rounded-full border-gray-400 shadow-xl p-3 flex mx-auto">
+                                    <img class="rounded-full m-auto" src="https://mentors.rsu.lv/images/arta-hermane.jpg" alt="student">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="md:w-2/3 md:flex md:flex-col md:justify-center md:space-y-3">
-                            <p class="text-gray-800 text-center md:text-left">Mentoru programma noteikti ir lieliska iespēja, lai kvalitatīvi uzsāktu savus pirmos soļus universitātē. Mentori studējošajiem sniedz informācijas apmaiņu, superīgus ieteikumus par studiju procesu, ikdienu universitātē un ir atbalsta plecs jebkurā citā jautājumā. Pieteikties mentoru programmai ir lietderīgi, jo tieši caur mentoru Tev būs iespēja izprast savas programmas pamatprincipus, noskaidrot jebkādus neskaidros jautājumus un Tev būs cilvēks, kurš vienmēr būs gatavs palīdzēt. Es noteikti būtu gatava šogad pieteikties par mentoru, jo šī programma man ļoti daudz palīdzēja un deva iespēju iepazīt fantastisku cilvēku. Un noteikti vēlētos sniegt pretī to pašu kādam pirmkursniekam.</p>
-                            <p class="text-gray-400 text-sm md:text-left">- Arta Hermane, Sabiedrības veselības un sociālās labklājības fakultāte, fakultātes domniece</p>
+                            <div class="md:w-2/3 md:flex md:flex-col md:justify-center md:space-y-3">
+                                <p class="text-gray-800 text-center md:text-left">Mentoru programma noteikti ir lieliska iespēja, lai kvalitatīvi uzsāktu savus pirmos soļus universitātē. Mentori studējošajiem sniedz informācijas apmaiņu, superīgus ieteikumus par studiju procesu, ikdienu universitātē un ir atbalsta plecs jebkurā citā jautājumā. Pieteikties mentoru programmai ir lietderīgi, jo tieši caur mentoru Tev būs iespēja izprast savas programmas pamatprincipus, noskaidrot jebkādus neskaidros jautājumus un Tev būs cilvēks, kurš vienmēr būs gatavs palīdzēt. Es noteikti būtu gatava šogad pieteikties par mentoru, jo šī programma man ļoti daudz palīdzēja un deva iespēju iepazīt fantastisku cilvēku. Un noteikti vēlētos sniegt pretī to pašu kādam pirmkursniekam.</p>
+                                <p class="text-gray-400 text-sm md:text-left">- Arta Hermane, Sabiedrības veselības un sociālās labklājības fakultāte, fakultātes domniece</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
         </div>

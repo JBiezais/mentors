@@ -236,10 +236,10 @@ export default {
             width: 100%;
         }
         .default-height{
-            height: 250px;
+            height: 275px;
         }
         .extra-height{
-            height: 425px;
+            height: 450px;
         }
     }
 </style>

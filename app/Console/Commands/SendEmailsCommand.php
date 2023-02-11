@@ -55,10 +55,6 @@ class SendEmailsCommand extends Command
         if(!empty($events)){
             $mentors = Mentor::query()->where('status', 1)->get();
             foreach ($events as $event){
-                if($event['mentors_training']){
-                    $this->mentorTraining($mentors, $event);
-                    $event->update(['sent' => 1]);
-                }
                 if($event['mentees_applying']){
                     $this->menteesBeginToApply($mentors, $event);
                     $event->update(['sent' => 1]);

@@ -80,14 +80,20 @@
                     </div>
                     <div class="text-center font-semibold text-base md:text-left">
                         Par sevi:
-                        <p class="font-medium">
+                        <p v-if="showFullAbout !== mentor.id" @click="showFullAbout = mentor.id" class="font-medium">
+                            {{mentor.about.length > 200 ? mentor.about.substring(0, 200) + '...' : mentor.about}}
+                        </p>
+                        <p v-if="showFullAbout === mentor.id" @click="showFullAbout = null" class="font-medium">
                             {{mentor.about}}
                         </p>
                     </div>
                     <div class="text-center font-semibold text-base md:text-left">
                         Kāpēc pieteicos mentorēt:
-                        <p class="font-medium">
-                           {{mentor.why}}
+                        <p v-if="showFullWhy !== mentor.id" @click="showFullWhy = mentor.id" class="font-medium">
+                           {{mentor.why.length > 200 ? mentor.why.substring(0, 200) + '...' : mentor.why}}
+                        </p>
+                        <p v-if="showFullWhy === mentor.id" @click="showFullWhy = null" class="font-medium">
+                            {{mentor.why}}
                         </p>
                     </div>
                     <div class="flex text-center font-semibold text-base">
@@ -123,6 +129,8 @@ export default {
     },
     data(){
         return{
+            showFullAbout:null,
+            showFullWhy:null,
             programs:{},
             displayMentors:{},
             form: useForm({

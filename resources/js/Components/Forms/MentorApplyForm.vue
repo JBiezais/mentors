@@ -108,7 +108,7 @@
         <div>
             <label class="flex space-x-2 font-semibold">
                 <input class="rounded-xl my-auto" type="checkbox" v-model="form.privacy">
-                <p>Piekrītu savu datu apstrādāšanai saskaņā ar datu izmantošanas politiku</p>
+                <p>Piekrītu savu datu apstrādāšanai saskaņā ar datu izmantošanas politiku un esmu iepazinies ar <a class="underline" href="">nolikumu</a></p>
             </label>
             <InputError class="mt-2" :message="$page.props.errors.privacy" />
         </div>

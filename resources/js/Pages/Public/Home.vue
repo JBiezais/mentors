@@ -12,21 +12,24 @@
                 </div>
             </div>
         </div>
-
+        <div class="w-full">
+            <img src="https://sp.rsu.lv/sites/default/files/styles/top_image_1440x480/public/top_images/M%C4%81jaslapas%20baneri_6.png?h=a3e98682&itok=MR48zYsp" class="w-full">
+        </div>
+        <div class="flex-grow" style="background-image: url('/img/bg.png'); background-size: cover; background-repeat: no-repeat">
         <div class="flex-grow">
-            <div class="w-full py-8 px-3" style="background-image: url('/img/bg.png'); background-size: cover; background-repeat: no-repeat">
+            <div class="w-full py-8 px-3">
                 <div class="lg:max-w-5xl mx-auto flex flex-col md:flex-row space-y-5 md:space-x-8 md:space-y-0">
                     <div class="flex flex flex-col md:flex-row space-y-5 md:space-x-8 md:space-y-0 w-full">
                         <div class="rounded-xl bg-gray-50 p-5 h-fit my-auto" :class="events.length? 'md:w-1/2': 'w-full'">
-                            <div class="flex flex-col space-y-8 md:justify-center" :class="events.length? '': 'md:flex-row md:space-x-4'">
-                                <Link :href="route('student.create')" class="py-5 uppercase px-8 border-4 border-lime-700 hover:bg-lime-700 text-lime-700 hover:text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer w-full">
+                            <div class="flex flex-col space-y-8 md:justify-center" :class="events.length? 'space-y-8': 'md:flex-row md:space-x-4 space-y-0'">
+                                <Link :href="route('student.create')" class="py-5 uppercase px-8 bg-blue-750 text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer w-full">
                                     <h1 class="text-xl text-center font-bold my-auto">Pieteikties mentoram</h1>
                                 </Link>
-                                <Link :href="route('mentor.create')" class="py-5 px-4 uppercase border-4 border-lime-700 hover:bg-lime-700 text-lime-700 hover:text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer w-full">
+                                <Link :href="route('mentor.create')" class="py-5 uppercase px-8 bg-blue-750 text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer w-full">
                                     <h1 class="text-xl text-center my-auto font-bold" >Gribu būt mentors</h1>
                                 </Link>
-                                <div class="py-5 px-8 uppercase border-4 border-lime-700 text-center hover:bg-lime-700 text-lime-700 hover:text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer text-xl font-bold my-auto w-full">
-                                    <a class="text-center">Ārzemju mentors</a>
+                                <div class="py-5 px-8 uppercase bg-blue-750 text-white shadow-xl rounded-xl mx-auto align-middle md:mx-0 cursor-pointer text-xl font-bold my-auto flex w-full">
+                                    <a class="text-center mx-auto">Ārzemju mentors</a>
                                 </div>
                             </div>
                         </div>
@@ -59,42 +62,44 @@
                     </div>
                 </div>
             </div>
-            <div class="p-8 bg-gray-50">
+<!--            <div class="p-8 bg-gradient-to-b from-blue-950 to-blue-850">-->
+            <div class="lg:max-w-5xl bg-gray-50 p-5 space-y-9 mb-5 mx-3 md:mx-auto rounded-xl">
+            <div class="p-8">
                 <div class="lg:max-w-5xl space-y-5 mx-auto">
                     <div class="flex flex-col space-y-5">
                         <div class="relative">
                             <div class="card extra-height">
-                                <div class="md:w-3/4 bg-gray-100 shadow-xl rounded-xl flex front">
-                                    <div class="w-3 rounded-l-xl bg-yellow-500 h-auto"></div>
+                                <div class="md:w-3/4 bg-gray-200 shadow-xl rounded-xl flex front">
+                                    <div class="w-3 rounded-l-xl bg-yellow-950 h-auto"></div>
                                     <div class="p-5 w-fit flex">
                                         <h1 class="text-2xl my-auto text-gray-700">Uzzini vairāk par <span class="text-lime-700 font-semibold">Mentoru Programmu</span><br/>
                                             Mentoru programma ir vieta, kur iegūt noderīgas zināšanas!
                                         </h1>
                                     </div>
                                 </div>
-                                <div class="md:w-3/4 bg-gray-100 shadow-xl rounded-xl flex back">
+                                <div class="md:w-3/4 bg-gray-200 shadow-xl rounded-xl flex back">
                                     <div class="p-5 w-fit">
                                         <p class="text-xl italic ">RSU Mentoru programma latviešu studējošajiem tiek realizēta katru gadu no septembra līdz februārim, tā ir balstīta uz brīvprātības principa. Tās mērķis ir veicināt jauno studējošo inegrāciju studiju vidē un sabiedriskajā dzīvē. Mentoru programmā jaunie studējošie jeb mentorējamie iegūst zināšanas no vecāko studiju gadu studējošajiem jeb mentoriem.</p>
                                     </div>
                                     <div class="flex-grow"></div>
-                                    <div class="w-3 rounded-r-xl bg-lime-700 h-auto"></div>
+                                    <div class="w-3 rounded-r-xl bg-blue-950 h-auto"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="relative flex">
                             <div class="flex-grow"></div>
                             <div class="card extra-height">
-                                <div class="md:w-3/4 bg-gray-100 shadow-xl rounded-xl flex front">
+                                <div class="md:w-3/4 bg-gray-200 shadow-xl rounded-xl flex front">
                                     <div class="p-5 w-fit flex">
                                         <h1 class="text-2xl my-auto text-gray-700">Uzzini, kas ir <span class="text-lime-700 font-semibold">MENTORS</span><br/>
                                             Par mentoru var kļūt jau otrajā mācību semestrī.
                                         </h1>
                                     </div>
                                     <div class="flex-grow"></div>
-                                    <div class="w-3 rounded-r-xl bg-yellow-500 h-auto"></div>
+                                    <div class="w-3 rounded-r-xl bg-yellow-950 h-auto"></div>
                                 </div>
-                                <div class="md:w-3/4 bg-gray-100 shadow-xl rounded-xl flex back">
-                                    <div class="w-3 rounded-l-xl bg-lime-700 h-auto"></div>
+                                <div class="md:w-3/4 bg-gray-200 shadow-xl rounded-xl flex back">
+                                    <div class="w-3 rounded-l-xl bg-blue-950 h-auto"></div>
                                     <div class="p-5 w-fit">
                                         <p class="text-xl italic ">Mentors ir studējošais, kurš uzsācis studijas vismaz 3. semestrī un ir gatavs dalīties savās zināšanās un praktiskajā pieredzē ar jauno studējošo. Mentors var gan sniegt padomus, gan atbildēt uz mentorējamajam interesējošiem jautājumiem. Mentors tiek piešķirts uz pirmo mācību semestri un vienam mentoram var būt līdz 5 mentorējamajiem.</p>
                                     </div>
@@ -103,31 +108,32 @@
                         </div>
                         <div class="relative">
                             <div class="card default-height">
-                                <div class="md:w-3/4 bg-gray-100 shadow-xl rounded-xl flex front">
-                                    <div class="w-3 rounded-l-xl bg-yellow-500 h-auto"></div>
+                                <div class="md:w-3/4 bg-gray-200 shadow-xl rounded-xl flex front">
+                                    <div class="w-3 rounded-l-xl bg-yellow-950 h-auto"></div>
                                     <div class="p-5 w-fit flex">
                                         <h1 class="text-2xl my-auto text-gray-700">Uzzini, kas ir <span class="text-lime-700 font-semibold">MENTORĒJAMAIS</span><br/>
                                             Par mentorējamo var kļūt jebkurš pirmā kursa studējošais.
                                         </h1>
                                     </div>
                                 </div>
-                                <div class="md:w-3/4 bg-gray-100 shadow-xl rounded-xl flex back">
+                                <div class="md:w-3/4 bg-gray-200 shadow-xl rounded-xl flex back">
                                     <div class="p-5 w-fit">
                                         <p class="text-xl italic ">Mentorējamais ir pirmā studiju gada studējošais, kurš vēlas iegūt zināšanas par studiju procesa norisi, par sabiedriskās dzīves iespējām universitātē, vēlas iegūt jaunus kontaktus un iegūt pieredzi.</p>
                                     </div>
                                     <div class="flex-grow"></div>
-                                    <div class="w-3 rounded-r-xl bg-lime-700 h-auto"></div>
+                                    <div class="w-3 rounded-r-xl bg-blue-950 h-auto"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="p-8 bg-gray-50">
+<!--            <div class="p-8 bg-gradient-to-b from-blue-850 to-blue-750">-->
+            <div class="p-8">
                 <div class="lg:max-w-5xl space-y-5 mx-auto">
                     <div class="w-full space-y-3 md:flex md:space-y-0 md:space-x-5">
                         <div class="md:my-auto">
-                            <div class="w-fit h-fit bg-yellow-500 rounded-full border-gray-400 shadow-xl p-3 flex mx-auto">
+                            <div class="w-fit h-fit bg-yellow-950 rounded-full border-gray-400 shadow-xl p-3 flex mx-auto">
                                 <img class="rounded-full m-auto" src="https://mentors.rsu.lv/images/dins-mironovs.jpg" alt="student">
                             </div>
                         </div>
@@ -139,7 +145,7 @@
                     <hr class="bg-gray-800">
                     <div class="w-full space-y-3 md:flex md:flex-row-reverse md:space-y-0 md:space-x-5">
                         <div class="md:my-auto">
-                            <div class="w-fit h-fit bg-yellow-500 rounded-full border-gray-400 shadow-xl p-3 flex mx-auto">
+                            <div class="w-fit h-fit bg-yellow-950 rounded-full border-gray-400 shadow-xl p-3 flex mx-auto">
                                 <img class="rounded-full m-auto" src="https://mentors.rsu.lv/images/arta-hermane.jpg" alt="student">
                             </div>
                         </div>
@@ -151,6 +157,8 @@
                     </div>
                 </div>
             </div>
+            </div>
+        </div>
         </div>
         <Footer></Footer>
     </div>

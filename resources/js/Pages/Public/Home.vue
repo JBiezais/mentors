@@ -239,7 +239,7 @@ export default {
             height: 275px;
         }
         .extra-height{
-            height: 450px;
+            height: 600px;
         }
     }
 </style>

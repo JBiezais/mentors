@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="w-full">
-            <img src="https://sp.rsu.lv/sites/default/files/styles/top_image_1440x480/public/top_images/M%C4%81jaslapas%20baneri_6.png?h=a3e98682&itok=MR48zYsp" class="w-full">
+            <img src="/img/banner.png" class="w-full">
         </div>
         <div class="flex-grow" style="background-image: url('/img/bg.png'); background-size: cover; background-repeat: no-repeat">
         <div class="flex-grow">

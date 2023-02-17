@@ -3,7 +3,7 @@
         <div class="w-full md:w-1/3 lg:w-1/4 space-y-5 my-auto">
             <h1 class="text-gray-200 text-lg font-semibold">Koordinē</h1>
             <div>
-                <a href="https://sp.rsu.lv/" target="_blank"><img class="mx-auto" src="https://mentors.rsu.lv/images/rsusp-logo.svg" alt="RSUsp"></a>
+                <a href="https://sp.rsu.lv/" target="_blank"><img class="mx-auto" src="/img/logo.png" alt="RSUsp"></a>
             </div>
         </div>
         <div class="md:text-right ml-auto text-gray-200 flex flex-col my-auto space-y-3">

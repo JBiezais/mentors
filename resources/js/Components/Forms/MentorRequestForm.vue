@@ -72,6 +72,11 @@
                         <input type="checkbox" class="rounded-full bg-gray-900" :checked="!form.mentor_id">
                     </label>
                 </div>
+                <div class="col-span-2" v-if="displayMentors.length === 0">
+                    <p class="text-sm">
+                        Diemžēl Tavā studiju programmā <strong>neviens Mentors šobrīd nav pieejams</strong>, taču nebēdā! Mēģināsim Tev piešķirt Mentoru no citas studiju programmas, kurš tāpat spēs pastāstīt par studiju procesu uzsākot mācības RSU!<br/>
+                    </p>
+                </div>
                 <div class="rounded-xl p-2 space-y-3" :class="form.mentor_id === mentor.id ? 'border-2 border-emerald-800 shadow-xl': 'border border-gray-800'" @click="addMentor(mentor.id)" v-for="mentor in displayMentors">
                     <img class="rounded-lg m-auto w-full h-auto" :src="'/'+mentor.img" alt="student">
                     <div class="text-center text-lg">

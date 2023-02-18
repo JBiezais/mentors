@@ -98,7 +98,7 @@
         </div>
         <div>
             <h1>Pievienot Attēlu</h1>
-            <label class="block border-blue-850 border rounded-xl p-1 space-y-2">
+            <label class="block border-blue-850 border rounded-xl p-1">
                 <img :src="formPhotoPreview" class="border w-2/3 border-none rounded-xl" alt="photo" v-if="formPhotoPreview">
                 <span class="sr-only">Choose File</span>
                 <input type="file" ref="formPhotoUploadField" @change="updatePhotoPreview" class="block w-full rounded-lg text-sm text-blue-850 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-850 file:text-white hover:file:text-white hover:file:bg-blue-950 file:cursor-pointer"/>
@@ -108,7 +108,7 @@
         <div>
             <label class="flex space-x-2 font-semibold">
                 <input class="rounded-xl my-auto" type="checkbox" v-model="form.privacy">
-                <p>Piekrītu savu datu apstrādāšanai saskaņā ar datu izmantošanas politiku un esmu iepazinies ar <a class="underline" href="#">nolikumu</a></p>
+                <p>Piekrītu savu datu apstrādāšanai saskaņā ar datu izmantošanas politiku un esmu iepazinies ar <a class="underline" href="/files/studentiem-mentoru_nolikums.docx">nolikumu</a></p>
             </label>
             <InputError class="mt-2" :message="$page.props.errors.privacy" />
         </div>

@@ -22,20 +22,20 @@
                     <div class="flex flex flex-col md:flex-row space-y-5 md:space-x-8 md:space-y-0 w-full">
                         <div class="rounded-xl bg-gray-50 p-5 h-fit my-auto" :class="events.length? 'md:w-1/2': 'w-full'">
                             <div class="flex flex-col space-y-8 md:justify-center" :class="events.length? 'space-y-8': 'md:flex-row md:space-x-4 md:space-y-0'">
-                                <Link :href="route('student.create')" class="py-5 uppercase px-8 bg-blue-750 text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer w-full">
+                                <Link :href="route('student.create')" class="py-5 uppercase px-8 bg-blue-750 text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer w-full hover:scale-105 transition-all duration-100">
                                     <h1 class="text-xl text-center font-bold my-auto">Pieteikties mentoram</h1>
                                 </Link>
-                                <Link :href="route('mentor.create')" class="py-5 uppercase px-8 bg-blue-750 text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer w-full">
+                                <Link :href="route('mentor.create')" class="py-5 uppercase px-8 bg-blue-750 text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer w-full hover:scale-105 transition-all duration-100">
                                     <h1 class="text-xl text-center my-auto font-bold" >Gribu būt mentors</h1>
                                 </Link>
-                                <div class="py-5 px-8 uppercase bg-blue-750 text-white shadow-xl rounded-xl mx-auto align-middle md:mx-0 cursor-pointer text-xl font-bold my-auto flex w-full">
-                                    <a class="text-center mx-auto">Ārzemju mentors</a>
+                                <div class="py-5 px-8 uppercase bg-blue-750 text-white shadow-xl rounded-xl mx-auto align-middle md:mx-0 cursor-pointer text-xl font-bold my-auto flex w-full hover:scale-105 transition-all duration-100">
+                                    <a class="text-center mx-auto" href="https://www.rsu.lv/form/arvalstu-studentu-mentora-pietei">Ārzemju mentors</a>
                                 </div>
                             </div>
                         </div>
                         <div class="md:w-1/2 rounded-xl bg-gray-50 p-5 h-fit" v-if="events.length">
                             <div class="space-y-4 md:justify-center">
-                                <h1 class="text-2xl text-center text-lime-700 uppercase font-bold">Gaidāmie notikumi</h1>
+                                <h1 class="text-2xl text-center text-blue-850 uppercase font-bold">Gaidāmie notikumi</h1>
                                 <div class="space-y-4 overflow-y-auto h-96 pb-4">
                                     <div v-for="event in events" class="flex space-x-5 border border-gray-300 rounded-xl shadow-lg p-1">
                                         <div class="py-3 px-4 rounded-xl">

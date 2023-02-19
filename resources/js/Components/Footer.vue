@@ -3,7 +3,7 @@
         <div class="w-full md:w-1/3 lg:w-1/4 space-y-5 my-auto text-gray-200">
             <h1 class="text-lg font-semibold">Koordinē</h1>
             <div>
-                <a href="https://sp.rsu.lv/" target="_blank"><img class="mx-auto" src="/img/logo.png" alt="RSUsp"></a>
+                <a href="https://sp.rsu.lv/" target="_blank"><img class="mr-auto max-w-sm" src="/img/logo.png" alt="RSUsp"></a>
             </div>
             <div class="flex space-x-5">
                 <a href="tel:+37167409159">+371 67 409 159</a>

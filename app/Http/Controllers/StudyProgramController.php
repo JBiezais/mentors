@@ -15,8 +15,6 @@ class StudyProgramController extends Controller
 {
     public function index(): Response
     {
-//        $data = StudyProgram::with('spotsTotal')->get();
-//        dd($data);
         $data = Faculty::query()->with(['programs' => function($query) {
             $query->withCount('students');
             $query->withCount('mentors');
@@ -33,7 +31,6 @@ class StudyProgramController extends Controller
             'faculty_id' => 'required',
             'title' => 'required',
             'code' => 'required',
-            'lriCode' => 'required',
             'level' => 'required',
         ]);
 

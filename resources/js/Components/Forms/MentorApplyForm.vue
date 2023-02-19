@@ -59,7 +59,7 @@
             </label>
             <label class="flex flex-col md:w-1/2">
                 Mentorējamo skaits
-                <input class="border-gray-800 bg-gray-100 rounded-lg text-gray-800" type="number" min="1" max="5" v-model="form.mentees">
+                <input class="border-gray-800 bg-gray-100 rounded-lg text-gray-800" type="number" min="1" max="5" @input="checkInput()" v-model="form.mentees">
                 <InputError class="mt-2" :message="$page.props.errors.mentees" />
             </label>
         </div>
@@ -166,6 +166,16 @@ export default {
             this.form.img = this.$refs.formPhotoUploadField.files[0];
             reader.readAsDataURL(this.$refs.formPhotoUploadField.files[0]);
         },
+        checkInput(){
+            if(/^-?\d+(\.\d+)?$/.test(this.form.mentees)){
+                if(this.form.mentees > 5 || this.form.mentees < 1){
+                    this.form.mentees = ''
+                }
+            }else{
+                this.form.mentees = ''
+            }
+
+        }
     },
     watch:{
         'form.faculty_id': function(){

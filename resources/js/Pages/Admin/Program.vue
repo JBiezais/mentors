@@ -87,7 +87,6 @@
                                     <input type="text" v-model="programForm.title" placeholder="Nosaukums" class="rounded-lg w-full">
                                 </div>
                                 <div class="grid grid-cols-3 gap-5">
-                                    <input class="rounded-lg w-full" type="text" v-model="programForm.lriCode" placeholder="LRI Kods">
                                     <input class="rounded-lg w-full mx-auto" type="text" v-model="programForm.level" placeholder="Studiju līmenis">
                                     <input class="rounded-lg w-full" type="text" v-model="programForm.code" placeholder="Kods">
                                 </div>

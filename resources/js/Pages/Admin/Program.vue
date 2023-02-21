@@ -125,7 +125,6 @@ export default {
             programForm:{
                 title: '',
                 code: '',
-                lriCode: '',
                 level: '',
                 faculty_id: ''
             },

@@ -226,20 +226,28 @@ export default {
         transform: rotateY(0deg);
     }
 
-    .background{
-        background-color: #4d7c0f;
-        background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='%236ca81c' fill-opacity='0.23'%3E%3Cpath d='M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    @media (max-width: 850px){
+        .default-height{
+            height: 380px;
+        }
+        .extra-height{
+            height: 400px;
+        }
     }
-
     @media (max-width: 600px) {
+        .extra-height{
+            height: 500px;
+        }
+    }
+    @media (max-width: 400px) {
         .card{
             width: 100%;
         }
         .default-height{
-            height: 400px;
+            height: 350px;
         }
         .extra-height{
-            height: 600px;
+            height: 550px;
         }
     }
 </style>

@@ -49,7 +49,7 @@
     </p>
     <p>Jautājumu vai neskaidrību gadījumā sazinies ar Mentoru programmas koordinatori <strong>Alisi Agnesi Rozentāli</strong> <a href="mailto:aliseagnese.rozentale@rsu.lv">aliseagnese.rozentale@rsu.lv</a> .</p>
     <p>
-        Lai viss izdodas!<br/>
+        Gaidīsim Tavu atbildi!<br/>
         <br/>
         RSU Mentoru programma
     </p>

@@ -14,7 +14,6 @@ class StudyProgram extends Model
       'faculty_id',
       'title',
       'code',
-      'lriCode',
       'level',
     ];
 

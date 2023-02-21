@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignId('faculty_id');
             $table->string('title');
             $table->string('code');
-            $table->string('lriCode');
             $table->string('level');
             $table->timestamps();
         });

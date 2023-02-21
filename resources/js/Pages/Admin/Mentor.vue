@@ -19,6 +19,7 @@
                         <div class="flex space-x-5 col-span-4">
                             <Link :href="route('mentor.edit', mentor.id)" class="font-semibold text-xl text-blue-700">{{mentor.name}} {{mentor.lastName}}</Link>
                             <h1 class="my-auto font-semibold">{{mentor.students.length}}/{{mentor.mentees}}</h1>
+                            <img src="/img/verified.png" alt="verified" class="w-5 h-5 my-auto" v-if="mentor.status">
                         </div>
                         <h1 class="col-span-1 font-semibold text-lg">Pamatinformācija</h1>
                         <p class="col-span-3">{{mentor.year}}. gads; {{mentor.email}} ; {{mentor.phone}}</p>

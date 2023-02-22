@@ -15,7 +15,7 @@
         <div class="w-full">
             <img src="/img/banner.png" class="w-full">
         </div>
-        <div class="flex-grow" style="background-image: url('/img/Untitled%20design.png'); background-size: cover; background-repeat: no-repeat">
+        <div class="flex-grow" style="background-image: url('/img/bg.png'); background-size: cover; background-repeat: no-repeat">
         <div class="flex-grow">
             <div class="w-full py-8 px-3">
                 <div class="lg:max-w-5xl mx-auto flex flex-col md:flex-row space-y-5 md:space-x-8 md:space-y-0">

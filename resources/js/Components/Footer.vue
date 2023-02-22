@@ -12,8 +12,8 @@
         </div>
         <div class="md:text-right ml-auto text-gray-200 flex flex-col my-auto space-y-2">
             <a href="/files/RSU%20SP_Privātuma%20politika.pdf" target="_blank">Datu izmantošana</a>
-            <h1>Alise Rozentāle</h1>
-            <div class="flex flex-col">
+            <h1 class="font-semibold">Alise Agnese Rozentāle</h1>
+            <div class="flex flex-col font-semibold">
                 <a href="tel:+37127727419">+371 27 727 419</a>
                 <a href="mailto:aliseagnese.rozentale@rsu.lv">AliseAgnese.Rozentale@rsu.lv</a>
             </div>

@@ -1,3 +1,10 @@
+## Enviroment Setup
+
+1. PHP 8.2
+1. MySQL 8.0
+1. Nginx 
+1. Node.js
+
 ## Project Setup
 
 

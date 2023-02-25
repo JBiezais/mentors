@@ -22,14 +22,14 @@
                     <div class="flex flex flex-col md:flex-row space-y-5 md:space-x-8 md:space-y-0 w-full">
                         <div class="rounded-xl bg-gray-50 p-5 h-fit my-auto" :class="events.length? 'md:w-1/2': 'w-full'">
                             <div class="flex flex-col space-y-8 md:justify-center" :class="events.length? 'space-y-8': 'md:flex-row md:space-x-4 md:space-y-0'">
-                                <Link :href="route('student.create')" class="py-5 uppercase px-8 bg-blue-750 text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer w-full hover:scale-105 transition-all duration-100">
-                                    <h1 class="text-xl text-center font-bold my-auto">Pieteikties mentoram</h1>
+                                <Link :href="route('student.create')" class="flex py-5 uppercase px-8 bg-blue-750 text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer w-full hover:scale-105 transition-all duration-100">
+                                    <h1 class="text-xl text-center font-bold m-auto">Pieteikties mentoram</h1>
                                 </Link>
-                                <Link :href="route('mentor.create')" class="py-5 uppercase px-8 bg-blue-750 text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer w-full hover:scale-105 transition-all duration-100">
-                                    <h1 class="text-xl text-center my-auto font-bold" >Gribu būt mentors</h1>
+                                <Link :href="route('mentor.create')" class="flex py-5 uppercase px-8 bg-blue-750 text-white shadow-xl rounded-xl mx-auto md:mx-0 cursor-pointer w-full hover:scale-105 transition-all duration-100">
+                                    <h1 class="text-xl text-center my-auto font-bold m-auto" >Kļūt par mentoru</h1>
                                 </Link>
                                 <div class="py-5 px-8 uppercase bg-blue-750 text-white shadow-xl rounded-xl mx-auto align-middle md:mx-0 cursor-pointer text-xl font-bold my-auto flex w-full hover:scale-105 transition-all duration-100">
-                                    <a class="text-center mx-auto" href="https://www.rsu.lv/form/arvalstu-studentu-mentora-pietei">Ārzemju mentors</a>
+                                    <a class="text-center mx-auto" href="https://www.rsu.lv/form/arvalstu-studentu-mentora-pietei">Mentors ārvalstu studējošajiem</a>
                                 </div>
                             </div>
                         </div>

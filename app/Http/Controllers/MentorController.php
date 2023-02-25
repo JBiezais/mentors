@@ -21,8 +21,8 @@ class MentorController extends Controller
 {
     public function index():Response
     {
-        $programs = StudyProgram::query()->select('id', 'title', 'code')->get();
-        $faculties = Faculty::query()->with('programs')->get();
+        $programs = StudyProgram::query()->select('id', 'title', 'code')->orderBy('title')->get();
+        $faculties = Faculty::query()->with('programs')->orderBy('title')->get();
         $mentors = Mentor::query()->with('students');
 
         if(request('keyword') !== null){

@@ -73,7 +73,7 @@
                     </label>
                 </div>
                 <div class="col-span-2" v-if="displayMentors.length === 0">
-                    <p class="text-sm">
+                    <p class="text-base">
                         Diemžēl Tavā studiju programmā <strong>neviens Mentors šobrīd nav pieejams</strong>, taču nebēdā! Mēģināsim Tev piešķirt Mentoru no citas studiju programmas, kurš tāpat spēs pastāstīt par studiju procesu uzsākot mācības RSU!<br/>
                     </p>
                 </div>

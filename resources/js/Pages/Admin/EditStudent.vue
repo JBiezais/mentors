@@ -44,16 +44,16 @@
                     <p v-if="!edit" class="col-span-3"><span v-if="student.lang === 0">Latviešu</span><span v-if="student.lang === 1">Krievu</span><span v-if="student.lang === 2">Angļu</span></p>
                     <h1 class="col-span-1 font-semibold text-lg">Mentors {{edit ? '('+chooseMentor.length+')' : ''}}</h1>
                     <select v-if="edit" class="col-span-3 border-gray-800 bg-gray-100 rounded-lg text-gray-800 w-full" v-model="form.mentor_id">
-                        <option disabled value="default">Izvēlieties Studiju Programu</option>
+                        <option disabled value="default">Izvēlieties Mentoru</option>
                         <option :value="mentor.id" v-for="mentor in chooseMentor">{{mentor.name}} {{mentor.lastName}}</option>
                     </select>
-                    <div v-if="!edit && student.mentor" class="col-span-3">
-                        <Link  :href="route('mentor.edit', student.mentor.id)" >{{student.mentor.name}} {{student.mentor.lastName}}</Link>
+                    <div v-if="!edit" class="col-span-3">
+                        <Link v-if="!edit && student.mentor"  :href="route('mentor.edit', student.mentor.id)" >{{student.mentor.name}} {{student.mentor.lastName}}</Link>
                     </div>
                     <h1 class="col-span-1 font-semibold text-lg">Pieteicās</h1>
                     <p class="col-span-3">{{new Date(student.created_at).toLocaleDateString()}} {{new Date(student.created_at).toLocaleTimeString()}}</p>
-                    <div v-if="edit" class="col-span-4 relative">
-                        <button class="cursor-pointer bg-gray-700 hover:bg-gray-900 text-gray-100 rounded-lg py-2 px-3 text-center right-0 absolute">Saglabāt</button>
+                    <div v-if="edit" class="col-span-4 flex mb-5">
+                        <button class="cursor-pointer bg-gray-700 hover:bg-gray-900 text-gray-100 rounded-lg py-2 px-3 text-center ml-auto">Saglabāt</button>
                     </div>
                 </form>
                 <div class="">

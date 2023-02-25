@@ -19,7 +19,7 @@ class StudyProgramController extends Controller
             $query->withCount('students');
             $query->withCount('mentors');
             $query->with('spotsTotal');
-        }])->get();
+        }])->orderBy('title')->get();
 
         return Inertia::render('Admin/Program', [
             'data' => $data

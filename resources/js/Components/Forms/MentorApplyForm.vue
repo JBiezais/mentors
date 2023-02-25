@@ -47,7 +47,7 @@
         </div>
         <div class="space-y-3 md:space-y-0 md:flex md:space-x-3">
             <label class="flex flex-col md:w-1/2">
-                Studiju gads
+                Studiju gads rudens semestrī
                 <select class="border-gray-800 bg-gray-100 rounded-lg text-gray-800" v-model="form.year">
                     <option value="2">2. gads</option>
                     <option value="3">3. gads</option>

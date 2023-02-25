@@ -9,18 +9,31 @@
                     api-key="asjef8xxim81si331ci5a80ypn35vkqxrjynu0xl5merr1yl"
                     v-model="form.content"
                     :init="{
-                     height: 350,
-                     menubar: false,
-                     plugins: [
-                       'advlist autolink lists link image charmap print preview anchor',
-                       'searchreplace visualblocks code fullscreen',
-                       'insertdatetime media table paste code help wordcount'
-                     ],
-                     toolbar:
-                       'undo redo | formatselect | bold italic backcolor | \
-                       alignleft aligncenter alignright alignjustify | \
-                       bullist numlist outdent indent | removeformat | help'
-                }"
+                    height: 350,
+                    menubar: true,
+                    link_context_toolbar: true,
+                    menu: {
+                        file: { title: 'File', items: 'newdocument restoredraft | preview | export print | deleteallconversations' },
+                        edit: { title: 'Edit', items: 'undo redo | cut copy paste pastetext | selectall | searchreplace' },
+                        view: { title: 'View', items: 'code | visualaid visualchars visualblocks | spellchecker | preview fullscreen | showcomments' },
+                        insert: { title: 'Insert', items: 'image link media addcomment pageembed template codesample inserttable | charmap emoticons hr | pagebreak nonbreaking anchor tableofcontents | insertdatetime' },
+                        format: { title: 'Format', items: 'bold italic underline strikethrough superscript subscript codeformat | styles blocks fontfamily fontsize align lineheight | forecolor backcolor | language | removeformat' },
+                        tools: { title: 'Tools', items: 'spellchecker spellcheckerlanguage | a11ycheck code wordcount' },
+                        table: { title: 'Table', items: 'inserttable | cell row column | advtablesort | tableprops deletetable' },
+                        help: { title: 'Help', items: 'help' }
+                    },
+                    plugins: [
+                        'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'print', 'preview', 'anchor',
+                        'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                        'insertdatetime', 'media', 'table', 'paste', 'code', 'help', 'wordcount'
+                    ],
+                    toolbar:[
+                        'undo redo | formatselect | bold italic backcolor | \
+                        alignleft aligncenter alignright alignjustify | \
+                        bullist numlist outdent indent link | removeformat | help'
+                    ]
+                    }"
+
                 ></editor>
                 <div class="ml-auto w-fit space-x-3">
                     <SecondaryButton @click="close">Aizvērt</SecondaryButton>

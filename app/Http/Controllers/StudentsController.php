@@ -19,8 +19,8 @@ class StudentsController extends Controller
 {
     public function index(): Response
     {
-        $programs = StudyProgram::query()->get();
-        $faculties = Faculty::query()->with('programs')->get();
+        $programs = StudyProgram::query()->orderBy('title')->get();
+        $faculties = Faculty::query()->with('programs')->orderBy('title')->get();
         $students = Student::query()->with('mentor');
 
         if(request('keyword') !== null){

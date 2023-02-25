@@ -226,28 +226,39 @@ export default {
         transform: rotateY(0deg);
     }
 
-    @media (max-width: 850px){
+    @media (max-width: 926px){
         .default-height{
-            height: 380px;
+            height: 250px;
         }
         .extra-height{
-            height: 400px;
+            height: 300px;
         }
     }
-    @media (max-width: 600px) {
+    @media (max-width: 665px) {
         .extra-height{
             height: 500px;
         }
     }
-    @media (max-width: 400px) {
+    @media (max-width: 500px) {
         .card{
             width: 100%;
         }
         .default-height{
-            height: 350px;
+            height: 300px;
         }
         .extra-height{
             height: 550px;
+        }
+    }
+    @media (max-width: 375px) {
+        .card{
+            width: 100%;
+        }
+        .default-height{
+            height: 450px;
+        }
+        .extra-height{
+            height: 800px;
         }
     }
 </style>

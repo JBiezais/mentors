@@ -140,7 +140,7 @@ export default {
         getMentors(){
             this.chooseMentor = this.mentors.filter(mentor => {
                 if(mentor.id !== this.form.mentor_id){
-                    if(mentor.faculty_id === this.form.faculty_id){
+                    if(mentor.program_id === this.form.program_id){
                         switch (this.form.lang.toString()){
                             case '0':
                                 if(mentor.lv){
@@ -187,6 +187,9 @@ export default {
         'form.faculty_id': function(){
             this.setPrograms()
             this.getMentors()
+        },
+        'form.program_id': function(){
+          this.getMentors()
         },
         'form.lang':function(){
             this.getMentors()

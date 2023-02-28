@@ -168,7 +168,7 @@ export default {
         filterMentors(){
             this.form.mentor_id = null
             this.displayMentors = this.mentors.filter(mentor => {
-                if(mentor.faculty_id === this.form.faculty_id){
+                if(mentor.program_id === this.form.program_id){
                     switch (this.form.lang){
                         case '0':
                             if(mentor.lv){
@@ -199,6 +199,9 @@ export default {
     watch:{
         'form.faculty_id': function(){
             this.programs = this.faculties.find(faculty => faculty.id === this.form.faculty_id)
+            this.filterMentors()
+        },
+        'form.program_id': function (){
             this.filterMentors()
         },
         'form.lang': function (){

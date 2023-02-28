@@ -27,7 +27,7 @@ Route::get('/', [Controller::class, 'index'])->name('home');
 
 Route::resource('mentor', MentorController::class)->only('store', 'create');
 Route::resource('student', StudentsController::class)->only('store', 'create');
-Route::get('/mail/{key}', [MailController::class, 'verify']);
+Route::get('/mail/{key}', [MailController::class, 'verify'])->name('verify.mentor');
 
 
 Route::middleware('auth')->group(function () {

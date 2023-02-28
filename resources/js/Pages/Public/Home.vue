@@ -8,7 +8,6 @@
                 />
                 <div class="m-auto">
                     <h1 class="text-xl md:text-2xl font-semibold uppercase">mentoru programma {{new Date().getFullYear()}}</h1>
-                    <h1></h1>
                 </div>
             </div>
         </div>

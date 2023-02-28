@@ -54,7 +54,7 @@
             Paldies Tev, ka izvēlējies pieteikties Mentoru programmai un kļūt par Mentoru kādam pirmkursniekam jaunajā mācību gadā! Lai pabeigtu pieteikšanos programmai, lūdzu, <strong>apstiprini savu e-pastu</strong> spiežot uz zemāk redzamā lodziņa.
         </p>
         <div style="width: 100%; text-align: center">
-            <a class="button" href="{{'https://mentors.test/mail/'.$data['key']}}">Verificēt e-pastu</a>
+            <a class="button" href="{{ route('verify.mentor', $data['key']) }}">Verificēt e-pastu</a>
         </div>
         <p>
             Pēc e-pasta apstiprināšanas Tavu pieteikumu izskatīs programmas koordinatori, lai pārliecinātos par tā atbilstību. <strong>Tiklīdz Tavs pieteikums tiks apstiprināts saņemsi ziņu par turpmāko programmas norisi.</strong>

@@ -22,6 +22,7 @@
         .background{
             background-color: rgb(209 213 219);
             display: flex;
+            flex-direction: column;
         }
         .message-box{
             background-color: rgb(243 244 246);
@@ -40,14 +41,15 @@
     </style>
 </head>
 <body class="background">
+<h1 style="text-align: center; font-size: 1.5rem; margin: 1rem 0"><a href="{{route('home')}}">RSU Mentoru Programa</a></h1>
 <div class="message-box">
-    <p>Sveiks {{$data['name']. ' '. $data['lastName']}},</p>
+    <p>Sveiks/-a {{$data['name']. ' '. $data['lastName']}},</p>
     <p>
         Tuvojas brīdis, kad jaunie studējošie sāks aktīvi pieteikties saviem Mentoriem, tāpēc esam nolēmuši rīkot Mentoru apmācības, lai nodotu Tev visas nepieciešamākās zināšanas, kas noderēs saziņai ar Mentorējamo!
 
         Apmācības notiks {{\Carbon\Carbon::parse($data['event']['date'])->format('d M Y, H:i')}}, {{$data['event']['location']}}. Lūdzu, norādi vai plāno ierasties uz apmācībām aizpildot anketu <a href="{{$data['event']['link']}}">{{$data['event']['link']}}</a>.
     </p>
-    <p>Jautājumu vai neskaidrību gadījumā sazinies ar Mentoru programmas koordinatori <strong>Alisi Agnesi Rozentāli</strong> <a href="mailto:aliseagnese.rozentale@rsu.lv">aliseagnese.rozentale@rsu.lv</a> .</p>
+    <p>Jautājumu vai neskaidrību gadījumā sazinies ar Mentoru programmas koordinatori <strong>Alisi Agnesi Rozentāli</strong> <a href="mailto:aliseagnese.rozentale@rsu.lv">(AliseAgnese.Rozentale@rsu.lv)</a> .</p>
     <p>
         Gaidīsim Tavu atbildi!<br/>
         <br/>

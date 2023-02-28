@@ -22,6 +22,7 @@
         .background{
             background-color: rgb(209 213 219);
             display: flex;
+            flex-direction: column;
         }
         .message-box{
             background-color: rgb(243 244 246);
@@ -40,24 +41,25 @@
     </style>
 </head>
 <body class="background">
-    <div class="message-box">
-        <p>Sveiks {{$data['name']. ' '. $data['lastName']}},</p>
-        <p>
-            Paldies, ka izvēlējies pieteikties Mentoram! Ceram, ka no Mentora iegūtās zināšanas un stāsti par viņa pieredzi Tev noderēs uzsākot studijas RSU!<br/>
-            <br/>
-            <strong>Tava kontaktinformācija ir nosūtīta Mentoram.</strong> Tuvākajā laikā viņš ar Tevi sazināsies!<br/>
-            <br/>
-            Ja tomēr vēlies sazināties pirmais, šeit būs Tava Mentora kontaktinformācija:<br/>
-        </p>
-        <p>Vārds Uzvārds: <strong>{{$data['mentor']['name']. ' '. $data['mentor']['lastName']}}</strong></p>
-        <p>Telefona nummurs: <strong>{{$data['mentor']['phone']}}</strong></p>
-        <p>E-pasts: <strong>{{$data['mentor']['email']}}</strong></p>
-        <p>Jautājumu vai neskaidrību gadījumā sazinies ar Mentoru programmas koordinatori <strong>Alisi Agnesi Rozentāli</strong> <a href="mailto:aliseagnese.rozentale@rsu.lv">aliseagnese.rozentale@rsu.lv</a> .</p>
-        <p>
-            Lai viss izdodas!<br/>
-            <br/>
-            RSU Mentoru programma
-        </p>
-    </div>
+<h1 style="text-align: center; font-size: 1.5rem; margin: 1rem 0"><a href="{{route('home')}}">RSU Mentoru Programa</a></h1>
+<div class="message-box">
+    <p>Sveiks/-a {{$data['name']. ' '. $data['lastName']}},</p>
+    <p>
+        Paldies, ka izvēlējies pieteikties Mentoram! Ceram, ka no Mentora iegūtās zināšanas un stāsti par viņa pieredzi Tev noderēs uzsākot studijas RSU!<br/>
+        <br/>
+        <strong>Tava kontaktinformācija ir nosūtīta Mentoram.</strong> Tuvākajā laikā viņš ar Tevi sazināsies!<br/>
+        <br/>
+        Ja tomēr vēlies sazināties pirmais, šeit būs Tava Mentora kontaktinformācija:<br/>
+    </p>
+    <p>Vārds Uzvārds: <strong>{{$data['mentor']['name']. ', '. $data['mentor']['lastName']}}</strong></p>
+    <p>Telefona nummurs: <strong>{{$data['mentor']['phone']}}</strong></p>
+    <p>E-pasts: <strong>{{$data['mentor']['email']}}</strong></p>
+    <p>Jautājumu vai neskaidrību gadījumā sazinies ar Mentoru programmas koordinatori <strong>Alisi Agnesi Rozentāli</strong> <a href="mailto:aliseagnese.rozentale@rsu.lv">(AliseAgnese.Rozentale@rsu.lv)</a> .</p>
+    <p>
+        Lai viss izdodas!<br/>
+        <br/>
+        RSU Mentoru programma
+    </p>
+</div>
 </body>
 </html>

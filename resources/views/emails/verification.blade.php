@@ -22,6 +22,7 @@
         .background{
             background-color: rgb(209 213 219);
             display: flex;
+            flex-direction: column;
         }
         .message-box{
             background-color: rgb(243 244 246);
@@ -48,8 +49,9 @@
     </style>
 </head>
 <body class="background">
+<h1 style="text-align: center; font-size: 1.5rem; margin: 1rem 0"><a href="{{route('home')}}">RSU Mentoru Programa</a></h1>
     <div class="message-box">
-        <p>Sveiks {{$data['name']}} {{$data['lastName']}},</p>
+        <p>Sveiks/-a {{$data['name']}} {{$data['lastName']}},</p>
         <p>
             Paldies Tev, ka izvēlējies pieteikties Mentoru programmai un kļūt par Mentoru kādam pirmkursniekam jaunajā mācību gadā! Lai pabeigtu pieteikšanos programmai, lūdzu, <strong>apstiprini savu e-pastu</strong> spiežot uz zemāk redzamā lodziņa.
         </p>
@@ -59,7 +61,7 @@
         <p>
             Pēc e-pasta apstiprināšanas Tavu pieteikumu izskatīs programmas koordinatori, lai pārliecinātos par tā atbilstību. <strong>Tiklīdz Tavs pieteikums tiks apstiprināts saņemsi ziņu par turpmāko programmas norisi.</strong>
         </p>
-        <p>Jautājumu vai neskaidrību gadījumā sazinies ar Mentoru programmas koordinatori <strong>Alisi Agnesi Rozentāli</strong> <a href="mailto:aliseagnese.rozentale@rsu.lv">aliseagnese.rozentale@rsu.lv</a> .</p>
+        <p>Jautājumu vai neskaidrību gadījumā sazinies ar Mentoru programmas koordinatori <strong>Alisi Agnesi Rozentāli</strong> <a href="mailto:aliseagnese.rozentale@rsu.lv">(AliseAgnese.Rozentale@rsu.lv)</a> .</p>
         <p>
             Lai viss izdodas!<br/>
             <br/>

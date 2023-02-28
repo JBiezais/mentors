@@ -22,6 +22,7 @@
         .background{
             background-color: rgb(209 213 219);
             display: flex;
+            flex-direction: column;
         }
         .message-box{
             background-color: rgb(243 244 246);
@@ -40,8 +41,9 @@
     </style>
 </head>
 <body class="background">
+<h1 style="text-align: center; font-size: 1.5rem; margin: 1rem 0"><a href="{{route('home')}}">RSU Mentoru Programa</a></h1>
 <div class="message-box">
-    <p>Sveiks {{$data['name']. ' '. $data['lastName']}},</p>
+    <p>Sveiks/-a {{$data['name']. ' '. $data['lastName']}},</p>
     <p>
         Ir atvērta pieteikšanās mentorējamajiem, kas nozīmē, ka drīzumā saņemsi e-pastu ar pirmkursnieka kontaktinformāciju. Mentorējamie varēs pieteikties līdz 30. Septembrim, tāpēc nebēdā, ja vēl neviens Tevi nav izvēlējies!<br/>
         <br/>
@@ -50,7 +52,7 @@
         Visa nepieciešamā informācija ir pieejama kopīgajā Mentoru materiālu bāzē - <a href="{{$data['event']['link']}}" target="_blank">{{$data['event']['link']}}</a> Šeit sadaļā “{{$data['event']['description']}}”
         vari uzdot arī jebkuru jautājumu, uz kuru var atbildēt gan pārējie mentori, gan programmas koordinatori.
     </p>
-    <p>Vari uzdot jautājumus arī sazinoties ar <strong>Alisi Agnesi Rozentāli</strong> (<a href="mailto:aliseagnese.rozentale@rsu.lv">aliseagnese.rozentale@rsu.lv</a>) vai rakstot uz <a href="mailto:sp@rsu.lv">sp@rsu.lv</a>.</p>
+    <p>Vari uzdot jautājumus arī sazinoties ar <strong>Alisi Agnesi Rozentāli</strong> <a href="mailto:aliseagnese.rozentale@rsu.lv">(AliseAgnese.Rozentale@rsu.lv)</a> vai rakstot uz <a href="mailto:sp@rsu.lv">sp@rsu.lv</a>.</p>
     <p>
         Lai veiksmīga saziņa ar Mentorējamajiem!<br/>
         <br/>

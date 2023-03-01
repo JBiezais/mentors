@@ -27,6 +27,7 @@ class EventController extends Controller
             'date' => 'required|date',
             'mentors_training' => 'nullable|boolean',
             'mentees_applying' => 'nullable|boolean',
+            'description' => 'nullable|string',
             'link' => 'nullable'
         ]);
 
@@ -53,6 +54,7 @@ class EventController extends Controller
             'date' => 'required|date',
             'mentors_training' => 'nullable|boolean',
             'mentees_applying' => 'nullable|boolean',
+            'description' => 'nullable|string',
             'link' => 'nullable'
         ]);
 

@@ -49,10 +49,11 @@
                                     <input type="datetime-local" class="border-gray-800 bg-gray-100 rounded-lg text-gray-800" v-model="form.date">
                                     <input type="text" class="border-gray-800 bg-gray-100 rounded-lg text-gray-800" v-model="form.location">
                                     <h1>Mentorējamo pieteikšanās</h1>
-                                    <div :class="!form.mentees_applying? 'col-span-2': 'col-span-1'"></div>
+                                    <h1>Mentoru apmācības</h1>
+                                    <div class="col-span-1" v-if="!form.mentees_applying && !form.mentors_training"></div>
                                     <h1 v-if="form.mentors_training || form.mentees_applying">Links <span v-if="form.mentors_training">URL uz materiāliem</span> <span v-if="form.mentees_applying">URL uz anketu</span></h1>
                                     <input type="radio" value="1" class="border-gray-800 bg-gray-100 rounded-lg text-gray-800 m-auto" @click="form.mentees_applying? form.mentees_applying = 0: form.mentees_applying = 1; form.mentors_training = 0; form.link = null" v-model="form.mentees_applying">
-                                    <div v-if="form.mentees_applying"></div>
+                                    <input type="radio" value="1" class="border-gray-800 bg-gray-100 rounded-lg text-gray-800 m-auto" @click="form.mentors_training? form.mentors_training = 0: form.mentors_training = 1; form.mentees_applying = 0; form.link = null" v-model="form.mentors_training">
                                     <input type="text" class="border-gray-800 bg-gray-100 rounded-lg text-gray-800" v-if="form.mentors_training || form.mentees_applying" v-model="form.link">
                                     <div v-if="form.mentees_applying" class="col-span-2"></div>
                                     <h1  v-if="form.mentees_applying">Sadaļa</h1>

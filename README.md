@@ -16,5 +16,6 @@
 1. Run `php artisan storage:link` to creates a symbolic link
 1. Run `npm install` to install NPM dependencies;
 1. Run `npm run build` to build/compile frontend assets;
+1. Change in .env file MAIL settings  APP_LINK to server domain.
 1. Run command `/usr/local/bin/php /mentors/project/directory/artisan schedule:run >> /dev/null 2>&1` to run scheduled tasks every minute (Check if there is queued emails)
 

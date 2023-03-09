@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -17,9 +18,12 @@ class Controller extends BaseController
 
     public function index():Response
     {
+        $message = Session::get('message');
+
         $events = Event::query()->where('date', '>' ,Carbon::now()->subDay())->orderBy('date')->get();
         return Inertia::render('Public/Home', [
-            'events' => $events
+            'events' => $events,
+            'message' => $message
         ]);
     }
 }

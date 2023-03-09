@@ -7,6 +7,7 @@ use App\Models\Mentor;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class MailController extends Controller
 {
@@ -22,6 +23,8 @@ class MailController extends Controller
             'content' => null,
             'type' => 'verificationPassed'
         ]);
+
+        Session::flash('message', ['title' => 'Verifikācija apstiprināta', 'text' => 'Jūsu pieteikums ir veiksmīgi nosūtīts lūdzu gaidiet turpmāko ziņu e-pastā']);
 
         return Redirect::route('home');
     }

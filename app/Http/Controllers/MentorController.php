@@ -13,6 +13,7 @@ use App\Models\StudyProgram;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -87,6 +88,8 @@ class MentorController extends Controller
             'content' => null,
             'type' => 'verification'
         ]);
+
+        Session::flash('message', ['title' => 'Pieteikums nosūtīts', 'text' => 'Jūsu pieteikums ir veiksmīgi nosūtīts lūdzu gaidiet turpmāko ziņu e-pastā']);
 
         return Redirect::route('home');
     }

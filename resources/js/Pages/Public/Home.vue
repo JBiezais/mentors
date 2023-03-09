@@ -11,6 +11,18 @@
                 </div>
             </div>
         </div>
+        <Modal :show="message" @close="message = null">
+            <div class="p-5 flex flex-col">
+                <div class="space-y-2">
+                    <h1 class="font-semibold text-xl">{{message.title}}</h1>
+                    <hr>
+                </div>
+                <h1 class="my-5">{{message.text}}</h1>
+                <hr>
+                <PrimaryButton class="ml-auto mt-2" @click="message = null">Aizvērt</PrimaryButton>
+            </div>
+
+        </Modal>
         <div class="w-full">
             <img src="/img/banner.png" class="w-full">
         </div>
@@ -46,11 +58,11 @@
                                             <div class="flex space-x-4">
                                                 <div class="flex space-x-2">
                                                     <img src="/img/clock.svg" alt="location" class="h-4 w-auto my-auto">
-                                                    <h1 class="my-auto">{{new Date(event.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}}</h1>
+                                                    <h1 class="my-auto text-sm">{{new Date(event.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}}</h1>
                                                 </div>
                                                 <div class="flex space-x-2">
                                                     <img src="/img/location.svg" alt="location" class="h-4 w-auto my-auto">
-                                                    <h1 class="my-auto">{{event.location}}</h1>
+                                                    <h1 class="my-auto text-sm">{{event.location}}</h1>
                                                 </div>
                                             </div>
                                         </div>
@@ -167,13 +179,16 @@ import Footer from "@/Components/Footer.vue";
 import { Link } from '@inertiajs/vue3';
 import Header from "@/Components/Header.vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
+import Modal from "@/Components/Modal.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 
 export default {
     name: "Home",
-    components: {ApplicationLogo, Header, Link, Footer},
+    components: {PrimaryButton, Modal, ApplicationLogo, Header, Link, Footer},
     props:{
-      events: Object,
+        events: Object,
+        message: String
     },
     data() {
         return {

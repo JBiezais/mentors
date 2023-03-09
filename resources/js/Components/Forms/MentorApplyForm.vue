@@ -97,7 +97,7 @@
             </div>
         </div>
         <div>
-            <h1>Pievienot Attēlu</h1>
+            <h1>Pievienot Attēlu (attēla izmērs nepārsniedz 1MB)</h1>
             <label class="block border-blue-850 border rounded-xl p-1">
                 <img :src="formPhotoPreview" class="border w-2/3 border-none rounded-xl" alt="photo" v-if="formPhotoPreview">
                 <span class="sr-only">Choose File</span>

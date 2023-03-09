@@ -43,13 +43,12 @@ class StudyProgramController extends Controller
     }
     public function update(StudyProgram $studyProgram, Request $request): RedirectResponse
     {
-        dd($studyProgram);
+
         $data = $request->validate([
             'id' => 'required',
             'faculty_id' => 'required',
             'title' => 'required',
             'code' => 'required',
-            'lriCode' => 'required',
             'level' => 'required',
         ]);
 

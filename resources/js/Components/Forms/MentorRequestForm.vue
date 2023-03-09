@@ -154,9 +154,13 @@ export default {
     },
     methods:{
         submit(){
-            this.form.post(route('student.store'), {
-                preserveState: 'errors'
-            })
+            if(!this.form.privacy){
+                this.$page.props.errors.privacy = "This field must be selected"
+            }else{
+                this.form.post(route('student.store'), {
+                    preserveState: 'errors'
+                })
+            }
         },
         addMentor(id){
             if(this.form.mentor === id){

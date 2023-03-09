@@ -145,16 +145,20 @@ export default {
                 lv: 0,
                 ru: 0,
                 en: 0,
-                privacy: 0,
+                privacy: null,
                 img: null
             }),
         }
     },
     methods:{
         submit(){
-            this.form.post(route('mentor.store'), {
-                preserveState: 'errors'
-            })
+            if(!this.form.privacy){
+                this.$page.props.errors.privacy = "This field must be selected"
+            }else{
+                this.form.post(route('mentor.store'), {
+                    preserveState: 'errors'
+                })
+            }
         },
         updatePhotoPreview(){
             const reader = new FileReader();

@@ -172,11 +172,17 @@ export default {
             })
         },
         checkValue(students, spots){
-            if(spots[0]){
-                if(spots[0].total_spots < students){
-                    return 'bg-red-300'
-                }
+
+            let control = 0
+            if(typeof spots[0] !== 'undefined'){
+                control = students - spots[0].total_spots
+            }else{
+                control = students
             }
+            if(control > 0){
+                return 'bg-red-300'
+            }
+
             return ''
         }
     },

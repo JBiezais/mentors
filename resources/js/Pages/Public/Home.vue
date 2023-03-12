@@ -7,7 +7,7 @@
                     class="block h-16 w-auto my-auto fill-current text-gray-800"
                 />
                 <div class="m-auto">
-                    <h1 class="text-xl md:text-2xl font-semibold uppercase">mentoru programma {{new Date().getFullYear()}}</h1>
+                    <h1 class="text-xl md:text-2xl font-semibold uppercase text-center">mentoru programma {{new Date().getFullYear()}}</h1>
                 </div>
             </div>
         </div>
@@ -21,7 +21,6 @@
                 <hr>
                 <PrimaryButton class="ml-auto mt-2" @click="message = null">Aizvērt</PrimaryButton>
             </div>
-
         </Modal>
         <div class="w-full">
             <img src="/img/banner.png" class="w-full">
@@ -62,7 +61,7 @@
                                                 </div>
                                                 <div class="flex space-x-2">
                                                     <img src="/img/location.svg" alt="location" class="h-4 w-auto my-auto">
-                                                    <h1 class="my-auto text-sm">{{event.location}}</h1>
+                                                    <h1 class="my-auto text-sm break-all">{{event.location}}</h1>
                                                 </div>
                                             </div>
                                         </div>
@@ -73,7 +72,7 @@
                     </div>
                 </div>
             </div>
-            <div class="lg:max-w-5xl bg-gray-50 p-5 space-y-9 mb-5 mx-3 md:mx-auto rounded-xl">
+            <div class="lg:max-w-5xl bg-gray-50 space-y-9 mb-5 mx-3 md:mx-auto rounded-xl padding">
                 <div class="p-8">
                     <div class="lg:max-w-5xl space-y-5 mx-auto">
                         <div class="flex flex-col space-y-5">
@@ -204,6 +203,9 @@ export default {
 </script>
 
 <style scoped>
+    .padding {
+        padding: 1.25rem;
+    }
     .card {
         width: 75%;
         position: relative;
@@ -265,6 +267,9 @@ export default {
         }
     }
     @media (max-width: 375px) {
+        .padding{
+            padding: 1.25rem 0.25rem;
+        }
         .card{
             width: 100%;
         }

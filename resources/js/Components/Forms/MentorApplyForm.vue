@@ -40,7 +40,7 @@
                 Studiju Programma
                 <select class="border-gray-800 bg-gray-100 rounded-lg text-gray-800" v-model="form.program_id">
                     <option disabled value="default">Izvēlieties Fakultāti</option>
-                    <option :value="program.id" v-for="program in programs.programs">{{program.title}}</option>
+                    <option :value="program.id" v-for="program in programs.programs">{{program.title}} ({{program.level}})</option>
                 </select>
                 <InputError class="mt-2" :message="$page.props.errors.program_id" />
             </label>

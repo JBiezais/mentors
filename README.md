@@ -15,7 +15,7 @@
 1. Run `php artisan migrate --seed` to migrate database and seed it
 1. Create new directory `mkdir storage/app/image`
 1. Create new directory `mkdir storage/app/image/cropped`
-1. Run `php artisan storage:link` to creates a symbolic link
+1. Run `php artisan storage:link` to creates a symlink
 1. Run `npm install` to install NPM dependencies;
 1. Run `npm run build` to build/compile frontend assets;
 1. Run `php artisan key:gen` to generate ne application key

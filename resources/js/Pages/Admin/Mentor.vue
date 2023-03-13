@@ -3,12 +3,30 @@
         <Header v-if="$page.props.auth.user !== null"></Header>
         <div class="flex-grow lg:max-w-7xl mx-auto py-5">
             <div class="p-8 bg-gray-50 w-full space-y-5">
-                <FilterBar :keyword="keyword" :type="type" :program="program" :faculty="faculty" :custom="close" @filter="getFilteredProps($event)" @open="close = 1" :faculties="faculties">
+                <FilterBar :view="view" :keyword="keyword" :type="type" :program="program" :faculty="faculty" :custom="close" @view="view = $event" @filter="getFilteredProps($event)" @open="close = 1" :faculties="faculties">
                     <template v-slot:first>Apstiprinātie</template>
                     <template v-slot:second>Pieteikumi</template>
                 </FilterBar>
             </div>
-            <div class="space-y-5">
+            <div class="border border-gray-300" v-if="view === 'list'">
+                <div class="bg-gray-800 text-white font-semibold grid grid-cols-6 p-7">
+                    <h1>Vārds Uzvārds</h1>
+                    <h1>Telefona numurs</h1>
+                    <h1>E-pasts</h1>
+                    <h1>Studiju gads</h1>
+                    <h1>Fakultāte</h1>
+                    <h1>Studiju programa</h1>
+                </div>
+                <div class="px-7 py-3 border-b border-gray-300 grid grid-cols-6 cursor-pointer" v-for="mentor in mentors" @click="openMentor(mentor.id)">
+                    <h1>{{mentor.name}} {{mentor.lastName}}</h1>
+                    <h1>{{mentor.phone}}</h1>
+                    <h1>{{mentor.email}}</h1>
+                    <h1>{{mentor.year}}. gads</h1>
+                    <h1>{{findFaculty(mentor.faculty_id)}}</h1>
+                    <h1>{{findProgram(mentor.program_id)}}</h1>
+                </div>
+            </div>
+            <div class="space-y-5" v-if="view === 'grid'">
                 <div class="border border-gray-300 flex w-full p-5 rounded-xl" v-for="mentor in mentors">
                     <div class="w-1/4">
                         <div class="w-fit h-fit bg-gray-100 rounded-full border-gray-400 shadow-xl p-3 flex">
@@ -70,6 +88,7 @@ export default {
 
     data(){
         return{
+            view: 'grid',
             close: 0,
         }
     },
@@ -98,6 +117,9 @@ export default {
                 preserveState: false
             })
         },
+        openMentor(id){
+            Inertia.get(route('mentor.edit', id))
+        }
     }
 }
 </script>

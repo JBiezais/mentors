@@ -20,18 +20,15 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
          User::factory()->create([
+             'name' => 'Juris Biezais',
              'email' => 'admin@biezais.lv',
              'password' => bcrypt('Svetais0599')
          ]);
 
         User::factory()->create([
+            'name' => 'Alise Rozentāle',
             'email' => 'aliroz@rsu.lv',
             'password' => bcrypt('Kapostins^135')
         ]);
-
-//         Faculty::factory(5)->create();
-//         StudyProgram::factory(25)->create();
-//         Mentor::factory(60)->create();
-//         Student::factory(100)->create();
     }
 }

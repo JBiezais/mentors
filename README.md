@@ -13,6 +13,7 @@
 1. Run `cp .env.example .env` to create your local environment file;
 1. In .env file change SMTP config to correct email and APP_LINK to server domain.
 1. Run `php artisan migrate --seed` to migrate database and seed it
+1. Create new directory `mkdir storage/app/image`
 1. Create new directory `mkdir storage/app/image/cropped`
 1. Run `php artisan storage:link` to creates a symbolic link
 1. Run `npm install` to install NPM dependencies;

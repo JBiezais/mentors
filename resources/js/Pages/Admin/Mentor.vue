@@ -8,6 +8,7 @@
                     <template v-slot:second>Pieteikumi</template>
                 </FilterBar>
             </div>
+            <div v-if="mentors.length">Kopskaits: {{mentors.length}}</div>
             <div class="border border-gray-300" v-if="view === 'list'">
                 <div class="bg-gray-800 text-white font-semibold grid grid-cols-6 p-7">
                     <h1>Vārds Uzvārds</h1>

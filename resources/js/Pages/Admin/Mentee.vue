@@ -9,6 +9,7 @@
                 </FilterBar>
             </div>
             <div class="py-5">
+                <div v-if="students.length">Kopskaits: {{students.length}}</div>
                 <table class="min-w-full text-center">
                     <thead class="border-b bg-gray-800 sticky top-0">
                     <tr>

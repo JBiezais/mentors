@@ -143,7 +143,7 @@
                         <div class="w-full space-y-3 md:flex md:space-y-0 md:space-x-5">
                             <div class="md:my-auto">
                                 <div class="w-fit h-fit bg-yellow-950 rounded-full border-gray-400 shadow-xl p-3 flex mx-auto">
-                                    <img class="rounded-full m-auto" src="https://mentors.rsu.lv/images/dins-mironovs.jpg" alt="student">
+                                    <img class="rounded-full m-auto" src="/img/dins-mironovs.jpeg" alt="student">
                                 </div>
                             </div>
                             <div class="md:w-2/3 md:flex md:flex-col md:justify-center md:space-y-3">
@@ -155,7 +155,7 @@
                         <div class="w-full space-y-3 md:flex md:flex-row-reverse md:space-y-0 md:space-x-5">
                             <div class="md:my-auto">
                                 <div class="w-fit h-fit bg-yellow-950 rounded-full border-gray-400 shadow-xl p-3 flex mx-auto">
-                                    <img class="rounded-full m-auto" src="https://mentors.rsu.lv/images/arta-hermane.jpg" alt="student">
+                                    <img class="rounded-full m-auto" src="/img/arta-hermane.jpeg" alt="student">
                                 </div>
                             </div>
 

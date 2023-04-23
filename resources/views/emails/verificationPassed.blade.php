@@ -52,7 +52,7 @@
             <br/>
             @foreach($data['events'] as $event)
                 @if($event['mentors_training'])
-                    {{\Carbon\Carbon::parse($event['date'])->format('d M Y H:i')}} <strong>Mentoru apmācības</strong>, kurās nodosim svarīgāko informāciju, kas Tev kā Mentoram būtu jāzina.<br/><br/>
+                    {{\Carbon\Carbon::parse($event['date'])->format('d M Y H:i')}} <strong>Mentoru apmācības</strong>, kurās nodosim svarīgāko informāciju, kas Tev kā Mentoram būtu jāzina. Sīkāka informācija sekos.<br/><br/>
                 @endif
                 @if($event['mentees_applying'])
                     {{\Carbon\Carbon::parse($event['date'])->format('d M Y H:i')}}  <strong>Atveras pieteikšanās Mentorējamajiem.</strong>

@@ -42,10 +42,6 @@ class SendEmailsCommand extends Command
     public function handle()
     {
         $events = Event::query()
-            ->where(function($q){
-                $q->orWhere('date', '>', Carbon::now()->subDay());
-                $q->orWhere('date', '<', Carbon::now()->subDay());
-            })
             ->where('sent', 0)
             ->where(function($q){
                 $q->orWhere('mentors_training', 1);
@@ -55,7 +51,7 @@ class SendEmailsCommand extends Command
         if(!empty($events)){
             $mentors = Mentor::query()->where('status', 1)->get();
             foreach ($events as $event){
-                if($event['mentees_applying']){
+                if($event['mentees_applying'] && Carbon::today()->format("d/m/y") === Carbon::parse($event['date'])->format("d/m/y")){
                     $this->menteesBeginToApply($mentors, $event);
                     $event->update(['sent' => 1]);
                 }

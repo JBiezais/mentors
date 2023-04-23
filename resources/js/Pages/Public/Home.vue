@@ -59,7 +59,7 @@
                                                     <img src="/img/clock.svg" alt="location" class="h-4 w-auto my-auto">
                                                     <h1 class="my-auto text-sm">{{new Date(event.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}}</h1>
                                                 </div>
-                                                <div class="flex space-x-2">
+                                                <div class="flex space-x-2" v-if="event.location">
                                                     <img src="/img/location.svg" alt="location" class="h-4 w-auto my-auto">
                                                     <h1 class="my-auto text-sm break-all">{{event.location}}</h1>
                                                 </div>
@@ -110,7 +110,7 @@
                                     <div class="md:w-3/4 bg-gray-200 shadow-xl rounded-xl flex back">
                                         <div class="w-3 rounded-l-xl bg-blue-950 h-auto"></div>
                                         <div class="p-5 w-fit">
-                                            <p class="text-xl italic ">Mentors ir studējošais, kurš uzsācis studijas otrajā studiju gadā un ir gatavs dalīties savās zināšanās un praktiskajā pieredzē ar jauno studējošo. Mentors var gan sniegt padomus, gan atbildēt uz mentorējamajam interesējošiem jautājumiem. Mentors tiek piešķirts uz pirmo mācību semestri un vienam mentoram var būt līdz 5 mentorējamajiem. </p>
+                                            <p class="text-xl italic ">Mentors ir studējošais, kurš uzsācis studijas vismaz otrajā studiju gadā un ir gatavs dalīties savās zināšanās un praktiskajā pieredzē ar jauno studējošo. Mentors var gan sniegt padomus, gan atbildēt uz mentorējamajam interesējošiem jautājumiem. Mentors tiek piešķirts uz pirmo mācību semestri un vienam mentoram var būt līdz 5 mentorējamajiem. </p>
                                         </div>
                                     </div>
                                 </div>
@@ -143,25 +143,28 @@
                         <div class="w-full space-y-3 md:flex md:space-y-0 md:space-x-5">
                             <div class="md:my-auto">
                                 <div class="w-fit h-fit bg-yellow-950 rounded-full border-gray-400 shadow-xl p-3 flex mx-auto">
-                                    <img class="rounded-full m-auto" src="/img/dins-mironovs.jpeg" alt="student">
+                                    <img class="rounded-full m-auto" src="/img/liva-vaivade.png" alt="student">
                                 </div>
                             </div>
                             <div class="md:w-2/3 md:flex md:flex-col md:justify-center md:space-y-3">
-                                <p class="text-gray-800 text-center md:text-right">Mentoru programmā piedalījos, jo gribēju pamēģināt, kā ir būt mentoram. Pašam pirmajā studiju gadā bija neoficiāls mentors caur draugu draugiem, tādēļ arī nolēmu pieteikties, jo visiem šādas iespējas dabūt neoficiālus mentorus nav. Tomēr pirmā studiju gada studējošajiem ir vērtīgi iesaistīties programmā, jo tā var daudz vieglāk un ātrāk iekļauties universitātes vidē, noskaidrot sev interesējošos jautājumus par studiju procesu, akadēmiskajām lietām, pašpārvaldi, tādēļ ļoti silti iesaku pieteikties mentoru programmai.</p>
-                                <p class="text-gray-400 text-sm md:text-right">- Dins Mironovs, Medicīnas fakultāte, 3.studiju gads, RSU SP Akadēmiskā virziena vadītāja vietnieks</p>
+                                <p class="text-gray-800 text-center md:text-right">
+                                    Pieteikšanās Mentoru programmai un Mentora atbalsts, uzsākot studijas, ir pamats pirmajiem soļiem universitātē un vērtīgs atbalsta plecs. Vienmēr ir iespēja vaicāt pēc kāda padoma, pamācības un noskaidrot visu nepieciešamo. Tāpat tā ir iespēja iepazīt pirmo savā jomā studējošo un kas to lai zina, varbūt Jūsu ceļi krustojas arī tālāk! Man mentora atbalsts pirmajā semestrī ārkārtīgi palīdzēja iejusties studiju vidē un saprast, kas un kā. Tas mani iedrošināja iesaistīties studiju dzīvē vēl vairāk, kas bija sākums darbībai studējošo pašpārvaldē un studentijā kopumā. Arī pieredze kā mentoram bija forša, ar padomu palīdzot  pirmkursniekiem veiksmīgi tikt galā ar neskaidrībām, un just, kā viņiem arvien labāk izdodas iejusties RSU. Iesaku iesaistīties Mentoru programmā, lai veicinātu veiksmīgāku studiju uzsākšu un kontaktu veidošanu starp studējošajiem!
+                                </p>
+                                <p class="text-gray-400 text-sm md:text-right">- Līva Vaivade, Eiropas Studiju fakultāte, Latvijas Studentu apvienības Sociālā virziena vadītāja.</p>
                             </div>
                         </div>
                         <hr class="bg-gray-800">
                         <div class="w-full space-y-3 md:flex md:flex-row-reverse md:space-y-0 md:space-x-5">
                             <div class="md:my-auto">
                                 <div class="w-fit h-fit bg-yellow-950 rounded-full border-gray-400 shadow-xl p-3 flex mx-auto">
-                                    <img class="rounded-full m-auto" src="/img/arta-hermane.jpeg" alt="student">
+                                    <img class="rounded-full m-auto" src="/img/inga-barvika.jpeg" alt="student">
                                 </div>
                             </div>
-
                             <div class="md:w-2/3 md:flex md:flex-col md:justify-center md:space-y-3">
-                                <p class="text-gray-800 text-center md:text-left">Mentoru programma noteikti ir lieliska iespēja, lai kvalitatīvi uzsāktu savus pirmos soļus universitātē. Mentori studējošajiem sniedz informācijas apmaiņu, superīgus ieteikumus par studiju procesu, ikdienu universitātē un ir atbalsta plecs jebkurā citā jautājumā. Pieteikties mentoru programmai ir lietderīgi, jo tieši caur mentoru Tev būs iespēja izprast savas programmas pamatprincipus, noskaidrot jebkādus neskaidros jautājumus un Tev būs cilvēks, kurš vienmēr būs gatavs palīdzēt. Es noteikti būtu gatava šogad pieteikties par mentoru, jo šī programma man ļoti daudz palīdzēja un deva iespēju iepazīt fantastisku cilvēku. Un noteikti vēlētos sniegt pretī to pašu kādam pirmkursniekam.</p>
-                                <p class="text-gray-400 text-sm md:text-left">- Arta Hermane, Sabiedrības veselības un sociālās labklājības fakultāte, fakultātes domniece</p>
+                                <p class="text-gray-800 text-center md:text-left">
+                                    Uzsākt studiju gaitas ir ne vien aizraujoši un vilinoši, bet reizēm arī nedaudz baisi un satraucoši, tā kā aiz universitātes durvīm paveras pavisam jauna pasaule ar saviem noteikumiem, kārtību un tradīcijām. Lai palīdzētu saglabāt sirdsmieru, tikt galā ar nesaprotamo jautājumu pinekļiem un pozitīvajām sajūtām ņemt virsroku, blakus lieti noder pieredzējis atbalsta plecs atsaucīga mentora veidolā. No sirds iesaku pieteikties mentoru programmai, lai palīdzētu jaunajiem studējošajiem ātrāk iejusties universitātes ikdienas virpulī, dotu iespēju uzzināt par plašajām iespējām, kur iesaistīties un radoši izpausies gan studiju ietvaros, gan arī ārpus tām. Kļūstot par mentoru, Tu atver durvis pirmkursniekiem uz jaunu, košu un piedzīvojumiem bagātu pasauli - Rīgas Stradiņa universitāti!
+                                </p>
+                                <p class="text-gray-400 text-sm md:text-left">- Inga Barvika, Rehabilitācijas fakultāte, Studējošo pašpārvaldes Iekšējās sadarbības un cilvēkresursu virziena vadītāja.</p>
                             </div>
                         </div>
                     </div>

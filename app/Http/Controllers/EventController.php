@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -23,7 +24,7 @@ class EventController extends Controller
     {
         $data = $request->validate([
             'title' => 'required',
-            'location' => 'string',
+            'location' => 'string|nullable',
             'date' => 'required|date',
             'mentors_training' => 'nullable|boolean',
             'mentees_applying' => 'nullable|boolean',
@@ -50,13 +51,15 @@ class EventController extends Controller
         $data = $request->validate([
             'id' => 'required',
             'title' => 'required',
-            'location' => 'string',
-            'date' => 'required|date',
+            'location' => 'string|nullable',
+            'date' => 'required',
             'mentors_training' => 'nullable|boolean',
             'mentees_applying' => 'nullable|boolean',
             'description' => 'nullable|string',
             'link' => 'nullable'
         ]);
+        $data['sent'] = 0;
+        $data['date'] = Carbon::parse($data['date']);
 
         $event->update($data);
 

@@ -169,6 +169,12 @@ class SendEmailsCommand extends Command
                 ];
                 if($student['email']){
                     SendMail::to($student['email'])->send(new MentorDataMail($emailData));
+                    $mentors = Mentor::query()
+                        ->with('students')
+                        ->select('id', 'name', 'lastName', 'email', 'key')
+                        ->where('id', $student->mentor->id)
+                        ->get();
+                    $this->menteeData($mentors);
                     $this->info('Mentor Data mail has been sent to '. $student['email']);
                 }else{
                     $this->info('Student has not provided email');

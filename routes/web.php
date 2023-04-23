@@ -25,8 +25,10 @@ use Inertia\Inertia;
 
 Route::get('/', [Controller::class, 'index'])->name('home');
 
-Route::resource('mentor', MentorController::class)->only('store', 'create');
-Route::resource('student', StudentsController::class)->only('store', 'create');
+Route::resource('mentor', MentorController::class)->only('store');
+Route::resource('student', StudentsController::class)->only('store');
+Route::get('/mentor/apply', [MentorController::class, 'create'])->name('mentor.create');
+Route::get('student/apply', [StudentsController::class, 'create'])->name('student.create');
 Route::get('/mail/{key}', [MailController::class, 'verify'])->name('verify.mentor');
 
 

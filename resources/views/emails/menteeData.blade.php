@@ -48,7 +48,7 @@
         Mentorējamo studentu kontaktinformācija:
     </p>
     @foreach($data['students'] as $student)
-        <p>Vārds Uzvārds: <strong>{{$$student['name']. ' '. $student['lastName']}}</strong></p>
+        <p>Vārds Uzvārds: <strong>{{$student['name']. ' '. $student['lastName']}}</strong></p>
         <p>Telefona nummurs: <strong>{{$student['phone']}}</strong></p>
         <p>E-pasts: <strong>{{$student['email']}}</strong></p>
         <hr>

@@ -88,7 +88,8 @@ class StudentsController extends Controller
 
         return Redirect::route('home');
     }
-    public function edit(Student $student){
+    public function edit(Student $student): Response
+    {
 
         $faculties = Faculty::with('programs')->get();
         $mentors = Mentor::query()->withCount('students')->get();
@@ -100,7 +101,8 @@ class StudentsController extends Controller
             'faculties' => $faculties
         ]);
     }
-    public function update(Student $student, Request $request){
+    public function update(Student $student, Request $request): RedirectResponse
+    {
 
         $data = $request->validate([
             'id' => 'required',
@@ -115,18 +117,31 @@ class StudentsController extends Controller
             'lang' => 'nullable|integer',
         ]);
 
-        Student::find($data['id'])->update($data);
+        /** @var Student $student */
+        $student = Student::query()->find($data['id']);
+
+        if($student->mentor_id !== $data['mentor_id'] && !is_null($data['mentor_id'])){
+            $this->sendMentorData($student);
+
+            /** @var Mentor $mentor */
+            $mentor = Mentor::query()->find($data['mentor_id']);
+            (new MentorController)->sendMenteeData($mentor);
+        }
+
+        $student->update($data);
 
         return Redirect::route('student.edit', $data['id']);
     }
-    public function destroy(Student $student){
+    public function destroy(Student $student): RedirectResponse
+    {
 
         $student->delete();
 
         return Redirect::route('student.index');
     }
 
-    public function sendMentorData(Student $student){
+    public function sendMentorData(Student $student): void
+    {
         Mail::create([
             'mentor_ids' => null,
             'student_ids' => json_encode(array($student->id)),

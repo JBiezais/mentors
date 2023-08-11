@@ -35,7 +35,7 @@ class GenerateMailForAllUpdatedMentees extends Command
         });
 
         $studentIds = $students->pluck('id')->toArray();
-        $mentorIds = $students->pluck('mentor_id')->toArray();
+        $mentorIds = array_unique($students->pluck('mentor_id')->toArray());
 
         Mail::create([
             'mentor_ids' => null,

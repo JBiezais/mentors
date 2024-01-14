@@ -2,63 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StudentRequest;
-use App\Models\Event;
-use App\Models\Faculty;
-use App\Models\Mail;
-use App\Models\Mentor;
-use App\Models\Student;
-use App\Models\StudyProgram;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 use Inertia\Response;
+use src\Domain\Faculty\Models\Faculty;
+use src\Domain\Mail\Actions\MailMentorDataCreateAction;
+use src\Domain\Mentor\Models\Mentor;
+use src\Domain\Program\Models\Program;
+use src\Domain\Shared\Actions\UserNotificationCreateAction;
+use src\Domain\Student\Actions\StudentCreateAction;
+use src\Domain\Student\Actions\StudentDeleteAction;
+use src\Domain\Student\Actions\StudentUpdateAction;
+use src\Domain\Student\DTO\StudentCreateData;
+use src\Domain\Student\DTO\StudentUpdateData;
+use src\Domain\Student\Models\Student;
+use src\Domain\Student\Requests\StudentCreateRequest;
+use src\Domain\Student\Requests\StudentUpdateRequest;
 
 class StudentsController extends Controller
 {
     public function index(): Response
     {
-        $programs = StudyProgram::query()->orderBy('title')->get();
+        $request = request();
+        $programs = Program::query()->orderBy('title')->get();
         $faculties = Faculty::query()->with('programs')->orderBy('title')->get();
-        $students = Student::query()->with('mentor');
+        $students = Student::query()->with('mentor')->filterFromRequest($request)->get();
 
-        if(request('keyword') !== null){
-            $values = explode(' ', trim(request('keyword')));
-            $students = $students->where(function($query) use ($values) {
-                $query->orWhereIn('name', $values);
-                $query->orWhereIn('lastName', $values);
-            });
-        }
-
-        if(request('type') !== null){
-            switch (request('type')){
-                case 'requested':
-                    $students = $students->whereNull('mentor_id');
-                    break;
-                case 'confirmed':
-                    $students = $students->whereNotNull('mentor_id');
-                    break;
-            }
-        }
-
-        if(request('faculty') !== null){
-            $students = $students->where('faculty_id', request('faculty'));
-        }
-
-        if(request('program') !== null){
-            $students = $students->where('program_id', request('program'));
-        }
 
         return Inertia::render('Admin/Mentee', [
             'programs' => $programs,
             'faculties' => $faculties,
             'students' => $students->get(),
-            'keyword' => request('keyword'),
-            'type' => request('type'),
-            'program' => request('program'),
-            'faculty' => request('faculty'),
+            'keyword' => $request->keyword,
+            'type' => $request->type,
+            'program' => $request->program,
+            'faculty' => $request->faculty,
         ]);
     }
     public function create(): Response
@@ -71,82 +50,49 @@ class StudentsController extends Controller
             'mentors' => $mentors
         ]);
     }
-    public function store(StudentRequest $request):RedirectResponse
+
+    public function store(StudentCreateRequest $request):RedirectResponse
     {
-        $data = $request->validated();
+        $data = StudentCreateData::from($request->all());
 
-        $student = Student::create($data);
+        StudentCreateAction::execute($data);
 
-        Mail::create([
-            'mentor_ids' => null,
-            'student_ids' => json_encode(array($student->id)),
-            'content' => null,
-            'type' => 'mentorData'
-        ]);
-
-        Session::flash('message', ['title' => 'Pieteikums nosūtīts', 'text' => 'Jūsu pieteikums ir veiksmīgi nosūtīts lūdzu gaidiet turpmāko ziņu e-pastā']);
+        UserNotificationCreateAction::execute(
+            'Pieteikums nosūtīts',
+            'Jūsu pieteikums ir veiksmīgi nosūtīts lūdzu gaidiet turpmāko ziņu e-pastā'
+        );
 
         return Redirect::route('home');
     }
     public function edit(Student $student): Response
     {
-
         $faculties = Faculty::with('programs')->get();
         $mentors = Mentor::query()->withCount('students')->get();
-        $student = Student::query()->whereId($student->id)->with('mentor')->first();
+        $data = Student::query()->where('id', $student->id)->with('mentor')->first();
 
         return Inertia::render('Admin/EditStudent', [
-            'student' => $student,
+            'student' => $data,
             'mentors' => $mentors,
             'faculties' => $faculties
         ]);
     }
-    public function update(Student $student, Request $request): RedirectResponse
+    public function update(Student $student, StudentUpdateRequest $request): RedirectResponse
     {
+        $data = StudentUpdateData::from($request->all());
 
-        $data = $request->validate([
-            'id' => 'required',
-            'faculty_id' => 'required|integer',
-            'program_id' => 'required|integer',
-            'mentor_id' => 'integer',
-            'name' => 'required|string',
-            'lastName' => 'required|string',
-            'phone' => 'required',
-            'email' => 'required|email',
-            'comment' => 'nullable',
-            'lang' => 'nullable|integer',
-        ]);
-
-        /** @var Student $student */
-        $student = Student::query()->find($data['id']);
-
-        if($student->mentor_id !== $data['mentor_id'] && !is_null($data['mentor_id'])){
-            $this->sendMentorData($student);
-
-            /** @var Mentor $mentor */
-            $mentor = Mentor::query()->find($data['mentor_id']);
-            (new MentorController)->sendMenteeData($mentor);
-        }
-
-        $student->update($data);
+        StudentUpdateAction::execute($student, $data);
 
         return Redirect::route('student.edit', $data['id']);
     }
     public function destroy(Student $student): RedirectResponse
     {
-
-        $student->delete();
+        StudentDeleteAction::execute($student);
 
         return Redirect::route('student.index');
     }
 
     public function sendMentorData(Student $student): void
     {
-        Mail::create([
-            'mentor_ids' => null,
-            'student_ids' => json_encode(array($student->id)),
-            'content' => null,
-            'type' => 'mentorData'
-        ]);
+        MailMentorDataCreateAction::execute([$student->id]);
     }
 }

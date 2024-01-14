@@ -10,13 +10,13 @@ use App\Mail\MentorDataMail;
 use App\Mail\MentorTrainingEventMail;
 use App\Mail\VerificationMail;
 use App\Mail\VerificationPassedMail;
-use App\Models\Event;
-use App\Models\Mail;
-use App\Models\Mentor;
-use App\Models\Student;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail as SendMail;
+use src\Domain\Event\Models\Event;
+use src\Domain\Mail\Models\Mail;
+use src\Domain\Mentor\Models\Mentor;
+use src\Domain\Student\Models\Student;
 
 class SendEmailsCommand extends Command
 {

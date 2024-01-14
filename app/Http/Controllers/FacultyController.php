@@ -2,44 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Faculty;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use Inertia\Inertia;
+use src\Domain\Faculty\Actions\FacultyCreateAction;
+use src\Domain\Faculty\Actions\FacultyDeleteAction;
+use src\Domain\Faculty\Actions\FacultyUpdateAction;
+use src\Domain\Faculty\DTO\FacultyData;
+use src\Domain\Faculty\Models\Faculty;
+use src\Domain\Faculty\Requests\FacultyCreateRequest;
+use src\Domain\Faculty\Requests\FacultyUpdateRequest;
 
 class FacultyController extends Controller
 {
-    public function index(): \Inertia\Response
+    public function store(FacultyCreateRequest $request): RedirectResponse
     {
-        return Inertia::render('Home');
+        $data = FacultyData::from($request->all());
+
+        FacultyCreateAction::execute($data);
+
+        return Redirect::route('programs.index');
     }
-    public function store(Request $request): RedirectResponse
+    public function update(Faculty $faculty, FacultyUpdateRequest $request): RedirectResponse
     {
-        $data = $request->validate([
-            'title' => 'required',
-            'code' => 'required'
-        ]);
+        $data = FacultyData::from($request->all());
 
-        Faculty::create($data);
-
-        return Redirect::to(route('programs.index'));
-    }
-    public function update(Faculty $faculty, Request $request){
-        $data = $request->validate([
-            'id' => 'required',
-            'title' => 'required'
-        ]);
-
-        $faculty->update($data);
+        FacultyUpdateAction::execute($faculty, $data);
 
         return Redirect::route('programs.index');
 
     }
-    public function destroy($faculty):RedirectResponse
+    public function destroy(Faculty $faculty):RedirectResponse
     {
-        Faculty::find($faculty)->delete();
+        FacultyDeleteAction::execute($faculty);
 
-        return Redirect::to(route('programs.index'));
+        return Redirect::route('programs.index');
     }
 }

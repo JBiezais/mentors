@@ -2,10 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Mail;
-use App\Models\Student;
-use Carbon\Carbon;
 use Illuminate\Console\Command;
+use src\Domain\Mail\Models\Mail;
+use src\Domain\Student\Models\Student;
 
 class GenerateMailForAllUpdatedMentees extends Command
 {

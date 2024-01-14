@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\StudyProgram;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use src\Domain\Program\Models\Program;
 
 class StudyProgramSeeder extends Seeder
 {
@@ -15,6 +14,6 @@ class StudyProgramSeeder extends Seeder
      */
     public function run()
     {
-        StudyProgram::factory(30)->create();
+        Program::factory(30)->create();
     }
 }

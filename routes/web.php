@@ -7,7 +7,7 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentsController;
-use App\Http\Controllers\StudyProgramController;
+use App\Http\Controllers\ProgramController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('mentor', MentorController::class)->except('store', 'create', 'show');
     Route::resource('student', StudentsController::class)->except('store', 'create', 'show');
     Route::resource('faculty', FacultyController::class)->except('create', 'edit', 'index', 'show');
-    Route::resource('programs', StudyProgramController::class)->except('create', 'show');
+    Route::resource('programs', ProgramController::class)->except('create', 'show');
     Route::resource('event', EventController::class)->except('create', 'show');
 });
 

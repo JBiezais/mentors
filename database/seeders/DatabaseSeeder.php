@@ -5,8 +5,6 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Faculty;
 use App\Models\Mentor;
-use App\Models\Student;
-use App\Models\StudyProgram;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 

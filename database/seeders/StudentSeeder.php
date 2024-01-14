@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Student;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use src\Domain\Student\Models\Student;
 
 class StudentSeeder extends Seeder
 {

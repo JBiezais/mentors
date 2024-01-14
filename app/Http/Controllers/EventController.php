@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
-use Carbon\Carbon;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use src\Domain\Event\Actions\EventCreateAction;
+use src\Domain\Event\Actions\EventDeleteAction;
+use src\Domain\Event\Actions\EventUpdateAction;
+use src\Domain\Event\DTO\EventCreateData;
+use src\Domain\Event\DTO\EventUpdateData;
+use src\Domain\Event\Models\Event;
+use src\Domain\Event\Requests\EventCreateRequest;
+use src\Domain\Event\Requests\EventUpdateRequest;
 
 class EventController extends Controller
 {
-    public function index():Response
+    public function index(): Response
     {
         $events = Event::query()->orderBy('date')->get();
         return Inertia::render('Admin/Events', [
@@ -20,64 +23,22 @@ class EventController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(EventCreateRequest $request): void
     {
-        $data = $request->validate([
-            'title' => 'required',
-            'location' => 'string|nullable',
-            'date' => 'required|date',
-            'mentors_training' => 'nullable|boolean',
-            'mentees_applying' => 'nullable|boolean',
-            'description' => 'nullable|string',
-            'link' => 'nullable'
-        ]);
+        $data = EventCreateData::from($request->all());
 
-        $data = Event::create($data);
-
-        if($data['mentors_training']){
-            Event::query()->whereNot('id', $data['id'])->update([
-                'mentors_training' => 0,
-            ]);
-        }
-        if($data['mentees_applying']){
-            Event::query()->whereNot('id', $data['id'])->update([
-                'mentees_applying' => 0,
-            ]);
-        }
+        EventCreateAction::execute($data);
     }
 
-    public function update(Event $event, Request $request)
+    public function update(Event $event, EventUpdateRequest $request): void
     {
-        $data = $request->validate([
-            'id' => 'required',
-            'title' => 'required',
-            'location' => 'string|nullable',
-            'date' => 'required',
-            'mentors_training' => 'nullable|boolean',
-            'mentees_applying' => 'nullable|boolean',
-            'description' => 'nullable|string',
-            'link' => 'nullable'
-        ]);
-        $data['sent'] = 0;
-        $data['date'] = Carbon::parse($data['date']);
+        $data = EventUpdateData::from($request->all());
 
-        $event->update($data);
-
-        if($data['mentors_training']){
-            Event::query()->whereNot('id', $data['id'])->update([
-                'mentors_training' => 0,
-            ]);
-        }
-        if($data['mentees_applying']){
-            Event::query()->whereNot('id', $data['id'])->update([
-                'mentees_applying' => 0,
-            ]);
-        }
-
+        EventUpdateAction::execute($event, $data);
     }
 
-    public function destroy(Event $event)
+    public function destroy(Event $event): void
     {
-        $event->delete();
+        EventDeleteAction::execute($event);
     }
 }

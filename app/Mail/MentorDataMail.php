@@ -21,6 +21,6 @@ class MentorDataMail extends Mailable
     public function build()
     {
         return $this->view('emails.mentorData', ['data' => $this->data])
-            ->subject('Mentor Data email');
+            ->subject(__('Mentor Data'));
     }
 }

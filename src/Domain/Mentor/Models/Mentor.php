@@ -5,9 +5,13 @@ namespace src\Domain\Mentor\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Ramsey\Collection\Collection;
 use src\Domain\Mentor\Builders\MentorBuilder;
 use src\Domain\Student\Models\Student;
 
+/**
+ * @property Collection<int, Student> $students
+ */
 class Mentor extends Model
 {
     use HasFactory;

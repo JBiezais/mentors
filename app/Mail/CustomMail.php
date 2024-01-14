@@ -18,9 +18,9 @@ class CustomMail extends Mailable
         $this->data = $data;
     }
 
-    public function build()
+    public function build(): CustomMail
     {
         return $this->view('emails.custom', ['data' => $this->data])
-            ->subject('Notification');
+            ->subject(__('Notification'));
     }
 }

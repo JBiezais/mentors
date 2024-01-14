@@ -21,6 +21,6 @@ class MenteeDataMail extends Mailable
     public function build()
     {
         return $this->view('emails.menteeData', ['data' => $this->data])
-            ->subject('Mentee Data email');
+            ->subject(__('Mentee Data'));
     }
 }

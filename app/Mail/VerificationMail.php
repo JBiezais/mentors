@@ -21,7 +21,7 @@ class VerificationMail extends Mailable
     public function build()
     {
         return $this->view('emails.verification', ['data' => $this->data])
-            ->subject('Verification email');
+            ->subject(__('Verification'));
     }
 
 }

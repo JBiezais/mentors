@@ -21,6 +21,6 @@ class VerificationPassedMail extends Mailable
     public function build()
     {
         return $this->view('emails.verificationPassed', ['data' => $this->data])
-            ->subject('Email verified');
+            ->subject(__('Email verified'));
     }
 }

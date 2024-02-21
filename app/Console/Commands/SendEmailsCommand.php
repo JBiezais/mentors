@@ -224,7 +224,7 @@ class SendEmailsCommand extends Command
         });
     }
 
-    private function custom(Collection $receivers,string $content): void
+    private function custom(Collection $receivers, string $content): void
     {
         $receivers->each(function($receiver) use ($content){
             $emailData = [

@@ -33,7 +33,7 @@ class StudentsController extends Controller
         return Inertia::render('Admin/Mentee', [
             'programs' => $programs,
             'faculties' => $faculties,
-            'students' => $students->get(),
+            'students' => $students,
             'keyword' => $request->keyword,
             'type' => $request->type,
             'program' => $request->program,

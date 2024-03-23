@@ -22,6 +22,7 @@ use src\Domain\Mentor\Requests\MentorCreateRequest;
 use src\Domain\Mentor\Requests\MentorUpdateRequest;
 use src\Domain\Program\Models\Program;
 use src\Domain\Shared\Actions\UserNotificationCreateAction;
+use src\Domain\User\Models\User;
 
 class MentorController extends Controller
 {
@@ -39,7 +40,8 @@ class MentorController extends Controller
             'keyword' => $request->keyword,
             'type' => $request->type,
             'program' => $request->program,
-            'faculty' => $request->faculty
+            'faculty' => $request->faculty,
+            'contacts' => User::query()->select(['phone', 'email'])->where('use', 1)->first()
         ]);
     }
 
@@ -48,7 +50,8 @@ class MentorController extends Controller
         $faculties = Faculty::query()->with('programs')->get();
 
         return Inertia::render('Public/Mentor', [
-            'faculties' => $faculties
+            'faculties' => $faculties,
+            'contacts' => User::query()->select(['phone', 'email'])->where('use', 1)->first()
         ]);
     }
 
@@ -76,6 +79,7 @@ class MentorController extends Controller
             'mentor' => $data,
             'faculties' => $faculties,
             'programs' => $programs,
+            'contacts' => User::query()->select(['phone', 'email'])->where('use', 1)->first()
         ]);
     }
 

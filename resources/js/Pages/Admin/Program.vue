@@ -102,7 +102,7 @@
                 </table>
             </div>
         </div>
-        <Footer></Footer>
+        <Footer :contacts="contacts"/>
     </div>
 </template>
 
@@ -115,7 +115,11 @@ export default {
     name: "Program",
     components: {Footer, Header, Link},
     props:{
-      data: Object
+        data: Object,
+        contacts: {
+            email: String,
+            phone: String
+        }
     },
     data(){
         return{

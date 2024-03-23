@@ -49,7 +49,7 @@
 
         Apmācības notiks {{\Carbon\Carbon::parse($data['event']['date'])->format('d M Y, H:i')}}, {{$data['event']['location']}}. Lūdzu, norādi vai plāno ierasties uz apmācībām aizpildot anketu <a href="{{$data['event']['link']}}">{{$data['event']['link']}}</a>.
     </p>
-    <p>Jautājumu vai neskaidrību gadījumā sazinies ar Mentoru programmas koordinatori <strong>Alisi Agnesi Rozentāli</strong> <a href="mailto:aliseagnese.rozentale@rsu.lv">(AliseAgnese.Rozentale@rsu.lv)</a> .</p>
+    <p>Jautājumu vai neskaidrību gadījumā sazinies ar Mentoru programmas koordinatori <strong>{{$contacts['name']}}</strong> <a href="mailto:{{$contacts['email']}}">({{$contacts['email']}})</a> .</p>
     <p>
         Gaidīsim Tavu atbildi!<br/>
         <br/>

@@ -52,7 +52,7 @@
         Visa nepieciešamā informācija ir pieejama kopīgajā Mentoru materiālu bāzē - <a href="{{$data['event']['link']}}" target="_blank">{{$data['event']['link']}}</a> Šeit sadaļā “{{$data['event']['description']}}”
         vari uzdot arī jebkuru jautājumu, uz kuru var atbildēt gan pārējie mentori, gan programmas koordinatori.
     </p>
-    <p>Vari uzdot jautājumus arī sazinoties ar <strong>Alisi Agnesi Rozentāli</strong> <a href="mailto:aliseagnese.rozentale@rsu.lv">(AliseAgnese.Rozentale@rsu.lv)</a> vai rakstot uz <a href="mailto:sp@rsu.lv">sp@rsu.lv</a>.</p>
+    <p>Vari uzdot jautājumus arī sazinoties ar <strong>{{$contacts['name']}}</strong> <a href="mailto:{{$contacts['email']}}">({{$contacts['email']}})</a> vai rakstot uz <a href="mailto:sp@rsu.lv">sp@rsu.lv</a>.</p>
     <p>
         Lai veiksmīga saziņa ar Mentorējamajiem!<br/>
         <br/>

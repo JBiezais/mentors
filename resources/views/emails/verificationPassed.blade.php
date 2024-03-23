@@ -64,7 +64,7 @@
     <p>
         Kad jaunie pirmkursnieki sāks pieteikties Mentoriem, Tev automātiski tiks nosūtīta viņu <strong>kontaktinformācija un instrukcija kā rīkoties tālāk.</strong> Savukārt, pirmkursnieks saņems Tevis iesniegto informāciju.
     </p>
-    <p>Jautājumu vai neskaidrību gadījumā sazinies ar Mentoru programmas koordinatori <strong>Alisi Agnesi Rozentāli</strong> <a href="mailto:aliseagnese.rozentale@rsu.lv">(AliseAgnese.Rozentale@rsu.lv)</a> .</p>
+    <p>Jautājumu vai neskaidrību gadījumā sazinies ar Mentoru programmas koordinatori <strong>{{$contacts['name']}}</strong> <a href="mailto:{{$contacts['email']}}">({{$contacts['email']}})</a> .</p>
     <p>
         Lai viss izdodas!<br/>
         <br/>

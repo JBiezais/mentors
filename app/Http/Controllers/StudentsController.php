@@ -19,6 +19,7 @@ use src\Domain\Student\DTO\StudentUpdateData;
 use src\Domain\Student\Models\Student;
 use src\Domain\Student\Requests\StudentCreateRequest;
 use src\Domain\Student\Requests\StudentUpdateRequest;
+use src\Domain\User\Models\User;
 
 class StudentsController extends Controller
 {
@@ -38,6 +39,7 @@ class StudentsController extends Controller
             'type' => $request->type,
             'program' => $request->program,
             'faculty' => $request->faculty,
+            'contacts' => User::query()->select(['phone', 'email'])->where('use', 1)->first()
         ]);
     }
     public function create(): Response
@@ -47,7 +49,8 @@ class StudentsController extends Controller
 
         return Inertia::render('Public/Student', [
             'faculties' => $faculties,
-            'mentors' => $mentors
+            'mentors' => $mentors,
+            'contacts' => User::query()->select(['phone', 'email'])->where('use', 1)->first()
         ]);
     }
 
@@ -73,7 +76,8 @@ class StudentsController extends Controller
         return Inertia::render('Admin/EditStudent', [
             'student' => $data,
             'mentors' => $mentors,
-            'faculties' => $faculties
+            'faculties' => $faculties,
+            'contacts' => User::query()->select(['phone', 'email'])->where('use', 1)->first()
         ]);
     }
     public function update(Student $student, StudentUpdateRequest $request): RedirectResponse

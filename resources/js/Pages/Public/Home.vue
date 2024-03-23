@@ -172,7 +172,7 @@
             </div>
         </div>
         </div>
-        <Footer></Footer>
+        <Footer :contacts="contacts"/>
     </div>
 </template>
 
@@ -190,7 +190,11 @@ export default {
     components: {PrimaryButton, Modal, ApplicationLogo, Header, Link, Footer},
     props:{
         events: Object,
-        message: String
+        message: String,
+        contacts: {
+            email: String,
+            phone: String
+        }
     },
     data() {
         return {

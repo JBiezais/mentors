@@ -17,10 +17,18 @@ use src\Domain\Event\Models\Event;
 use src\Domain\Mail\Models\Mail;
 use src\Domain\Mentor\Models\Mentor;
 use src\Domain\Student\Models\Student;
+use src\Domain\User\Models\User;
 use Symfony\Component\Console\Command\Command as CommandAlias;
 
 class SendEmailsCommand extends Command
 {
+    private array $contacts;
+    public function __construct()
+    {
+        parent::__construct();
+        $this->contacts =  User::query()->select(['phone', 'email', 'name'])->where('use', 1)->first()->toArray();
+    }
+
     /**
      * The name and signature of the console command.
      *
@@ -132,7 +140,7 @@ class SendEmailsCommand extends Command
             ];
 
             if($mentor->key && $mentor->email) {
-                SendMail::to($mentor->email)->send(new VerificationMail($emailData));
+                SendMail::to($mentor->email)->send(new VerificationMail($emailData, $this->contacts));
             }
         });
     }
@@ -150,7 +158,7 @@ class SendEmailsCommand extends Command
                 'events' => $events
             ];
 
-            SendMail::to($mentor->email)->send(new VerificationPassedMail($emailData));
+            SendMail::to($mentor->email)->send(new VerificationPassedMail($emailData, $this->contacts));
         });
     }
 
@@ -167,7 +175,7 @@ class SendEmailsCommand extends Command
                     'students' => $mentor->students
                 ];
 
-                SendMail::to($mentor->email)->send(new MenteeDataMail($emailData));
+                SendMail::to($mentor->email)->send(new MenteeDataMail($emailData, $this->contacts));
             }
         });
     }
@@ -191,7 +199,7 @@ class SendEmailsCommand extends Command
                 ];
 
                 if($student['email']){
-                    SendMail::to($student['email'])->send(new MentorDataMail($emailData));
+                    SendMail::to($student['email'])->send(new MentorDataMail($emailData, $this->contacts));
 
                     $this->menteeData(collect([$student->mentor]));
                 }
@@ -201,7 +209,7 @@ class SendEmailsCommand extends Command
                     'lastName' => $student->lastName,
                 ];
                 if($student['email']){
-                    SendMail::to($student['email'])->send(new MenteeHasNoMentor($emailData));
+                    SendMail::to($student['email'])->send(new MenteeHasNoMentor($emailData, $this->contacts));
                 }
             }
         });
@@ -220,7 +228,7 @@ class SendEmailsCommand extends Command
                 'event' => $event
             ];
 
-            SendMail::to($mentor->email)->send(new MenteesBeginToApplyMail($emailData));
+            SendMail::to($mentor->email)->send(new MenteesBeginToApplyMail($emailData, $this->contacts));
         });
     }
 
@@ -233,7 +241,7 @@ class SendEmailsCommand extends Command
                 'content' => $content
             ];
 
-            SendMail::to($receiver->email)->send(new CustomMail($emailData));
+            SendMail::to($receiver->email)->send(new CustomMail($emailData, $this->contacts));
         });
     }
 }

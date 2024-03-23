@@ -13,14 +13,17 @@ class MenteeDataMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct($data)
+    private array $data;
+    private array $contacts;
+    public function __construct(array $data, array $contacts)
     {
         $this->data = $data;
+        $this->contacts = $contacts;
     }
 
     public function build()
     {
-        return $this->view('emails.menteeData', ['data' => $this->data])
+        return $this->view('emails.menteeData', ['data' => $this->data, 'contacts' => $this->contacts])
             ->subject(__('Mentee Data'));
     }
 }

@@ -76,7 +76,7 @@
                 </form>
             </div>
         </div>
-        <Footer></Footer>
+        <Footer :contacts="contacts"/>
     </div>
 </template>
 
@@ -90,7 +90,11 @@ export default {
     name: "Events",
     components: {Header, FilterBar, Footer},
     props:{
-        events: Object
+        events: Object,
+        contacts: {
+            email: String,
+            phone: String
+        }
     },
     data(){
         return {

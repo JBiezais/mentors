@@ -66,7 +66,7 @@
                 </div>
             </div>
         </div>
-        <Footer></Footer>
+        <Footer :contacts="contacts"/>
     </div>
     <CustomMail @custom="getFilteredProps($event)" @close="close = 0" v-if="close"></CustomMail>
 </template>
@@ -88,7 +88,11 @@ export default {
     props:{
         student: Object,
         faculties: Object,
-        mentors: Object
+        mentors: Object,
+        contacts: {
+            email: String,
+            phone: String
+        }
     },
     data(){
         return{

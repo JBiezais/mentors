@@ -51,7 +51,7 @@
         <br/>
         Informāciju saņemsi tuvākajā laikā, tiklīdz Mentors tiks atrasts.<br/>
     </p>
-    <p>Jautājumu vai neskaidrību gadījumā sazinies ar Mentoru programmas koordinatori <strong>Alisi Agnesi Rozentāli</strong> <a href="mailto:aliseagnese.rozentale@rsu.lv">(AliseAgnese.Rozentale@rsu.lv)</a> .</p>
+    <p>Jautājumu vai neskaidrību gadījumā sazinies ar Mentoru programmas koordinatori <strong>{{$contacts['name']}}</strong> <a href="mailto:{{$contacts['email']}}">({{$contacts['email']}})</a> .</p>
     <p>
         Lai viss izdodas!<br/>
         <br/>

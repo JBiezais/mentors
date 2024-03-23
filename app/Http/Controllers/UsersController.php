@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 use src\Domain\User\Actions\UserCreateAction;
+use src\Domain\User\Actions\UserDeleteAction;
+use src\Domain\User\Actions\UserUpdateAction;
 use src\Domain\User\DTO\UserCreateData;
 use src\Domain\User\Models\User;
 use src\Domain\User\Requests\UserCreateRequest;
@@ -18,7 +20,8 @@ class UsersController extends Controller
     {
         $users = User::query()->orderBy('created_at', 'desc')->get();
         return Inertia::render('Admin/Users', [
-            'users' => $users
+            'users' => $users,
+            'contacts' => User::query()->select(['phone', 'email'])->where('use', 1)->first()
         ]);
     }
 
@@ -31,18 +34,16 @@ class UsersController extends Controller
         return Redirect::route('users.index');
     }
 
-    public function update(Request $request, User $user): RedirectResponse
+    public function update(User $user): RedirectResponse
     {
-        $user->update([
-            'use' => true
-        ]);
+        UserUpdateAction::execute($user);
 
         return Redirect::route('users.index');
     }
 
     public function destroy(User $user): RedirectResponse
     {
-        $user->delete();
+        UserDeleteAction::execute($user);
 
         return Redirect::route('users.index');
     }

@@ -56,7 +56,7 @@
                 </div>
             </div>
         </div>
-        <Footer></Footer>
+        <Footer :contacts="contacts"/>
     </div>
     <CustomMail @custom="createCustomMail($event)" @close="close = 0" v-if="close"></CustomMail>
 </template>
@@ -84,7 +84,11 @@ export default {
         keyword: String,
         type: String,
         program: String,
-        faculty: String
+        faculty: String,
+        contacts: {
+            email: String,
+            phone: String
+        }
     },
 
     data(){

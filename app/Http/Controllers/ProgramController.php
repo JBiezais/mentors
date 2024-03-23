@@ -15,6 +15,7 @@ use src\Domain\Program\DTO\ProgramUpdateData;
 use src\Domain\Program\Models\Program;
 use src\Domain\Program\Requests\ProgramCreateRequest;
 use src\Domain\Program\Requests\ProgramUpdateRequest;
+use src\Domain\User\Models\User;
 
 class ProgramController extends Controller
 {
@@ -27,7 +28,8 @@ class ProgramController extends Controller
         }])->orderBy('title')->get();
 
         return Inertia::render('Admin/Program', [
-            'data' => $data
+            'data' => $data,
+            'contacts' => User::query()->select(['phone', 'email'])->where('use', 1)->first()
         ]);
     }
     public function store(ProgramCreateRequest $request): RedirectResponse

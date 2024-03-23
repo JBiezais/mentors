@@ -14,8 +14,8 @@
             <a href="/files/RSU%20SP_Privātuma%20politika.pdf" target="_blank">Datu izmantošana</a>
             <h1 class="font-semibold">Jautājumu gadījumā zvani vai raksti:</h1>
             <div class="flex flex-col font-semibold">
-                <a href="tel:+37127727419">+371 27727419</a>
-                <a href="mailto:aliseagnese.rozentale@rsu.lv">AliseAgnese.Rozentale@rsu.lv</a>
+                <a :href="'tel:'+contacts.phone">{{contacts.phone}}</a>
+                <a :href="'mailto:'+contacts.email">{{contacts.email}}</a>
             </div>
             <div class="flex md:space-x-5">
                 <div class="md:flex-grow hidden md:block"></div>
@@ -36,7 +36,13 @@ import { Link } from '@inertiajs/vue3';
 
 export default {
     name: "Footer",
-    components: {Link}
+    components: {Link},
+    props: {
+        contacts: {
+            email: String,
+            phone: String
+        }
+    }
 }
 </script>
 

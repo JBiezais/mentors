@@ -11,7 +11,7 @@
                 <MentorRequestForm :faculties="faculties" :mentors="mentors"></MentorRequestForm>
             </div>
         </div>
-        <Footer></Footer>
+        <Footer :contacts="contacts"/>
     </div>
 
 </template>
@@ -27,6 +27,10 @@ export default {
     props:{
         faculties: Object,
         mentors: Object,
+        contacts: {
+            email: String,
+            phone: String
+        }
     }
 }
 </script>

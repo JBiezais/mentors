@@ -12,6 +12,7 @@ use src\Domain\Event\DTO\EventUpdateData;
 use src\Domain\Event\Models\Event;
 use src\Domain\Event\Requests\EventCreateRequest;
 use src\Domain\Event\Requests\EventUpdateRequest;
+use src\Domain\User\Models\User;
 
 class EventController extends Controller
 {
@@ -19,7 +20,8 @@ class EventController extends Controller
     {
         $events = Event::query()->orderBy('date')->get();
         return Inertia::render('Admin/Events', [
-            'events' => $events
+            'events' => $events,
+            'contacts' => User::query()->select(['phone', 'email'])->where('use', 1)->first()
         ]);
     }
 

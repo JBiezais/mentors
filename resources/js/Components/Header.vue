@@ -16,19 +16,22 @@
                     <!-- Navigation Links -->
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <NavLink :href="route('home')" :active="route().current('home')">
-                            Public Home Page
+                            Galvenā lapa
                         </NavLink>
                         <NavLink :href="route('mentor.index')" :active="route().current('mentor.index')">
-                            Mentors
+                            Mentori
                         </NavLink>
                         <NavLink :href="route('student.index')" :active="route().current('student.index')">
-                            Mentees
+                            Mentorējamie
                         </NavLink>
                         <NavLink :href="route('programs.index')" :active="route().current('programs.index')">
-                            Study programs
+                            Studiju programmas
                         </NavLink>
                         <NavLink :href="route('event.index')" :active="route().current('event.index')">
-                            Events
+                            Pasākumi
+                        </NavLink>
+                        <NavLink :href="route('users.index')" :active="route().current('users.index')">
+                            Lietotāji
                         </NavLink>
                     </div>
                 </div>
@@ -111,19 +114,19 @@
         >
             <div class="pt-2 pb-3 space-y-1">
                 <ResponsiveNavLink :href="route('home')" :active="route().current('home')">
-                    Public Home Page
+                    Galvenā lapa
                 </ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('mentor.index')" :active="route().current('mentor.index')">
-                    Mentors
+                    Mentori
                 </ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('student.index')" :active="route().current('student.index')">
-                    Mentees
+                    Mentorējamie
                 </ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('programs.index')" :active="route().current('programs.index')">
-                    Study programs
+                    Studiju programmas
                 </ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('event.index')" :active="route().current('event.index')">
-                    Events
+                    Pasākumi
                 </ResponsiveNavLink>
             </div>
 

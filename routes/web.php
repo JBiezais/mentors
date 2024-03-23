@@ -6,6 +6,7 @@ use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\ProgramController;
 use Illuminate\Foundation\Application;
@@ -53,6 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('faculty', FacultyController::class)->except('create', 'edit', 'index', 'show');
     Route::resource('programs', ProgramController::class)->except('create', 'show');
     Route::resource('event', EventController::class)->except('create', 'show');
+    Route::resource('users', UsersController::class)->except('create', 'show');
 });
 
 require __DIR__.'/auth.php';

@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
+use src\Domain\User\Models\User;
 
 return new class extends Migration
 {

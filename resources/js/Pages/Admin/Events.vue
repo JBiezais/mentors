@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="flex w-fit mx-auto space-x-4">
                                     <button v-if="!form.id" type="submit" class="text-white bg-gray-700 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Pievienot</button>
-                                    <button v-if="form.id" type="submit" class="text-white bg-gray-700 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Update</button>
+                                    <button v-if="form.id" type="submit" class="text-white bg-gray-700 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Saglabāt</button>
                                     <h1 @click="form = {title: '', location: '', date: null, description: '', id: null}; addNew=0" type="submit" class="cursor-pointer text-gray-900 bg-gray-100 hover:bg-gray-200 border-gray-900 border focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Aizvērt</h1>
                                 </div>
                             </form>

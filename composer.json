@@ -21,6 +21,7 @@
         "laravel/breeze": "^1.18",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.21",
+        "laravel/telescope": "^5.0",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
         "phpunit/phpunit": "^9.5.10",

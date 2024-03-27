@@ -1,8 +1,11 @@
 {
     "Notification": "Paziņojums",
     "Mentees Begin To Apply": "Mentorējamie uzsāk pieteikšanos",
-    "Verification email": "Verifikācija",
+    "Verification": "Verifikācija",
+    "Verification passed": "Verifikācija apstiprināta",
     "Mentor Data": "Mentora dati",
     "Mentee Data": "Mentorējamā dati",
-    "Email verified": "Epasts verificēts"
+    "Email verified": "Epasts verificēts",
+    "Regards": "Lai viss izdodas",
+    "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\ninto your web browser:": "Ja jums ir problēmas, noklikšķinot uz pogas \":actionText\", nokopējiet un ielīmējiet zemāk esošo URL"
 }

@@ -2,7 +2,7 @@
 {{-- Header --}}
 <x-slot:header>
 <x-mail::header :url="config('app.url')">
-<img src="{{asset('/img/logo.png')}}" alt="RSU SP logo" style="width: 200px">
+<img src="{{asset('/img/header-logo.png')}}" alt="RSU SP logo" style="width: 200px">
 </x-mail::header>
 </x-slot:header>
 

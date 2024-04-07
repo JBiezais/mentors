@@ -25,7 +25,11 @@ class SendEmailsCommand extends Command
     public function __construct()
     {
         parent::__construct();
-        $this->contacts =  User::query()->select(['phone', 'email', 'name'])->where('use', 1)->first()->toArray();
+        $this->contacts =  User::query()
+            ->select(['phone', 'email', 'name'])
+            ->where('use', 1)
+            ->first()
+            ->toArray();
     }
 
     /**
@@ -47,86 +51,98 @@ class SendEmailsCommand extends Command
      *
      * @return int
      */
+
     public function handle(): int
     {
-        $mentors = Mentor::query()->with('students')->get();
-        $students = Student::query()->with('mentor')->get();
+        $mentors = Mentor::with('students')->get();
+        $students = Student::with('mentor')->get();
+
         $events = Event::query()
-            ->where(function($q){
-                $q->orWhere('mentors_training', 1);
-                $q->orWhere('mentees_applying', 1);
-            })
+            ->where(
+                function ($q) {
+                    $q->where('mentors_training', 1)
+                        ->orWhere('mentees_applying', 1);
+                }
+            )
+            ->where('sent', 0)
+            ->whereDate('date', now())
             ->orderBy('date')
             ->get();
 
-        $events->where('sent', 0)
-            ->each(function(Event $event) use ($mentors){
-                if(
-                    $event->mentees_applying &&
-                    Carbon::today()->format("d/m/y") === Carbon::parse($event->date)->format("d/m/y")
-                ){
-                    $this->menteesBeginToApply($mentors->where('status', 1), $event);
-                    $event->update(['sent' => 1]);
-                }
-            });
+        $events->each(function ($event) use ($mentors) {
+            $this->menteesBeginToApply($mentors->where('status', 1), $event);
+            $event->sent = 1;
+            $event->save();
+        });
 
-        Mail::query()->where('sent', 0)->get()
+        Mail::query()
+            ->where('sent', 0)
+            ->get()
             ->chunk(100)
-            ->each(function(Collection $mails) use ($mentors, $students, $events){
-                $mails->each(function(Mail $mail) use ($mentors, $students, $events){
-                    switch ($mail->type){
-                        case 'verification':
-                            if($mail->mentor_ids){
-                                $this->verification(
-                                    $mentors->whereIn('id', $mail->mentor_ids)
-                                );
-                            }
-                            break;
-                        case 'verificationPassed':
-                            if($mail->mentor_ids){
-                                $this->verificationPassed(
-                                    $mentors->whereIn('id', $mail->mentor_ids),
-                                    $events
-                                );
-                            }
-                            break;
-                        case 'menteeData':
-                            if($mail->mentor_ids){
-                                $this->menteeData(
-                                    $mentors->whereIn('id', $mail->mentor_ids)
-                                );
-                            }
-                            break;
-                        case 'mentorData':
-                            if($mail->student_ids){
-                                $this->mentorData(
-                                    $students->whereIn('id', $mail->student_ids)
-                                );
-                            }
-                            break;
-                        case 'custom':
-                            $receivers = null;
-
-                            if($mail->mentor_ids){
-                                $receivers = $mentors->whereIn('id', $mail->mentor_ids);
-                            }
-                            if($mail->student_ids){
-                                $receivers = $students->whereIn('id', $mail->student_ids);
-                            }
-
-                            if($receivers){
-                                $this->custom($receivers, $mail->content);
-                            }
-                            break;
-                    }
-
-                    $mail->update([
-                        'sent' => 1
-                    ]);
+            ->each(function ($mails) use ($mentors, $students, $events) {
+                $mails->each(function ($mail) use ($mentors, $students, $events) {
+                    $this->processMail($mail, $mentors, $students, $events);
+                    $mail->sent = 1;
+                    $mail->save();
                 });
             });
 
         return CommandAlias::SUCCESS;
+    }
+
+    /**
+     * @param Mail $mail
+     * @param Collection<int, Mentor> $mentors
+     * @param Collection<int, Student> $students
+     * @param Collection<int, Event> $events
+     */
+    protected function processMail(Mail $mail, Collection $mentors, Collection $students, Collection $events): void
+    {
+        switch ($mail->type){
+            case 'verification':
+                if($mail->mentor_ids){
+                    $this->verification(
+                        $mentors->whereIn('id', $mail->mentor_ids)
+                    );
+                }
+                break;
+            case 'verificationPassed':
+                if($mail->mentor_ids){
+                    $this->verificationPassed(
+                        $mentors->whereIn('id', $mail->mentor_ids),
+                        $events
+                    );
+                }
+                break;
+            case 'menteeData':
+                if($mail->mentor_ids){
+                    $this->menteeData(
+                        $mentors->whereIn('id', $mail->mentor_ids)
+                    );
+                }
+                break;
+            case 'mentorData':
+                if($mail->student_ids){
+                    $this->mentorData(
+                        $students->whereIn('id', $mail->student_ids)
+                    );
+                }
+                break;
+            case 'custom':
+                $receivers = null;
+
+                if($mail->mentor_ids){
+                    $receivers = $mentors->whereIn('id', $mail->mentor_ids);
+                }
+                if($mail->student_ids){
+                    $receivers = $students->whereIn('id', $mail->student_ids);
+                }
+
+                if($receivers){
+                    $this->custom($receivers, $mail->content);
+                }
+                break;
+        }
     }
 
     /**

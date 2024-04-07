@@ -21,15 +21,9 @@ use Symfony\Component\Console\Command\Command as CommandAlias;
 
 class SendEmailsCommand extends Command
 {
-    private array $contacts;
     public function __construct()
     {
         parent::__construct();
-        $this->contacts =  User::query()
-            ->select(['phone', 'email', 'name'])
-            ->where('use', 1)
-            ->first()
-            ->toArray();
     }
 
     /**
@@ -57,6 +51,12 @@ class SendEmailsCommand extends Command
         $mentors = Mentor::with('students')->get();
         $students = Student::with('mentor')->get();
 
+        $contacts = User::query()
+            ->select(['phone', 'email', 'name'])
+            ->where('use', 1)
+            ->first()
+            ->toArray();
+
         $events = Event::query()
             ->where(
                 function ($q) {
@@ -69,8 +69,8 @@ class SendEmailsCommand extends Command
             ->orderBy('date')
             ->get();
 
-        $events->each(function ($event) use ($mentors) {
-            $this->menteesBeginToApply($mentors->where('status', 1), $event);
+        $events->each(function ($event) use ($mentors, $contacts) {
+            $this->menteesBeginToApply($mentors->where('status', 1), $event, $contacts);
             $event->sent = 1;
             $event->save();
         });
@@ -79,9 +79,9 @@ class SendEmailsCommand extends Command
             ->where('sent', 0)
             ->get()
             ->chunk(100)
-            ->each(function ($mails) use ($mentors, $students, $events) {
-                $mails->each(function ($mail) use ($mentors, $students, $events) {
-                    $this->processMail($mail, $mentors, $students, $events);
+            ->each(function ($mails) use ($mentors, $students, $events, $contacts) {
+                $mails->each(function ($mail) use ($mentors, $students, $events, $contacts) {
+                    $this->processMail($mail, $mentors, $students, $events, $contacts);
                     $mail->sent = 1;
                     $mail->save();
                 });
@@ -96,13 +96,14 @@ class SendEmailsCommand extends Command
      * @param Collection<int, Student> $students
      * @param Collection<int, Event> $events
      */
-    protected function processMail(Mail $mail, Collection $mentors, Collection $students, Collection $events): void
+    protected function processMail(Mail $mail, Collection $mentors, Collection $students, Collection $events, array $contacts): void
     {
         switch ($mail->type){
             case 'verification':
                 if($mail->mentor_ids){
                     $this->verification(
-                        $mentors->whereIn('id', $mail->mentor_ids)
+                        $mentors->whereIn('id', $mail->mentor_ids),
+                        $contacts
                     );
                 }
                 break;
@@ -110,21 +111,24 @@ class SendEmailsCommand extends Command
                 if($mail->mentor_ids){
                     $this->verificationPassed(
                         $mentors->whereIn('id', $mail->mentor_ids),
-                        $events
+                        $events,
+                        $contacts
                     );
                 }
                 break;
             case 'menteeData':
                 if($mail->mentor_ids){
                     $this->menteeData(
-                        $mentors->whereIn('id', $mail->mentor_ids)
+                        $mentors->whereIn('id', $mail->mentor_ids),
+                        $contacts
                     );
                 }
                 break;
             case 'mentorData':
                 if($mail->student_ids){
                     $this->mentorData(
-                        $students->whereIn('id', $mail->student_ids)
+                        $students->whereIn('id', $mail->student_ids),
+                        $contacts
                     );
                 }
                 break;
@@ -139,7 +143,7 @@ class SendEmailsCommand extends Command
                 }
 
                 if($receivers){
-                    $this->custom($receivers, $mail->content);
+                    $this->custom($receivers, $mail->content, $contacts);
                 }
                 break;
         }
@@ -148,11 +152,11 @@ class SendEmailsCommand extends Command
     /**
      * @param Collection<int, Mentor> $mentors
      */
-    private function verification(Collection $mentors): void
+    private function verification(Collection $mentors, array $contacts): void
     {
         $chunk = $mentors->chunk(1000);
-        $chunk->each(function(Collection $notifiables){
-            $notifiables->each(function (Mentor $mentor){
+        $chunk->each(function(Collection $notifiables) use ($contacts){
+            $notifiables->each(function (Mentor $mentor) use ($contacts){
                 $emailData = [
                     'name' => $mentor->name,
                     'lastName' => $mentor->lastName,
@@ -160,7 +164,7 @@ class SendEmailsCommand extends Command
                 ];
 
                 if($mentor->key && $mentor->email) {
-                    $mentor->notify(new VerificationMail($emailData, $this->contacts));
+                    $mentor->notify(new VerificationMail($emailData, $contacts));
                 }
             });
         });
@@ -170,18 +174,18 @@ class SendEmailsCommand extends Command
      * @param Collection<int, Mentor> $mentors
      * @param Collection<int, Event> $events
      */
-    private function verificationPassed(Collection $mentors, Collection $events): void
+    private function verificationPassed(Collection $mentors, Collection $events, array $contacts): void
     {
         $chunk = $mentors->chunk(1000);
-        $chunk->each(function(Collection $notifiables) use ($events){
-            $notifiables->each(function(Mentor $mentor) use ($events){
+        $chunk->each(function(Collection $notifiables) use ($events, $contacts){
+            $notifiables->each(function(Mentor $mentor) use ($events, $contacts){
                 $emailData = [
                     'name' => $mentor->name,
                     'lastName' => $mentor->lastName,
                     'events' => $events
                 ];
 
-                $mentor->notify(new VerificationPassedMail($emailData, $this->contacts));
+                $mentor->notify(new VerificationPassedMail($emailData, $contacts));
             });
         });
     }
@@ -189,11 +193,11 @@ class SendEmailsCommand extends Command
     /**
      * @param Collection<int, Mentor> $mentors
      */
-    private function menteeData(Collection $mentors): void
+    private function menteeData(Collection $mentors, array $contacts): void
     {
         $chunk = $mentors->chunk(1000);
-        $chunk->each(function(Collection $notifiables){
-            $notifiables->each(function(Mentor $mentor){
+        $chunk->each(function(Collection $notifiables) use ($contacts){
+            $notifiables->each(function(Mentor $mentor) use ($contacts){
                 if($mentor->students){
                     $emailData = [
                         'name' => $mentor->name,
@@ -201,7 +205,7 @@ class SendEmailsCommand extends Command
                         'students' => $mentor->students
                     ];
 
-                    $mentor->notify(new MenteeDataMail($emailData, $this->contacts));
+                    $mentor->notify(new MenteeDataMail($emailData, $contacts));
                 }
             });
         });
@@ -210,11 +214,11 @@ class SendEmailsCommand extends Command
     /**
      * @param Collection<int, Student> $students
      */
-    private function mentorData(Collection $students): void
+    private function mentorData(Collection $students, array $contacts): void
     {
         $chunk = $students->chunk(1000);
-        $chunk->each(function(Collection $notifiables){
-            $notifiables->each(function(Student $student){
+        $chunk->each(function(Collection $notifiables) use ($contacts){
+            $notifiables->each(function(Student $student) use ($contacts){
                 if($student->mentor){
                     $emailData = [
                         'name' => $student->name,
@@ -228,7 +232,7 @@ class SendEmailsCommand extends Command
                     ];
 
                     if($student['email']){
-                        $student->notify(new MentorDataMail($emailData, $this->contacts));
+                        $student->notify(new MentorDataMail($emailData, $contacts));
 
                         $this->menteeData(collect([$student->mentor]));
                     }
@@ -238,7 +242,7 @@ class SendEmailsCommand extends Command
                         'lastName' => $student->lastName,
                     ];
                     if($student['email']){
-                        $student->notify(new MenteeHasNoMentor($emailData, $this->contacts));
+                        $student->notify(new MenteeHasNoMentor($emailData, $contacts));
                     }
                 }
             });
@@ -249,18 +253,18 @@ class SendEmailsCommand extends Command
     /**
      * @param Collection<int, Mentor> $mentors
      */
-    private function menteesBeginToApply(Collection $mentors, Event $event): void
+    private function menteesBeginToApply(Collection $mentors, Event $event, array $contacts): void
     {
         $chunk = $mentors->chunk(1000);
-        $chunk->each(function(Collection $notifiables) use ($event){
-            $notifiables->each(function (Mentor $mentor) use ($event){
+        $chunk->each(function(Collection $notifiables) use ($event, $contacts){
+            $notifiables->each(function (Mentor $mentor) use ($event, $contacts){
                 $emailData = [
                     'name' => $mentor->name,
                     'lastName' => $mentor->lastName,
                     'event' => $event
                 ];
 
-                $mentor->notify(new MenteesBeginToApplyMail($emailData, $this->contacts));
+                $mentor->notify(new MenteesBeginToApplyMail($emailData, $contacts));
             });
         });
     }
@@ -268,18 +272,18 @@ class SendEmailsCommand extends Command
     /**
      * @param Collection<int, Mentor|Student> $receivers
      */
-    private function custom(Collection $receivers, string $content): void
+    private function custom(Collection $receivers, string $content, array $contacts): void
     {
         $chunk = $receivers->chunk(1000);
-        $chunk->each(function(Collection $notifiables) use ($content){
-           $notifiables->each(function(Mentor|Student $receiver) use ($content){
+        $chunk->each(function(Collection $notifiables) use ($content, $contacts){
+           $notifiables->each(function(Mentor|Student $receiver) use ($content, $contacts){
                $emailData = [
                    'name' => $receiver->name,
                    'lastName' => $receiver->lastName,
                    'content' => $content
                ];
 
-               $receiver->notify(new CustomMail($emailData, $this->contacts));
+               $receiver->notify(new CustomMail($emailData, $contacts));
            });
         });
     }

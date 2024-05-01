@@ -15,7 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command('mail:send')->everyFiveMinutes();
+//         $schedule->command('mail:send')->everyFiveMinutes();
+        $schedule->call('oauth:token')->everySecond();
     }
 
     /**

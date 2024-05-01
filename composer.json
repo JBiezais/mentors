@@ -7,12 +7,14 @@
     "require": {
         "php": "^8.0.2",
         "doctrine/dbal": "^3.6",
-        "guzzlehttp/guzzle": "^7.2",
+        "guzzlehttp/guzzle": "^7.8",
         "inertiajs/inertia-laravel": "^0.6.8",
         "intervention/image": "^2.7",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
+        "laravel/telescope": "^5.0",
         "laravel/tinker": "^2.7",
+        "league/oauth2-client": "^2.7",
         "spatie/laravel-data": "^3.11",
         "tightenco/ziggy": "^1.0"
     },
@@ -21,7 +23,6 @@
         "laravel/breeze": "^1.18",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.21",
-        "laravel/telescope": "^5.0",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
         "phpunit/phpunit": "^9.5.10",
@@ -65,7 +66,8 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
         }
     },
     "minimum-stability": "stable",

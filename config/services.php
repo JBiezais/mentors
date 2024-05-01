@@ -30,5 +30,12 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
-
+    'oauth' => [
+        'client_id' => env('OAUTH_CLIENT_ID'),
+        'client_secret' => env('OAUTH_CLIENT_SECRET'),
+        'redirect_uri' => env('OAUTH_REDIRECT_URI'),
+        'url_authorize' => env('OAUTH_URL_AUTHORIZE'),
+        'url_access_token' => env('OAUTH_URL_ACCESS_TOKEN'),
+        'url_resource_owner_details' => env('OAUTH_URL_RESOURCE_OWNER_DETAILS'),
+    ],
 ];

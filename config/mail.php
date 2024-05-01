@@ -1,5 +1,7 @@
 <?php
 
+use App\Providers\OAuthServiceProvider;
+
 return [
 
     /*
@@ -36,13 +38,16 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+            'host' => env('MAIL_HOST', 'smtp.example.com'),
             'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
-            'timeout' => null,
-            'local_domain' => env('MAIL_EHLO_DOMAIN'),
+            'password' => null,
+            'auth_mode' => 'oauth',
+            'client_id' => env('OAUTH_CLIENT_ID'),
+            'client_secret' => env('OAUTH_CLIENT_SECRET'),
+            'refresh_token' => env('OAUTH_REFRESH_TOKEN'),
+            'provider' => OAuthServiceProvider::class,
         ],
 
         'ses' => [

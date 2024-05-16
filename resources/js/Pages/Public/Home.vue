@@ -143,14 +143,14 @@
                         <div class="w-full space-y-3 md:flex md:space-y-0 md:space-x-5">
                             <div class="md:my-auto">
                                 <div class="w-fit h-fit bg-yellow-950 rounded-full border-gray-400 shadow-xl p-3 flex mx-auto">
-                                    <img class="rounded-full m-auto" src="/img/liva-vaivade.png" alt="student">
+                                    <img class="rounded-full m-auto" src="/img/amanda-elizabete-dureja.jpeg" alt="student">
                                 </div>
                             </div>
                             <div class="md:w-2/3 md:flex md:flex-col md:justify-center md:space-y-3">
                                 <p class="text-gray-800 text-center md:text-right">
-                                    Pieteikšanās Mentoru programmai un Mentora atbalsts, uzsākot studijas, ir pamats pirmajiem soļiem universitātē un vērtīgs atbalsta plecs. Vienmēr ir iespēja vaicāt pēc kāda padoma, pamācības un noskaidrot visu nepieciešamo. Tāpat tā ir iespēja iepazīt pirmo savā jomā studējošo un kas to lai zina, varbūt Jūsu ceļi krustojas arī tālāk! Man mentora atbalsts pirmajā semestrī ārkārtīgi palīdzēja iejusties studiju vidē un saprast, kas un kā. Tas mani iedrošināja iesaistīties studiju dzīvē vēl vairāk, kas bija sākums darbībai studējošo pašpārvaldē un studentijā kopumā. Arī pieredze kā mentoram bija forša, ar padomu palīdzot  pirmkursniekiem veiksmīgi tikt galā ar neskaidrībām, un just, kā viņiem arvien labāk izdodas iejusties RSU. Iesaku iesaistīties Mentoru programmā, lai veicinātu veiksmīgāku studiju uzsākšu un kontaktu veidošanu starp studējošajiem!
+                                    Vai atceries sevi kā pirmkursnieku - neziņas, kutinoša satraukuma un cerību pilnu? Uzsākt noslēpumainās un tik ilgi gaidītās studijas Rīgas Stradiņa universitātē var būt aizraujošs un tajā pašā laikā biedējošs lēciens neaizmirstamā piedzīvojumā. Tieši tāpēc ir noderīgi, ja blakus ir kāds pieredzējis ceļa biedrs, kas palīdzēs integrēties jaunajā vidē, būs drošs atbalsta plecs un uzticams pirmais draugs studentijā jeb vienā vārdā - mentors. Atceros, ka pirms diviem gadiem, iestājoties RSU, man nebija zināms neviens vecāka studiju gada studējošais, tāpēc nācās izprašņāt, ko mani vienaudži ir dzirdējuši par dzīvi universitātē. Tad es uzzināju par iespēju pieteikties Mentoru programmai, kas man sniedza cilvēku, kuru es nepazinu, bet kurš bija gatavs būt mans draugs un atbalsta plecs brīdī, kad apkārt man ir daudz svešu seju un neizdibināmu jautājumu. Nebaidies būt cilvēks, kas pirmais iepazīstinās jaunos studējošos ar studentijas dzīves karuseli, atbildēm uz miglainajiem jautājumiem, kad rosās katra pirmkursnieka prātā, kā arī iespējām, ko paver universitāte. Ja šobrīd esi daļiņa no RSU ģimenes, piesakies Mentoru programmai, palīdzi integrēties jaunām degošām dvēselēm un piepildi viņu sapni par Rīgas Stradiņa universitāti.
                                 </p>
-                                <p class="text-gray-400 text-sm md:text-right">- Līva Vaivade, Eiropas Studiju fakultāte, Latvijas Studentu apvienības Sociālā virziena vadītāja.</p>
+                                <p class="text-gray-400 text-sm md:text-right">- Amanda Elizabete Dūrēja, Medicīnas fakultāte, Studējošo pašpārvaldes Iekšējās sadarbības un cilvēkresursu virziena vadītāja.</p>
                             </div>
                         </div>
                         <hr class="bg-gray-800">

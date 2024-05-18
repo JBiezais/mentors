@@ -9,7 +9,7 @@ use Illuminate\Support\HtmlString;
 
 class MenteesBeginToApplyMail extends Notification
 {
-    use Queueable;
+    use Queueable, SendEmailTrait;
 
     private array $data;
     private array $contacts;
@@ -32,7 +32,7 @@ class MenteesBeginToApplyMail extends Notification
     public function buildMailMessage(): MailMessage
     {
         return (new MailMessage())
-            ->subject(config('app.name').': '.__('Mentees Begin To Apply'))
+            ->subject($this->getSubject())
             ->greeting('Sveiks/-a '. $this->data['name']. ' '. $this->data['lastName'])
             ->line('Ir atvērta pieteikšanās mentorējamajiem, kas nozīmē, ka drīzumā saņemsi e-pastu ar pirmkursnieka kontaktinformāciju. Mentorējamie varēs pieteikties līdz 30. Septembrim, tāpēc nebēdā, ja vēl neviens Tevi nav izvēlējies!')
             ->line('Ja jau esi saņēmis sava Mentorējamā kontaktus, droši vari ar viņu sazināties un iespējams uzaicināt uz tikšanos klātienē.')
@@ -42,5 +42,10 @@ class MenteesBeginToApplyMail extends Notification
             ->action('Dodies uz Mentoru materiālu bāzi', $this->data['event']['link'])
             ->line('Šeit sadaļā “'. $this->data['event']['description'].'” vari uzdot arī jebkuru jautājumu, uz kuru var atbildēt gan pārējie mentori, gan programmas koordinatori.')
             ->line(new HtmlString('Jautājumu vai neskaidrību gadījumā sazinies ar Mentoru programmas koordinatori <strong>'.$this->contacts['name'].'</strong> <a href="mailto:'.$this->contacts['email'].'">('.$this->contacts['email'].')</a> .'));
+    }
+
+    private function getSubject(): string
+    {
+        return config('app.name').': '.__('Mentees Begin To Apply');
     }
 }

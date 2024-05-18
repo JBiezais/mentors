@@ -160,11 +160,13 @@ class SendEmailsCommand extends Command
                 $emailData = [
                     'name' => $mentor->name,
                     'lastName' => $mentor->lastName,
+                    'email' => $mentor->email,
                     'key' => $mentor->key
                 ];
 
                 if($mentor->key && $mentor->email) {
-                    $mentor->notify(new VerificationMail($emailData, $contacts));
+                    $notification = new VerificationMail($emailData, $contacts);
+                    $notification->sendEmail();
                 }
             });
         });
@@ -182,10 +184,11 @@ class SendEmailsCommand extends Command
                 $emailData = [
                     'name' => $mentor->name,
                     'lastName' => $mentor->lastName,
-                    'events' => $events
+                    'events' => $events,
+                    'email' => $mentor->email
                 ];
 
-                $mentor->notify(new VerificationPassedMail($emailData, $contacts));
+                (new VerificationPassedMail($emailData, $contacts))->sendEmail();
             });
         });
     }
@@ -202,10 +205,11 @@ class SendEmailsCommand extends Command
                     $emailData = [
                         'name' => $mentor->name,
                         'lastName' => $mentor->lastName,
-                        'students' => $mentor->students
+                        'students' => $mentor->students,
+                        'email' => $mentor->email
                     ];
 
-                    $mentor->notify(new MenteeDataMail($emailData, $contacts));
+                    (new MenteeDataMail($emailData, $contacts))->sendEmail();;
                 }
             });
         });
@@ -228,21 +232,23 @@ class SendEmailsCommand extends Command
                             'lastName' => $student->mentor->lastName,
                             'email' => $student->mentor->email,
                             'phone' => $student->mentor->phone
-                        ]
+                        ],
+                        'email' => $student->email
                     ];
 
                     if($student['email']){
-                        $student->notify(new MentorDataMail($emailData, $contacts));
+                        (new MentorDataMail($emailData, $contacts))->sendEmail();;
 
-                        $this->menteeData(collect([$student->mentor]));
+                        $this->menteeData(collect([$student->mentor]), $contacts);
                     }
                 }else{
                     $emailData = [
                         'name' => $student->name,
                         'lastName' => $student->lastName,
+                        'email' => $student->email
                     ];
                     if($student['email']){
-                        $student->notify(new MenteeHasNoMentor($emailData, $contacts));
+                        (new MenteeHasNoMentor($emailData, $contacts))->sendEmail();;
                     }
                 }
             });
@@ -261,10 +267,11 @@ class SendEmailsCommand extends Command
                 $emailData = [
                     'name' => $mentor->name,
                     'lastName' => $mentor->lastName,
-                    'event' => $event
+                    'event' => $event,
+                    'email' => $mentor->email
                 ];
 
-                $mentor->notify(new MenteesBeginToApplyMail($emailData, $contacts));
+                (new MenteesBeginToApplyMail($emailData, $contacts))->sendEmail();;
             });
         });
     }
@@ -280,10 +287,11 @@ class SendEmailsCommand extends Command
                $emailData = [
                    'name' => $receiver->name,
                    'lastName' => $receiver->lastName,
-                   'content' => $content
+                   'content' => $content,
+                   'email' => $receiver->email
                ];
 
-               $receiver->notify(new CustomMail($emailData, $contacts));
+               (new CustomMail($emailData, $contacts))->sendEmail();;
            });
         });
     }

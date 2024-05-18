@@ -11,7 +11,7 @@ use Illuminate\Queue\SerializesModels;
 
 class MentorTrainingEventMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable, SerializesModels, SendEmailTrait;
 
     public function __construct($data)
     {
@@ -21,6 +21,11 @@ class MentorTrainingEventMail extends Mailable
     public function build()
     {
         return $this->view('emails.mentorTrainingEvent', ['data' => $this->data])
-            ->subject('Mentor Training event email');
+            ->subject($this->getSubject());
+    }
+
+    private function getSubject(): string
+    {
+        return 'Mentor Training event email';
     }
 }

@@ -9,7 +9,7 @@ use Illuminate\Support\HtmlString;
 
 class MenteeDataMail extends Notification
 {
-    use Queueable;
+    use Queueable, SendEmailTrait;
 
     private array $data;
     private array $contacts;
@@ -32,7 +32,7 @@ class MenteeDataMail extends Notification
     public function buildMailMessage(): MailMessage
     {
         $mail =  (new MailMessage())
-            ->subject(config('app.name').': '.__('Mentee Data'))
+            ->subject($this->getSubject())
             ->greeting('Sveiks/-a '. $this->data['name']. ' '. $this->data['lastName'])
             ->line('Mentorējamo studentu kontaktinformācija:');
 
@@ -46,5 +46,10 @@ class MenteeDataMail extends Notification
 
         return $mail
             ->line(new HtmlString('Jautājumu vai neskaidrību gadījumā sazinies ar Mentoru programmas koordinatori <strong>'.$this->contacts['name'].'</strong> <a href="mailto:'.$this->contacts['email'].'">('.$this->contacts['email'].')</a> .'));
+    }
+
+    private function getSubject(): string
+    {
+        return config('app.name').': '.__('Mentee Data');
     }
 }

@@ -9,7 +9,7 @@ use Illuminate\Support\HtmlString;
 
 class MentorDataMail extends Notification
 {
-    use Queueable;
+    use Queueable, SendEmailTrait;
 
     private array $data;
     private array $contacts;
@@ -32,7 +32,7 @@ class MentorDataMail extends Notification
     public function buildMailMessage(): MailMessage
     {
         return (new MailMessage())
-            ->subject(config('app.name').': '.__('Mentor Data'))
+            ->subject($this->getSubject())
             ->greeting('Sveiks/-a '. $this->data['name']. ' '. $this->data['lastName'])
             ->line('Paldies, ka izvēlējies pieteikties Mentoram! Ceram, ka no Mentora iegūtās zināšanas un stāsti par viņa pieredzi Tev noderēs uzsākot studijas RSU!')
             ->line(new HtmlString('<strong>Tava kontaktinformācija ir nosūtīta Mentoram.</strong> Tuvākajā laikā viņš ar Tevi sazināsies!'))
@@ -41,5 +41,9 @@ class MentorDataMail extends Notification
             ->line(new HtmlString('<strong>Telefona nummurs:</strong> '.$this->data['mentor']['phone']))
             ->line(new HtmlString('<strong>E-pasts:</strong> '.$this->data['mentor']['email']))
             ->line(new HtmlString('Jautājumu vai neskaidrību gadījumā sazinies ar Mentoru programmas koordinatori <strong>'.$this->contacts['name'].'</strong> <a href="mailto:'.$this->contacts['email'].'">('.$this->contacts['email'].')</a> .'));
+    }
+    private function getSubject(): string
+    {
+        return config('app.name').': '.__('Mentor Data');
     }
 }

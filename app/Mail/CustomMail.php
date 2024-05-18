@@ -14,7 +14,7 @@ use Illuminate\Support\HtmlString;
 
 class CustomMail extends Notification
 {
-    use Queueable, SerializesModels;
+    use Queueable, SerializesModels, SendEmailTrait;
 
     private array $data;
     private array $contacts;
@@ -37,9 +37,14 @@ class CustomMail extends Notification
     public function buildMailMessage(): MailMessage
     {
         return (new MailMessage())
-            ->subject(config('app.name'))
+            ->subject($this->getSubject())
             ->greeting('Sveiks/-a '. $this->data['name']. ' '. $this->data['lastName'])
             ->line(new HtmlString($this->data['content']))
             ->line(new HtmlString('Jautājumu vai neskaidrību gadījumā sazinies ar Mentoru programmas koordinatori <strong>'.$this->contacts['name'].'</strong> <a href="mailto:'.$this->contacts['email'].'">('.$this->contacts['email'].')</a> .'));
+    }
+
+    private function getSubject(): string
+    {
+        return config('app.name');
     }
 }

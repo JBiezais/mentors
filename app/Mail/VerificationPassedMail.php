@@ -15,7 +15,7 @@ use Illuminate\Support\HtmlString;
 
 class VerificationPassedMail extends Notification
 {
-    use Queueable;
+    use Queueable, SendEmailTrait;
 
     private array $data;
     private array $contacts;
@@ -38,7 +38,7 @@ class VerificationPassedMail extends Notification
     public function buildMailMessage(): MailMessage
     {
         $mail =  (new MailMessage())
-            ->subject(config('app.name').': '.__('Verification passed'))
+            ->subject($this->getSubject())
             ->greeting('Sveiks/-a '. $this->data['name']. ' '. $this->data['lastName'])
             ->line(new HtmlString('Tavs pieteikums Mentoru programmai <strong>ir apstiprināts!</strong>'));
 
@@ -50,5 +50,10 @@ class VerificationPassedMail extends Notification
         return $mail
             ->line(new HtmlString('Kad jaunie pirmkursnieki sāks pieteikties Mentoriem, Tev automātiski tiks nosūtīta viņu <strong>kontaktinformācija un instrukcija kā rīkoties tālāk.</strong> Savukārt, pirmkursnieks saņems Tevis iesniegto informāciju.'))
             ->line(new HtmlString('Jautājumu vai neskaidrību gadījumā sazinies ar Mentoru programmas koordinatori <strong>'.$this->contacts['name'].'</strong> <a href="mailto:'.$this->contacts['email'].'">('.$this->contacts['email'].')</a> .'));
+    }
+
+    private function getSubject(): string
+    {
+        return config('app.name').': '.__('Verification passed');
     }
 }

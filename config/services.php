@@ -33,9 +33,8 @@ return [
     'oauth' => [
         'client_id' => env('OAUTH_CLIENT_ID'),
         'client_secret' => env('OAUTH_CLIENT_SECRET'),
-        'redirect_uri' => env('OAUTH_REDIRECT_URI'),
-        'url_authorize' => env('OAUTH_URL_AUTHORIZE'),
-        'url_access_token' => env('OAUTH_URL_ACCESS_TOKEN'),
-        'url_resource_owner_details' => env('OAUTH_URL_RESOURCE_OWNER_DETAILS'),
+        'tenant_id' => env('OAUTH_TENANT_ID'),
+        'token_url' => 'https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token',
+        'scope' => 'https://graph.microsoft.com/.default',
     ],
 ];

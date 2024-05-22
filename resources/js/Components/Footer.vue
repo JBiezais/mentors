@@ -6,7 +6,7 @@
                 <a href="https://sp.rsu.lv/" target="_blank"><img class="mr-auto w-full max-w-sm" src="/img/white-footer-logo.png" alt="RSUsp"></a>
             </div>
             <div class="flex space-x-5">
-                <a href="tel:+37167409159">+371 67 409 159</a>
+                <a href="tel:+37127750555">+371 27 750 555</a>
                 <a href="mailto:sp@rsu.lv">sp@rsu.lv</a>
             </div>
         </div>

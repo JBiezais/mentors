@@ -2,9 +2,6 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Faculty;
-use App\Models\Mentor;
 use Illuminate\Database\Seeder;
 use src\Domain\User\Models\User;
 

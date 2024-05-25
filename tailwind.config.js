@@ -18,7 +18,7 @@ module.exports = {
                 'gray-450': '#a0a29f',
                 'gray-550': '#7c7f7c',
                 'blue-950': '#090430',
-                'yellow-950': '#FFD600',
+                'accent': '#e085f9', //previous #FFD600
                 'blue-850': '#021127',
                 'blue-750': '#010E21',
             }

@@ -14,7 +14,7 @@ class StudentUpdateData extends Data
         public string $lastName,
         public string $phone,
         public string $email,
-        public string $comment,
+        public ?string $comment,
         public int $lang,
     ) {
     }

@@ -12,9 +12,9 @@ class StudentUpdateAction extends Model
 {
     public static function execute(Student $student, StudentUpdateData $data): void
     {
-        if($student->mentor_id !== $data['mentor_id'] && !is_null($data['mentor_id'])){
+        if($student->mentor_id !== $data->mentor_id && !is_null($data->mentor_id)){
             MailMentorDataCreateAction::execute([$student->id]);
-            MailMenteeDataCreateAction::execute([$data['mentor_id']]);
+            MailMenteeDataCreateAction::execute([$data->mentor_id]);
         }
 
         $student->update($data->all());

@@ -86,7 +86,7 @@ class StudentsController extends Controller
 
         StudentUpdateAction::execute($student, $data);
 
-        return Redirect::route('student.edit', $data['id']);
+        return Redirect::route('student.edit', $data->id);
     }
     public function destroy(Student $student): RedirectResponse
     {

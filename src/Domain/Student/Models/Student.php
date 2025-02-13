@@ -5,6 +5,7 @@ namespace src\Domain\Student\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use src\Domain\Mentor\Models\Mentor;
 use src\Domain\Student\Builder\StudentBuilder;
@@ -14,7 +15,7 @@ use src\Domain\Student\Builder\StudentBuilder;
  */
 class Student extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     protected $fillable = [
         'faculty_id',

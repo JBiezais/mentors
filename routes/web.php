@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\MailController;
@@ -9,9 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\ProgramController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +36,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return redirect('/');
     })->name('dashboard');
+
+    Route::get('/config', [ConfigController::class, 'index'])->name('config');
+    Route::post('/archive', [ConfigController::class, 'archive'])->name('archive');
+    Route::post('/design', [ConfigController::class, 'design'])->name('design');
 
     Route::post('/mentees/remove/{mentor}', [MentorController::class, 'removeMentees'])->name('remove.mentees');
     Route::post('/mentor/confirm/{mentor}', [MentorController::class, 'confirmMentor'])->name('confirm.mentor');

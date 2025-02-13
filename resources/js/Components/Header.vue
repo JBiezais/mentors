@@ -33,6 +33,9 @@
                         <NavLink :href="route('users.index')" :active="route().current('users.index')">
                             Lietotāji
                         </NavLink>
+                        <NavLink :href="route('config')" :active="route().current('config')">
+                            Konfigurācija
+                        </NavLink>
                     </div>
                 </div>
 
@@ -127,6 +130,12 @@
                 </ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('event.index')" :active="route().current('event.index')">
                     Pasākumi
+                </ResponsiveNavLink>
+                <ResponsiveNavLink :href="route('users.index')" :active="route().current('users.index')">
+                    Lietotāji
+                </ResponsiveNavLink>
+                <ResponsiveNavLink :href="route('config')" :active="route().current('config')">
+                    Konfigurācija
                 </ResponsiveNavLink>
             </div>
 

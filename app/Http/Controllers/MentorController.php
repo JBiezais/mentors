@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use src\Domain\Config\Models\Config;
 use src\Domain\Faculty\Models\Faculty;
 use src\Domain\Mail\Actions\MailMenteeDataCreateAction;
 use src\Domain\Mail\Actions\MailVerificationPassedCreateAction;
@@ -48,8 +49,11 @@ class MentorController extends Controller
     public function create(): Response
     {
         $faculties = Faculty::query()->with('programs')->get();
+        $configs = Config::query()->whereIn('type', ['color', 'background'])->select(['type', 'value'])->get();
 
         return Inertia::render('Public/Mentor', [
+            'color' => $configs->where('type', 'color')->first()?->value,
+            'background' => $configs->where('type', 'background')->first()?->value,
             'faculties' => $faculties,
             'contacts' => User::query()->select(['phone', 'email'])->where('use', 1)->first()
         ]);

@@ -23,9 +23,9 @@
             </div>
         </Modal>
         <div class="w-full">
-            <img src="/img/banner.png" class="w-full">
+            <img :src="this.banner" alt="banner" class="w-full">
         </div>
-        <div class="flex-grow" style="background-image: url('/img/bg.jpeg'); background-size: cover; background-repeat: no-repeat">
+        <div class="flex-grow" :style="{backgroundImage: `url('${this.background}')`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}">
         <div class="flex-grow">
             <div class="w-full py-8 px-3">
                 <div class="lg:max-w-5xl mx-auto flex flex-col md:flex-row space-y-5 md:space-x-8 md:space-y-0">
@@ -79,7 +79,7 @@
                             <div class="relative">
                                 <div class="card extra-height">
                                     <div class="md:w-3/4 bg-gray-200 shadow-xl rounded-xl flex front">
-                                        <div class="w-3 rounded-l-xl bg-accent h-auto"></div>
+                                        <div class="w-3 rounded-l-xl h-auto" :style="{backgroundColor: this.color}"></div>
                                         <div class="p-5 w-fit flex">
                                             <h1 class="text-2xl my-auto text-gray-700">Uzzini vairāk par <span class="text-blue-850 font-semibold">Mentoru Programmu!</span><br/>
                                                 Mentoru programma ir vieta, kur pieredzējuši studējošie savas zināšanas un pieredzi nodod pirmā studiju gada studējošajiem.
@@ -105,7 +105,7 @@
                                             </h1>
                                         </div>
                                         <div class="flex-grow"></div>
-                                        <div class="w-3 rounded-r-xl bg-accent h-auto"></div>
+                                        <div class="w-3 rounded-r-xl h-auto" :style="{backgroundColor: this.color}"></div>
                                     </div>
                                     <div class="md:w-3/4 bg-gray-200 shadow-xl rounded-xl flex back">
                                         <div class="w-3 rounded-l-xl bg-blue-950 h-auto"></div>
@@ -118,7 +118,7 @@
                             <div class="relative">
                                 <div class="card default-height">
                                     <div class="md:w-3/4 bg-gray-200 shadow-xl rounded-xl flex front">
-                                        <div class="w-3 rounded-l-xl bg-accent h-auto"></div>
+                                        <div class="w-3 rounded-l-xl h-auto" :style="{backgroundColor: this.color}"></div>
                                         <div class="p-5 w-fit flex">
                                             <h1 class="text-2xl my-auto text-gray-700">Uzzini, kas ir <span class="text-blue-850 font-semibold">MENTORĒJAMAIS</span><br/>
                                                 Par mentorējamo var kļūt jebkurš pirmā studiju gada studējošais.
@@ -142,7 +142,7 @@
                     <div class="lg:max-w-5xl space-y-5 mx-auto">
                         <div class="w-full space-y-3 md:flex md:space-y-0 md:space-x-5">
                             <div class="md:my-auto">
-                                <div class="w-fit h-fit bg-accent rounded-full border-gray-400 shadow-xl p-3 flex mx-auto">
+                                <div class="w-fit h-fit rounded-full border-gray-400 shadow-xl p-3 flex mx-auto" :style="{backgroundColor: this.color}">
                                     <img class="rounded-full m-auto" src="/img/amanda-elizabete-dureja.jpeg" alt="student">
                                 </div>
                             </div>
@@ -156,7 +156,7 @@
                         <hr class="bg-gray-800">
                         <div class="w-full space-y-3 md:flex md:flex-row-reverse md:space-y-0 md:space-x-5">
                             <div class="md:my-auto">
-                                <div class="w-fit h-fit bg-accent rounded-full border-gray-400 shadow-xl p-3 flex mx-auto">
+                                <div class="w-fit h-fit rounded-full border-gray-400 shadow-xl p-3 flex mx-auto" :style="{backgroundColor: this.color}">
                                     <img class="rounded-full m-auto" src="/img/inga-barvika.jpeg" alt="student">
                                 </div>
                             </div>
@@ -189,6 +189,18 @@ export default {
     name: "Home",
     components: {PrimaryButton, Modal, ApplicationLogo, Header, Link, Footer},
     props:{
+        banner: {
+            type: String,
+            default: '/img/banner.png'
+        },
+        color: {
+           type: String,
+           default: '#e085f9',
+        },
+        background: {
+            type: String,
+            default: '/img/bg.jpeg'
+        },
         events: Object,
         message: String,
         contacts: {

@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/config', [ConfigController::class, 'index'])->name('config');
     Route::post('/archive', [ConfigController::class, 'archive'])->name('archive');
     Route::post('/design', [ConfigController::class, 'design'])->name('design');
+    Route::get('/statistics/{type}', [ConfigController::class, 'getStatistics'])->name('config.statistics');
 
     Route::post('/mentees/remove/{mentor}', [MentorController::class, 'removeMentees'])->name('remove.mentees');
     Route::post('/mentor/confirm/{mentor}', [MentorController::class, 'confirmMentor'])->name('confirm.mentor');

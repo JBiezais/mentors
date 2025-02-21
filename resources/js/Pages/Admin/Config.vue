@@ -15,6 +15,11 @@
                 />
             </div>
         </div>
+        <div class="flex-grow lg:max-w-7xl xl:mx-auto py-5 w-full mx-10">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+                <Statistics/>
+            </div>
+        </div>
         <Footer :contacts="contacts"/>
     </div>
 </template>
@@ -38,10 +43,12 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 import Modal from "@/Components/Modal.vue";
 import PreparationForNewYear from "@/Components/PreparationForNewYear.vue";
 import ColorAndBannerConfig from "@/Components/ColorAndBannerConfig.vue";
+import Statistics from "@/Components/Forms/Statistics.vue";
 
 export default {
     name: "Settings",
     components: {
+        Statistics,
         ColorAndBannerConfig,
         PreparationForNewYear,
         Modal, SecondaryButton,

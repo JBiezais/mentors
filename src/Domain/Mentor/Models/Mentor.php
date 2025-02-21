@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Ramsey\Collection\Collection;
+use src\Domain\Faculty\Models\Faculty;
 use src\Domain\Mentor\Builders\MentorBuilder;
 use src\Domain\Student\Models\Student;
 
@@ -46,5 +47,10 @@ class Mentor extends Model
     public function students():HasMany
     {
         return $this->hasMany(Student::class);
+    }
+
+    public function faculty()
+    {
+        return $this->belongsTo(Faculty::class);
     }
 }

@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use Maatwebsite\Excel\Facades\Excel;
+use src\Domain\Config\Exports\FacultyMentorMenteeExport;
+use src\Domain\Config\Exports\YearlyParticipationExport;
 use src\Domain\Config\Models\Config;
 use src\Domain\Config\Requests\ConfigRequest;
 use src\Domain\Mail\Models\Mail;
@@ -47,6 +51,15 @@ class ConfigController extends Controller
         Config::query()->updateOrCreate(['type' => 'background'], ['value' => $background]);
 
         return Redirect::route('config');
+    }
+
+    public function getStatistics(Request $request, string $type)
+    {
+        return match ($type){
+            'facultyMentorMentee' => Excel::download(new FacultyMentorMenteeExport(), 'FacultyMentorMentee.xlsx'),
+            'yearlyParticipant' => Excel::download(new YearlyParticipationExport(), 'YearlyParticipationExport.xlsx'),
+            default => null
+        };
     }
 
     private function getFilePath(array $data, UploadFileAction $uploadFileAction): string

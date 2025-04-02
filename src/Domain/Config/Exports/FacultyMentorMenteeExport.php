@@ -5,6 +5,7 @@ namespace src\Domain\Config\Exports;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
+use src\Domain\Config\Sheets\FacultyMentorMenteeSheet;
 
 class FacultyMentorMenteeExport implements WithMultipleSheets
 {

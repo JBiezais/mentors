@@ -1,6 +1,6 @@
 <?php
 
-namespace src\Domain\Config\Exports;
+namespace src\Domain\Config\Sheets;
 
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -47,13 +47,13 @@ class FacultyMentorMenteeSheet implements FromCollection, WithHeadings, WithMapp
 
     public function headings(): array
     {
-        return ['Faculty Name', 'Number of Mentors', 'Number of Mentees'];
+        return ['Fakultātes nosaukums', 'Mentoru skaits', 'Mentorējamo skaits'];
     }
 
     public function map($row): array
     {
         return [
-            $row->title ?? 'Unknown',
+            $row->title ?? 'Nezināms',
             $row->mentors_count ?? 0,
             $row->students_count ?? 0,
         ];
@@ -115,12 +115,12 @@ class FacultyMentorMenteeSheet implements FromCollection, WithHeadings, WithMapp
         $comparisonPlot = new PlotArea(null, [$comparisonSeries]);
 
         return new Chart(
-            name: 'Comparison',
-            title: new Title('Mentors vs. Mentees per Faculty'),
+            name: 'Salīdzinājums',
+            title: new Title('Mentori un mentorējamie pēc fakultātēm'),
             legend: new Legend(),
             plotArea: $comparisonPlot,
-            xAxisLabel: new Title('Faculty'),
-            yAxisLabel: new Title('Count')
+            xAxisLabel: new Title('Fakultāte'),
+            yAxisLabel: new Title('Skaits')
         );
     }
 
@@ -137,8 +137,8 @@ class FacultyMentorMenteeSheet implements FromCollection, WithHeadings, WithMapp
         $mentorsPiePlot = new PlotArea(null, [$mentorsPieSeries]);
 
         return new Chart(
-            name: 'Mentors Distribution',
-            title: new Title('Mentors Distribution by Faculty'),
+            name: 'Mentoru sadalījums',
+            title: new Title('Mentoru sadalījums pa fakultātēm'),
             legend: new Legend(),
             plotArea: $mentorsPiePlot
         );
@@ -157,8 +157,8 @@ class FacultyMentorMenteeSheet implements FromCollection, WithHeadings, WithMapp
         $menteesPiePlot = new PlotArea(null, [$menteesPieSeries]);
 
         return  new Chart(
-            name: 'Mentees Distribution',
-            title: new Title('Mentees Distribution by Faculty'),
+            name: 'Mentorējamo sadalījums',
+            title: new Title('Mentorējamo sadalījums pa fakultātēm'),
             legend: new Legend(),
             plotArea: $menteesPiePlot
         );

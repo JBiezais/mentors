@@ -16,8 +16,6 @@ use PhpOffice\PhpSpreadsheet\Chart\DataSeriesValues;
 use PhpOffice\PhpSpreadsheet\Chart\Legend;
 use PhpOffice\PhpSpreadsheet\Chart\PlotArea;
 use PhpOffice\PhpSpreadsheet\Chart\Title;
-use src\Domain\Mentor\Models\Mentor;
-use src\Domain\Student\Models\Student;
 
 class YearlyParticipationExport implements FromCollection, WithHeadings, WithMapping, WithCharts, ShouldAutoSize, WithTitle
 {
@@ -53,7 +51,7 @@ class YearlyParticipationExport implements FromCollection, WithHeadings, WithMap
 
     public function headings(): array
     {
-        return ['Year', 'Number of Mentors', 'Number of Students'];
+        return ['Gads', 'Mentoru skaits', 'Studentu skaits'];
     }
 
     public function map($row): array
@@ -104,12 +102,12 @@ class YearlyParticipationExport implements FromCollection, WithHeadings, WithMap
         $legend = new Legend();
 
         $chart = new Chart(
-            name: 'Yearly Participation Chart',
-            title: new Title('Yearly Participants'),
+            name: 'Gada līdzdalības diagramma',
+            title: new Title('Gada dalībnieki'),
             legend: $legend,
             plotArea: $plot,
-            xAxisLabel: new Title('Year'),
-            yAxisLabel: new Title('Participants')
+            xAxisLabel: new Title('Gads'),
+            yAxisLabel: new Title('Dalībnieki')
         );
 
         $chart->setTopLeftPosition('E2');

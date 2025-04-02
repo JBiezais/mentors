@@ -5,8 +5,10 @@ namespace src\Domain\Mentor\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Ramsey\Collection\Collection;
+use src\Domain\Faculty\Models\Faculty;
 use src\Domain\Mentor\Builders\MentorBuilder;
 use src\Domain\Student\Models\Student;
 
@@ -15,7 +17,7 @@ use src\Domain\Student\Models\Student;
  */
 class Mentor extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     protected $fillable = [
         'faculty_id',
@@ -45,5 +47,10 @@ class Mentor extends Model
     public function students():HasMany
     {
         return $this->hasMany(Student::class);
+    }
+
+    public function faculty()
+    {
+        return $this->belongsTo(Faculty::class);
     }
 }

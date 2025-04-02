@@ -128,10 +128,15 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import InputError from "@/Components/InputError.vue";
 import Checkbox from "@/Components/Checkbox.vue";
 import {useForm} from "@inertiajs/vue3";
+import DangerButton from "@/Components/DangerButton.vue";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
+import Modal from "@/Components/Modal.vue";
 
 export default {
     name: "Settings",
     components: {
+        Modal, SecondaryButton,
+        DangerButton,
         Checkbox,
         InputError,
         PrimaryButton,
@@ -149,6 +154,7 @@ export default {
     },
     data(){
         return {
+            confirmingDataDeletion: false,
             form: useForm({
                 name: '',
                 email: '',
@@ -160,6 +166,7 @@ export default {
                 id: '',
                 _method: 'put'
             }),
+            emptyForm: useForm({})
         }
     },
     methods:{
@@ -176,6 +183,11 @@ export default {
                 preserveState: 'errors'
             })
         },
+        archiveData(){
+            this.emptyForm.post(route('archive'), {
+                preserveState: 'errors'
+            })
+        }
     },
 }
 </script>

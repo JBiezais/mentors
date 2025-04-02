@@ -11,6 +11,12 @@
         <link rel="icon" href="img/logo-icon.png">
 
         <!-- Scripts -->
+        <script>
+            window.Laravel = {
+                baseUrl: "{{ asset('') }}"
+            };
+        </script>
+
         @routes
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
         @inertiaHead

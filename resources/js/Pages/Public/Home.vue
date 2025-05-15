@@ -143,28 +143,28 @@
                         <div class="w-full space-y-3 md:flex md:space-y-0 md:space-x-5">
                             <div class="md:my-auto">
                                 <div class="w-fit h-fit rounded-full border-gray-400 shadow-xl p-3 flex mx-auto" :style="{backgroundColor: this.color}">
-                                    <img class="rounded-full m-auto" src="/img/amanda-elizabete-dureja.jpeg" alt="student">
+                                    <img class="rounded-full m-auto" src="/img/home/pers_1.jpeg" alt="student">
                                 </div>
                             </div>
                             <div class="md:w-2/3 md:flex md:flex-col md:justify-center md:space-y-3">
                                 <p class="text-gray-800 text-center md:text-right">
-                                    Vai atceries sevi kā pirmkursnieku - neziņas, kutinoša satraukuma un cerību pilnu? Uzsākt noslēpumainās un tik ilgi gaidītās studijas Rīgas Stradiņa universitātē var būt aizraujošs un tajā pašā laikā biedējošs lēciens neaizmirstamā piedzīvojumā. Tieši tāpēc ir noderīgi, ja blakus ir kāds pieredzējis ceļa biedrs, kas palīdzēs integrēties jaunajā vidē, būs drošs atbalsta plecs un uzticams pirmais draugs studentijā jeb vienā vārdā - mentors. Atceros, ka pirms diviem gadiem, iestājoties RSU, man nebija zināms neviens vecāka studiju gada studējošais, tāpēc nācās izprašņāt, ko mani vienaudži ir dzirdējuši par dzīvi universitātē. Tad es uzzināju par iespēju pieteikties Mentoru programmai, kas man sniedza cilvēku, kuru es nepazinu, bet kurš bija gatavs būt mans draugs un atbalsta plecs brīdī, kad apkārt man ir daudz svešu seju un neizdibināmu jautājumu. Nebaidies būt cilvēks, kas pirmais iepazīstinās jaunos studējošos ar studentijas dzīves karuseli, atbildēm uz miglainajiem jautājumiem, kas rosās katra pirmkursnieka prātā, kā arī iespējām, ko paver universitāte. Ja šobrīd esi daļiņa no RSU ģimenes, piesakies Mentoru programmai, palīdzi integrēties jaunām degošām dvēselēm un piepildi viņu sapni par Rīgas Stradiņa universitāti.
+                                    Pirmās dienas universitātē var aprakstīt šādi: “Bezlimita iespējas, tomēr nulle sapratnes, ko ar attiecīgajām iespējām darīt un kā tās pielietot ikdienā.” Tieši šajā kontekstā īstā veiksmes atslēga pirmajiem akadēmiskās dzīves soļiem ir Mentoru programma. Mentors ir tā persona, kurai starp intensīvajām nodarbībām un komplicētajiem mājasdarbiem allaž var piezvanīt vai vismaz aizsūtīt zīmīti ne tikai kā kolēģim, bet arī kā tuvam draugam. Mentors vienmēr atradīs pareizos vārdus, kurus teikt – arī brīžos, kad ne tikai kolokvija, bet pat maza iknedēļas testiņa sekmīga nokārtošana šķistu neiespējama. Ja jūti sevī dzirksti būt par tiltu par neziņu un drošību, starp apjukumu un skaidrību – tad šī ir tava zīme. Piesakies Mentoru programmai un kļūsti par daļu no tā, kas padara RSU vairāk nekā tikai universitāti – par vietu, kur rodas īstas draudzības, atklājas katra studenta paslēptais potenciāls un aug nākotnes līderi.
                                 </p>
-                                <p class="text-gray-400 text-sm md:text-right">- Amanda Elizabete Dūrēja, Medicīnas fakultāte, Studējošo pašpārvaldes Iekšējās sadarbības un cilvēkresursu virziena vadītāja.</p>
+                                <p class="text-gray-400 text-sm md:text-right">- Georgs Pimanovs, Medicīnas un Zobārstniecības fakultāte.</p>
                             </div>
                         </div>
                         <hr class="bg-gray-800">
                         <div class="w-full space-y-3 md:flex md:flex-row-reverse md:space-y-0 md:space-x-5">
                             <div class="md:my-auto">
                                 <div class="w-fit h-fit rounded-full border-gray-400 shadow-xl p-3 flex mx-auto" :style="{backgroundColor: this.color}">
-                                    <img class="rounded-full m-auto" src="/img/inga-barvika.jpeg" alt="student">
+                                    <img class="rounded-full m-auto" src="/img/home/pers_2.jpeg" alt="student">
                                 </div>
                             </div>
                             <div class="md:w-2/3 md:flex md:flex-col md:justify-center md:space-y-3">
                                 <p class="text-gray-800 text-center md:text-left">
-                                    Uzsākt studiju gaitas ir ne vien aizraujoši un vilinoši, bet reizēm arī nedaudz baisi un satraucoši, tā kā aiz universitātes durvīm paveras pavisam jauna pasaule ar saviem noteikumiem, kārtību un tradīcijām. Lai palīdzētu saglabāt sirdsmieru, tikt galā ar nesaprotamo jautājumu pinekļiem un pozitīvajām sajūtām ņemt virsroku, blakus lieti noder pieredzējis atbalsta plecs atsaucīga mentora veidolā. No sirds iesaku pieteikties mentoru programmai, lai palīdzētu jaunajiem studējošajiem ātrāk iejusties universitātes ikdienas virpulī, dotu iespēju uzzināt par plašajām iespējām, kur iesaistīties un radoši izpausies gan studiju ietvaros, gan arī ārpus tām. Kļūstot par mentoru, Tu atver durvis pirmkursniekiem uz jaunu, košu un piedzīvojumiem bagātu pasauli - Rīgas Stradiņa universitāti!
+                                    Pusotru gadu atpakaļ, uzsākot savas studijas Rīgas Stradiņa universitātē, mana dzīve it kā pagriezās pa 180 grādiem. Attapos pavisam jaunā pilsētā, jaunā kolektīvā un jaunās telpās, kurās vienlaicīgi notika tik daudz lietu, ka nevarēja izsekot līdzi. Visā šajā aklimatizācijas periodā sākotnēji bija sarežģīti uzsākt savu tālāko akadēmisko ceļu, tādēļ kaut arī novēloti, es atradu sev mentoru – personu, kas izskaidros jebkura studiju kursa organizāciju, dažādus pasākumus, kā arī padalīsies arī ar kādu konspektu, kas nereti palīdz studiju procesā. Pateicoties šai pozitīvai pieredzei, man palika studēt drošāk, jo atradu cilvēku, kam, pat rakstot svētdienas pusnaktī, varu lūgt padomu. Šī iemesla dēļ sapratu, ka man ir iespēja palīdzēt arī citiem, tāpat, kā reiz palīdzēja man. Šobrīd esmu mentors trīs ārvalstu studentiem un diviem latviešu studentiem, un es saņemu gandarījumu katrreiz, kad varu tiem palīdzēt.
                                 </p>
-                                <p class="text-gray-400 text-sm md:text-left">- Inga Barvika, Veselības un sporta zinātņu fakultāte.</p>
+                                <p class="text-gray-400 text-sm md:text-left">- Rolāns Vozņesenskis, Zobārstniecības fakultāte, LZSA Ārlietu virziena vadītājs.</p>
                             </div>
                         </div>
                     </div>

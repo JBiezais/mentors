@@ -16,7 +16,13 @@ class UploadFileAction{
     {
         $img = Image::make($file->path());
 
-        $fileName = Str::snake(time().$file->getClientOriginalName());
+        $originalName = $file->getClientOriginalName();
+        $timestamp = time();
+
+        $nameWithoutExtension = pathinfo($originalName, PATHINFO_FILENAME);
+        $extension = $file->getClientOriginalExtension();
+
+        $fileName = Str::snake($timestamp . '_' . $nameWithoutExtension) . '.' . $extension;
         $file->storeAs(self::IMAGE_PATH, $fileName);
 
         $filePath = self::IMAGE_PATH .'/'. $fileName;

@@ -3,7 +3,7 @@
         <Header v-if="$page.props.auth.user !== null"></Header>
         <div class="flex-grow lg:max-w-7xl mx-auto py-5">
             <div class="p-8 bg-gray-50 w-full space-y-5">
-                <FilterBar :view="view" :keyword="keyword" :type="type" :program="program" :faculty="faculty" :custom="close" @view="view = $event" @filter="getFilteredProps($event)" @open="close = 1" :faculties="faculties">
+                <FilterBar :view="view" :keyword="keyword" :type="type" :program="program" :faculty="faculty" :custom="close" @view="view = $event" @filter="getFilteredProps($event)" @open="close = true" :faculties="faculties">
                     <template v-slot:first>Apstiprinātie</template>
                     <template v-slot:second>Pieteikumi</template>
                 </FilterBar>
@@ -57,8 +57,8 @@
             </div>
         </div>
         <Footer :contacts="contacts"/>
+        <CustomMail @custom="createCustomMail($event)" @close="close = false" :show="close"></CustomMail>
     </div>
-    <CustomMail @custom="createCustomMail($event)" @close="close = 0" v-if="close"></CustomMail>
 </template>
 <style>
     @media (max-width: 486px){
@@ -94,7 +94,7 @@ export default {
     data(){
         return{
             view: 'grid',
-            close: 0,
+            close: false,
         }
     },
 

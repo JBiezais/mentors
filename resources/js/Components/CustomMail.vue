@@ -3,7 +3,7 @@
         <div class="p-6 space-y-5">
             <h1 class="text-xl font-semibold">Epasta ziņa 1</h1>
             <editor
-                api-key="asjef8xxim81si331ci5a80ypn35vkqxrjynu0xl5merr1yl"
+                api-key="kg9ubz7kwfz57eu4x20dvd1sfnd3o2h2pa7bc2hwkxbuv9x9"
                 v-model="form.content"
                 :init="{
                 height: 350,

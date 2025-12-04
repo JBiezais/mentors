@@ -2,6 +2,7 @@
 
 namespace src\Domain\Faculty\Models;
 
+use Database\Factories\FacultyFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,6 +14,11 @@ use src\Domain\Student\Models\Student;
 class Faculty extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected static function newFactory()
+    {
+        return FacultyFactory::new();
+    }
 
     protected $fillable = [
         'title',

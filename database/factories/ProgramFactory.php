@@ -3,12 +3,15 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use src\Domain\Program\Models\Program;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\src\Domain\Program\Models\Program>
  */
-class StudyProgramFactory extends Factory
+class ProgramFactory extends Factory
 {
+    protected $model = Program::class;
+
     /**
      * Define the model's default state.
      *
@@ -20,7 +23,6 @@ class StudyProgramFactory extends Factory
             'faculty_id' => fake()->numberBetween(1, 5),
             'title' => fake()->sentence(2),
             'code' => 'LPM',
-            'lriCode' => fake()->randomNumber(5),
             'level' => fake()->randomElement(['pamatstudijas', 'augstākā līmeņa studijas']),
         ];
     }

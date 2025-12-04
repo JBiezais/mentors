@@ -2,11 +2,10 @@
 
 namespace src\Domain\Faculty\Actions;
 
-use Illuminate\Database\Eloquent\Model;
 use src\Domain\Faculty\Models\Faculty;
 use src\Domain\Program\Models\Program;
 
-class FacultyDeleteAction extends Model
+class FacultyDeleteAction
 {
     public static function execute(Faculty $faculty):void
     {

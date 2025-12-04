@@ -2,10 +2,9 @@
 
 namespace src\Domain\Program\Actions;
 
-use Illuminate\Database\Eloquent\Model;
 use src\Domain\Program\Models\Program;
 
-class ProgramDeleteAction extends Model
+class ProgramDeleteAction
 {
     public static function execute(Program $program):void
     {

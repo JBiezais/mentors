@@ -28,7 +28,7 @@
 import Footer from "@/Components/Footer.vue";
 import FilterBar from "@/Pages/Admin/FilterBar.vue";
 import Header from "@/Components/Header.vue";
-import {Inertia} from "@inertiajs/inertia";
+import { router, useForm } from "@inertiajs/vue3";
 import UpdatePasswordForm from "@/Pages/Profile/Partials/UpdatePasswordForm.vue";
 import DeleteUserForm from "@/Pages/Profile/Partials/DeleteUserForm.vue";
 import UpdateProfileInformationForm from "@/Pages/Profile/Partials/UpdateProfileInformationForm.vue";
@@ -37,7 +37,6 @@ import TextInput from "@/Components/TextInput.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import InputError from "@/Components/InputError.vue";
 import Checkbox from "@/Components/Checkbox.vue";
-import {useForm} from "@inertiajs/vue3";
 import DangerButton from "@/Components/DangerButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import Modal from "@/Components/Modal.vue";

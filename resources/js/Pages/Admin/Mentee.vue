@@ -68,8 +68,7 @@
 import FilterBar from "@/Pages/Admin/FilterBar.vue";
 import Header from "@/Components/Header.vue";
 import Footer from "@/Components/Footer.vue";
-import {Inertia} from "@inertiajs/inertia";
-import {Link} from '@inertiajs/vue3';
+import { router, Link } from "@inertiajs/vue3";
 import CustomMail from "@/Components/CustomMail.vue";
 
 export default {
@@ -95,7 +94,7 @@ export default {
     },
     methods:{
         getFilteredProps($event){
-            Inertia.get(route('student.index'), $event, {
+            router.get(route('student.index'), $event, {
                 preserveState: false
             })
         },
@@ -103,7 +102,7 @@ export default {
             return this.programs.find(program => program.id === id).title
         },
         deleteStudent(id){
-          Inertia.delete(route('student.destroy', id), {
+          router.delete(route('student.destroy', id), {
               preserveState: false
           })
         },
@@ -115,7 +114,7 @@ export default {
                     id: this.students.map(student => student.id)
                 }
             }
-            Inertia.post(route('sendCustom'), emailForm, {
+            router.post(route('sendCustom'), emailForm, {
                 preserveState: false
             })
         },

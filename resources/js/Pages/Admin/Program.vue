@@ -109,8 +109,7 @@
 <script>
 import Header from "@/Components/Header.vue";
 import Footer from "@/Components/Footer.vue";
-import {Link, router} from '@inertiajs/vue3';
-import {Inertia} from "@inertiajs/inertia";
+import { Link, router } from '@inertiajs/vue3';
 export default {
     name: "Program",
     components: {Footer, Header, Link},
@@ -145,33 +144,33 @@ export default {
     methods: {
         submitProgram(id){
             if(!this.programForm.id){
-                Inertia.post(route('programs.store'), this.programForm, {
+                router.post(route('programs.store'), this.programForm, {
                     preserveState: false
                 })
             }else{
-                Inertia.put(route('programs.update', id), this.programForm, {
+                router.put(route('programs.update', id), this.programForm, {
                     preserveState: false
                 })
             }
 
         },
         submitFaculty(){
-            Inertia.post(route('faculty.store'), this.facultyForm, {
+            router.post(route('faculty.store'), this.facultyForm, {
                 preserveState: false
             })
         },
         updateFaculty(){
-            Inertia.put(route('faculty.update', this.updateForm.id), this.updateForm, {
+            router.put(route('faculty.update', this.updateForm.id), this.updateForm, {
                 preserveState: false
             })
         },
         deleteFaculty(id){
-            Inertia.delete(route('faculty.destroy', id),{
+            router.delete(route('faculty.destroy', id),{
                 preserveState: false
             })
         },
         deleteProgram(id){
-            Inertia.delete(route('programs.destroy', id),{
+            router.delete(route('programs.destroy', id),{
                 preserveState: false,
             })
         },

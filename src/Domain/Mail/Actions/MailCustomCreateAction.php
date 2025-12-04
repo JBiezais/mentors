@@ -2,9 +2,7 @@
 
 namespace src\Domain\Mail\Actions;
 
-use Illuminate\Database\Eloquent\Model;
-
-class MailCustomCreateAction extends Model
+class MailCustomCreateAction
 {
     public static function execute(string $content, string $type, ?array $ids): void
     {

@@ -3,12 +3,15 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use src\Domain\Student\Models\Student;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\src\Domain\Student\Models\Student>
  */
 class StudentFactory extends Factory
 {
+    protected $model = Student::class;
+
     /**
      * Define the model's default state.
      *
@@ -19,7 +22,7 @@ class StudentFactory extends Factory
         return [
             'faculty_id' => 1,
             'program_id' => 1,
-            'mentor_id' => fake()->randomNumber(2),
+            'mentor_id' => null,
             'name' => fake()->firstName(),
             'lastName' => fake()->lastName(),
             'phone' => fake()->phoneNumber,

@@ -2,6 +2,8 @@
 
 namespace src\Domain\Program\Models;
 
+use Database\Factories\ProgramFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,7 +12,12 @@ use src\Domain\Student\Models\Student;
 
 class Program extends Model
 {
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
+
+    protected static function newFactory()
+    {
+        return ProgramFactory::new();
+    }
 
     protected $table = 'study_programs';
 

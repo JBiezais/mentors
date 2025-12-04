@@ -2,6 +2,7 @@
 
 namespace src\Domain\Mentor\Models;
 
+use Database\Factories\MentorFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -18,6 +19,11 @@ use src\Domain\Student\Models\Student;
 class Mentor extends Model
 {
     use HasFactory, Notifiable, SoftDeletes;
+
+    protected static function newFactory()
+    {
+        return MentorFactory::new();
+    }
 
     protected $fillable = [
         'faculty_id',

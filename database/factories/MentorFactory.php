@@ -3,12 +3,15 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use src\Domain\Mentor\Models\Mentor;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Mentor>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\src\Domain\Mentor\Models\Mentor>
  */
 class MentorFactory extends Factory
 {
+    protected $model = Mentor::class;
+
     /**
      * Define the model's default state.
      *
@@ -30,7 +33,9 @@ class MentorFactory extends Factory
             'lv' => fake()->boolean,
             'ru' => fake()->boolean,
             'en' => fake()->boolean,
-            'privacy' => 1
+            'privacy' => 1,
+            'status' => 0,
+            'key' => fake()->uuid(),
         ];
     }
 }

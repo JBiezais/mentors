@@ -2,10 +2,9 @@
 
 namespace src\Domain\Event\Actions;
 
-use Illuminate\Database\Eloquent\Model;
 use src\Domain\Event\Models\Event;
 
-class EventRemoveMentorTrainingFlagAction extends Model
+class EventRemoveMentorTrainingFlagAction
 {
     public static function fromAllExcept(Event $event):void
     {

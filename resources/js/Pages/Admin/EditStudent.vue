@@ -72,10 +72,9 @@
 </template>
 
 <script>
-import {Link} from '@inertiajs/vue3';
+import { Link, router } from '@inertiajs/vue3';
 import Header from "@/Components/Header.vue";
 import Footer from "@/Components/Footer.vue";
-import {Inertia} from "@inertiajs/inertia";
 import CustomMail from "@/Components/CustomMail.vue";
 export default {
     name: "EditStudent",
@@ -124,7 +123,7 @@ export default {
             return this.faculty.programs.find(program => program.id === id) || {title: ''}
         },
         deleteStudent(id){
-            Inertia.delete(route('student.destroy', id), {
+            router.delete(route('student.destroy', id), {
                 preserveState: false
             })
         },
@@ -132,12 +131,12 @@ export default {
             this.programs = this.faculties.find(faculty => faculty.id === this.form.faculty_id)
         },
         submitForm(id){
-            Inertia.put(route('student.update', id), this.form, {
+            router.put(route('student.update', id), this.form, {
                 preserveState: false,
             })
         },
         sendMentorData(id){
-            Inertia.post(route('sendMentorData', id), {}, {
+            router.post(route('sendMentorData', id), {}, {
                 preserveState: false
             })
         },
@@ -182,7 +181,7 @@ export default {
                     id: [this.student.id]
                 }
             }
-            Inertia.post(route('sendCustom'), emailForm, {
+            router.post(route('sendCustom'), emailForm, {
                 preserveState: false
             })
         },

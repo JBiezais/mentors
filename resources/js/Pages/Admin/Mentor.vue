@@ -69,8 +69,7 @@
 <script>
 import Footer from "@/Components/Footer.vue";
 import Header from "@/Components/Header.vue";
-import {Inertia} from "@inertiajs/inertia";
-import {Link} from '@inertiajs/vue3';
+import { router, Link } from "@inertiajs/vue3";
 import FilterBar from "@/Pages/Admin/FilterBar.vue";
 import CustomMail from "@/Components/CustomMail.vue";
 
@@ -100,7 +99,7 @@ export default {
 
     methods:{
         getFilteredProps($event){
-            Inertia.get(route('mentor.index'), $event, {
+            router.get(route('mentor.index'), $event, {
                 preserveState: false
             })
         },
@@ -118,12 +117,12 @@ export default {
                     id: this.mentors.map(mentor => mentor.id)
                 }
             }
-            Inertia.post(route('sendCustom'), emailForm, {
+            router.post(route('sendCustom'), emailForm, {
                 preserveState: false
             })
         },
         openMentor(id){
-            Inertia.get(route('mentor.edit', id))
+            router.get(route('mentor.edit', id))
         }
     }
 }

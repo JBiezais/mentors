@@ -133,9 +133,7 @@
 import FilterBar from "@/Pages/Admin/FilterBar.vue";
 import Header from "@/Components/Header.vue";
 import Footer from "@/Components/Footer.vue";
-import {useForm} from "@inertiajs/vue3";
-import {Link} from '@inertiajs/vue3';
-import {Inertia} from "@inertiajs/inertia";
+import { useForm, Link, router } from "@inertiajs/vue3";
 import CustomMail from "@/Components/CustomMail.vue";
 
 export default {
@@ -179,7 +177,7 @@ export default {
             return this.programs.find(program => program.id === id).title
         },
         deleteMentor(id){
-            Inertia.delete(route('mentor.destroy', id), {
+            router.delete(route('mentor.destroy', id), {
                 preserveState: false
             })
         },
@@ -188,17 +186,17 @@ export default {
             console.log(this.dropDownPrograms)
         },
         submitForm(id){
-            Inertia.put(route('mentor.update', id), this.form, {
+            router.put(route('mentor.update', id), this.form, {
                 preserveState: false,
             })
         },
         removeMentees(id){
-            Inertia.post(route('remove.mentees', id), {ids: this.mentees}, {
+            router.post(route('remove.mentees', id), {ids: this.mentees}, {
                 preserveState:false
             })
         },
         confirmMentor(id){
-            Inertia.post(route('confirm.mentor', id), {}, {
+            router.post(route('confirm.mentor', id), {}, {
                 preserveState: false
             })
         },
@@ -211,7 +209,7 @@ export default {
             }
         },
         sendMenteeData(id){
-            Inertia.post(route('sendMenteesData', id), {}, {
+            router.post(route('sendMenteesData', id), {}, {
                 preserveState: false
             })
         },
@@ -223,7 +221,7 @@ export default {
                     id: [this.mentor.id]
                 }
             }
-            Inertia.post(route('sendCustom'), emailForm, {
+            router.post(route('sendCustom'), emailForm, {
                 preserveState: false
             })
         },

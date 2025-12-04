@@ -2,10 +2,9 @@
 
 namespace src\Domain\Mentor\Actions;
 
-use Illuminate\Database\Eloquent\Model;
 use src\Domain\Mentor\Models\Mentor;
 
-class MentorDeleteAction extends Model
+class MentorDeleteAction
 {
     public static function execute(Mentor $mentor):void
     {

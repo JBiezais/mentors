@@ -2,13 +2,12 @@
 
 namespace src\Domain\Student\Actions;
 
-use Illuminate\Database\Eloquent\Model;
 use src\Domain\Mail\Actions\MailMenteeDataCreateAction;
 use src\Domain\Mail\Actions\MailMentorDataCreateAction;
 use src\Domain\Student\DTO\StudentUpdateData;
 use src\Domain\Student\Models\Student;
 
-class StudentUpdateAction extends Model
+class StudentUpdateAction
 {
     public static function execute(Student $student, StudentUpdateData $data): void
     {

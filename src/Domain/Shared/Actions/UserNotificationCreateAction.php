@@ -2,10 +2,9 @@
 
 namespace src\Domain\Shared\Actions;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Session;
 
-class UserNotificationCreateAction extends Model
+class UserNotificationCreateAction
 {
     public static function execute(string $title, string $message):void
     {

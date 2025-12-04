@@ -2,11 +2,10 @@
 
 namespace src\Domain\Event\Actions;
 
-use Illuminate\Database\Eloquent\Model;
 use src\Domain\Event\DTO\EventCreateData;
 use src\Domain\Event\Models\Event;
 
-class EventCreateAction extends Model
+class EventCreateAction
 {
     public static function execute(EventCreateData $data):void
     {

@@ -1,21 +1,19 @@
 <?php
 
-
 namespace src\Domain\Shared\Actions;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
-class UploadFileAction{
-
+class UploadFileAction
+{
     const IMAGE_PATH = 'image';
     const CROPPED_IMAGE_PATH = 'image/cropped';
 
     public function upload(UploadedFile $file, bool $resize = true): bool|string
     {
-        $img = Image::make($file->path());
-
         $originalName = $file->getClientOriginalName();
         $timestamp = time();
 
@@ -25,17 +23,16 @@ class UploadFileAction{
         $fileName = Str::snake($timestamp . '_' . $nameWithoutExtension) . '.' . $extension;
         $file->storeAs(self::IMAGE_PATH, $fileName);
 
-        $filePath = self::IMAGE_PATH .'/'. $fileName;
+        $filePath = self::IMAGE_PATH . '/' . $fileName;
 
-        if($resize){
-            $filePath = self::CROPPED_IMAGE_PATH.'/'.$fileName;
+        if ($resize) {
+            $filePath = self::CROPPED_IMAGE_PATH . '/' . $fileName;
 
-            $img->resize(400, 400, function ($const) {
-                $const->aspectRatio();
-            })->crop(400, 400)->save($filePath);
+            $manager = new ImageManager(new Driver());
+            $img = $manager->read($file->path());
+            $img->cover(400, 400)->save(storage_path('app/' . $filePath));
         }
 
         return $filePath;
-
     }
 }

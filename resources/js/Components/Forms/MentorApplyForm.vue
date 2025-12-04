@@ -117,9 +117,8 @@
 </template>
 
 <script>
-import {Inertia} from "@inertiajs/inertia";
+import { router, useForm } from "@inertiajs/vue3";
 import InputError from "@/Components/InputError.vue";
-import { useForm } from '@inertiajs/vue3'
 
 export default {
     name: "MentorApplyForm",

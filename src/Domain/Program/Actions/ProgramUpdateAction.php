@@ -2,11 +2,10 @@
 
 namespace src\Domain\Program\Actions;
 
-use Illuminate\Database\Eloquent\Model;
 use src\Domain\Program\DTO\ProgramUpdateData;
 use src\Domain\Program\Models\Program;
 
-class ProgramUpdateAction extends Model
+class ProgramUpdateAction
 {
     public static function execute(Program $program, ProgramUpdateData $data):void
     {

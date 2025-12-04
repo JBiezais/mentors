@@ -3,11 +3,10 @@
 namespace src\Domain\Event\Actions;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use src\Domain\Event\DTO\EventUpdateData;
 use src\Domain\Event\Models\Event;
 
-class EventUpdateAction extends Model
+class EventUpdateAction
 {
     public static function execute(Event $event, EventUpdateData $data):void
     {

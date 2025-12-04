@@ -2,10 +2,9 @@
 
 namespace src\Domain\Event\Actions;
 
-use Illuminate\Database\Eloquent\Model;
 use src\Domain\Event\Models\Event;
 
-class EventDeleteAction extends Model
+class EventDeleteAction
 {
     public static function execute(Event $event):void
     {

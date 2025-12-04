@@ -84,7 +84,7 @@
 import Footer from "@/Components/Footer.vue";
 import FilterBar from "@/Pages/Admin/FilterBar.vue";
 import Header from "@/Components/Header.vue";
-import {Inertia} from "@inertiajs/inertia";
+import { router } from "@inertiajs/vue3";
 
 export default {
     name: "Events",
@@ -115,18 +115,18 @@ export default {
     methods:{
         submitEvent(){
             if(!this.form.id){
-                Inertia.post(route('event.store'), this.form, {
+                router.post(route('event.store'), this.form, {
                     preserveState: false
                 })
             }else{
-                Inertia.put(route('event.update', this.form.id), this.form, {
+                router.put(route('event.update', this.form.id), this.form, {
                     preserveState: false
                 })
             }
 
         },
         deleteProgram(id){
-            Inertia.delete(route('event.destroy', id), {
+            router.delete(route('event.destroy', id), {
                 preserveState: false
             })
         }

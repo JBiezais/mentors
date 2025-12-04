@@ -17,7 +17,6 @@ use src\Domain\Mail\Models\Mail;
 use src\Domain\Mentor\Models\Mentor;
 use src\Domain\Student\Models\Student;
 use src\Domain\User\Models\User;
-use Symfony\Component\Console\Command\Command as CommandAlias;
 
 class SendEmailsCommand extends Command
 {
@@ -87,7 +86,7 @@ class SendEmailsCommand extends Command
                 });
             });
 
-        return CommandAlias::SUCCESS;
+        return Command::SUCCESS;
     }
 
     /**

@@ -2,9 +2,7 @@
 
 namespace src\Domain\Mail\Actions;
 
-use Illuminate\Database\Eloquent\Model;
-
-class MailMenteeDataCreateAction extends Model
+class MailMenteeDataCreateAction
 {
     public static function execute(?array $mentor_ids = null, ?array $student_ids = null):void
     {

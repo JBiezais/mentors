@@ -1,19 +1,22 @@
 <template>
-    <div class="min-h-screen flex flex-col">
+    <div class="min-h-screen flex flex-col bg-gray-50">
         <Header v-if="$page.props.auth.user !== null"></Header>
-        <div class="w-full p-8 flex-grow" :style="{backgroundImage: `url('${this.getImageUrl(background)}')`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}">
-            <div class="rounded-xl bg-gray-100 p-5 space-y-5 text-gray-800 md:max-w-3xl mx-auto">
-                <h1 class="text-2xl font-semibold">Gribu sev Mentoru!</h1>
-                <p class="text-gray-500">
-                    Vecāku studiju gadu studējošais jeb Mentors palīdzēs Tev iejusties studiju vidē un veiksmīgi uzsākt studijas! Aizpildi anketu par sevi, lai Mentors varētu ar Tevi sazināties! Ievadītie dati tiks izmantoti tikai programmas ietvaros un netiks izpausti trešajām personām.
-                </p>
-
-                <MentorRequestForm :faculties="faculties" :mentors="mentors"></MentorRequestForm>
+        <main class="flex-grow py-12 md:py-16 px-4">
+            <div class="max-w-3xl mx-auto">
+                <div class="rounded-2xl bg-white p-6 md:p-8 shadow-md border border-gray-100 border-l-4 border-l-accent-500">
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Gribu sev Mentoru!</h1>
+                    <p class="text-gray-600 leading-relaxed mb-2">
+                        Vecāku studiju gadu studējošais jeb Mentors palīdzēs Tev iejusties studiju vidē un veiksmīgi uzsākt studijas!
+                    </p>
+                    <p class="text-gray-500 text-sm mb-6">
+                        Aizpildi anketu par sevi, lai Mentors varētu ar Tevi sazināties! Ievadītie dati tiks izmantoti tikai programmas ietvaros un netiks izpausti trešajām personām.
+                    </p>
+                    <MentorRequestForm :faculties="faculties" :mentors="mentors"></MentorRequestForm>
+                </div>
             </div>
-        </div>
+        </main>
         <Footer :contacts="contacts"/>
     </div>
-
 </template>
 
 <script>
@@ -23,28 +26,11 @@ import Header from "@/Components/Header.vue";
 
 export default {
     name: "Student",
-    components: {Header, MentorRequestForm, Footer},
-    props:{
-        background: {
-            type: String,
-            default: '/img/bg.jpeg'
-        },
+    components: { Header, MentorRequestForm, Footer },
+    props: {
         faculties: Object,
         mentors: Object,
-        contacts: {
-            email: String,
-            phone: String
-        }
-    },
-    methods: {
-        getImageUrl(imagePath)
-        {
-            return window.Laravel.baseUrl+imagePath
-        },
+        contacts: Object
     }
-}
+};
 </script>
-
-<style scoped>
-
-</style>

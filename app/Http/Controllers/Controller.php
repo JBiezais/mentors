@@ -10,6 +10,8 @@ use Inertia\Inertia;
 use Inertia\Response;
 use src\Domain\Config\Models\Config;
 use src\Domain\Event\Models\Event;
+use src\Domain\Faculty\Models\Faculty;
+use src\Domain\Mentor\Models\Mentor;
 use src\Domain\User\Models\User;
 
 class Controller extends BaseController
@@ -22,12 +24,16 @@ class Controller extends BaseController
 
         $events = Event::query()->where('date', '>' ,Carbon::now()->subDay())->orderBy('date')->get();
         $configs = Config::query()->whereIn('type', ['banner', 'color', 'background'])->select(['type', 'value'])->get();
+        $faculties = Faculty::query()->with('programs')->get();
+        $mentors = Mentor::query()->where('status', 1)->withCount('students')->get();
 
-        return Inertia::render('Public/Home', [
+        return Inertia::render('Public/home/Home', [
             'color' => $configs->where('type', 'color')->first()?->value,
             'banner' => $configs->where('type', 'banner')->first()?->value,
             'background' => $configs->where('type', 'background')->first()?->value,
             'events' => $events,
+            'faculties' => $faculties,
+            'mentors' => $mentors,
             'message' => $message,
             'contacts' => User::query()->select(['phone', 'email'])->where('use', 1)->first()
         ]);

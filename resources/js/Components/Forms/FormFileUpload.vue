@@ -33,7 +33,7 @@ const triggerFileSelect = () => fileInput.value?.click();
 </script>
 
 <template>
-    <label class="flex flex-col">
+    <div class="flex flex-col">
         <span v-if="label" class="text-sm font-medium text-gray-700 mb-1">{{ label }}<span v-if="required" class="text-red-500 ml-0.5">*</span></span>
         <div
             role="button"
@@ -58,9 +58,10 @@ const triggerFileSelect = () => fileInput.value?.click();
                 type="file"
                 :accept="accept"
                 class="sr-only"
+                @click.stop
                 @change="updatePreview"
             />
         </div>
         <InputError class="mt-1" :message="error" />
-    </label>
+    </div>
 </template>

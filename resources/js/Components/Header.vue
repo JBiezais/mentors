@@ -16,25 +16,25 @@
                     <!-- Navigation Links -->
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <NavLink :href="route('home')" :active="route().current('home')">
-                            Galvenā lapa
+                            {{ $t('header.nav.home') }}
                         </NavLink>
                         <NavLink :href="route('mentor.index')" :active="route().current('mentor.index')">
-                            Mentori
+                            {{ $t('header.nav.mentors') }}
                         </NavLink>
                         <NavLink :href="route('student.index')" :active="route().current('student.index')">
-                            Mentorējamie
+                            {{ $t('header.nav.mentees') }}
                         </NavLink>
                         <NavLink :href="route('programs.index')" :active="route().current('programs.index')">
-                            Studiju programmas
+                            {{ $t('header.nav.programs') }}
                         </NavLink>
                         <NavLink :href="route('event.index')" :active="route().current('event.index')">
-                            Pasākumi
+                            {{ $t('header.nav.events') }}
                         </NavLink>
                         <NavLink :href="route('users.index')" :active="route().current('users.index')">
-                            Lietotāji
+                            {{ $t('header.nav.users') }}
                         </NavLink>
                         <NavLink :href="route('config')" :active="route().current('config')">
-                            Konfigurācija
+                            {{ $t('header.nav.config') }}
                         </NavLink>
                     </div>
                 </div>
@@ -68,9 +68,9 @@
                             </template>
 
                             <template #content>
-                                <DropdownLink :href="route('profile.edit')"> Profils </DropdownLink>
+                                <DropdownLink :href="route('profile.edit')"> {{ $t('header.dropdown.profile') }} </DropdownLink>
                                 <DropdownLink :href="route('logout')" method="post" as="button">
-                                    Izrakstīties
+                                    {{ $t('header.dropdown.logout') }}
                                 </DropdownLink>
                             </template>
                         </Dropdown>
@@ -117,25 +117,25 @@
         >
             <div class="pt-2 pb-3 space-y-1">
                 <ResponsiveNavLink :href="route('home')" :active="route().current('home')">
-                    Galvenā lapa
+                    {{ $t('header.nav.home') }}
                 </ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('mentor.index')" :active="route().current('mentor.index')">
-                    Mentori
+                    {{ $t('header.nav.mentors') }}
                 </ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('student.index')" :active="route().current('student.index')">
-                    Mentorējamie
+                    {{ $t('header.nav.mentees') }}
                 </ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('programs.index')" :active="route().current('programs.index')">
-                    Studiju programmas
+                    {{ $t('header.nav.programs') }}
                 </ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('event.index')" :active="route().current('event.index')">
-                    Pasākumi
+                    {{ $t('header.nav.events') }}
                 </ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('users.index')" :active="route().current('users.index')">
-                    Lietotāji
+                    {{ $t('header.nav.users') }}
                 </ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('config')" :active="route().current('config')">
-                    Konfigurācija
+                    {{ $t('header.nav.config') }}
                 </ResponsiveNavLink>
             </div>
 

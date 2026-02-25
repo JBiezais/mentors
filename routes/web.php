@@ -25,6 +25,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [Controller::class, 'index'])->name('home');
 
+Route::get('/locale/{locale}', function (string $locale) {
+    if (in_array($locale, ['lv', 'en'])) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+})->name('locale.switch');
+
 Route::resource('mentor', MentorController::class)->only('store');
 Route::resource('student', StudentsController::class)->only('store');
 Route::get('/mentor/apply', [MentorController::class, 'create'])->name('mentor.create');

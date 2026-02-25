@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3 class="text-2xl md:text-3xl lg:text-4xl font-medium text-gray-900 tracking-tight text-center">Pieteikties</h3>
+        <h3 class="text-2xl md:text-3xl lg:text-4xl font-medium text-gray-900 tracking-tight text-center">{{ $t('apply.title') }}</h3>
         <div
             role="tablist"
             class="flex mt-6 mb-8 justify-center"
@@ -17,7 +17,7 @@
                     ]"
                     @click="setTab('mentor')"
                 >
-                    Gribu būt Mentors!
+                    {{ $t('apply.tabMentor') }}
                 </button>
                 <button
                     role="tab"
@@ -30,7 +30,7 @@
                     ]"
                     @click="setTab('mentee')"
                 >
-                    Gribu sev Mentoru!
+                    {{ $t('apply.tabMentee') }}
                 </button>
             </div>
         </div>

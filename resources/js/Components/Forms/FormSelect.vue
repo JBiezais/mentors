@@ -146,7 +146,7 @@ const handleKeydown = (e) => {
                         v-if="displayOptions.length === 0"
                         class="px-3 py-2.5 text-sm text-gray-400"
                     >
-                        Nav pieejamu opciju
+                        {{ $t('common.noOptions') }}
                     </div>
                 </div>
             </div>

@@ -21,6 +21,8 @@
     },
     "dependencies": {
         "@tinymce/tinymce-vue": "^5.1.0",
-        "lucide-vue-next": "^0.575.0"
+        "lucide-vue-next": "^0.575.0",
+        "swiper": "^12.1.2",
+        "vue-i18n": "^11.2.8"
     }
 }

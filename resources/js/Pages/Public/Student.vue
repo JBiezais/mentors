@@ -1,7 +1,7 @@
 <template>
     <div class="min-h-screen flex flex-col bg-gray-50">
         <Header v-if="$page.props.auth.user !== null"></Header>
-        <main class="flex-grow py-12 md:py-16 px-4">
+        <main class="flex-grow py-12 md:py-16 px-4 sm:px-6 md:px-8">
             <div class="max-w-3xl mx-auto">
                 <div class="rounded-2xl bg-white p-6 md:p-8 shadow-md border border-gray-100 border-l-4 border-l-accent-500">
                     <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Gribu sev Mentoru!</h1>

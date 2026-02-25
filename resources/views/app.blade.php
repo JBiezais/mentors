@@ -13,7 +13,8 @@
         <!-- Scripts -->
         <script>
             window.Laravel = {
-                baseUrl: "{{ asset('') }}"
+                baseUrl: "{{ asset('') }}",
+                locale: @json(app()->getLocale())
             };
         </script>
 

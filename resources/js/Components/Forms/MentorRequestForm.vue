@@ -10,14 +10,14 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <FormInput
                                 :icon="User"
-                                label="Vārds"
+                                :label="$t('mentorRequest.labels.name')"
                                 v-model="form.name"
                                 :error="errors?.name"
                                 required
                             />
                             <FormInput
                                 :icon="User"
-                                label="Uzvārds"
+                                :label="$t('mentorRequest.labels.lastName')"
                                 v-model="form.lastName"
                                 :error="errors?.lastName"
                                 required
@@ -26,7 +26,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <FormInput
                                 :icon="Phone"
-                                label="Telefona numurs"
+                                :label="$t('mentorRequest.labels.phone')"
                                 v-model="form.phone"
                                 :error="errors?.phone"
                                 type="tel"
@@ -34,7 +34,7 @@
                             />
                             <FormInput
                                 :icon="Mail"
-                                label="E-pasts"
+                                :label="$t('mentorRequest.labels.email')"
                                 v-model="form.email"
                                 :error="errors?.email"
                                 type="email"
@@ -47,20 +47,20 @@
                     <template v-else-if="currentStep === 2">
                         <FormSelect
                             :icon="GraduationCap"
-                            label="Fakultāte"
+                            :label="$t('mentorRequest.labels.faculty')"
                             v-model="form.faculty_id"
                             :error="errors?.faculty_id"
                             :options="facultyOptions"
-                            placeholder="Izvēlieties fakultāti"
+                            :placeholder="$t('mentorRequest.placeholders.faculty')"
                             required
                         />
                         <FormSelect
                             :icon="BookOpen"
-                            label="Studiju programma"
+                            :label="$t('mentorRequest.labels.program')"
                             v-model="form.program_id"
                             :error="errors?.program_id"
                             :options="programOptions"
-                            placeholder="Izvēlieties studiju programmu"
+                            :placeholder="$t('mentorRequest.placeholders.program')"
                             required
                         />
                     </template>
@@ -69,19 +69,19 @@
                     <template v-else-if="currentStep === 3">
                         <FormTextarea
                             :icon="MessageSquare"
-                            label="Komentāri"
+                            :label="$t('mentorRequest.labels.comments')"
                             v-model="form.comment"
                             :error="errors?.comment"
                             :rows="3"
-                            placeholder="Papildu komentāri (pēc vēlēšanās)..."
+                            :placeholder="$t('mentorRequest.placeholders.comments')"
                         />
                         <FormSelect
                             :icon="Languages"
-                            label="Kurā valodā vēlies runāt ar mentoru?"
+                            :label="$t('mentorRequest.labels.languageQuestion')"
                             v-model="form.lang"
                             :error="errors?.lang"
                             :options="langOptions"
-                            placeholder="Izvēlieties valodu"
+                            :placeholder="$t('mentorRequest.placeholders.language')"
                             required
                         />
                     </template>
@@ -89,17 +89,17 @@
                     <!-- Step 4: Mentor selection & Submit -->
                     <template v-else-if="currentStep === 4">
                         <div class="text-center md:text-left text-xl font-semibold" v-if="canShowMentors">
-                            Izvēlies mentoru:
+                            {{ $t('mentorRequest.mentorSelection.chooseMentor') }}
                             <div class="md:grid md:grid-cols-2 md:gap-5 mt-5">
                                 <div class="col-span-2">
                                     <label class="flex text-base space-x-5 items-center cursor-pointer" @click="form.mentor_id = ''">
                                         <input type="checkbox" class="rounded border-gray-300 text-accent-500 focus:ring-accent-500/20 w-4 h-4" :checked="!form.mentor_id" readonly tabindex="-1">
-                                        <span class="text-sm font-medium text-gray-700">Jebkurš mentors</span>
+                                        <span class="text-sm font-medium text-gray-700">{{ $t('mentorRequest.mentorSelection.anyMentor') }}</span>
                                     </label>
                                 </div>
                                 <div class="col-span-2" v-if="displayMentors.length === 0">
                                     <p class="text-base">
-                                        Diemžēl Tavā studiju programmā <strong>neviens Mentors šobrīd nav pieejams</strong>, taču nebēdā! Mēģināsim Tev piešķirt Mentoru no citas studiju programmas, kurš tāpat spēs pastāstīt par studiju procesu uzsākot mācības RSU!<br/>
+                                        {{ $t('mentorRequest.mentorSelection.noMentorsAvailable') }}<br/>
                                     </p>
                                 </div>
                                 <div
@@ -112,28 +112,28 @@
                                     <img class="rounded-lg m-auto w-full h-auto" :src="'/'+mentor.img" alt="mentor">
                                     <div class="text-center text-lg">
                                         <h1>{{ mentor.name }} {{ mentor.lastName }}</h1>
-                                        <p class="text-gray-500 italic text-sm">{{ mentor.year }}. gads</p>
+                                        <p class="text-gray-500 italic text-sm">{{ $t('mentorRequest.yearDisplay', { year: mentor.year }) }}</p>
                                     </div>
                                     <div class="text-center font-semibold text-base md:text-left">
-                                        Par sevi:
+                                        {{ $t('mentorRequest.mentorSelection.aboutMe') }}
                                         <p v-if="showFullAbout !== mentor.id" @click.stop="showFullAbout = mentor.id" class="font-medium">
                                             {{ mentor.about?.length > 200 ? mentor.about.substring(0, 200) + '...' : mentor.about }}
                                         </p>
                                         <p v-else @click.stop="showFullAbout = null" class="font-medium">{{ mentor.about }}</p>
                                     </div>
                                     <div class="text-center font-semibold text-base md:text-left">
-                                        Kāpēc pieteicos mentorēt:
+                                        {{ $t('mentorRequest.mentorSelection.whyMentor') }}
                                         <p v-if="showFullWhy !== mentor.id" @click.stop="showFullWhy = mentor.id" class="font-medium">
                                             {{ mentor.why?.length > 200 ? mentor.why.substring(0, 200) + '...' : mentor.why }}
                                         </p>
                                         <p v-else @click.stop="showFullWhy = null" class="font-medium">{{ mentor.why }}</p>
                                     </div>
                                     <div class="flex text-center font-semibold text-base">
-                                        Valodas:
+                                        {{ $t('mentorRequest.mentorSelection.languages') }}
                                         <h1 class="ml-2 space-x-3 font-medium">
-                                            <span v-if="mentor.lv">Latviešu</span>
-                                            <span v-if="mentor.ru">Krievu</span>
-                                            <span v-if="mentor.en">Angļu</span>
+                                            <span v-if="mentor.lv">{{ $t('mentorRequest.languages.lv') }}</span>
+                                            <span v-if="mentor.ru">{{ $t('mentorRequest.languages.ru') }}</span>
+                                            <span v-if="mentor.en">{{ $t('mentorRequest.languages.en') }}</span>
                                         </h1>
                                     </div>
                                 </div>
@@ -158,14 +158,14 @@
                 class="w-full px-6 py-2.5 bg-accent-500 hover:bg-accent-600 text-white rounded-lg font-medium transition-colors"
                 @click="nextStep"
             >
-                Turpināt
+                {{ $t('mentorRequest.buttons.continue') }}
             </button>
             <button
                 v-if="currentStep === 4"
                 type="submit"
                 class="w-full px-6 py-2.5 bg-accent-500 hover:bg-accent-600 text-white rounded-lg font-medium transition-colors"
             >
-                Nosūtīt pieteikumu
+                {{ $t('mentorRequest.buttons.submit') }}
             </button>
             <button
                 v-if="currentStep > 1"
@@ -173,7 +173,7 @@
                 class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 font-medium transition-colors"
                 @click="prevStep"
             >
-                Atpakaļ
+                {{ $t('mentorRequest.buttons.back') }}
             </button>
         </div>
     </form>
@@ -221,18 +221,14 @@ export default {
         return {
             currentStep: 1,
             transitionDir: 'next',
+            stepErrors: {},
             showFullAbout: null,
             showFullWhy: null,
-            steps: [
-                { id: 1, label: 'Personīgie dati' },
-                { id: 2, label: 'Studijas' },
-                { id: 3, label: 'Par sevi' },
-                { id: 4, label: 'Mentors un nosūtīt' },
-            ],
-            langOptions: [
-                { value: 0, label: 'Latviešu' },
-                { value: 1, label: 'Krievu' },
-                { value: 2, label: 'Angļu' },
+            stepKeys: [
+                { id: 1, labelKey: 'mentorRequest.steps.personal' },
+                { id: 2, labelKey: 'mentorRequest.steps.studies' },
+                { id: 3, labelKey: 'mentorRequest.steps.about' },
+                { id: 4, labelKey: 'mentorRequest.steps.mentorSubmit' },
             ],
             form: useForm({
                 name: '',
@@ -249,22 +245,42 @@ export default {
         };
     },
     computed: {
+        steps() {
+            return this.stepKeys.map((s) => ({ id: s.id, label: this.$t(s.labelKey) }));
+        },
+        langOptions() {
+            return [
+                { value: 0, label: this.$t('mentorRequest.languages.lv') },
+                { value: 1, label: this.$t('mentorRequest.languages.ru') },
+                { value: 2, label: this.$t('mentorRequest.languages.en') },
+            ];
+        },
         errors() {
-            return this.$page?.props?.errors || {};
+            return { ...(this.$page?.props?.errors || {}), ...this.stepErrors };
         },
         transitionName() {
             return 'slide-' + this.transitionDir;
         },
         facultyOptions() {
-            return (this.faculties || []).map((f) => ({ value: f.id, label: f.title }));
+            return (this.faculties || []).map((f) => ({
+                value: f.id,
+                label: f.code && this.$te(`faculties.${f.code}`)
+                    ? this.$t(`faculties.${f.code}`)
+                    : f.title,
+            }));
         },
         programOptions() {
             const faculty = this.faculties?.find((f) => f.id == this.form.faculty_id);
             const programs = faculty?.programs || [];
-            return programs.map((p) => ({
-                value: p.id,
-                label: `${p.title} (${p.level || ''})`,
-            }));
+            return programs.map((p) => {
+                const baseLabel = p.code && this.$te(`programs.${p.code}`)
+                    ? this.$t(`programs.${p.code}`)
+                    : p.title;
+                return {
+                    value: p.id,
+                    label: `${baseLabel} (${p.level || ''})`,
+                };
+            });
         },
         canShowMentors() {
             return this.form.faculty_id !== 'default' &&
@@ -286,7 +302,7 @@ export default {
             });
         },
         consentLabel() {
-            return 'Piekrītu savu datu apstrādāšanai saskaņā ar datu izmantošanas politiku';
+            return this.$t('mentorRequest.consent');
         },
     },
     methods: {
@@ -314,12 +330,39 @@ export default {
                     return true;
             }
         },
+        getStepErrors(step) {
+            const err = {};
+            switch (step) {
+                case 1:
+                    if (!this.form.name?.trim()) err.name = this.$t('mentorRequest.errors.name');
+                    if (!this.form.lastName?.trim()) err.lastName = this.$t('mentorRequest.errors.lastName');
+                    if (!this.form.phone?.trim()) err.phone = this.$t('mentorRequest.errors.phone');
+                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.form.email)) err.email = this.$t('mentorRequest.errors.email');
+                    break;
+                case 2:
+                    if (this.form.faculty_id === 'default') err.faculty_id = this.$t('mentorRequest.errors.faculty');
+                    if (this.form.program_id === 'default') err.program_id = this.$t('mentorRequest.errors.program');
+                    break;
+                case 3:
+                    if (this.form.lang === null || this.form.lang === undefined) err.lang = this.$t('mentorRequest.errors.language');
+                    break;
+                case 4:
+                    if (!this.form.privacy) err.privacy = this.$t('mentorRequest.errors.privacy');
+                    break;
+            }
+            return err;
+        },
         nextStep() {
-            if (!this.validateStep(this.currentStep)) return;
+            if (!this.validateStep(this.currentStep)) {
+                this.stepErrors = this.getStepErrors(this.currentStep);
+                return;
+            }
+            this.stepErrors = {};
             this.transitionDir = 'next';
             this.currentStep++;
         },
         prevStep() {
+            this.stepErrors = {};
             this.transitionDir = 'prev';
             this.currentStep--;
         },
@@ -328,7 +371,7 @@ export default {
         },
         submit() {
             if (!this.form.privacy) {
-                this.form.setError('privacy', 'Lūdzu, piekrītiet datu apstrādāšanai');
+                this.form.setError('privacy', this.$t('mentorRequest.errors.privacy'));
                 return;
             }
             this.form.post(route('student.store'), {

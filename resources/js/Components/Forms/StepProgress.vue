@@ -17,8 +17,8 @@ defineProps({
 </script>
 
 <template>
-    <div class="w-full mb-8">
-        <div class="flex items-start">
+    <div class="w-full mb-8 overflow-x-auto">
+        <div class="flex items-start min-w-max">
             <template v-for="(step, index) in steps" :key="step.id">
                 <div class="flex flex-col items-center flex-shrink-0">
                     <div

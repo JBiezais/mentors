@@ -10,14 +10,14 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <FormInput
                             :icon="User"
-                            label="Vārds"
+                            :label="$t('mentorApply.labels.name')"
                             v-model="form.name"
                             :error="errors?.name"
                             required
                         />
                         <FormInput
                             :icon="User"
-                            label="Uzvārds"
+                            :label="$t('mentorApply.labels.lastName')"
                             v-model="form.lastName"
                             :error="errors?.lastName"
                             required
@@ -26,7 +26,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <FormInput
                             :icon="Phone"
-                            label="Telefona numurs"
+                            :label="$t('mentorApply.labels.phone')"
                             v-model="form.phone"
                             :error="errors?.phone"
                             type="tel"
@@ -34,7 +34,7 @@
                         />
                         <FormInput
                             :icon="Mail"
-                            label="E-pasts"
+                            :label="$t('mentorApply.labels.email')"
                             v-model="form.email"
                             :error="errors?.email"
                             type="email"
@@ -47,25 +47,25 @@
                     <template v-else-if="currentStep === 2">
                     <FormSelect
                         :icon="GraduationCap"
-                        label="Fakultāte"
+                        :label="$t('mentorApply.labels.faculty')"
                         v-model="form.faculty_id"
                         :error="errors?.faculty_id"
                         :options="facultyOptions"
-                        placeholder="Izvēlieties fakultāti"
+                        :placeholder="$t('mentorApply.placeholders.faculty')"
                         required
                     />
                     <FormSelect
                         :icon="BookOpen"
-                        label="Studiju programma"
+                        :label="$t('mentorApply.labels.program')"
                         v-model="form.program_id"
                         :error="errors?.program_id"
                         :options="programOptions"
-                        placeholder="Izvēlieties programu"
+                        :placeholder="$t('mentorApply.placeholders.program')"
                         required
                     />
                     <FormSelect
                         :icon="Calendar"
-                        label="Studiju gads"
+                        :label="$t('mentorApply.labels.year')"
                         v-model="form.year"
                         :error="errors?.year"
                         :options="yearOptions"
@@ -77,20 +77,20 @@
                     <template v-else-if="currentStep === 3">
                     <FormTextarea
                         :icon="FileText"
-                        label="Par Tevi"
+                        :label="$t('mentorApply.labels.about')"
                         v-model="form.about"
                         :error="errors?.about"
                         :rows="4"
-                        placeholder="Pastāstiet par sevi..."
+                        :placeholder="$t('mentorApply.placeholders.about')"
                         required
                     />
                     <FormTextarea
                         :icon="MessageSquare"
-                        label="Kāpēc gribi būt mentors?"
+                        :label="$t('mentorApply.labels.whyMentor')"
                         v-model="form.why"
                         :error="errors?.why"
                         :rows="4"
-                        placeholder="Share your motivation..."
+                        :placeholder="$t('mentorApply.placeholders.why')"
                         required
                     />
                     </template>
@@ -100,29 +100,30 @@
                     <div>
                         <span class="text-sm font-medium text-gray-700 mb-2 block flex items-center gap-2">
                             <Languages class="w-4 h-4 text-gray-400" />
-                            Brīvi runā <span class="text-red-500">*</span>
+                            {{ $t('mentorApply.labels.languages') }} <span class="text-red-500">*</span>
                         </span>
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                             <FormCheckbox
                                 v-model="form.lv"
-                                label="Latviešu"
+                                :label="$t('mentorApply.languages.lv')"
                                 :error="errors?.lv"
                             />
                             <FormCheckbox
                                 v-model="form.en"
-                                label="Angļu"
+                                :label="$t('mentorApply.languages.en')"
                                 :error="errors?.en"
                             />
                             <FormCheckbox
                                 v-model="form.ru"
-                                label="Krievu"
+                                :label="$t('mentorApply.languages.ru')"
                                 :error="errors?.ru"
                             />
                         </div>
+                        <InputError class="mt-1" :message="errors?.languages" />
                     </div>
                     <FormInput
                         :icon="Users"
-                        label="Mentorējamo skaits"
+                        :label="$t('mentorApply.labels.menteesCount')"
                         v-model.number="form.mentees"
                         :error="errors?.mentees"
                         type="number"
@@ -133,7 +134,7 @@
                     />
                     <FormFileUpload
                         v-model="form.img"
-                        label="Pievienot attēlu"
+                        :label="$t('mentorApply.labels.addImage')"
                         :error="errors?.img"
                         required
                     />
@@ -159,14 +160,14 @@
                 class="w-full px-6 py-2.5 bg-accent-500 hover:bg-accent-600 text-white rounded-lg font-medium transition-colors"
                 @click="nextStep"
             >
-                Turpināt
+                {{ $t('mentorApply.buttons.continue') }}
             </button>
             <button
                 v-if="currentStep === 5"
                 type="submit"
                 class="w-full px-6 py-2.5 bg-accent-500 hover:bg-accent-600 text-white rounded-lg font-medium transition-colors"
             >
-                Nosūtīt pieteikumu
+                {{ $t('mentorApply.buttons.submit') }}
             </button>
             <button
                 v-if="currentStep > 1"
@@ -174,7 +175,7 @@
                 class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 font-medium transition-colors"
                 @click="prevStep"
             >
-                Atpakaļ
+                {{ $t('mentorApply.buttons.back') }}
             </button>
         </div>
     </form>
@@ -200,6 +201,7 @@ import FormTextarea from './FormTextarea.vue';
 import FormCheckbox from './FormCheckbox.vue';
 import FormFileUpload from './FormFileUpload.vue';
 import StepProgress from './StepProgress.vue';
+import InputError from '@/Components/InputError.vue';
 
 export default {
     name: 'MentorApplyForm',
@@ -210,6 +212,7 @@ export default {
         FormCheckbox,
         FormFileUpload,
         StepProgress,
+        InputError,
         Languages,
     },
     props: {
@@ -222,19 +225,13 @@ export default {
         return {
             currentStep: 1,
             transitionDir: 'next',
-            steps: [
-                { id: 1, label: 'Personīgie dati' },
-                { id: 2, label: 'Studijas' },
-                { id: 3, label: 'Par Tevi' },
-                { id: 4, label: 'Papildinformācija' },
-                { id: 5, label: 'Apstiprinājums' },
-            ],
-            yearOptions: [
-                { value: '2', label: '2. gads' },
-                { value: '3', label: '3. gads' },
-                { value: '4', label: '4. gads' },
-                { value: '5', label: '5. gads' },
-                { value: '6', label: '6. gads' },
+            stepErrors: {},
+            stepKeys: [
+                { id: 1, labelKey: 'mentorApply.steps.personal' },
+                { id: 2, labelKey: 'mentorApply.steps.studies' },
+                { id: 3, labelKey: 'mentorApply.steps.about' },
+                { id: 4, labelKey: 'mentorApply.steps.details' },
+                { id: 5, labelKey: 'mentorApply.steps.confirm' },
             ],
             form: useForm({
                 name: '',
@@ -256,25 +253,47 @@ export default {
         };
     },
     computed: {
+        steps() {
+            return this.stepKeys.map((s) => ({ id: s.id, label: this.$t(s.labelKey) }));
+        },
+        yearOptions() {
+            return [
+                { value: '2', label: this.$t('mentorApply.yearOptions.2') },
+                { value: '3', label: this.$t('mentorApply.yearOptions.3') },
+                { value: '4', label: this.$t('mentorApply.yearOptions.4') },
+                { value: '5', label: this.$t('mentorApply.yearOptions.5') },
+                { value: '6', label: this.$t('mentorApply.yearOptions.6') },
+            ];
+        },
         errors() {
-            return this.$page?.props?.errors || {};
+            return { ...(this.$page?.props?.errors || {}), ...this.stepErrors };
         },
         transitionName() {
             return 'slide-' + this.transitionDir;
         },
         facultyOptions() {
-            return (this.faculties || []).map((f) => ({ value: f.id, label: f.title }));
+            return (this.faculties || []).map((f) => ({
+                value: f.id,
+                label: f.code && this.$te(`faculties.${f.code}`)
+                    ? this.$t(`faculties.${f.code}`)
+                    : f.title,
+            }));
         },
         programOptions() {
             const faculty = this.faculties?.find((f) => f.id == this.form.faculty_id);
             const programs = faculty?.programs || [];
-            return programs.map((p) => ({
-                value: p.id,
-                label: `${p.title} (${p.level || ''})`,
-            }));
+            return programs.map((p) => {
+                const baseLabel = p.code && this.$te(`programs.${p.code}`)
+                    ? this.$t(`programs.${p.code}`)
+                    : p.title;
+                return {
+                    value: p.id,
+                    label: `${baseLabel} (${p.level || ''})`,
+                };
+            });
         },
         consentLabel() {
-            return 'Piekrītu savu datu apstrādāšanai saskaņā ar datu izmantošanas politiku un esmu iepazinies ar <a class="underline hover:text-accent-600" href="/files/studentiem-mentoru_nolikums.docx">nolikumu</a>';
+            return this.$t('mentorApply.consent') + ' <a class="underline hover:text-accent-600" href="/files/studentiem-mentoru_nolikums.docx">' + this.$t('mentorApply.consentLink') + '</a>';
         },
     },
     methods: {
@@ -311,18 +330,52 @@ export default {
                     return true;
             }
         },
+        getStepErrors(step) {
+            const err = {};
+            switch (step) {
+                case 1:
+                    if (!this.form.name?.trim()) err.name = this.$t('mentorApply.errors.name');
+                    if (!this.form.lastName?.trim()) err.lastName = this.$t('mentorApply.errors.lastName');
+                    if (!this.form.phone?.trim()) err.phone = this.$t('mentorApply.errors.phone');
+                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.form.email)) err.email = this.$t('mentorApply.errors.email');
+                    break;
+                case 2:
+                    if (this.form.faculty_id === 'default') err.faculty_id = this.$t('mentorApply.errors.faculty');
+                    if (this.form.program_id === 'default') err.program_id = this.$t('mentorApply.errors.program');
+                    if (!this.form.year) err.year = this.$t('mentorApply.errors.year');
+                    break;
+                case 3:
+                    if (!this.form.about?.trim()) err.about = this.$t('mentorApply.errors.about');
+                    if (!this.form.why?.trim()) err.why = this.$t('mentorApply.errors.why');
+                    break;
+                case 4:
+                    if (!(this.form.lv || this.form.en || this.form.ru)) err.languages = this.$t('mentorApply.errors.languages');
+                    if (this.form.mentees < 1 || this.form.mentees > 5) err.mentees = this.$t('mentorApply.errors.mentees');
+                    if (!this.form.img) err.img = this.$t('mentorApply.errors.img');
+                    break;
+                case 5:
+                    if (!this.form.privacy) err.privacy = this.$t('mentorApply.errors.privacy');
+                    break;
+            }
+            return err;
+        },
         nextStep() {
-            if (!this.validateStep(this.currentStep)) return;
+            if (!this.validateStep(this.currentStep)) {
+                this.stepErrors = this.getStepErrors(this.currentStep);
+                return;
+            }
+            this.stepErrors = {};
             this.transitionDir = 'next';
             this.currentStep++;
         },
         prevStep() {
+            this.stepErrors = {};
             this.transitionDir = 'prev';
             this.currentStep--;
         },
         submit() {
             if (!this.form.privacy) {
-                this.form.setError('privacy', 'Lūdzu, piekrītiet datu apstrādāšanai');
+                this.form.setError('privacy', this.$t('mentorApply.errors.privacy'));
                 return;
             }
             this.form.post(route('mentor.store'), {

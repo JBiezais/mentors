@@ -3,9 +3,8 @@
 namespace src\Domain\Config\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class ConfigRequest extends FormRequest
+class HeroGalleryReorderRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -15,7 +14,8 @@ class ConfigRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'color' => ['required', 'string', Rule::in(array_keys(config('color-schemes', [])))],
+            'ids' => ['required', 'array', 'min:1'],
+            'ids.*' => ['required', 'integer', 'exists:hero_gallery_images,id'],
         ];
     }
 }

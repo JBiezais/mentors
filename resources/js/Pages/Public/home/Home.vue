@@ -92,17 +92,9 @@ export default {
     props: {
         faculties: Array,
         mentors: Array,
-        banner: {
-            type: String,
-            default: '/img/banner.png'
-        },
-        color: {
-            type: String,
-            default: '#e085f9'
-        },
-        background: {
-            type: String,
-            default: '/img/bg.jpeg'
+        heroGallery: {
+            type: Array,
+            default: () => []
         },
         events: Array,
         message: Object,
@@ -116,10 +108,11 @@ export default {
     },
     computed: {
         carouselImages() {
-            const images = [];
-            if (this.banner) images.push(this.banner);
-            if (this.background && this.background !== this.banner) images.push(this.background);
-            return images.length ? images : ['/img/banner.png'];
+            const paths = this.heroGallery?.filter(Boolean) ?? [];
+            if (paths.length) {
+                return paths.map((p) => (p.startsWith('/') ? p : `/${p}`));
+            }
+            return ['/img/banner.png'];
         }
     },
     watch: {

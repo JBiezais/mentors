@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 use Inertia\Response;
-use src\Domain\Config\Models\Config;
+use src\Domain\Config\Models\HeroGalleryImage;
 use src\Domain\Event\Models\Event;
 use src\Domain\Faculty\Models\Faculty;
 use src\Domain\Mentor\Models\Mentor;
@@ -23,14 +23,12 @@ class Controller extends BaseController
         $message = Session::get('message');
 
         $events = Event::query()->where('date', '>' ,Carbon::now()->subDay())->orderBy('date')->get();
-        $configs = Config::query()->whereIn('type', ['banner', 'color', 'background'])->select(['type', 'value'])->get();
+        $heroGallery = HeroGalleryImage::query()->orderBy('sort_order')->pluck('path')->values()->all();
         $faculties = Faculty::query()->with('programs')->get();
         $mentors = Mentor::query()->where('status', 1)->withCount('students')->get();
 
         return Inertia::render('Public/home/Home', [
-            'color' => $configs->where('type', 'color')->first()?->value,
-            'banner' => $configs->where('type', 'banner')->first()?->value,
-            'background' => $configs->where('type', 'background')->first()?->value,
+            'heroGallery' => $heroGallery,
             'events' => $events,
             'faculties' => $faculties,
             'mentors' => $mentors,

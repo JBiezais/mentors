@@ -48,7 +48,7 @@ defineProps({
 <style scoped>
 .testimonial-swiper :deep(.swiper-button-next),
 .testimonial-swiper :deep(.swiper-button-prev) {
-    color: theme('colors.accent.600');
+    color: var(--accent-600);
     width: 28px;
     height: 28px;
 }
@@ -57,6 +57,6 @@ defineProps({
     font-size: 14px;
 }
 .testimonial-swiper :deep(.swiper-pagination-bullet-active) {
-    background-color: theme('colors.accent.500');
+    background-color: var(--accent-500);
 }
 </style>

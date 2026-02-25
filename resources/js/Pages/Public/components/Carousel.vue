@@ -49,7 +49,7 @@ const modules = [Pagination, Navigation, Autoplay, Keyboard, A11y];
 <style scoped>
 .hero-carousel :deep(.swiper-button-next),
 .hero-carousel :deep(.swiper-button-prev) {
-    color: theme('colors.accent.600');
+    color: var(--accent-600);
     width: 28px;
     height: 28px;
     opacity: 1;
@@ -82,6 +82,6 @@ const modules = [Pagination, Navigation, Autoplay, Keyboard, A11y];
     }
 }
 .hero-carousel :deep(.swiper-pagination-bullet-active) {
-    background-color: theme('colors.accent.500');
+    background-color: var(--accent-500);
 }
 </style>

@@ -6,7 +6,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Testing\AssertableInertia as Assert;
-use src\Domain\Config\Models\Config;
 use src\Domain\Faculty\Models\Faculty;
 use src\Domain\Mail\Models\Mail;
 use src\Domain\Mentor\Models\Mentor;
@@ -60,20 +59,13 @@ class MentorControllerTest extends TestCase
         );
     }
 
-    public function test_create_includes_config_values(): void
+    public function test_create_redirects_to_home_pieteikties(): void
     {
         Faculty::factory()->create();
-        Config::create(['type' => 'color', 'value' => '#ff0000']);
-        Config::create(['type' => 'background', 'value' => 'bg.jpg']);
 
         $response = $this->get(route('mentor.create'));
 
-        $response->assertOk();
-        $response->assertInertia(fn (Assert $page) => $page
-            ->component('Public/Mentor')
-            ->where('color', '#ff0000')
-            ->where('background', 'bg.jpg')
-        );
+        $response->assertRedirect(route('home') . '#pieteikties');
     }
 
     public function test_store_validates_required_fields(): void

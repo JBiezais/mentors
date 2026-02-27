@@ -38,14 +38,11 @@ export default {
             confirmingDataDeletion: false,
             galleryItems: this.heroGallery.map((item) => ({ ...item })),
             form: useForm({
-                color: this.color ?? 'pink',
+                color: this.color ?? '#f43f5e',
             })
         };
     },
     computed: {
-        colorSchemes() {
-            return this.$page.props.accentScheme?.schemes ?? {};
-        },
         imageUrl() {
             return (path) => (path.startsWith('/') ? path : `/${path}`);
         }
@@ -91,27 +88,19 @@ export default {
             <div class="space-y-5">
                 <div class="space-y-3 px-2">
                     <p class="font-semibold">Akcenta krāsa</p>
-                    <div class="flex flex-wrap gap-3">
-                        <label
-                            v-for="(scheme, key) in colorSchemes"
-                            :key="key"
-                            class="flex items-center gap-2 cursor-pointer border rounded-lg p-3 transition-colors"
-                            :class="form.color === key ? 'ring-2 ring-accent-500 border-accent-500' : 'border-gray-200 hover:border-gray-300'"
+                    <div class="flex items-center gap-3">
+                        <input
+                            type="color"
+                            v-model="form.color"
+                            class="w-12 h-12 cursor-pointer"
                         >
-                            <input
-                                type="radio"
-                                v-model="form.color"
-                                :value="key"
-                                class="sr-only"
-                            >
-                            <span
-                                class="w-8 h-8 rounded-full shrink-0"
-                                :style="{ backgroundColor: scheme['500'] }"
-                            ></span>
-                            <span class="text-sm font-medium text-gray-700">{{ scheme.label }}</span>
-                        </label>
+                        <div class="flex flex-col">
+                            <span class="text-sm font-medium text-gray-700">{{ form.color }}</span>
+                            <span class="text-xs text-gray-500">Izvēlies akcenta krāsu</span>
+                        </div>
                     </div>
                 </div>
+                <PrimaryButton @click="submit">Saglabāt</PrimaryButton>
                 <div class="space-y-3 px-2">
                     <p class="font-semibold">Hero galerija (4:3 ieteicamais attēlu izmērs)</p>
                     <div class="space-y-4">
@@ -155,7 +144,6 @@ export default {
                     </div>
                     <InputError class="mt-2" :message="$page.props.errors?.images" />
                 </div>
-                <PrimaryButton @click="submit">Saglabāt</PrimaryButton>
             </div>
         </div>
     </div>

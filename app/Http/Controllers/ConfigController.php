@@ -12,6 +12,7 @@ use src\Domain\Config\Exports\FacultyMentorMenteeExport;
 use src\Domain\Config\Exports\YearlyParticipationExport;
 use src\Domain\Config\Models\Config;
 use src\Domain\Config\Models\HeroGalleryImage;
+use src\Domain\Config\Services\AccentPaletteGenerator;
 use src\Domain\Config\Requests\ConfigRequest;
 use src\Domain\Config\Requests\HeroGalleryReorderRequest;
 use src\Domain\Config\Requests\HeroGalleryStoreRequest;
@@ -31,8 +32,11 @@ class ConfigController extends Controller
             ->get()
             ->map(fn (HeroGalleryImage $img) => ['id' => $img->id, 'path' => $img->path]);
 
+        $color = $configs->where('type', 'color')->first()?->value;
+        $color = ($color && AccentPaletteGenerator::isValidHex($color)) ? $color : AccentPaletteGenerator::DEFAULT_HEX;
+
         return Inertia::render('Admin/Config', [
-            'color' => $configs->where('type', 'color')->first()?->value,
+            'color' => $color,
             'heroGallery' => $heroGallery,
             'contacts' => User::query()->select(['phone', 'email'])->where('use', 1)->first()
         ]);
@@ -47,7 +51,7 @@ class ConfigController extends Controller
     public function design(ConfigRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        $color = $data['color'];
+        $color = strtolower($data['color']);
 
         Config::query()->updateOrCreate(['type' => 'color'], ['value' => $color]);
 

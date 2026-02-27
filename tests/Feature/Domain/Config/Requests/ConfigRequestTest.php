@@ -21,23 +21,23 @@ class ConfigRequestTest extends TestCase
     public function test_valid_request_passes_validation(): void
     {
         $validator = $this->validate([
-            'color' => 'pink',
+            'color' => '#f43f5e',
         ]);
 
         $this->assertFalse($validator->fails());
     }
 
-    public function test_color_must_be_valid_scheme_key(): void
+    public function test_color_rejects_invalid_hex(): void
     {
         $validator = $this->validate([
-            'color' => '#ffffff',
+            'color' => '#ff',
         ]);
 
         $this->assertTrue($validator->fails());
         $this->assertArrayHasKey('color', $validator->errors()->toArray());
     }
 
-    public function test_color_rejects_invalid_scheme_key(): void
+    public function test_color_rejects_non_hex_string(): void
     {
         $validator = $this->validate([
             'color' => 'invalid_scheme',

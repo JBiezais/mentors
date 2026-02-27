@@ -23,7 +23,7 @@ class ConfigControllerTest extends TestCase
     public function test_index_displays_config_settings(): void
     {
         $user = User::factory()->create();
-        Config::create(['type' => 'color', 'value' => 'pink']);
+        Config::create(['type' => 'color', 'value' => '#f43f5e']);
         HeroGalleryImage::create(['path' => 'image/banner.jpg', 'sort_order' => 0]);
         HeroGalleryImage::create(['path' => 'image/bg.jpg', 'sort_order' => 1]);
 
@@ -32,7 +32,7 @@ class ConfigControllerTest extends TestCase
         $response->assertOk();
         $response->assertInertia(fn (Assert $page) => $page
             ->component('Admin/Config')
-            ->where('color', 'pink')
+            ->where('color', '#f43f5e')
             ->has('heroGallery', 2)
             ->where('heroGallery.0.id', 1)
             ->where('heroGallery.0.path', 'image/banner.jpg')
@@ -101,23 +101,23 @@ class ConfigControllerTest extends TestCase
     public function test_design_updates_color_config(): void
     {
         $user = User::factory()->create();
-        Config::create(['type' => 'color', 'value' => 'pink']);
+        Config::create(['type' => 'color', 'value' => '#f43f5e']);
 
         $response = $this->actingAs($user)->post(route('design'), [
-            'color' => 'red',
+            'color' => '#e11d48',
         ]);
 
         $response->assertRedirect(route('config'));
         $this->assertDatabaseHas('configs', [
             'type' => 'color',
-            'value' => 'red',
+            'value' => '#e11d48',
         ]);
     }
 
     public function test_design_requires_authentication(): void
     {
         $response = $this->post(route('design'), [
-            'color' => 'red',
+            'color' => '#e11d48',
         ]);
 
         $response->assertRedirect(route('login'));
@@ -137,7 +137,7 @@ class ConfigControllerTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->actingAs($user)->post(route('design'), [
-            'color' => '#ff0000',
+            'color' => 'invalid',
         ]);
 
         $response->assertSessionHasErrors(['color']);

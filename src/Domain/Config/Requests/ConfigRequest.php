@@ -3,7 +3,6 @@
 namespace src\Domain\Config\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class ConfigRequest extends FormRequest
 {
@@ -15,7 +14,7 @@ class ConfigRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'color' => ['required', 'string', Rule::in(array_keys(config('color-schemes', [])))],
+            'color' => ['required', 'string', 'regex:/^#[0-9a-fA-F]{6}$/'],
         ];
     }
 }

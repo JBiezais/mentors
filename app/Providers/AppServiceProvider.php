@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use src\Domain\Config\Models\Config;
+use src\Domain\Config\Services\AccentPaletteGenerator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,11 +27,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer('app', function ($view) {
-            $key = Config::query()->where('type', 'color')->first()?->value ?? 'pink';
-            $schemes = config('color-schemes', []);
-            $palette = $schemes[$key] ?? $schemes['pink'] ?? [];
-            $shades = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900'];
-            $accentPalette = collect($palette)->only($shades)->filter()->all();
+            $hex = Config::query()->where('type', 'color')->first()?->value;
+            if (! $hex || ! AccentPaletteGenerator::isValidHex($hex)) {
+                $hex = AccentPaletteGenerator::DEFAULT_HEX;
+            }
+            $accentPalette = AccentPaletteGenerator::fromHex($hex);
             $view->with('accentPalette', $accentPalette);
         });
     }

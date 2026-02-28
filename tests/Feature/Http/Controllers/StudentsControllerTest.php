@@ -122,6 +122,37 @@ class StudentsControllerTest extends TestCase
         ]);
     }
 
+    public function test_store_returns_json_when_expecting_json(): void
+    {
+        $faculty = Faculty::factory()->create(['code' => 'FE']);
+        $program = Program::factory()->create(['faculty_id' => $faculty->id]);
+        $mentor = Mentor::factory()->create([
+            'faculty_id' => $faculty->id,
+            'program_id' => $program->id,
+            'status' => 1,
+        ]);
+
+        $response = $this->postJson(route('student.store'), [
+            'name' => 'Jane',
+            'lastName' => 'Smith',
+            'email' => 'jane.smith@example.com',
+            'phone' => '87654321',
+            'faculty_id' => $faculty->id,
+            'program_id' => $program->id,
+            'mentor_id' => $mentor->id,
+            'lang' => 1,
+            'privacy' => true,
+        ]);
+
+        $response->assertOk();
+        $response->assertJsonStructure(['message' => ['text']]);
+        $response->assertJson([
+            'message' => [
+                'text' => 'Pieteikums veiksmīgi nosūtīts!',
+            ],
+        ]);
+    }
+
     public function test_store_validates_required_fields(): void
     {
         $response = $this->post(route('student.store'), []);

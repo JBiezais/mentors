@@ -165,9 +165,10 @@
             <button
                 v-if="currentStep === 5"
                 type="submit"
-                class="w-full px-6 py-2.5 bg-accent-500 hover:bg-accent-600 text-white rounded-lg font-medium transition-colors"
+                :disabled="submitting"
+                class="w-full px-6 py-2.5 bg-accent-500 hover:bg-accent-600 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-                {{ $t('mentorApply.buttons.submit') }}
+                {{ submitting ? '...' : $t('mentorApply.buttons.submit') }}
             </button>
             <button
                 v-if="currentStep > 1"
@@ -182,7 +183,6 @@
 </template>
 
 <script>
-import { useForm } from '@inertiajs/vue3';
 import {
     User,
     Mail,
@@ -215,6 +215,7 @@ export default {
         InputError,
         Languages,
     },
+    emits: ['success'],
     props: {
         faculties: {
             type: Array,
@@ -233,7 +234,7 @@ export default {
                 { id: 4, labelKey: 'mentorApply.steps.details' },
                 { id: 5, labelKey: 'mentorApply.steps.confirm' },
             ],
-            form: useForm({
+            form: {
                 name: '',
                 lastName: '',
                 phone: '',
@@ -244,12 +245,14 @@ export default {
                 mentees: 5,
                 about: '',
                 why: '',
-                lv: 0,
-                ru: 0,
-                en: 0,
+                lv: false,
+                ru: false,
+                en: false,
                 privacy: null,
                 img: null,
-            }),
+            },
+            apiErrors: {},
+            submitting: false,
         };
     },
     computed: {
@@ -266,7 +269,7 @@ export default {
             ];
         },
         errors() {
-            return { ...(this.$page?.props?.errors || {}), ...this.stepErrors };
+            return { ...this.apiErrors, ...this.stepErrors };
         },
         transitionName() {
             return 'slide-' + this.transitionDir;
@@ -373,15 +376,70 @@ export default {
             this.transitionDir = 'prev';
             this.currentStep--;
         },
-        submit() {
+        async submit() {
             if (!this.form.privacy) {
-                this.form.setError('privacy', this.$t('mentorApply.errors.privacy'));
+                this.stepErrors = { privacy: this.$t('mentorApply.errors.privacy') };
                 return;
             }
-            this.form.post(route('mentor.store'), {
-                preserveState: 'errors',
-                forceFormData: true,
-            });
+            this.apiErrors = {};
+            this.stepErrors = {};
+            this.submitting = true;
+
+            const formData = new FormData();
+            formData.append('name', this.form.name);
+            formData.append('lastName', this.form.lastName);
+            formData.append('phone', this.form.phone);
+            formData.append('email', this.form.email);
+            formData.append('faculty_id', this.form.faculty_id);
+            formData.append('program_id', this.form.program_id);
+            formData.append('year', this.form.year);
+            formData.append('mentees', this.form.mentees);
+            formData.append('about', this.form.about);
+            formData.append('why', this.form.why);
+            formData.append('lv', this.form.lv ? 1 : 0);
+            formData.append('ru', this.form.ru ? 1 : 0);
+            formData.append('en', this.form.en ? 1 : 0);
+            formData.append('privacy', this.form.privacy ? 1 : 0);
+            if (this.form.img) {
+                formData.append('img', this.form.img);
+            }
+
+            try {
+                const response = await window.axios.post(route('mentor.store'), formData, {
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': this.$page.props.csrf_token,
+                    },
+                });
+                this.$emit('success', response.data.message);
+                this.form = {
+                    name: '',
+                    lastName: '',
+                    phone: '',
+                    email: '',
+                    faculty_id: 'default',
+                    program_id: 'default',
+                    year: '2',
+                    mentees: 5,
+                    about: '',
+                    why: '',
+                    lv: false,
+                    ru: false,
+                    en: false,
+                    privacy: null,
+                    img: null,
+                };
+                this.currentStep = 1;
+            } catch (err) {
+                if (err.response?.status === 422 && err.response?.data?.errors) {
+                    const e = err.response.data.errors;
+                    this.apiErrors = Object.fromEntries(
+                        Object.entries(e).map(([k, v]) => [k, Array.isArray(v) ? v[0] : v])
+                    );
+                }
+            } finally {
+                this.submitting = false;
+            }
         },
         checkMenteesInput() {
             const val = this.form.mentees;

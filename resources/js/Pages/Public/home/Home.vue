@@ -36,17 +36,6 @@
                 <a href="#pieteikties" @click="scrollToSection('pieteikties'); showMobileNav = false" class="block w-full text-center py-3 px-4 bg-accent-500 hover:bg-accent-600 text-white font-medium rounded-none transition-colors duration-200">{{ $t('home.nav.pieteikties') }}</a>
             </div>
         </div>
-        <Modal :show="showMessageModal" @close="showMessageModal = false">
-            <div v-if="message" class="p-6 flex flex-col">
-                <div class="space-y-2">
-                    <h2 class="font-semibold text-xl text-gray-900">{{ message.title }}</h2>
-                    <hr class="border-gray-200">
-                </div>
-                <p class="my-5 text-gray-700 leading-relaxed">{{ message.text }}</p>
-                <hr class="border-gray-200">
-                <PrimaryButton class="ml-auto mt-4" @click="message = null">{{ $t('home.modal.close') }}</PrimaryButton>
-            </div>
-        </Modal>
 
         <main class="flex-grow">
             <section id="hero" class="bg-white py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8">
@@ -66,12 +55,14 @@
             </section>
             <section id="pieteikties" class="bg-stone-50 pt-20 md:pt-24 lg:pt-28 pb-12 md:pb-16 px-4 sm:px-6 md:px-8">
                 <div class="max-w-6xl mx-auto">
-                    <ApplySection :faculties="faculties" :mentors="mentors" />
+                    <ApplySection :faculties="faculties" :mentors="mentors" @success="showSuccessToast" />
                 </div>
             </section>
         </main>
 
         <Footer :contacts="contacts" :scroll-to-section="scrollToSection" />
+
+        <Toast :show="showToast" :message="toastMessage" :duration="5000" />
     </div>
 </template>
 
@@ -85,10 +76,11 @@ import HeroSection from "@/Pages/Public/home/sections/Hero/HeroSection.vue";
 import InformationSection from "@/Pages/Public/home/sections/Information/InformationSection.vue";
 import TestimonialSection from "@/Pages/Public/home/sections/Testimonial/TestimonialSection.vue";
 import ApplySection from "@/Pages/Public/home/sections/Apply/ApplySection.vue";
+import Toast from "@/Components/Toast.vue";
 
 export default {
     name: "Home",
-    components: { PrimaryButton, Modal, ApplicationLogo, Header, Footer, HeroSection, InformationSection, TestimonialSection, ApplySection },
+    components: { PrimaryButton, Modal, Toast, ApplicationLogo, Header, Footer, HeroSection, InformationSection, TestimonialSection, ApplySection },
     props: {
         faculties: Array,
         mentors: Array,
@@ -103,7 +95,9 @@ export default {
     data() {
         return {
             showMessageModal: false,
-            showMobileNav: false
+            showMobileNav: false,
+            showToast: false,
+            toastMessage: null
         };
     },
     computed: {
@@ -131,6 +125,13 @@ export default {
         scrollToSection(sectionId) {
             const el = document.getElementById(sectionId);
             if (el) el.scrollIntoView({ behavior: 'smooth' });
+        },
+        showSuccessToast(msg) {
+            this.toastMessage = msg;
+            this.showToast = true;
+            setTimeout(() => {
+                this.showToast = false;
+            }, 5000);
         }
     }
 };

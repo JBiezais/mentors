@@ -75,6 +75,40 @@ class MentorControllerTest extends TestCase
         $response->assertSessionHasErrors(['name', 'lastName', 'email', 'phone', 'faculty_id', 'program_id', 'year', 'mentees', 'about', 'why', 'privacy', 'img']);
     }
 
+    public function test_store_returns_json_when_expecting_json(): void
+    {
+        Storage::fake('public');
+        $faculty = Faculty::factory()->create(['code' => 'FE']);
+        $program = Program::factory()->create(['faculty_id' => $faculty->id]);
+        $image = UploadedFile::fake()->image('mentor.jpg');
+
+        $response = $this->postJson(route('mentor.store'), [
+            'name' => 'John',
+            'lastName' => 'Doe',
+            'email' => 'john.doe@example.com',
+            'phone' => '12345678',
+            'faculty_id' => $faculty->id,
+            'program_id' => $program->id,
+            'year' => 2,
+            'mentees' => 3,
+            'about' => 'About me',
+            'why' => 'Why mentor',
+            'lv' => 1,
+            'ru' => 0,
+            'en' => 1,
+            'privacy' => 1,
+            'img' => $image,
+        ]);
+
+        $response->assertOk();
+        $response->assertJsonStructure(['message' => ['text']]);
+        $response->assertJson([
+            'message' => [
+                'text' => 'Pieteikums veiksmīgi nosūtīts!',
+            ],
+        ]);
+    }
+
     public function test_edit_shows_mentor_form_for_authenticated_user(): void
     {
         $user = User::factory()->create();

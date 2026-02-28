@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -47,16 +48,19 @@ class StudentsController extends Controller
         return Redirect::to(route('home') . '#pieteikties');
     }
 
-    public function store(StudentCreateRequest $request):RedirectResponse
+    public function store(StudentCreateRequest $request): RedirectResponse|JsonResponse
     {
         $data = StudentCreateData::from($request->all());
 
         StudentCreateAction::execute($data);
 
-        UserNotificationCreateAction::execute(
-            'Pieteikums nosūtīts',
-            'Jūsu pieteikums ir veiksmīgi nosūtīts lūdzu gaidiet turpmāko ziņu e-pastā'
-        );
+        $flashTitle = 'Pieteikums nosūtīts';
+        $flashText = 'Jūsu pieteikums ir veiksmīgi nosūtīts lūdzu gaidiet turpmāko ziņu e-pastā';
+        UserNotificationCreateAction::execute($flashTitle, $flashText);
+
+        if ($request->expectsJson()) {
+            return response()->json(['message' => ['text' => 'Pieteikums veiksmīgi nosūtīts!']], 200);
+        }
 
         return Redirect::route('home');
     }

@@ -40,11 +40,13 @@
                     <MentorApplyForm
                         v-if="activeTab === 'mentor' && faculties"
                         :faculties="faculties"
+                        @success="$emit('success', $event)"
                     />
                     <MentorRequestForm
                         v-else-if="activeTab === 'mentee' && faculties && mentors"
                         :faculties="faculties"
                         :mentors="mentors"
+                        @success="$emit('success', $event)"
                     />
                 </div>
             </Transition>

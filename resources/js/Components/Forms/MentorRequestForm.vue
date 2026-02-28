@@ -163,9 +163,10 @@
             <button
                 v-if="currentStep === 4"
                 type="submit"
-                class="w-full px-6 py-2.5 bg-accent-500 hover:bg-accent-600 text-white rounded-lg font-medium transition-colors"
+                :disabled="submitting"
+                class="w-full px-6 py-2.5 bg-accent-500 hover:bg-accent-600 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-                {{ $t('mentorRequest.buttons.submit') }}
+                {{ submitting ? '...' : $t('mentorRequest.buttons.submit') }}
             </button>
             <button
                 v-if="currentStep > 1"
@@ -180,7 +181,6 @@
 </template>
 
 <script>
-import { useForm } from '@inertiajs/vue3';
 import {
     User,
     Mail,
@@ -207,6 +207,7 @@ export default {
         StepProgress,
         InputError,
     },
+    emits: ['success'],
     props: {
         faculties: {
             type: Array,
@@ -230,7 +231,7 @@ export default {
                 { id: 3, labelKey: 'mentorRequest.steps.about' },
                 { id: 4, labelKey: 'mentorRequest.steps.mentorSubmit' },
             ],
-            form: useForm({
+            form: {
                 name: '',
                 lastName: '',
                 phone: '',
@@ -241,7 +242,9 @@ export default {
                 lang: null,
                 mentor_id: '',
                 privacy: false,
-            }),
+            },
+            apiErrors: {},
+            submitting: false,
         };
     },
     computed: {
@@ -256,7 +259,7 @@ export default {
             ];
         },
         errors() {
-            return { ...(this.$page?.props?.errors || {}), ...this.stepErrors };
+            return { ...this.apiErrors, ...this.stepErrors };
         },
         transitionName() {
             return 'slide-' + this.transitionDir;
@@ -369,14 +372,62 @@ export default {
         addMentor(id) {
             this.form.mentor_id = this.form.mentor_id == id ? '' : id;
         },
-        submit() {
+        async submit() {
             if (!this.form.privacy) {
-                this.form.setError('privacy', this.$t('mentorRequest.errors.privacy'));
+                this.stepErrors = { privacy: this.$t('mentorRequest.errors.privacy') };
                 return;
             }
-            this.form.post(route('student.store'), {
-                preserveState: 'errors',
-            });
+            this.apiErrors = {};
+            this.stepErrors = {};
+            this.submitting = true;
+
+            const formData = new FormData();
+            formData.append('name', this.form.name);
+            formData.append('lastName', this.form.lastName);
+            formData.append('phone', this.form.phone);
+            formData.append('email', this.form.email);
+            formData.append('faculty_id', this.form.faculty_id);
+            formData.append('program_id', this.form.program_id);
+            formData.append('comment', this.form.comment ?? '');
+            if (this.form.lang !== null && this.form.lang !== undefined) {
+                formData.append('lang', this.form.lang);
+            }
+            if (this.form.mentor_id) {
+                formData.append('mentor_id', this.form.mentor_id);
+            }
+            formData.append('privacy', this.form.privacy ? 1 : 0);
+
+            try {
+                const response = await window.axios.post(route('student.store'), formData, {
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': this.$page.props.csrf_token,
+                    },
+                });
+                this.$emit('success', response.data.message);
+                this.form = {
+                    name: '',
+                    lastName: '',
+                    phone: '',
+                    email: '',
+                    faculty_id: 'default',
+                    program_id: 'default',
+                    comment: '',
+                    lang: null,
+                    mentor_id: '',
+                    privacy: false,
+                };
+                this.currentStep = 1;
+            } catch (err) {
+                if (err.response?.status === 422 && err.response?.data?.errors) {
+                    const e = err.response.data.errors;
+                    this.apiErrors = Object.fromEntries(
+                        Object.entries(e).map(([k, v]) => [k, Array.isArray(v) ? v[0] : v])
+                    );
+                }
+            } finally {
+                this.submitting = false;
+            }
         },
     },
     watch: {

@@ -42,6 +42,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'csrf_token' => csrf_token(),
             'locale' => session('locale', config('app.locale')),
             'accentScheme' => [
                 'palette' => $palette,

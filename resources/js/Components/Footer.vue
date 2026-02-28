@@ -77,7 +77,6 @@
                     <a href="/files/RSU%20SP_Privātuma%20politika.pdf" target="_blank" class="hover:text-accent-400 transition-colors">{{ $t('footer.dataUsage') }}</a>
                 </div>
                 <Link
-                    v-if="$page.props.auth?.user === null"
                     :href="route('login')"
                     class="font-medium text-accent-400 hover:text-accent-300 transition-colors sm:self-end"
                 >

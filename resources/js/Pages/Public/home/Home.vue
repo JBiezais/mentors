@@ -10,14 +10,10 @@
                     <a href="#uzzini" @click.prevent="scrollToSection('uzzini')" class="text-gray-700 hover:text-accent-600 font-medium transition-colors">{{ $t('home.nav.uzziniVirak') }}</a>
                     <a href="#atsauksmes" @click.prevent="scrollToSection('atsauksmes')" class="text-gray-700 hover:text-accent-600 font-medium transition-colors">{{ $t('home.nav.atsauksmes') }}</a>
                     <a href="#pieteikties" @click.prevent="scrollToSection('pieteikties')" class="inline-flex items-center justify-center px-5 py-2.5 bg-accent-500 hover:bg-accent-600 text-white font-medium rounded-none transition-colors duration-200">{{ $t('home.nav.pieteikties') }}</a>
-                    <a :href="route('locale.switch', { locale: $page.props.locale === 'lv' ? 'en' : 'lv' })" class="inline-flex items-center justify-center px-4 py-2.5 border border-accent-500 text-accent-600 hover:bg-accent-50 font-medium rounded-none transition-colors duration-200">
-                        {{ $page.props.locale === 'lv' ? $t('home.nav.langLv') : $t('home.nav.langEn') }}
-                    </a>
+                    <LocaleDropdown />
                 </nav>
                 <div class="md:hidden flex items-center gap-2">
-                    <a :href="route('locale.switch', { locale: $page.props.locale === 'lv' ? 'en' : 'lv' })" class="inline-flex items-center justify-center px-4 py-2.5 border border-accent-500 text-accent-600 hover:bg-accent-50 font-medium rounded-none transition-colors duration-200">
-                        {{ $page.props.locale === 'lv' ? $t('home.nav.langLv') : $t('home.nav.langEn') }}
-                    </a>
+                    <LocaleDropdown />
                     <button
                         @click="showMobileNav = !showMobileNav"
                         class="p-2 rounded-md text-gray-600 hover:bg-gray-100"
@@ -70,6 +66,7 @@
 import Footer from "@/Components/Footer.vue";
 import Header from "@/Components/Header.vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
+import LocaleDropdown from "@/Components/LocaleDropdown.vue";
 import Modal from "@/Components/Modal.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import HeroSection from "@/Pages/Public/home/sections/Hero/HeroSection.vue";
@@ -80,7 +77,7 @@ import Toast from "@/Components/Toast.vue";
 
 export default {
     name: "Home",
-    components: { PrimaryButton, Modal, Toast, ApplicationLogo, Header, Footer, HeroSection, InformationSection, TestimonialSection, ApplySection },
+    components: { PrimaryButton, Modal, Toast, ApplicationLogo, Header, Footer, HeroSection, InformationSection, TestimonialSection, ApplySection, LocaleDropdown },
     props: {
         faculties: Array,
         mentors: Array,

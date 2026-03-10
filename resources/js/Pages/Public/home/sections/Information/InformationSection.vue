@@ -1,7 +1,7 @@
 <template>
         <h3 class="text-2xl md:text-3xl lg:text-4xl font-medium text-gray-900 tracking-tight mb-12 md:mb-16 text-center">{{ $t('information.title') }}</h3>
         <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
-            <nav class="flex flex-row lg:flex-col lg:w-64 shrink-0 gap-1 overflow-x-auto lg:overflow-visible">
+            <nav class="flex flex-col lg:w-64 shrink-0 gap-1">
                 <button
                     v-for="(item, index) in tabKeys"
                     :key="index"

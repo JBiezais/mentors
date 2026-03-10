@@ -3,7 +3,7 @@
         <h3 class="text-2xl md:text-3xl lg:text-4xl font-medium text-gray-900 tracking-tight mb-12 text-center">{{ $t('testimonial.title') }}</h3>
 
         <!-- Mobile: Swiper carousel -->
-        <div class="md:hidden">
+        <div class="md:hidden px-8">
             <TestimonialCarousel :testimonials="testimonials" />
         </div>
 

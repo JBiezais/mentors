@@ -4,7 +4,6 @@ namespace Tests\Feature\Http\Controllers;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Inertia\Testing\AssertableInertia as Assert;
-use src\Domain\Config\Models\Config;
 use src\Domain\Faculty\Models\Faculty;
 use src\Domain\Mail\Models\Mail;
 use src\Domain\Mentor\Models\Mentor;
@@ -59,20 +58,13 @@ class StudentsControllerTest extends TestCase
         );
     }
 
-    public function test_create_includes_config_values(): void
+    public function test_create_redirects_to_home_pieteikties(): void
     {
         Faculty::factory()->create();
-        Config::create(['type' => 'color', 'value' => '#00ff00']);
-        Config::create(['type' => 'background', 'value' => 'student-bg.jpg']);
 
         $response = $this->get(route('student.create'));
 
-        $response->assertOk();
-        $response->assertInertia(fn (Assert $page) => $page
-            ->component('Public/Student')
-            ->where('color', '#00ff00')
-            ->where('background', 'student-bg.jpg')
-        );
+        $response->assertRedirect(route('home') . '#pieteikties');
     }
 
     public function test_create_shows_only_confirmed_mentors(): void
@@ -127,6 +119,37 @@ class StudentsControllerTest extends TestCase
             'name' => 'Jane',
             'lastName' => 'Smith',
             'email' => 'jane.smith@example.com',
+        ]);
+    }
+
+    public function test_store_returns_json_when_expecting_json(): void
+    {
+        $faculty = Faculty::factory()->create(['code' => 'FE']);
+        $program = Program::factory()->create(['faculty_id' => $faculty->id]);
+        $mentor = Mentor::factory()->create([
+            'faculty_id' => $faculty->id,
+            'program_id' => $program->id,
+            'status' => 1,
+        ]);
+
+        $response = $this->postJson(route('student.store'), [
+            'name' => 'Jane',
+            'lastName' => 'Smith',
+            'email' => 'jane.smith@example.com',
+            'phone' => '87654321',
+            'faculty_id' => $faculty->id,
+            'program_id' => $program->id,
+            'mentor_id' => $mentor->id,
+            'lang' => 1,
+            'privacy' => true,
+        ]);
+
+        $response->assertOk();
+        $response->assertJsonStructure(['message' => ['text']]);
+        $response->assertJson([
+            'message' => [
+                'text' => 'Pieteikums veiksmīgi nosūtīts!',
+            ],
         ]);
     }
 

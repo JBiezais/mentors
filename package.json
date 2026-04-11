@@ -20,6 +20,10 @@
         "vue": "^3.4.0"
     },
     "dependencies": {
-        "@tinymce/tinymce-vue": "^5.1.0"
+        "@tinymce/tinymce-vue": "^5.1.0",
+        "lucide-vue-next": "^0.575.0",
+        "swiper": "^12.1.2",
+        "vue-i18n": "^11.2.8",
+        "vuedraggable": "^4.1.0"
     }
 }

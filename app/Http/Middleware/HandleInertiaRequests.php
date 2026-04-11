@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use src\Domain\Config\Models\Config;
+use src\Domain\Config\Services\AccentPaletteGenerator;
 use Tighten\Ziggy\Ziggy;
 
 class HandleInertiaRequests extends Middleware
@@ -30,9 +32,20 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $hex = Config::query()->where('type', 'color')->first()?->value;
+        if (! $hex || ! AccentPaletteGenerator::isValidHex($hex)) {
+            $hex = AccentPaletteGenerator::DEFAULT_HEX;
+        }
+        $palette = AccentPaletteGenerator::fromHex($hex);
+
         return array_merge(parent::share($request), [
             'auth' => [
                 'user' => $request->user(),
+            ],
+            'csrf_token' => csrf_token(),
+            'locale' => session('locale', config('app.locale')),
+            'accentScheme' => [
+                'palette' => $palette,
             ],
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [

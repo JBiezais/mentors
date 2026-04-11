@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    :root {
+        --accent-50: #fdf4ff;
+        --accent-100: #fae8ff;
+        --accent-200: #f5d0fe;
+        --accent-300: #f0abfc;
+        --accent-400: #e879f9;
+        --accent-500: #e085f9;
+        --accent-600: #c026d3;
+        --accent-700: #a21caf;
+        --accent-800: #86198f;
+        --accent-900: #701a75;
+    }
+}

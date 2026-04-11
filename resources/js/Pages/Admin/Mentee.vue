@@ -1,62 +1,58 @@
 <template>
     <div class="min-h-screen flex flex-col bg-gray-50">
         <Header v-if="$page.props.auth.user !== null"></Header>
-        <div class="flex-grow lg:max-w-7xl mx-auto">
-            <div class="p-8 bg-gray-50 w-full space-y-5">
+        <div class="flex-grow w-full lg:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="p-4 sm:p-6 lg:p-8 bg-gray-50 w-full space-y-5">
                 <FilterBar :keyword="keyword" :type="type" :program="program" :faculty="faculty" :custom="close" @filter="getFilteredProps($event)" @open="close = 1" :faculties="faculties">
                     <template v-slot:first>Ar mentoru</template>
                     <template v-slot:second>Bez mentora</template>
                 </FilterBar>
             </div>
             <div class="py-5">
-                <div v-if="students.length">Kopskaits: {{students.length}}</div>
-                <table class="min-w-full text-center">
-                    <thead class="border-b bg-gray-800 sticky top-0">
-                    <tr>
-                        <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                            Vārds, Uzvārds
-                        </th>
-                        <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                            Telefona nummurs
-                        </th>
-                        <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                            E-pasts
-                        </th>
-                        <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                            Studē
-                        </th>
-                        <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                            Mentors
-                        </th>
-                        <th scope="col" class="text-sm font-medium text-white px-6 py-4">
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="bg-white border-b" v-for="student in students">
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            {{student.name}}, {{student.lastName}}
-                        </td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            {{student.phone}}
-                        </td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            {{student.email}}
-                        </td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            {{findProgram(student.program_id)}}
-                        </td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            {{student.mentor ? student.mentor.name : ''}} {{student.mentor ? student.mentor.lastName : ''}}
-                        </td>
-                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap space-x-3 flex">
-                            <div class="flex-grow"></div>
-                            <Link :href="route('student.edit', student.id)" class="cursor-pointer bg-gray-700 hover:bg-gray-900 text-gray-100 rounded-lg py-2 px-3">Labot</Link>
-                            <h1 @click="deleteStudent(student.id)" class="cursor-pointer bg-red-600 rounded-lg py-2 px-3 hover:bg-red-800 text-gray-100">Dzēst</h1>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div v-if="students.length" class="text-sm font-medium text-gray-600 mb-3 flex items-center gap-2">
+                    <Users :size="16" class="shrink-0" />
+                    Kopskaits: {{ students.length }}
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                    <div
+                        v-for="student in students"
+                        class="bg-white border border-gray-200 rounded-lg p-3 hover:border-gray-300 transition-colors flex flex-col gap-2"
+                    >
+                        <p class="font-medium text-gray-900 text-sm truncate flex items-center gap-1.5" :title="`${student.name} ${student.lastName}`">
+                            <User :size="14" class="shrink-0 text-gray-400" />
+                            {{ student.name }} {{ student.lastName }}
+                        </p>
+                        <p class="text-xs text-gray-500 truncate flex items-center gap-1.5" :title="student.email">
+                            <Mail :size="12" class="shrink-0 text-gray-400" />
+                            {{ student.email }}
+                        </p>
+                        <p class="text-xs text-gray-600 truncate flex items-center gap-1.5">
+                            <GraduationCap :size="12" class="shrink-0 text-gray-400" />
+                            {{ findProgram(student.program_id) }}
+                        </p>
+                        <p v-if="student.mentor" class="text-xs text-gray-500 truncate flex items-center gap-1.5">
+                            <UserCheck :size="12" class="shrink-0 text-gray-400" />
+                            {{ student.mentor.name }} {{ student.mentor.lastName }}
+                        </p>
+                        <div class="flex gap-2 mt-auto pt-2 border-t border-gray-100">
+                            <Link
+                                :href="route('student.edit', student.id)"
+                                class="inline-flex items-center gap-1.5 text-xs font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded px-2.5 py-1.5 transition-colors"
+                            >
+                                <Pencil :size="12" />
+                                Labot
+                            </Link>
+                            <button
+                                type="button"
+                                @click="deleteStudent(student.id)"
+                                class="inline-flex items-center gap-1.5 text-xs font-medium text-red-700 bg-red-50 hover:bg-red-100 rounded px-2.5 py-1.5 transition-colors"
+                            >
+                                <Trash2 :size="12" />
+                                Dzēst
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <Footer :contacts="contacts"/>
@@ -70,10 +66,11 @@ import Header from "@/Components/Header.vue";
 import Footer from "@/Components/Footer.vue";
 import { router, Link } from "@inertiajs/vue3";
 import CustomMail from "@/Components/CustomMail.vue";
+import { Pencil, Trash2, User, Mail, GraduationCap, UserCheck, Users } from 'lucide-vue-next';
 
 export default {
     name: "Mentee",
-    components: {CustomMail, Footer, Header, FilterBar, Link},
+    components: { CustomMail, Footer, Header, FilterBar, Link, Pencil, Trash2, User, Mail, GraduationCap, UserCheck, Users },
     props:{
         programs: Object,
         faculties: Object,

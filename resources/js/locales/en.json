@@ -1,0 +1,278 @@
+{
+  "common": {
+    "noOptions": "No options available"
+  },
+  "home": {
+    "nav": {
+      "notikumi": "Events",
+      "uzziniVirak": "Learn more",
+      "atsauksmes": "Testimonials",
+      "pieteikties": "Apply",
+      "langLv": "LV",
+      "langEn": "EN"
+    },
+    "modal": {
+      "close": "Close"
+    }
+  },
+  "hero": {
+    "heading": "Connecting experienced",
+    "headingAccent": "with newcomers.",
+    "description": "Together we build a successful study path. The Mentor Programme is a place where experienced students share knowledge and experience with first-year students.",
+    "ctaApply": "Apply to the programme",
+    "ctaInternational": "Mentor for international students"
+  },
+  "information": {
+    "title": "Learn more",
+    "tabs": {
+      "program": "Mentor Programme",
+      "mentor": "What is a Mentor?",
+      "mentee": "What is a Mentee?"
+    },
+    "programTitle": "Mentor Programme",
+    "programContent": "The Mentor Programme is a place where experienced students pass on their knowledge and experience to first-year students. The RSU Mentor Programme for Latvian students is implemented every year from September to February and is based on the principle of volunteering. Its aim is to promote the integration of new students into the academic and social life.",
+    "mentorTitle": "What is a Mentor?",
+    "mentorContent": "A Mentor is an adviser and helper for first-year students. It is a student who has started studies at least in the second year and is ready to share their knowledge and practical experience with new students. A Mentor can give advice and answer questions. One mentor can have up to 5 mentees.",
+    "menteeTitle": "What is a Mentee?",
+    "menteeContent": "Any first-year student can become a mentee. A Mentee is a student who wants to learn about the study process, opportunities for social life at the university, and wants to gain new contacts and experience."
+  },
+  "testimonial": {
+    "title": "What participants say",
+    "quote1": "The first days at university can be described like this: 'Limitless opportunities, yet zero understanding of what to do with those opportunities and how to apply them in everyday life.' In this very context, the true key to success for the first steps of academic life is the Mentor Programme. A Mentor is that person you can always call or at least send a message to during intense classes and complicated assignments—not just as a colleague, but as a close friend.",
+    "attribution1": "— Georgs Pimanovs, Faculty of Medicine and Dentistry",
+    "quote2": "A year and a half ago, when I started my studies at Rīga Stradiņš University, my life seemed to turn 180 degrees. I found myself a mentor—a person who explains the organisation of any study course and various events. Thanks to this positive experience, I felt more confident in my studies. I am currently a mentor to three international students and two Latvian students, and I feel proud every time I can help them.",
+    "attribution2": "— Rolāns Vozņesenskis, Faculty of Dentistry"
+  },
+  "apply": {
+    "title": "Apply",
+    "tabMentor": "I want to be a Mentor!",
+    "tabMentee": "I want a Mentor!"
+  },
+  "mentorRequest": {
+    "steps": {
+      "personal": "Personal details",
+      "studies": "Studies",
+      "about": "About yourself",
+      "mentorSubmit": "Mentor and submit"
+    },
+    "labels": {
+      "name": "First name",
+      "lastName": "Last name",
+      "phone": "Phone number",
+      "email": "Email",
+      "faculty": "Faculty",
+      "program": "Study programme",
+      "comments": "Comments",
+      "languageQuestion": "In which language do you want to communicate with your mentor?"
+    },
+    "placeholders": {
+      "faculty": "Select faculty",
+      "program": "Select study programme",
+      "comments": "Additional comments (optional)...",
+      "language": "Select language"
+    },
+    "mentorSelection": {
+      "chooseMentor": "Choose a mentor:",
+      "anyMentor": "Any mentor",
+      "noMentorsAvailable": "Unfortunately, no Mentor is currently available in your study programme, but don't worry! We will try to assign you a Mentor from another study programme who can still tell you about the study process when starting studies at RSU!",
+      "aboutMe": "About me:",
+      "whyMentor": "Why I applied to mentor:",
+      "languages": "Languages:"
+    },
+    "languages": {
+      "lv": "Latvian",
+      "ru": "Russian",
+      "en": "English"
+    },
+    "yearSuffix": " year",
+    "yearDisplay": "Year {year}",
+    "consent": "I agree to the processing of my data in accordance with the data use policy",
+    "buttons": {
+      "continue": "Continue",
+      "submit": "Submit application",
+      "back": "Back"
+    },
+    "errors": {
+      "name": "Please enter your first name",
+      "lastName": "Please enter your last name",
+      "phone": "Please enter your phone number",
+      "email": "Please enter a valid email",
+      "faculty": "Please select a faculty",
+      "program": "Please select a study programme",
+      "language": "Please select a language",
+      "privacy": "Please agree to data processing"
+    }
+  },
+  "mentorApply": {
+    "steps": {
+      "personal": "Personal details",
+      "studies": "Studies",
+      "about": "About you",
+      "details": "Additional information",
+      "confirm": "Confirmation"
+    },
+    "labels": {
+      "name": "First name",
+      "lastName": "Last name",
+      "phone": "Phone number",
+      "email": "Email",
+      "faculty": "Faculty",
+      "program": "Study programme",
+      "year": "Study year",
+      "about": "About you",
+      "whyMentor": "Why do you want to be a mentor?",
+      "languages": "Speaks fluently",
+      "menteesCount": "Number of mentees",
+      "addImage": "Add photo"
+    },
+    "placeholders": {
+      "faculty": "Select faculty",
+      "program": "Select programme",
+      "about": "Tell us about yourself...",
+      "why": "Share your motivation..."
+    },
+    "languages": {
+      "lv": "Latvian",
+      "en": "English",
+      "ru": "Russian"
+    },
+    "yearOptions": {
+      "2": "2nd year",
+      "3": "3rd year",
+      "4": "4th year",
+      "5": "5th year",
+      "6": "6th year"
+    },
+    "consent": "I agree to the processing of my data in accordance with the data use policy and I have read the",
+    "consentLink": "regulations",
+    "buttons": {
+      "continue": "Continue",
+      "submit": "Submit application",
+      "back": "Back"
+    },
+    "errors": {
+      "name": "Please enter your first name",
+      "lastName": "Please enter your last name",
+      "phone": "Please enter your phone number",
+      "email": "Please enter a valid email",
+      "faculty": "Please select a faculty",
+      "program": "Please select a study programme",
+      "year": "Please select a study year",
+      "about": "Please fill in this field",
+      "why": "Please fill in this field",
+      "languages": "Please select at least one language",
+      "mentees": "Please enter a number from 1 to 5",
+      "img": "Please add a photo",
+      "privacy": "Please agree to data processing"
+    }
+  },
+  "header": {
+    "nav": {
+      "home": "Home",
+      "mentors": "Mentors",
+      "mentees": "Mentees",
+      "programs": "Study programmes",
+      "events": "Events",
+      "users": "Users",
+      "config": "Configuration"
+    },
+    "dropdown": {
+      "profile": "Profile",
+      "logout": "Log out"
+    }
+  },
+  "footer": {
+    "coordinatedBy": "Coordinated by",
+    "dataUsage": "Data use",
+    "contactPrompt": "For questions, call or write:",
+    "login": "Log in"
+  },
+  "carousel": {
+    "slideAlt": "Slide {index}"
+  },
+  "faculties": {
+    "FF": "Faculty of Pharmacy",
+    "MF": "Faculty of Medicine",
+    "MZF": "Faculty of Medicine and Dentistry",
+    "RF": "Faculty of Rehabilitation",
+    "VZF": "Faculty of Public Health",
+    "SF": "Faculty of Nursing",
+    "FE": "Faculty",
+    "F1": "Faculty 1",
+    "F2": "Faculty 2",
+    "ZF": "Faculty of Dentistry",
+    "RFF": "Residency Department",
+    "SZF": "Faculty of Social Sciences",
+    "VSZF": "Faculty of Health and Sport Sciences",
+    "LSPA": "Latvian Academy of Sport Pedagogy"
+  },
+  "programs": {
+    "VM": "Medicine",
+    "ZD": "Dentistry",
+    "FF": "Pharmacy",
+    "RF": "Rehabilitation",
+    "AL": "Audiology",
+    "ER": "Occupational Therapy",
+    "FT": "Physiotherapy",
+    "MS": "Nursing",
+    "BM": "Biomedicine",
+    "BS": "Biostatistics",
+    "KF": "Clinical Pharmacy",
+    "AP": "Physician Assistant",
+    "AM": "Therapeutic Massage",
+    "DT": "Digital Transformation in Healthcare",
+    "BV": "Business Administration and Economics",
+    "KK": "Communication Culture and Media",
+    "CS": "Computer Science",
+    "LPM": "Study Programme",
+    "MATH": "Mathematics",
+    "FP": "Pharmacy",
+    "FFK": "Clinical Pharmacy",
+    "RFF": "Industrial Pharmacy",
+    "Med": "Medicine",
+    "BioMed": "Biomedicine",
+    "StatMed": "Biostatistics",
+    "Zob": "Dentistry",
+    "Hig": "Dental Hygienist",
+    "SBuE": "International Business and Sustainable Economics",
+    "SBuJd": "International Business and Entrepreneurship",
+    "SMuR": "International Marketing and Advertising",
+    "SMuBV": "International Marketing and Business Administration",
+    "SBuT": "International Business and Law",
+    "MultMed": "Multimedia Communication",
+    "SabAt": "Public Relations",
+    "Žurn": "Journalism",
+    "KOMunMED": "Communication and Media Studies",
+    "StratSabV": "Strategic and Public Relations Management",
+    "Psih": "Psychology",
+    "StAttEU": "International Relations – European Studies",
+    "SocAntr": "Social Anthropology",
+    "StAttunDip": "International Relations and Diplomacy",
+    "TiesZin": "Law",
+    "TiesZinMg": "Law (master's)",
+    "VesKom": "Health Communication",
+    "VesVad": "Health Management",
+    "AudioLog": "Audiology",
+    "ErgoT": "Occupational Therapy",
+    "FizioT": "Physiotherapy",
+    "MasZ": "Nursing",
+    "OrtProt": "Orthotics and Prosthetics",
+    "SabV": "Public Health",
+    "SocDarb": "Social Work",
+    "Uzt": "Nutrition",
+    "VecM": "Midwifery",
+    "MaksT": "Art Therapy",
+    "MasZMg": "Nursing (master's)",
+    "Rehab": "Rehabilitation",
+    "SabVMg": "Public Health (master's)",
+    "SocDBJ": "Social Work with Children and Youth",
+    "SuperV": "Supervision",
+    "UzturMg": "Nutritional Science",
+    "VesPsih": "Health Psychology",
+    "VSS": "Health and Sport Specialist",
+    "Szin": "Sport Science",
+    "VFAD": "Health, Physical Activity and Safety",
+    "SzinM": "Sport Science (master's)",
+    "SIspec": "Sport and Education Specialist"
+  }
+}

@@ -7,6 +7,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Testing\AssertableInertia as Assert;
 use src\Domain\Config\Models\Config;
+use src\Domain\Config\Models\HeroGalleryImage;
 use src\Domain\Faculty\Models\Faculty;
 use src\Domain\Mail\Models\Mail;
 use src\Domain\Mentor\Models\Mentor;
@@ -22,18 +23,20 @@ class ConfigControllerTest extends TestCase
     public function test_index_displays_config_settings(): void
     {
         $user = User::factory()->create();
-        Config::create(['type' => 'color', 'value' => '#ffffff']);
-        Config::create(['type' => 'banner', 'value' => 'banner.jpg']);
-        Config::create(['type' => 'background', 'value' => 'bg.jpg']);
+        Config::create(['type' => 'color', 'value' => '#f43f5e']);
+        HeroGalleryImage::create(['path' => 'image/banner.jpg', 'sort_order' => 0]);
+        HeroGalleryImage::create(['path' => 'image/bg.jpg', 'sort_order' => 1]);
 
         $response = $this->actingAs($user)->get(route('config'));
 
         $response->assertOk();
         $response->assertInertia(fn (Assert $page) => $page
             ->component('Admin/Config')
-            ->where('color', '#ffffff')
-            ->where('banner', 'banner.jpg')
-            ->where('background', 'bg.jpg')
+            ->where('color', '#f43f5e')
+            ->has('heroGallery', 2)
+            ->where('heroGallery.0.id', 1)
+            ->where('heroGallery.0.path', 'image/banner.jpg')
+            ->where('heroGallery.1.path', 'image/bg.jpg')
         );
     }
 
@@ -95,37 +98,26 @@ class ConfigControllerTest extends TestCase
         $response->assertRedirect(route('login'));
     }
 
-    public function test_design_updates_config_with_existing_file_paths(): void
+    public function test_design_updates_color_config(): void
     {
         $user = User::factory()->create();
+        Config::create(['type' => 'color', 'value' => '#f43f5e']);
 
         $response = $this->actingAs($user)->post(route('design'), [
-            'color' => '#ff0000',
-            'banner' => ['existing_banner.jpg'],
-            'background' => ['existing_bg.jpg'],
+            'color' => '#e11d48',
         ]);
 
         $response->assertRedirect(route('config'));
         $this->assertDatabaseHas('configs', [
             'type' => 'color',
-            'value' => '#ff0000',
-        ]);
-        $this->assertDatabaseHas('configs', [
-            'type' => 'banner',
-            'value' => 'existing_banner.jpg',
-        ]);
-        $this->assertDatabaseHas('configs', [
-            'type' => 'background',
-            'value' => 'existing_bg.jpg',
+            'value' => '#e11d48',
         ]);
     }
 
     public function test_design_requires_authentication(): void
     {
         $response = $this->post(route('design'), [
-            'color' => '#ff0000',
-            'banner' => ['banner.jpg'],
-            'background' => ['bg.jpg'],
+            'color' => '#e11d48',
         ]);
 
         $response->assertRedirect(route('login'));
@@ -137,7 +129,61 @@ class ConfigControllerTest extends TestCase
 
         $response = $this->actingAs($user)->post(route('design'), []);
 
-        $response->assertSessionHasErrors(['color', 'banner', 'background']);
+        $response->assertSessionHasErrors(['color']);
+    }
+
+    public function test_design_rejects_invalid_color_scheme(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->post(route('design'), [
+            'color' => 'invalid',
+        ]);
+
+        $response->assertSessionHasErrors(['color']);
+    }
+
+    public function test_store_hero_gallery_image_adds_images(): void
+    {
+        Storage::fake('local');
+        $user = User::factory()->create();
+        $file = UploadedFile::fake()->image('hero.jpg', 800, 600);
+
+        $response = $this->actingAs($user)->post(route('config.hero-gallery.store'), [
+            'images' => [$file],
+        ]);
+
+        $response->assertRedirect(route('config'));
+        $this->assertDatabaseCount('hero_gallery_images', 1);
+        $this->assertDatabaseHas('hero_gallery_images', [
+            'sort_order' => 0,
+        ]);
+    }
+
+    public function test_destroy_hero_gallery_image_removes_image(): void
+    {
+        $user = User::factory()->create();
+        $image = HeroGalleryImage::create(['path' => 'image/test.jpg', 'sort_order' => 0]);
+
+        $response = $this->actingAs($user)->delete(route('config.hero-gallery.destroy', $image));
+
+        $response->assertRedirect(route('config'));
+        $this->assertDatabaseMissing('hero_gallery_images', ['id' => $image->id]);
+    }
+
+    public function test_reorder_hero_gallery_updates_sort_order(): void
+    {
+        $user = User::factory()->create();
+        $img1 = HeroGalleryImage::create(['path' => 'image/a.jpg', 'sort_order' => 0]);
+        $img2 = HeroGalleryImage::create(['path' => 'image/b.jpg', 'sort_order' => 1]);
+
+        $response = $this->actingAs($user)->patch(route('config.hero-gallery.reorder'), [
+            'ids' => [$img2->id, $img1->id],
+        ]);
+
+        $response->assertRedirect(route('config'));
+        $this->assertDatabaseHas('hero_gallery_images', ['id' => $img2->id, 'sort_order' => 0]);
+        $this->assertDatabaseHas('hero_gallery_images', ['id' => $img1->id, 'sort_order' => 1]);
     }
 
     public function test_get_statistics_returns_faculty_mentor_mentee_excel(): void

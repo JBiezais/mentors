@@ -8,10 +8,9 @@
         </div>
         <div class="flex-grow lg:max-w-7xl xl:mx-auto py-5 w-full mx-10">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <ColorAndBannerConfig
+                <ColorAndGalleryConfig
                     :color="color"
-                    :banner="banner"
-                    :background="background"
+                    :hero-gallery="heroGallery"
                 />
             </div>
         </div>
@@ -41,14 +40,14 @@ import DangerButton from "@/Components/DangerButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import Modal from "@/Components/Modal.vue";
 import PreparationForNewYear from "@/Components/PreparationForNewYear.vue";
-import ColorAndBannerConfig from "@/Components/ColorAndBannerConfig.vue";
+import ColorAndGalleryConfig from "@/Components/ColorAndGalleryConfig.vue";
 import Statistics from "@/Components/Forms/Statistics.vue";
 
 export default {
     name: "Settings",
     components: {
         Statistics,
-        ColorAndBannerConfig,
+        ColorAndGalleryConfig,
         PreparationForNewYear,
         Modal, SecondaryButton,
         DangerButton,
@@ -61,13 +60,9 @@ export default {
         Footer
     },
     props:{
-        banner: {
-            type: String,
-            default: null
-        },
-        background: {
-            type: String,
-            default: null
+        heroGallery: {
+            type: Array,
+            default: () => []
         },
         color: {
             type: String,

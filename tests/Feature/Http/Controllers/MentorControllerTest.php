@@ -6,7 +6,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Testing\AssertableInertia as Assert;
-use src\Domain\Config\Models\Config;
 use src\Domain\Faculty\Models\Faculty;
 use src\Domain\Mail\Models\Mail;
 use src\Domain\Mentor\Models\Mentor;
@@ -60,20 +59,13 @@ class MentorControllerTest extends TestCase
         );
     }
 
-    public function test_create_includes_config_values(): void
+    public function test_create_redirects_to_home_pieteikties(): void
     {
         Faculty::factory()->create();
-        Config::create(['type' => 'color', 'value' => '#ff0000']);
-        Config::create(['type' => 'background', 'value' => 'bg.jpg']);
 
         $response = $this->get(route('mentor.create'));
 
-        $response->assertOk();
-        $response->assertInertia(fn (Assert $page) => $page
-            ->component('Public/Mentor')
-            ->where('color', '#ff0000')
-            ->where('background', 'bg.jpg')
-        );
+        $response->assertRedirect(route('home') . '#pieteikties');
     }
 
     public function test_store_validates_required_fields(): void
@@ -81,6 +73,40 @@ class MentorControllerTest extends TestCase
         $response = $this->post(route('mentor.store'), []);
 
         $response->assertSessionHasErrors(['name', 'lastName', 'email', 'phone', 'faculty_id', 'program_id', 'year', 'mentees', 'about', 'why', 'privacy', 'img']);
+    }
+
+    public function test_store_returns_json_when_expecting_json(): void
+    {
+        Storage::fake('public');
+        $faculty = Faculty::factory()->create(['code' => 'FE']);
+        $program = Program::factory()->create(['faculty_id' => $faculty->id]);
+        $image = UploadedFile::fake()->image('mentor.jpg');
+
+        $response = $this->postJson(route('mentor.store'), [
+            'name' => 'John',
+            'lastName' => 'Doe',
+            'email' => 'john.doe@example.com',
+            'phone' => '12345678',
+            'faculty_id' => $faculty->id,
+            'program_id' => $program->id,
+            'year' => 2,
+            'mentees' => 3,
+            'about' => 'About me',
+            'why' => 'Why mentor',
+            'lv' => 1,
+            'ru' => 0,
+            'en' => 1,
+            'privacy' => 1,
+            'img' => $image,
+        ]);
+
+        $response->assertOk();
+        $response->assertJsonStructure(['message' => ['text']]);
+        $response->assertJson([
+            'message' => [
+                'text' => 'Pieteikums veiksmīgi nosūtīts!',
+            ],
+        ]);
     }
 
     public function test_edit_shows_mentor_form_for_authenticated_user(): void

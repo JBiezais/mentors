@@ -25,6 +25,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [Controller::class, 'index'])->name('home');
 
+Route::get('/locale/{locale}', function (string $locale) {
+    if (in_array($locale, ['lv', 'en'])) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+})->name('locale.switch');
+
 Route::resource('mentor', MentorController::class)->only('store');
 Route::resource('student', StudentsController::class)->only('store');
 Route::get('/mentor/apply', [MentorController::class, 'create'])->name('mentor.create');
@@ -34,12 +41,15 @@ Route::get('/mail/{key}', [MailController::class, 'verify'])->name('verify.mento
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
-        return redirect('/');
+        return redirect('/mentor');
     })->name('dashboard');
 
     Route::get('/config', [ConfigController::class, 'index'])->name('config');
     Route::post('/archive', [ConfigController::class, 'archive'])->name('archive');
     Route::post('/design', [ConfigController::class, 'design'])->name('design');
+    Route::post('/config/hero-gallery', [ConfigController::class, 'storeHeroGalleryImage'])->name('config.hero-gallery.store');
+    Route::delete('/config/hero-gallery/{heroGalleryImage}', [ConfigController::class, 'destroyHeroGalleryImage'])->name('config.hero-gallery.destroy');
+    Route::patch('/config/hero-gallery/reorder', [ConfigController::class, 'reorderHeroGallery'])->name('config.hero-gallery.reorder');
     Route::get('/statistics/{type}', [ConfigController::class, 'getStatistics'])->name('config.statistics');
 
     Route::post('/mentees/remove/{mentor}', [MentorController::class, 'removeMentees'])->name('remove.mentees');

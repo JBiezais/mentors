@@ -13,13 +13,21 @@
         <!-- Scripts -->
         <script>
             window.Laravel = {
-                baseUrl: "{{ asset('') }}"
+                baseUrl: "{{ asset('') }}",
+                locale: @json(app()->getLocale())
             };
         </script>
 
         @routes
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
         @inertiaHead
+        @if(isset($accentPalette))
+        <style>:root {
+@foreach($accentPalette as $shade => $hex)
+  --accent-{{ $shade }}: {{ $hex }};
+@endforeach
+}</style>
+        @endif
     </head>
     <body class="font-sans antialiased">
         @inertia

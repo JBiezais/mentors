@@ -1,0 +1,278 @@
+{
+  "common": {
+    "noOptions": "Nav pieejamu opciju"
+  },
+  "home": {
+    "nav": {
+      "notikumi": "Notikumi",
+      "uzziniVirak": "Uzzini vairāk",
+      "atsauksmes": "Atsauksmes",
+      "pieteikties": "Pieteikties",
+      "langLv": "LV",
+      "langEn": "EN"
+    },
+    "modal": {
+      "close": "Aizvērt"
+    }
+  },
+  "hero": {
+    "heading": "Savienojam pieredzējušos",
+    "headingAccent": "ar jaunajiem.",
+    "description": "Kopā veidojam veiksmīgu studiju ceļu. Mentoru programma ir vieta, kur pieredzējuši studējošie dalās ar zināšanām un pieredzi ar pirmā studiju gada studējošajiem.",
+    "ctaApply": "Pieteikties programmai",
+    "ctaInternational": "Mentors ārvalstu studējošajiem"
+  },
+  "information": {
+    "title": "Uzzini vairāk",
+    "tabs": {
+      "program": "Mentoru programma",
+      "mentor": "Kas ir Mentors?",
+      "mentee": "Kas ir Mentorējamais?"
+    },
+    "programTitle": "Mentoru programma",
+    "programContent": "Mentoru programma ir vieta, kur pieredzējuši studējošie savas zināšanas un pieredzi nodod pirmā studiju gada studējošajiem. RSU Mentoru programma latviešu studējošajiem tiek realizēta katru gadu no septembra līdz februārim, tā ir balstīta uz brīvprātības principa. Tās mērķis ir veicināt jauno studējošo integrāciju studiju vidē un sabiedriskajā dzīvē.",
+    "mentorTitle": "Kas ir Mentors?",
+    "mentorContent": "Mentors ir padomdevējs un palīgs pirmā studiju gada studējošajam. Tas ir studējošais, kurš uzsācis studijas vismaz otrajā studiju gadā un ir gatavs dalīties savās zināšanās un praktiskajā pieredzē ar jauno studējošo. Mentors var gan sniegt padomus, gan atbildēt uz jautājumiem. Vienam mentoram var būt līdz 5 mentorējamajiem.",
+    "menteeTitle": "Kas ir Mentorējamais?",
+    "menteeContent": "Par mentorējamo var kļūt jebkurš pirmā studiju gada studējošais. Mentorējamais ir studējošais, kurš vēlas iegūt zināšanas par studiju procesa norisi, par sabiedriskās dzīves iespējām universitātē, vēlas iegūt jaunus kontaktus un pieredzi."
+  },
+  "testimonial": {
+    "title": "Ko saka dalībnieki",
+    "quote1": "Pirmās dienas universitātē var aprakstīt šādi: \"Bezlimita iespējas, tomēr nulle sapratnes, ko ar attiecīgajām iespējām darīt un kā tās pielietot ikdienā.\" Tieši šajā kontekstā īstā veiksmes atslēga pirmajiem akadēmiskās dzīves soļiem ir Mentoru programma. Mentors ir tā persona, kurai starp intensīvajām nodarbībām un komplicētajiem mājasdarbiem allaž var piezvanīt vai vismaz aizsūtīt zīmīti ne tikai kā kolēģim, bet arī kā tuvam draugam.",
+    "attribution1": "— Georgs Pimanovs, Medicīnas un Zobārstniecības fakultāte",
+    "quote2": "Pusotru gadu atpakaļ, uzsākot savas studijas Rīgas Stradiņa universitātē, mana dzīve it kā pagriezās pa 180 grādiem. Es atradu sev mentoru – personu, kas izskaidros jebkura studiju kursa organizāciju, dažādus pasākumus. Pateicoties šai pozitīvai pieredzei, man palika studēt drošāk. Šobrīd esmu mentors trīs ārvalstu studentiem un diviem latviešu studentiem, un es saņemu gandarījumu katrreiz, kad varu tiem palīdzēt.",
+    "attribution2": "— Rolāns Vozņesenskis, Zobārstniecības fakultāte"
+  },
+  "apply": {
+    "title": "Pieteikties",
+    "tabMentor": "Gribu būt Mentors!",
+    "tabMentee": "Gribu sev Mentoru!"
+  },
+  "mentorRequest": {
+    "steps": {
+      "personal": "Personīgie dati",
+      "studies": "Studijas",
+      "about": "Par sevi",
+      "mentorSubmit": "Mentors un nosūtīt"
+    },
+    "labels": {
+      "name": "Vārds",
+      "lastName": "Uzvārds",
+      "phone": "Telefona numurs",
+      "email": "E-pasts",
+      "faculty": "Fakultāte",
+      "program": "Studiju programma",
+      "comments": "Komentāri",
+      "languageQuestion": "Kurā valodā vēlies runāt ar mentoru?"
+    },
+    "placeholders": {
+      "faculty": "Izvēlieties fakultāti",
+      "program": "Izvēlieties studiju programmu",
+      "comments": "Papildu komentāri (pēc vēlēšanās)...",
+      "language": "Izvēlieties valodu"
+    },
+    "mentorSelection": {
+      "chooseMentor": "Izvēlies mentoru:",
+      "anyMentor": "Jebkurš mentors",
+      "noMentorsAvailable": "Diemžēl Tavā studiju programmā neviens Mentors šobrīd nav pieejams, taču nebēdā! Mēģināsim Tev piešķirt Mentoru no citas studiju programmas, kurš tāpat spēs pastāstīt par studiju procesu uzsākot mācības RSU!",
+      "aboutMe": "Par sevi:",
+      "whyMentor": "Kāpēc pieteicos mentorēt:",
+      "languages": "Valodas:"
+    },
+    "languages": {
+      "lv": "Latviešu",
+      "ru": "Krievu",
+      "en": "Angļu"
+    },
+    "yearSuffix": ". gads",
+    "yearDisplay": "{year}. gads",
+    "consent": "Piekrītu savu datu apstrādāšanai saskaņā ar datu izmantošanas politiku",
+    "buttons": {
+      "continue": "Turpināt",
+      "submit": "Nosūtīt pieteikumu",
+      "back": "Atpakaļ"
+    },
+    "errors": {
+      "name": "Lūdzu, ievadiet vārdu",
+      "lastName": "Lūdzu, ievadiet uzvārdu",
+      "phone": "Lūdzu, ievadiet telefona numuru",
+      "email": "Lūdzu, ievadiet derīgu e-pastu",
+      "faculty": "Lūdzu, izvēlieties fakultāti",
+      "program": "Lūdzu, izvēlieties studiju programmu",
+      "language": "Lūdzu, izvēlieties valodu",
+      "privacy": "Lūdzu, piekrītiet datu apstrādāšanai"
+    }
+  },
+  "mentorApply": {
+    "steps": {
+      "personal": "Personīgie dati",
+      "studies": "Studijas",
+      "about": "Par Tevi",
+      "details": "Papildinformācija",
+      "confirm": "Apstiprinājums"
+    },
+    "labels": {
+      "name": "Vārds",
+      "lastName": "Uzvārds",
+      "phone": "Telefona numurs",
+      "email": "E-pasts",
+      "faculty": "Fakultāte",
+      "program": "Studiju programma",
+      "year": "Studiju gads",
+      "about": "Par Tevi",
+      "whyMentor": "Kāpēc gribi būt mentors?",
+      "languages": "Brīvi runā",
+      "menteesCount": "Mentorējamo skaits",
+      "addImage": "Pievienot attēlu"
+    },
+    "placeholders": {
+      "faculty": "Izvēlieties fakultāti",
+      "program": "Izvēlieties programu",
+      "about": "Pastāstiet par sevi...",
+      "why": "Share your motivation..."
+    },
+    "languages": {
+      "lv": "Latviešu",
+      "en": "Angļu",
+      "ru": "Krievu"
+    },
+    "yearOptions": {
+      "2": "2. gads",
+      "3": "3. gads",
+      "4": "4. gads",
+      "5": "5. gads",
+      "6": "6. gads"
+    },
+    "consent": "Piekrītu savu datu apstrādāšanai saskaņā ar datu izmantošanas politiku un esmu iepazinies ar",
+    "consentLink": "nolikumu",
+    "buttons": {
+      "continue": "Turpināt",
+      "submit": "Nosūtīt pieteikumu",
+      "back": "Atpakaļ"
+    },
+    "errors": {
+      "name": "Lūdzu, ievadiet vārdu",
+      "lastName": "Lūdzu, ievadiet uzvārdu",
+      "phone": "Lūdzu, ievadiet telefona numuru",
+      "email": "Lūdzu, ievadiet derīgu e-pastu",
+      "faculty": "Lūdzu, izvēlieties fakultāti",
+      "program": "Lūdzu, izvēlieties studiju programmu",
+      "year": "Lūdzu, izvēlieties studiju gadu",
+      "about": "Lūdzu, aizpildiet šo lauku",
+      "why": "Lūdzu, aizpildiet šo lauku",
+      "languages": "Lūdzu, izvēlieties vismaz vienu valodu",
+      "mentees": "Lūdzu, ievadiet skaitu no 1 līdz 5",
+      "img": "Lūdzu, pievienojiet attēlu",
+      "privacy": "Lūdzu, piekrītiet datu apstrādāšanai"
+    }
+  },
+  "header": {
+    "nav": {
+      "home": "Galvenā lapa",
+      "mentors": "Mentori",
+      "mentees": "Mentorējamie",
+      "programs": "Studiju programmas",
+      "events": "Pasākumi",
+      "users": "Lietotāji",
+      "config": "Konfigurācija"
+    },
+    "dropdown": {
+      "profile": "Profils",
+      "logout": "Izrakstīties"
+    }
+  },
+  "footer": {
+    "coordinatedBy": "Koordinē",
+    "dataUsage": "Datu izmantošana",
+    "contactPrompt": "Jautājumu gadījumā zvani vai raksti:",
+    "login": "Autorizēties"
+  },
+  "carousel": {
+    "slideAlt": "Slide {index}"
+  },
+  "faculties": {
+    "FF": "Farmācijas fakultāte",
+    "MF": "Medicīnas fakultāte",
+    "MZF": "Medicīnas un Zobārstniecības fakultāte",
+    "RF": "Rehabilitācijas fakultāte",
+    "VZF": "Veselības zinātņu fakultāte",
+    "SF": "Sūtītās aprūpes fakultāte",
+    "FE": "Fakultāte",
+    "F1": "Fakultāte 1",
+    "F2": "Fakultāte 2",
+    "ZF": "Zobārstniecības fakultāte",
+    "RFF": "Rezidentūras nodaļa",
+    "SZF": "Sociālo zinātņu fakultāte",
+    "VSZF": "Veselības un sporta zinātņu fakultāte",
+    "LSPA": "Latvijas Sporta pedagoģijas akadēmija"
+  },
+  "programs": {
+    "VM": "Ārstniecība",
+    "ZD": "Zobārstniecība",
+    "FF": "Farmācija",
+    "RF": "Rehabilitoloģija",
+    "AL": "Audiologopēdija",
+    "ER": "Ergoterapija",
+    "FT": "Fizioterapija",
+    "MS": "Māszinības",
+    "BM": "Biomedicīna",
+    "BS": "Biostatistika",
+    "KF": "Klīniskā farmācija",
+    "AP": "Ārsta palīgs",
+    "AM": "Ārstnieciskā masāža",
+    "DT": "Digitālā transformācija veselības nozarē",
+    "BV": "Biznesa vadība un ekonomika",
+    "KK": "Komunikācijas kultūra un multimediji",
+    "CS": "Datorzinātnes",
+    "LPM": "Studiju programma",
+    "MATH": "Matemātika",
+    "FP": "Farmācija",
+    "FFK": "Klīniskā farmācija",
+    "RFF": "Rūpnieciskā farmācija",
+    "Med": "Medicīna",
+    "BioMed": "Biomedicīna",
+    "StatMed": "Biostatistika",
+    "Zob": "Zobārstniecība",
+    "Hig": "Zobu higiēnists",
+    "SBuE": "Starptautiskais bizness un ilgtspējīga ekonomika",
+    "SBuJd": "Starptautiskais bizness un jaunuzņēmumu darbība",
+    "SMuR": "Starptautiskais mārketings un reklāma",
+    "SMuBV": "Starptautiskā mārketinga un biznesa vadība",
+    "SBuT": "Starptautiskais bizness un tiesības",
+    "MultMed": "Multimediju komunikācija",
+    "SabAt": "Sabiedriskās attiecības",
+    "Žurn": "Žurnālistika",
+    "KOMunMED": "Komunikācija un mediju studijas",
+    "StratSabV": "Stratēģiskā un sabiedrisko attiecību vadība",
+    "Psih": "Psiholoģija",
+    "StAttEU": "Starptautiskās attiecības – Eiropas studijas",
+    "SocAntr": "Sociālā antropoloģija",
+    "StAttunDip": "Starptautiskās attiecības un diplomātija",
+    "TiesZin": "Tiesību zinātne",
+    "TiesZinMg": "Tiesību zinātne",
+    "VesKom": "Veselības komunikācija",
+    "VesVad": "Veselības vadība",
+    "AudioLog": "Audiologopēdija",
+    "ErgoT": "Ergoterapija",
+    "FizioT": "Fizioterapija",
+    "MasZ": "Māszinības",
+    "OrtProt": "Ortozēšana, protezēšana",
+    "SabV": "Sabiedrības veselība",
+    "SocDarb": "Sociālais darbs",
+    "Uzt": "Uzturs",
+    "VecM": "Vecmāte",
+    "MaksT": "Mākslas terapija",
+    "MasZMg": "Māszinības",
+    "Rehab": "Rehabilitācija",
+    "SabVMg": "Sabiedrības veselība",
+    "SocDBJ": "Sociālais darbs ar bērniem un jauniešiem",
+    "SuperV": "Supervīzija",
+    "UzturMg": "Uzturzinātne",
+    "VesPsih": "Veselības psiholoģija",
+    "VSS": "Veselības sporta speciālists",
+    "Szin": "Sporta zinātne",
+    "VFAD": "Veselība, fiziskā aktivitāte un drošība",
+    "SzinM": "Sporta Zinātne",
+    "SIspec": "Sporta un izglītības speciālists"
+  }
+}

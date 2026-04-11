@@ -14,9 +14,7 @@ class ConfigRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'color' => ['required', 'string'],
-            'banner' => ['required', 'array', 'min:1', 'max:1'],
-            'background' => ['required', 'array', 'min:1', 'max:1'],
+            'color' => ['required', 'string', 'regex:/^#[0-9a-fA-F]{6}$/'],
         ];
     }
 }

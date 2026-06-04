@@ -31,8 +31,8 @@ export default {
     data() {
         return {
             testimonials: [
-                { image: '/img/home/pers_1.jpeg', alt: 'Madara Miller', quoteKey: 'testimonial.quote1', attributionKey: 'testimonial.attribution1' },
-                { image: '/img/home/pers_2.jpeg', alt: 'Rolāns Vozņesenskis', quoteKey: 'testimonial.quote2', attributionKey: 'testimonial.attribution2' },
+                { image: '/img/home/pers_5.jpeg', alt: 'Madara Miller', quoteKey: 'testimonial.quote1', attributionKey: 'testimonial.attribution1' },
+                { image: '/img/home/pers_6.jpeg', alt: 'Rolāns Vozņesenskis', quoteKey: 'testimonial.quote2', attributionKey: 'testimonial.attribution2' },
                 { image: '/img/home/pers_3.jpeg', alt: 'Veronika Tagijeva', quoteKey: 'testimonial.quote3', attributionKey: 'testimonial.attribution3' },
                 { image: '/img/home/pers_4.jpeg', alt: 'Eduards Doroņins', quoteKey: 'testimonial.quote4', attributionKey: 'testimonial.attribution4' },
             ],

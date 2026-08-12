@@ -92,14 +92,45 @@ class SendEmailsCommandTest extends TestCase
         $this->assertEquals(0, $event->sent);
     }
 
-    public function test_command_requires_coordinator_user(): void
+    public function test_command_skips_gracefully_when_no_coordinator_user_exists(): void
     {
         // Remove the coordinator user created in setUp
         User::query()->delete();
 
-        // Command should fail when no coordinator exists
-        $this->expectException(\Error::class);
-        $this->artisan('mail:send');
+        $this->artisan('mail:send')
+            ->expectsOutputToContain('No coordinator user with use = 1 found')
+            ->assertSuccessful();
+    }
+
+    public function test_command_continues_when_a_mail_fails_to_send(): void
+    {
+        // Force the OAuth token fetch to fail locally (no network calls)
+        config(['services.oauth.token_url' => null]);
+
+        $faculty = Faculty::factory()->create(['code' => 'FE']);
+        $program = Program::factory()->create(['faculty_id' => $faculty->id]);
+        $mentor = Mentor::factory()->create([
+            'faculty_id' => $faculty->id,
+            'program_id' => $program->id,
+        ]);
+
+        $mail = Mail::create([
+            'type' => 'verification',
+            'mentor_ids' => [$mentor->id],
+            'student_ids' => null,
+            'content' => null,
+            'sent' => 0,
+        ]);
+
+        $this->artisan('mail:send')
+            ->expectsOutputToContain("Failed to send mail #{$mail->id}")
+            ->assertSuccessful();
+
+        // Failed mail stays queued for the next run
+        $this->assertDatabaseHas('mails', [
+            'id' => $mail->id,
+            'sent' => 0,
+        ]);
     }
 
     public function test_command_loads_mentors_and_students(): void

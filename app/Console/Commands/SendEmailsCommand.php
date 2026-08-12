@@ -50,11 +50,18 @@ class SendEmailsCommand extends Command
         $mentors = Mentor::with('students')->get();
         $students = Student::with('mentor')->get();
 
-        $contacts = User::query()
+        $contact = User::query()
             ->select(['phone', 'email', 'name'])
             ->where('use', 1)
-            ->first()
-            ->toArray();
+            ->first();
+
+        if (! $contact) {
+            $this->warn('No coordinator user with use = 1 found. Skipping mail send.');
+
+            return Command::SUCCESS;
+        }
+
+        $contacts = $contact->toArray();
 
         $events = Event::query()
             ->where(
@@ -80,9 +87,14 @@ class SendEmailsCommand extends Command
             ->chunk(100)
             ->each(function ($mails) use ($mentors, $students, $events, $contacts) {
                 $mails->each(function ($mail) use ($mentors, $students, $events, $contacts) {
-                    $this->processMail($mail, $mentors, $students, $events, $contacts);
-                    $mail->sent = 1;
-                    $mail->save();
+                    try {
+                        $this->processMail($mail, $mentors, $students, $events, $contacts);
+                        $mail->sent = 1;
+                        $mail->save();
+                    } catch (\Throwable $e) {
+                        $this->error("Failed to send mail #{$mail->id} ({$mail->type}): {$e->getMessage()}");
+                        report($e);
+                    }
                 });
             });
 

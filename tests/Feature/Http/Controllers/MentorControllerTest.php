@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -321,6 +322,8 @@ class MentorControllerTest extends TestCase
 
     public function test_send_mentee_data_creates_mail_record(): void
     {
+        Carbon::setTestNow(Carbon::parse('2026-09-05 10:07:20', 'Europe/Riga'));
+
         $user = User::factory()->create();
         $faculty = Faculty::factory()->create(['code' => 'FE']);
         $program = Program::factory()->create(['faculty_id' => $faculty->id]);
@@ -331,10 +334,23 @@ class MentorControllerTest extends TestCase
 
         $response = $this->actingAs($user)->post(route('sendMenteesData', $mentor));
 
-        $response->assertRedirect(route('home'));
+        $response->assertRedirect(route('mentor.edit', $mentor));
+        $response->assertSessionHas('message', [
+            'title' => '',
+            'text' => 'Šis e-pasts ir ieplānots nosūtīšanai plkst. 10:10',
+        ]);
         $this->assertDatabaseHas('mails', [
             'type' => 'menteeData',
         ]);
+
+        $this->actingAs($user)
+            ->get(route('mentor.edit', $mentor))
+            ->assertInertia(fn (Assert $page) => $page
+                ->component('Admin/EditMentor')
+                ->where('message.text', 'Šis e-pasts ir ieplānots nosūtīšanai plkst. 10:10')
+            );
+
+        Carbon::setTestNow();
     }
 
     public function test_send_mentee_data_requires_authentication(): void

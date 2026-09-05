@@ -6,11 +6,13 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 use Inertia\Response;
 use src\Domain\Faculty\Models\Faculty;
 use src\Domain\Mail\Actions\MailMenteeDataCreateAction;
 use src\Domain\Mail\Actions\MailVerificationPassedCreateAction;
+use src\Domain\Mail\Actions\NextScheduledMailSendAction;
 use src\Domain\Mentor\Actions\MentorConfirmAction;
 use src\Domain\Mentor\Actions\MentorCreateAction;
 use src\Domain\Mentor\Actions\MentorDeleteAction;
@@ -78,7 +80,8 @@ class MentorController extends Controller
             'mentor' => $data,
             'faculties' => $faculties,
             'programs' => $programs,
-            'contacts' => User::query()->select(['phone', 'email'])->where('use', 1)->first()
+            'contacts' => User::query()->select(['phone', 'email'])->where('use', 1)->first(),
+            'message' => Session::get('message'),
         ]);
     }
 
@@ -114,6 +117,12 @@ class MentorController extends Controller
     {
         MailMenteeDataCreateAction::execute([$mentor->id]);
 
-        return Redirect::route('home');
+        $scheduledAt = NextScheduledMailSendAction::scheduledAtFormatted();
+        UserNotificationCreateAction::execute(
+            '',
+            "Šis e-pasts ir ieplānots nosūtīšanai plkst. {$scheduledAt}"
+        );
+
+        return Redirect::route('mentor.edit', $mentor->id);
     }
 }

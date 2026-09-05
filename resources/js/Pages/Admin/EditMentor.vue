@@ -125,6 +125,7 @@
             </div>
         </div>
         <Footer :contacts="contacts"/>
+        <Toast :show="showToast" :message="toastMessage" :duration="5000" />
     </div>
     <CustomMail @custom="getFilteredProps($event)" @close="close = 0" v-if="close"></CustomMail>
 </template>
@@ -135,10 +136,11 @@ import Header from "@/Components/Header.vue";
 import Footer from "@/Components/Footer.vue";
 import { useForm, Link, router } from "@inertiajs/vue3";
 import CustomMail from "@/Components/CustomMail.vue";
+import Toast from "@/Components/Toast.vue";
 
 export default {
     name: "EditMentor",
-    components: {CustomMail, Footer, Header, Link},
+    components: {CustomMail, Footer, Header, Link, Toast},
     props:{
         mentor: Object,
         programs: Object,
@@ -146,13 +148,16 @@ export default {
         contacts: {
             email: String,
             phone: String
-        }
+        },
+        message: Object
     },
     data(){
         return{
             close: 0,
             dropDownPrograms:{},
             edit: 0,
+            showToast: false,
+            toastMessage: null,
             form:{
                 id: this.mentor.id,
                 year: this.mentor.year,
@@ -210,8 +215,16 @@ export default {
         },
         sendMenteeData(id){
             router.post(route('sendMenteesData', id), {}, {
-                preserveState: false
+                preserveState: true,
+                preserveScroll: true,
             })
+        },
+        showSuccessToast(msg){
+            this.toastMessage = msg;
+            this.showToast = true;
+            setTimeout(() => {
+                this.showToast = false;
+            }, 5000);
         },
         getFilteredProps($event){
             let emailForm = {
@@ -229,6 +242,14 @@ export default {
     watch:{
         'form.faculty_id': function(){
             this.setPrograms()
+        },
+        message: {
+            handler(val) {
+                if (val?.text) {
+                    this.showSuccessToast(val);
+                }
+            },
+            immediate: true
         }
     },
     mounted(){
